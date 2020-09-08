@@ -4,6 +4,8 @@ template="about.html"
 path="about"
 +++
 
+> Looking for a job
+
 ## About 
 
 Write down something meaningful or nonsense.
@@ -25,15 +27,15 @@ Write down something meaningful or nonsense.
 
 > [plctag-rs](https://github.com/Joylei/plctag-rs)
 >> a rust wrapper of [libplctag](https://github.com/libplctag/libplctag), with rust style APIs and useful extensions.
->
+
 > [qute](https://github.com/Joylei/qute)
 >> QNAP device control for ITE8528
->
+
 > [NFly.BitsTransfer](https://github.com/Joylei/NFly.BitsTransfer)
 >> A .Net wrapper library for Windows Background Intelligent Transfer Service (BITS)
->
+
 > [riot-format](https://github.com/Joylei/riot-format)
 >> a helper library for riotjs to format displays
->
+
 > [riot-bulma](https://github.com/Joylei/riot-bulma)
 >> combine RIOT and Bulma to a super weapon
