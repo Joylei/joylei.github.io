@@ -1,0 +1,85 @@
+{% extends "index.html" %}
+{% import "post_macros.html" as post_macros %}
+
+{% block title %}{{config.title}} - {{page.title}}{% endblock title %}
+
+{% block content %}
+
+{% if page.toc %}
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                {% for h1 in page.toc %}
+                <li>
+                    <a href="{{h1.permalink | safe}}" class="toc-link">{{ h1.title }}</a>
+                    {% if h1.children %}
+                    <ul>
+                        {% for h2 in h1.children %}
+                        <li>
+                            <a href="{{h2.permalink | safe}}" class="toc-link">{{ h2.title }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endif %}
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="{{ page.permalink }}">{{ page.title }}</a>
+    </h1>
+    {{ post_macros::meta(page=page) }}
+    <div class="post-content" itemprop="articleBody">
+        {{ page.content | safe }}
+    </div>
+
+    {% block page_before_footer %}
+    {% endblock page_before_footer %}
+
+    <div class="post-footer">
+        {% block page_footer %}
+        {% if page.taxonomies.tags %}
+        <div class="post-tags">
+            {% for tag in page.taxonomies.tags %}
+            <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">#{{ tag }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if page.earlier or page.later or page.lighter or page.heavier %}
+        <div class="post-nav">
+            {% if page.earlier %}
+            <a class="previous" href="{{ page.earlier.permalink }}">‹ {{ page.earlier.title }}</a>
+            {% endif %}
+            {% if page.later %}
+            <a class="next" href="{{ page.later.permalink }}">{{ page.later.title }} ›</a>
+            {% endif %}
+            {% if page.lighter %}
+            <a class="previous" href="{{ page.lighter.permalink }}">‹ {{ page.lighter.title }}</a>
+            {% endif %}
+            {% if page.heavier %}
+            <a class="next" href="{{ page.heavier.permalink }}">{{ page.heavier.title }} ›</a>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% endblock page_footer %}
+
+    </div>
+
+    {% block page_after_footer %}
+    <section id="beaudar">
+        <script src="https://beaudar.lipk.org/client.js" repo="Joylei/joylei.github.io" issue-term="pathname" label="💬"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+        </script>
+    </section>
+    {% endblock page_after_footer %}
+</article>
+
+{% endblock content %}

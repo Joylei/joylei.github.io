@@ -1,0 +1,65 @@
+{% macro title(page) %}
+<header class="post__header">
+    <h1 class="post__title" itemprop="name">
+        <a href="{{ page.permalink }}">{{ page.title }}</a>
+    </h1>
+    <div class="post__meta">
+        <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+            <circle cx="16" cy="16" r="14" />
+            <path d="M16 8 L16 16 20 20" />
+        </svg>
+        <span>{{ page.reading_time }} minute read</span>
+        {% if page.date %}
+        <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+            <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+        </svg>
+        <span class="post__time">Published: {{ page.date | date(format="%F") }}</span>
+        {% endif %}
+        {% if page.category %}
+        <div class="post__category">
+            <a href="{{ get_taxonomy_url(kind="category", name=page.category) }}">{{ page.category }}</a>
+        </div>
+        {% endif %}
+    </div>
+</header>
+{% endmacro title %}
+
+{% macro meta(page) %}
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>{{ page.reading_time }} minute read</span>
+    {% if page.date %}
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: {{ page.date | date(format="%F") }}</span>
+    {% endif %}
+    {% if page.category %}
+    <div class="post__category">
+        <a href="{{ get_taxonomy_url(kind="category", name=page.category) }}">{{ page.category }}</a>
+    </div>
+    {% endif %}
+</div>
+{% endmacro meta %}
+
+{% macro page_in_list(page) %}
+<article class="post" itemscope itemtype="http://schema.org/CreativeWork">
+    <h1 class="post__title" itemprop="name">
+        <a href="{{ page.permalink }}">{{ page.title }}</a>
+    </h1>
+    {{ self::meta(page=page) }}
+    <div class="post__summary" itemprop="summary">
+        {{ page.summary | safe }}
+    </div>
+    <div class="read-more">
+        <a itemprop="url" href="{{ page.permalink }}">Read more...</a>
+    </div>
+</article>
+{% endmacro page_in_list %}
