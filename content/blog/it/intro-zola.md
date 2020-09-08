@@ -1,5 +1,5 @@
 +++
-title = "zola简单使用说明"
+title = "zola 简单使用说明"
 date=2020-09-04
 
 [taxonomies]
@@ -146,8 +146,8 @@ highlight_theme = "material-dark"
 
 更多语法高亮主题看[这里](https://www.getzola.org/documentation/getting-started/configuration/#syntax-highlighting)。
 
-
 ### Taxonomies
+
 在config.toml中配置分类和标签。
 
 ``` rust
@@ -156,9 +156,11 @@ taxonomies = [
     {name = "tags", rss = true},
 ]
 ```
+
 ### Feed
 
 在 config.toml中配置：
+
 ```toml
 generate_feed = true
 ```
@@ -168,6 +170,7 @@ generate_feed = true
 锚点
 
 `zola`会为内容中的标题生成唯一锚点。如：
+
 ```
 # Something exciting! <- something-exciting
 ## Example code <- example-code
@@ -177,6 +180,7 @@ generate_feed = true
 ```
 
 也可以手动指定锚点:
+
 ```
 # Something manual! {#manual}
 ```
@@ -186,13 +190,17 @@ generate_feed = true
 `content/pages/about.md` 这样引用 `[my link](@/pages/about.md)`。
 
 ## Serve
+
 本地`serve`预览：
+
 ```shell
 zola serve --interface 0.0.0.0 --port 2000
 ```
 
 ## Build
+
 构建静态页面：
+
 ```shell
 zola build
 ```
@@ -203,6 +211,47 @@ zola build
 简单的来说`github`允许选择哪个分支来发布。
 你可以把所有代码上传到某个分支，然后使用[`zola-deploy-action`](https://github.com/shalzz/zola-deploy-action)来自动构建和发布。
 
+这里示例的是用`code`分支存放所有代码，用`master`分支做`Github Pages`。
 
-# More
+- 在`Github`创建一个`Personal Access Token`: <https://github.com/settings/tokens>，记住这个`token`的值
+- 把这个`token`的值添加到项目的设置的`Secrets`里，并且名字为`TOKEN`
+- 添加`github action`：在``code`分支创建`.github/workflows/zola.yml`，内容为
+
+```text
+on:
+  push:
+    branches:
+      - code
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/code'
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@main
+      - name: 'Build only'
+        uses: shalzz/zola-deploy-action@v0.10.1
+        env:
+          BUILD_DIR: .
+          TOKEN: ${{ secrets.TOKEN }}
+          BUILD_ONLY: true
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/code'
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@main
+      - name: 'Build and deploy'
+        uses: shalzz/zola-deploy-action@v0.10.1
+        env:
+          PAGES_BRANCH: master
+          BUILD_DIR: .
+          TOKEN: ${{ secrets.TOKEN }}
+```
+
+- 当你对远程仓库执行`pull`或者`push`代码到`code`分支时就会自动运行`workflow`
+
+## More
+
 到[官网](https://www.getzola.org/)去探索更多内容吧。
