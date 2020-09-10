@@ -1,5 +1,5 @@
 {% import "post_macros.html" as post_macros %}
-
+{% import "extra_macros.html" as extra_macros %}
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -18,7 +18,7 @@
         title="RSS" href="{{ get_url(path=config.feed_filename) | safe }}">
     {% endif %}
 
-    {% block js %}
+    {% block js -%}
     <script defer src="{{get_url(path="vendor/instant.page-5.1.0.js", trailing_slash=false)}}" type="module"></script>
     <script defer src="{{get_url(path="vendor/medium-zoom.min.js", trailing_slash=false)}}"
         onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
@@ -35,6 +35,11 @@
         onload="renderMathInElement(document.body);"></script>
     {% endif %}
     {% endif %}
+
+    {% if config.extra.ga_id and (current_url is starting_with(config.extra.base_url)) %}
+    {{ extra_macros::ga(id=config.extra.ga_id) }}
+    {% endif %}
+
     {% endblock js %}
 
     {% block css %}

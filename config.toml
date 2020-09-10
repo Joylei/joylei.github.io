@@ -38,3 +38,8 @@ even_menu = [
     {url = "$BASE_URL/about", name = "About"},
 ]
 katex_enable = true
+
+# Google Analytics
+ga_id="UA-177611810-1"
+
+base_url="https://blog.dotone.top"
