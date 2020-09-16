@@ -74,11 +74,13 @@
     </div>
 
     {% block page_after_footer %}
+    {% current_url is starting_with(config.extra.base_url) %}
     <section id="beaudar">
         <script src="https://beaudar.lipk.org/client.js" repo="Joylei/joylei.github.io" issue-term="pathname" label="💬"
             theme="preferred-color-scheme" crossorigin="anonymous" async>
         </script>
     </section>
+    {% endif %}
     {% endblock page_after_footer %}
 </article>
 
