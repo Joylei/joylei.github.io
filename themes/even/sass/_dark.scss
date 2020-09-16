@@ -31,4 +31,10 @@
         border-left: 3px solid #8d3b6cd8;
         background: #212121;
     }
+
+    main .about code,
+    main .post code {
+        color: silver !important;
+        font-style: italic;
+    }
 }
