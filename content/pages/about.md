@@ -4,8 +4,6 @@ template="about.html"
 path="about"
 +++
 
-> Looking for a job
-
 ## About 
 
 Write down something meaningful or nonsense.
