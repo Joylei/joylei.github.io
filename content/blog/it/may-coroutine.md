@@ -84,3 +84,15 @@ fn child_task(index: usize) {
 }
 
 ```
+
+## Cancel的陷阱
+
+使用`cancel`后发现程序在`release`模式下莫名的崩溃。
+调试及查看源代码，发现是由于`May`的[cancel](https://github.com/Xudong-Huang/may/blob/master/src/cancel.rs)机制使用`rust`的`panic`机制。所以无法在编译时优化使用自定义的`panic`处理机制。
+
+```toml
+[profile.release]
+panic = "abort"
+```
+
+如果使用这个配置，`cancel()`时应用程序会崩溃退出。
