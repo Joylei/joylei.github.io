@@ -23,6 +23,9 @@ Write down something meaningful or nonsense.
 
 ## Open source projects
 
+> [ejdb2-rs](https://github.com/Joylei/ejdb2-rs)
+>> [ejdb2](https://github.com/Softmotions/ejdb) rust binding
+
 > [plctag-rs](https://github.com/Joylei/plctag-rs)
 >> a rust wrapper of [libplctag](https://github.com/libplctag/libplctag), with rust style APIs and useful extensions.
 
