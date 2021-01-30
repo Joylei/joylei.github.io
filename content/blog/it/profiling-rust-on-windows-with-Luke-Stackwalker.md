@@ -4,7 +4,7 @@ date=2020-12-24
 
 [taxonomies]
 categories=["Programming"]
-tags=["rust", "bindgen", "clang"]
+tags=["rust", "profiling", "stackwalker", "windows"]
 +++
 
 There are great profiling tools for rust, such as [profiling](https://crates.io/crates/profiling), [gperftools](https://crates.io/crates/gperftools), [flamegraph](https://crates.io/crates/flamegraph), etc.  But I would recommend to try
