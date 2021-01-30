@@ -37,4 +37,8 @@
         color: silver !important;
         font-style: italic;
     }
+
+    main .pagination>a {
+        color: $main-colour !important;
+    }
 }
