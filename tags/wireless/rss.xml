@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Lei&#x27;s Blog</title>
+        <link>https://blog.dotone.top</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>zh</language>
+        <atom:link href="https://blog.dotone.top/tags/wireless/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Thu, 21 May 2020 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>Windows 无线网卡优化设置</title>
+                <pubDate>Thu, 21 May 2020 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/notes/windows-wireless-nic-best-settgins/</link>
+                <guid>https://blog.dotone.top/notes/windows-wireless-nic-best-settgins/</guid>
+                <description>&lt;p&gt;无线网卡默认可能没有启用以下设置，启用后看看速度是不是更快了？&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;首选频带&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;3.首选5GHz频带&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;ul&gt;
+&lt;li&gt;吞吐量助推器&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;已启用&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;</description>
+            </item>
+        
+    </channel>
+</rss>

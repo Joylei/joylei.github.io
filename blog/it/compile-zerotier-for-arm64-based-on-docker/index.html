@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - 基于docker的arm64编译zerotier</title>
+
+    
+
+    <script defer src="https:&#x2F;&#x2F;blog.dotone.top&#x2F;vendor&#x2F;instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https:&#x2F;&#x2F;blog.dotone.top&#x2F;vendor&#x2F;medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https:&#x2F;&#x2F;blog.dotone.top&#x2F;vendor&#x2F;slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https:&#x2F;&#x2F;blog.dotone.top&#x2F;vendor&#x2F;katex@0.10.0&#x2F;katex.min.js">
+    </script>
+    <script defer src="https:&#x2F;&#x2F;blog.dotone.top&#x2F;vendor&#x2F;katex@0.10.0&#x2F;mathtex-script-type.min.js">
+    </script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;site.css">
+    
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;vendor&#x2F;katex@0.10.0&#x2F;katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Notes</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Notes</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/#zhu-ce-qemu-user-static" class="toc-link">注册qemu-user-static</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/#zhun-bei-ubuntu-arm64yuan" class="toc-link">准备ubuntu arm64源</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/#zhun-bei-dockerfile" class="toc-link">准备Dockerfile</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/#gou-jian-dockerjing-xiang" class="toc-link">构建docker镜像</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/#cha-kan-jing-xiang" class="toc-link">查看镜像</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/#chuang-jian-rong-qi" class="toc-link">创建容器</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/#bian-yi" class="toc-link">编译</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/#zai-bashzhong-zhi-xing-ming-ling" class="toc-link">在bash中执行命令</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/#qing-li" class="toc-link">清理</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/#bian-yi-1" class="toc-link">编译</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/#cha-kan-dong-tai-bian-yi-ku-yi-lai" class="toc-link">查看动态编译库依赖</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/#ba-zerotier-oneshang-chuan-dao-lu-you-qi" class="toc-link">把zerotier-one上传到路由器</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/#can-kao" class="toc-link">参考</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;compile-zerotier-for-arm64-based-on-docker&#x2F;">基于docker的arm64编译zerotier</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>8 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2020-06-12</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>为了在路由器使用zerotier，但又不想安装entware，自己动手编译zerotier。路由器使用的梅林固件，cpu是arm64架构的。</p>
+<h2 id="zhu-ce-qemu-user-static">注册qemu-user-static</h2>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">❯ docker run --rm --privileged multiarch/qemu-user-static:register --reset</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-alpha-static as binfmt interpreter for alpha</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-arm-static as binfmt interpreter for arm</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-armeb-static as binfmt interpreter for armeb</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-sparc-static as binfmt interpreter for sparc</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-sparc32plus-static as binfmt interpreter for sparc32plus</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-sparc64-static as binfmt interpreter for sparc64</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-ppc-static as binfmt interpreter for ppc</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-ppc64-static as binfmt interpreter for ppc64</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-ppc64le-static as binfmt interpreter for ppc64le</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-m68k-static as binfmt interpreter for m68k</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-mips-static as binfmt interpreter for mips</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-mipsel-static as binfmt interpreter for mipsel</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-mipsn32-static as binfmt interpreter for mipsn32</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-mipsn32el-static as binfmt interpreter for mipsn32el</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-mips64-static as binfmt interpreter for mips64</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-mips64el-static as binfmt interpreter for mips64el</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-sh4-static as binfmt interpreter for sh4</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-sh4eb-static as binfmt interpreter for sh4eb</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-s390x-static as binfmt interpreter for s390x</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-aarch64-static as binfmt interpreter for aarch64</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-aarch64_be-static as binfmt interpreter for aarch64_be</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-hppa-static as binfmt interpreter for hppa</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-riscv32-static as binfmt interpreter for riscv32</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-riscv64-static as binfmt interpreter for riscv64</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-xtensa-static as binfmt interpreter for xtensa</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-xtensaeb-static as binfmt interpreter for xtensaeb</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-microblaze-static as binfmt interpreter for microblaze</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-microblazeel-static as binfmt interpreter for microblazeel</span><span style="color:#eeffff;">
+Setting /usr/bin/qemu-or1k-static as binfmt interpreter for or1k</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+</span></pre><h2 id="zhun-bei-ubuntu-arm64yuan">准备ubuntu arm64源</h2>
+<p>默认的源更新太慢了，替换成阿里云的源。注意：这里对应的是ubuntu focal发行版；其它的发行版，请自行替换源地址。
+创建文件<code>sources.list</code>，内容如下：</p>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;"># See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to</span><span style="color:#eeffff;">
+# newer versions of the distribution.</span><span style="color:#eeffff;">
+deb http://mirrors.aliyun.com/ubuntu-ports/ focal main restricted</span><span style="color:#eeffff;">
+# deb-src http://archive.ubuntu.com/ubuntu/ focal main restricted</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+## Major bug fix updates produced after the final release of the</span><span style="color:#eeffff;">
+## distribution.</span><span style="color:#eeffff;">
+deb http://mirrors.aliyun.com/ubuntu-ports/ focal-updates main restricted</span><span style="color:#eeffff;">
+# deb-src http://archive.ubuntu.com/ubuntu/ focal-updates main restricted</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu</span><span style="color:#eeffff;">
+## team. Also, please note that software in universe WILL NOT receive any</span><span style="color:#eeffff;">
+## review or updates from the Ubuntu security team.</span><span style="color:#eeffff;">
+deb http://mirrors.aliyun.com/ubuntu-ports/ focal universe</span><span style="color:#eeffff;">
+# deb-src http://archive.ubuntu.com/ubuntu/ focal universe</span><span style="color:#eeffff;">
+deb http://mirrors.aliyun.com/ubuntu-ports/ focal-updates universe</span><span style="color:#eeffff;">
+# deb-src http://archive.ubuntu.com/ubuntu/ focal-updates universe</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu</span><span style="color:#eeffff;">
+## team, and may not be under a free licence. Please satisfy yourself as to</span><span style="color:#eeffff;">
+## your rights to use the software. Also, please note that software in</span><span style="color:#eeffff;">
+## multiverse WILL NOT receive any review or updates from the Ubuntu</span><span style="color:#eeffff;">
+## security team.</span><span style="color:#eeffff;">
+deb http://mirrors.aliyun.com/ubuntu-ports/ focal multiverse</span><span style="color:#eeffff;">
+# deb-src http://archive.ubuntu.com/ubuntu/ focal multiverse</span><span style="color:#eeffff;">
+deb http://mirrors.aliyun.com/ubuntu-ports/ focal-updates multiverse</span><span style="color:#eeffff;">
+# deb-src http://archive.ubuntu.com/ubuntu/ focal-updates multiverse</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+## N.B. software from this repository may not have been tested as</span><span style="color:#eeffff;">
+## extensively as that contained in the main release, although it includes</span><span style="color:#eeffff;">
+## newer versions of some applications which may provide useful features.</span><span style="color:#eeffff;">
+## Also, please note that software in backports WILL NOT receive any review</span><span style="color:#eeffff;">
+## or updates from the Ubuntu security team.</span><span style="color:#eeffff;">
+deb http://mirrors.aliyun.com/ubuntu-ports/ focal-backports main restricted universe multiverse</span><span style="color:#eeffff;">
+# deb-src http://archive.ubuntu.com/ubuntu/ focal-backports main restricted universe multiverse</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+## Uncomment the following two lines to add software from Canonical&#39;s</span><span style="color:#eeffff;">
+## &#39;partner&#39; repository.</span><span style="color:#eeffff;">
+## This software is not part of Ubuntu, but is offered by Canonical and the</span><span style="color:#eeffff;">
+## respective vendors as a service to Ubuntu users.</span><span style="color:#eeffff;">
+# deb http://archive.canonical.com/ubuntu focal partner</span><span style="color:#eeffff;">
+# deb-src http://archive.canonical.com/ubuntu focal partner</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+deb http://mirrors.aliyun.com/ubuntu-ports/ focal-security main restricted</span><span style="color:#eeffff;">
+# deb-src http://security.ubuntu.com/ubuntu/ focal-security main restricted</span><span style="color:#eeffff;">
+deb http://mirrors.aliyun.com/ubuntu-ports/ focal-security universe</span><span style="color:#eeffff;">
+# deb-src http://security.ubuntu.com/ubuntu/ focal-security universe</span><span style="color:#eeffff;">
+deb http://mirrors.aliyun.com/ubuntu-ports/ focal-security multiverse</span><span style="color:#eeffff;">
+# deb-src http://security.ubuntu.com/ubuntu/ focal-security multiverse</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+</span></pre><h2 id="zhun-bei-dockerfile">准备Dockerfile</h2>
+<p><a href="https://hub.docker.com/u/multiarch/">https://hub.docker.com/u/multiarch/</a></p>
+<p>创建文件<code>Dockerfile</code>,内容如下：</p>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">FROM multiarch/ubuntu-core:arm64-focal</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+COPY sources.list /etc/apt/</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+RUN apt-get update -yqq \</span><span style="color:#eeffff;">
+  &amp;&amp; apt-get install gcc g++ make curl git -y</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+VOLUME /tmp</span><span style="color:#eeffff;">
+WORKDIR /tmp</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+ENTRYPOINT [&quot;tail&quot;, &quot;-f&quot;, &quot;/dev/null&quot;]</span><span style="color:#eeffff;">
+</span></pre>
+<p>可以自己修改Dockerfile，使用<code>apt-get</code>安装必要的包。</p>
+<h2 id="gou-jian-dockerjing-xiang">构建docker镜像</h2>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">❯ docker build -t arm64:test .</span><span style="color:#eeffff;">
+</span></pre><h2 id="cha-kan-jing-xiang">查看镜像</h2>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">❯ docker image ls</span><span style="color:#eeffff;">
+REPOSITORY                   TAG                 IMAGE ID            CREATED             SIZE</span><span style="color:#eeffff;">
+arm64                        test                1b6c48260def        3 minutes ago       287MB</span><span style="color:#eeffff;">
+&lt;none&gt;                       &lt;none&gt;              727fd2a54c5f        11 minutes ago      70.2MB</span><span style="color:#eeffff;">
+multiarch/ubuntu-core        arm64-focal         ec57294b3a5f        4 days ago          70.2MB</span><span style="color:#eeffff;">
+multiarch/qemu-user-static   register            a119103618d8        12 days ago         1.25MB</span><span style="color:#eeffff;">
+</span></pre><h2 id="chuang-jian-rong-qi">创建容器</h2>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">❯ docker run -d --name arm64  -v /share/homes/admin/zerotier-dev/tmp:/tmp arm64:test</span><span style="color:#eeffff;">
+1123a7097cb7aa376a97ac3477b83dab95a44dd457e3daf5d21a82384209d66e</span><span style="color:#eeffff;">
+</span></pre><h2 id="bian-yi">编译</h2>
+<h3 id="zai-bashzhong-zhi-xing-ming-ling">在bash中执行命令</h3>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">❯ docker exec -it arm64 /bin/bash</span><span style="color:#eeffff;">
+</span></pre><pre style="background-color:#212121;">
+<span style="color:#eeffff;">root@0aa48fea29b7:/tmp# uname -a</span><span style="color:#eeffff;">
+Linux 0aa48fea29b7 4.19.104-microsoft-standard #1 SMP Wed Feb 19 06:37:35 UTC 2020 aarch64 aarch64 aarch64 GNU/Linux</span><span style="color:#eeffff;">
+</span></pre>
+<p>由于git下载太慢了并且可能中断，所以使用curl下载</p>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">curl -L -o zerotier-1.4.6.tar.gz --retry 20  https://github.com/zerotier/ZeroTierOne/archive/1.4.6.tar.gz</span><span style="color:#eeffff;">
+tar zxf zerotier-1.4.6.tar.gz</span><span style="color:#eeffff;">
+cd ZeroTierOne-1.4.6</span><span style="color:#eeffff;">
+</span></pre><h3 id="qing-li">清理</h3>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">make clean</span><span style="color:#eeffff;">
+</span></pre><h3 id="bian-yi-1">编译</h3>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">make</span><span style="color:#eeffff;">
+</span></pre>
+<p>如果需要静态编译:</p>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;"> make SHARED=0 CC=&#39;gcc -static&#39; CXX=&#39;g++ -static&#39;</span><span style="color:#eeffff;">
+</span></pre><h4 id="cha-kan-bian-yi-jie-guo">查看编译结果</h4>
+<p>下面是动态编译的结果：</p>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">root@0aa48fea29b7:/tmp/ZeroTierOne-1.4.6# ls -lh | grep zerotier-one</span><span style="color:#eeffff;">
+lrwxrwxrwx  1 root root   12 Jun 15 05:31 zerotier-cli -&gt; zerotier-one</span><span style="color:#eeffff;">
+lrwxrwxrwx  1 root root   12 Jun 15 05:31 zerotier-idtool -&gt; zerotier-one</span><span style="color:#eeffff;">
+-rwxr-xr-x  1 root root 1.7M Jun 15 05:31 zerotier-one</span><span style="color:#eeffff;">
+-rw-rw-r--  1 root root 5.4K Sep  5  2019 zerotier-one.spec</span><span style="color:#eeffff;">
+</span></pre><h3 id="cha-kan-dong-tai-bian-yi-ku-yi-lai">查看动态编译库依赖</h3>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">root@0aa48fea29b7:/tmp/ZeroTierOne-1.4.6# objdump -x zerotier-one | grep NEEDED</span><span style="color:#eeffff;">
+  NEEDED               libstdc++.so.6</span><span style="color:#eeffff;">
+  NEEDED               libm.so.6</span><span style="color:#eeffff;">
+  NEEDED               libgcc_s.so.1</span><span style="color:#eeffff;">
+  NEEDED               libpthread.so.0</span><span style="color:#eeffff;">
+  NEEDED               libc.so.6</span><span style="color:#eeffff;">
+  NEEDED               ld-linux-aarch64.so.1</span><span style="color:#eeffff;">
+root@0aa48fea29b7:/tmp/ZeroTierOne-1.4.6# ldd zerotier-one</span><span style="color:#eeffff;">
+        libstdc++.so.6 =&gt; /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000005501a5c000)</span><span style="color:#eeffff;">
+        libm.so.6 =&gt; /lib/aarch64-linux-gnu/libm.so.6 (0x0000005501c40000)</span><span style="color:#eeffff;">
+        libgcc_s.so.1 =&gt; /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000005501ceb000)</span><span style="color:#eeffff;">
+        libpthread.so.0 =&gt; /lib/aarch64-linux-gnu/libpthread.so.0 (0x0000005501d10000)</span><span style="color:#eeffff;">
+        libc.so.6 =&gt; /lib/aarch64-linux-gnu/libc.so.6 (0x0000005501d40000)</span><span style="color:#eeffff;">
+        /lib/ld-linux-aarch64.so.1 (0x0000005500000000)</span><span style="color:#eeffff;">
+</span></pre>
+<p>经过检查路由器上<code>/lib</code>目录，发现有除了<code>libstdc++.so.6</code>以为的库，而<code>libstdc++.so.6</code>在<code>/usr/lib</code>目录下存在。
+但是运行<code>zerotier-one --help</code>之后报错：</p>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">./zerotier-one: error while loading shared libraries: libstdc++.so.6: cannot open shared object file: No such file or directory</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+</span></pre>
+<p>指定从<code>/usr/lib</code>目录加载库之后仍然报错：</p>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;"> # LD_LIBRARY_PATH=/usr/lib ./zerotier-one --help</span><span style="color:#eeffff;">
+ ./zerotier-one: error while loading shared libraries: libstdc++.so.6: wrong ELF class: ELFCLASS32</span><span style="color:#eeffff;">
+</span></pre>
+<p>看起来<code>/usr/lib/libstdc++.so.6</code>是32位的。
+所以最后我选择使用静态编译的结果。</p>
+<h3 id="ba-zerotier-oneshang-chuan-dao-lu-you-qi">把zerotier-one上传到路由器</h3>
+<p>用sftp工具把<code>zerotier-one</code>上传到路由器，我这里是放在<code>/jffs/bin</code>。</p>
+<p>添加执行权限：</p>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">cd /jffs/bin</span><span style="color:#eeffff;">
+chmod u+x zerotier-one</span><span style="color:#eeffff;">
+</span></pre>
+<p>创建链接</p>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">ln -sf zerotier-one zerotier-cli</span><span style="color:#eeffff;">
+ln -sf zerotier-one zerotier-idtool</span><span style="color:#eeffff;">
+</span></pre>
+<p>验证是否能运行:</p>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">./zerotier-one --help</span><span style="color:#eeffff;">
+</span></pre>
+<p>如果正确无误应该得到输出：</p>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">ZeroTier One version 1.4.6</span><span style="color:#eeffff;">
+Copyright (c) 2019 ZeroTier, Inc.</span><span style="color:#eeffff;">
+Licensed under the ZeroTier BSL 1.1 (see LICENSE.txt)</span><span style="color:#eeffff;">
+Usage: ./zerotier-one [-switches] [home directory]</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+Available switches:</span><span style="color:#eeffff;">
+  -h                - Display this help</span><span style="color:#eeffff;">
+  -v                - Show version</span><span style="color:#eeffff;">
+  -U                - Skip privilege check and do not attempt to drop privileges</span><span style="color:#eeffff;">
+  -p&lt;port&gt;          - Port for UDP and TCP/HTTP (default: 9993, 0 for random)</span><span style="color:#eeffff;">
+  -d                - Fork and run as daemon (Unix-ish OSes)</span><span style="color:#eeffff;">
+  -i                - Generate and manage identities (zerotier-idtool)</span><span style="color:#eeffff;">
+  -q                - Query API (zerotier-cli)</span><span style="color:#eeffff;">
+</span></pre>
+<p>把<code>/jffs/bin</code>加到环境变量$PATH:</p>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">echo &quot;export PATH=/jffs/bin:\$PATH&quot; &gt;&gt; /jffs/configs/profile.add</span><span style="color:#eeffff;">
+</span></pre><pre style="background-color:#212121;">
+<span style="color:#eeffff;">ZTPID=$(pidof zerotier-one)</span><span style="color:#eeffff;">
+if [ ${ZTPID} -gt 0 ]; then</span><span style="color:#eeffff;">
+ exit 0</span><span style="color:#eeffff;">
+fi</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+zerotier-one -d</span><span style="color:#eeffff;">
+</span></pre>
+<p>现在开始可以按照zerotier官方文档进行后续操作。</p>
+<h2 id="can-kao">参考</h2>
+<ul>
+<li><a href="https://neoautomata.com/blog/zerotier-arm/">https://neoautomata.com/blog/zerotier-arm/</a></li>
+<li><a href="https://github.com/zerotier/ZeroTierOne">https://github.com/zerotier/ZeroTierOne</a></li>
+</ul>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags&#x2F;arm64&#x2F;">#arm64</a>
+            
+            <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags&#x2F;zerotier&#x2F;">#zerotier</a>
+            
+            <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags&#x2F;docker&#x2F;">#docker</a>
+            
+            <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags&#x2F;network&#x2F;">#network</a>
+            
+            <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags&#x2F;build&#x2F;">#build</a>
+            
+        </div>
+        
+        
+        <div class="post-nav">
+            
+            <a class="previous" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;life&#x2F;reading&#x2F;the-art-of-unit-testing-with-examples-in-.net&#x2F;">‹ 读书：《.Net单元测试的艺术》</a>
+            
+            
+            <a class="next" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;zerotier-unable-to-configure-virtual-network-port&#x2F;">zerotier: unable to configure virtual network port ›</a>
+            
+            
+            
+        </div>
+        
+
+        
+
+    </div>
+
+    
+    
+    <section id="beaudar">
+        <script src="https://beaudar.lipk.org/client.js" repo="Joylei/joylei.github.io" issue-term="pathname" label="💬"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+        </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https:&#x2F;&#x2F;blog.dotone.top&#x2F;even.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Lei&#x27;s Blog</title>
+        <link>https://blog.dotone.top</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>zh</language>
+        <atom:link href="https://blog.dotone.top/tags/ctc/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Mon, 09 Nov 2020 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>Windows下编译WarpCTC</title>
+                <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/blog/it/build-warpctc-on-windows/</link>
+                <guid>https://blog.dotone.top/blog/it/build-warpctc-on-windows/</guid>
+                <description>&lt;p&gt;需要用到&lt;code&gt;warpctc pytorch binding&lt;&#x2F;code&gt;，又不想切换到&lt;code&gt;linux&lt;&#x2F;code&gt;平台，于是修改一番，添加了一键编译脚本。&lt;&#x2F;p&gt;
+&lt;p&gt;在编译时可能会遇到CUDA报错，请修改&lt;code&gt;CMakeLists.txt&lt;&#x2F;code&gt;，在里面注释或者反注释CUDA对应的架构。&lt;&#x2F;p&gt;
+&lt;p&gt;修改后的代码已发布在&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Joylei&#x2F;warp-ctc&quot;&gt;Github&lt;&#x2F;a&gt;。&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+    </channel>
+</rss>

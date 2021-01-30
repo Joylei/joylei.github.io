@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Lei&#x27;s Blog</title>
+        <link>https://blog.dotone.top</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>zh</language>
+        <atom:link href="https://blog.dotone.top/tags/wsl/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Sun, 14 Jun 2020 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>WSL ubuntu add user</title>
+                <pubDate>Sun, 14 Jun 2020 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/notes/wsl-ubuntu-add-user/</link>
+                <guid>https://blog.dotone.top/notes/wsl-ubuntu-add-user/</guid>
+                <description>&lt;h2 id=&quot;da-kai-ming-ling-xing-yi-rootyong-hu-yun-xing-wsl&quot;&gt;打开命令行，以root用户运行wsl&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;C:\WINDOWS\system32&amp;gt;wsl -u root&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;tian-jia-user&quot;&gt;添加 user&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;root@MYPC:&#x2F;mnt&#x2F;c&#x2F;WINDIWS&#x2F;system32# adduser lei&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;按照提示输入用户名和密码&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;gei-xin-yong-hu-tian-jia-sudoquan-xian&quot;&gt;给新用户添加sudo权限&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;root@MYPC:&#x2F;mnt&#x2F;c&#x2F;WINDIWS&#x2F;system32# usermod -G sudo lei&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;tui-chu-dang-qian-wsl&quot;&gt;退出当前wsl&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;exit&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;qie-huan-mo-ren-yong-hu&quot;&gt;切换默认用户&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;C:\WINDOWS\system32&amp;gt;ubuntu2004 config --default-user lei&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;这里ubuntu版本是20.04，如果是ubuntu 18.04，那么运行的是&lt;code&gt;ubuntu1804 config --default-user &amp;lt;username&amp;gt;&lt;&#x2F;code&gt;；以此类推，如果是其它发行版，改为相应的发行版名称+版本号。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;qi-dong-xin-de-wsl-yan-zheng-xin-yong-hu-he-sudoshi-fou-you-xiao&quot;&gt;启动新的wsl，验证新用户和sudo是否有效&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;C:\WINDOWS\system32&amp;gt;wsl&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+lei@MYPC:&#x2F;mnt&#x2F;c&#x2F;WINDIWS&#x2F;system32#sudo apt update&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+[sudo] password for lei:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Get:1 http:&#x2F;&#x2F;archive.ubuntu.com&#x2F;ubuntu focal InRelease [265 kB]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Get:2 http:&#x2F;&#x2F;security.ubuntu.com&#x2F;ubuntu focal-security InRelease [107 kB]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Get:3 http:&#x2F;&#x2F;security.ubuntu.com&#x2F;ubuntu focal-security&#x2F;main amd64 Packages [103 kB]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Get:4 http:&#x2F;&#x2F;security.ubuntu.com&#x2F;ubuntu focal-security&#x2F;main Translation-en [38.5 kB]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Get:5 http:&#x2F;&#x2F;archive.ubuntu.com&#x2F;ubuntu focal-updates InRelease [107 kB]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;can-kao&quot;&gt;参考&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.microsoft.com&#x2F;zh-cn&#x2F;windows&#x2F;wsl&#x2F;wsl-config&quot;&gt;https:&#x2F;&#x2F;docs.microsoft.com&#x2F;zh-cn&#x2F;windows&#x2F;wsl&#x2F;wsl-config&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.tenforums.com&#x2F;tutorials&#x2F;128052-add-user-windows-subsystem-linux-wsl-distro-windows-10-a.html&quot;&gt;https:&#x2F;&#x2F;www.tenforums.com&#x2F;tutorials&#x2F;128052-add-user-windows-subsystem-linux-wsl-distro-windows-10-a.html&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.thewindowsclub.com&#x2F;how-to-set-default-user-switch-user-and-remove-a-user-for-wsl&#x2F;&quot;&gt;https:&#x2F;&#x2F;www.thewindowsclub.com&#x2F;how-to-set-default-user-switch-user-and-remove-a-user-for-wsl&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</description>
+            </item>
+        
+    </channel>
+</rss>

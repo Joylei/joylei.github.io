@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Lei&#x27;s Blog</title>
+        <link>https://blog.dotone.top</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>zh</language>
+        <atom:link href="https://blog.dotone.top/tags/architecture/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Tue, 31 Mar 2020 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>读书：《程序员必读之软件架构》</title>
+                <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/blog/life/reading/Software-Architecture-for-Developers/</link>
+                <guid>https://blog.dotone.top/blog/life/reading/Software-Architecture-for-Developers/</guid>
+                <description>&lt;p&gt;读书笔记&lt;&#x2F;p&gt;
+&lt;p&gt;英文： Software Architecture for Developers&lt;&#x2F;p&gt;
+&lt;p&gt;中文：程序员必读之软件架构&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;life&#x2F;reading&#x2F;Software-Architecture-for-Developers&#x2F;mind.png&quot;&gt;查看原图&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;life&#x2F;reading&#x2F;Software-Architecture-for-Developers&#x2F;mind.png&quot; alt=&quot;程序员必读之软件架构-脑图.png&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+    </channel>
+</rss>

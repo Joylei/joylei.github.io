@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Lei&#x27;s Blog</title>
+        <link>https://blog.dotone.top</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>zh</language>
+        <atom:link href="https://blog.dotone.top/tags/jiu-zhuan/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>N1救砖</title>
+                <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/notes/N1-rescure/</link>
+                <guid>https://blog.dotone.top/notes/N1-rescure/</guid>
+                <description>&lt;p&gt;https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;e27fd85866db
+https:&#x2F;&#x2F;post.smzdm.com&#x2F;p&#x2F;akmg5dv4&#x2F;
+https:&#x2F;&#x2F;powersee.github.io&#x2F;2020&#x2F;03&#x2F;n1-armbian-server&#x2F;&lt;&#x2F;p&gt;
+&lt;p&gt;N1救砖总结：
+https:&#x2F;&#x2F;blog.csdn.net&#x2F;liuyingjieyeah&#x2F;article&#x2F;details&#x2F;100064999&lt;&#x2F;p&gt;
+&lt;p&gt;T1救砖固件下载：https:&#x2F;&#x2F;www.right.com.cn&#x2F;forum&#x2F;thread-315706-1-1.html&lt;&#x2F;p&gt;
+&lt;p&gt;webpad N1 官改2.2：https:&#x2F;&#x2F;www.right.com.cn&#x2F;forum&#x2F;thread-338759-1-1.html&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+    </channel>
+</rss>

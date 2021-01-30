@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Lei&#x27;s Blog</title>
+        <link>https://blog.dotone.top</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>zh</language>
+        <atom:link href="https://blog.dotone.top/tags/coroutine/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Sun, 06 Sep 2020 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>May -  rust stackful coroutine</title>
+                <pubDate>Sun, 06 Sep 2020 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/blog/it/may-coroutine/</link>
+                <guid>https://blog.dotone.top/blog/it/may-coroutine/</guid>
+                <description>&lt;p&gt;最近在项目中尝试了&lt;code&gt;rust&lt;&#x2F;code&gt;下的协程库&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Xudong-Huang&#x2F;may&quot;&gt;&lt;code&gt;May&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;。如果你对写&lt;code&gt;async\await&lt;&#x2F;code&gt;感到厌倦，可以试试&lt;code&gt;May&lt;&#x2F;code&gt;,换换脑子。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;jie-shao&quot;&gt;介绍&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Xudong-Huang&#x2F;may&quot;&gt;&lt;code&gt;May&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;是一个用&lt;code&gt;pure rust&lt;&#x2F;code&gt;写的基于栈的协程库。官方的介绍如下：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;May is a high-performant library for programming stackful coroutines with which you can easily&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+develop and maintain massive concurrent programs. It can be thought as the Rust version of the&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+popular Goroutine.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;常见的协程库，在&lt;code&gt;python&lt;&#x2F;code&gt;下有&lt;code&gt;gevent&lt;&#x2F;code&gt;, &lt;code&gt;c\c++&lt;&#x2F;code&gt;有&lt;code&gt;libuv&lt;&#x2F;code&gt;。在&lt;code&gt;rust&lt;&#x2F;code&gt;下也有其它基于&lt;code&gt;ffi&lt;&#x2F;code&gt;封装的&lt;code&gt;libuv&lt;&#x2F;code&gt;等库。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;he-futurejian-dan-dui-bi&quot;&gt;和&lt;code&gt;Future&lt;&#x2F;code&gt;简单对比&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;May&lt;&#x2F;code&gt;和&lt;code&gt;rust&lt;&#x2F;code&gt;的&lt;code&gt;Future&lt;&#x2F;code&gt;有哪些相同和不同的地方？&lt;&#x2F;p&gt;
+&lt;p&gt;相同的地方：&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;都是基于&lt;code&gt;generator&lt;&#x2F;code&gt;实现的，也就是说都是&lt;code&gt;stackful&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;捕获的变量都需要&lt;code&gt;move&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;都需要&lt;code&gt;runtime&lt;&#x2F;code&gt;去执行&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;不同的地方：&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Future&lt;&#x2F;code&gt;需要&lt;code&gt;pin reference&lt;&#x2F;code&gt;, &lt;code&gt;May&lt;&#x2F;code&gt;不需要(可能也需要？)&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Future&lt;&#x2F;code&gt;使用&lt;code&gt;async\await&lt;&#x2F;code&gt;关键字，&lt;code&gt;May&lt;&#x2F;code&gt;不需要&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;shi-li&quot;&gt;示例&lt;&#x2F;h2&gt;
+&lt;p&gt;下面的示例简单展示了&lt;code&gt;task&lt;&#x2F;code&gt;的&lt;code&gt;spawn&lt;&#x2F;code&gt;和&lt;code&gt;cancel&lt;&#x2F;code&gt;。&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#89ddff;&quot;&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;macro_use&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c792ea;&quot;&gt;extern crate&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; may&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c792ea;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;may&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;coroutine &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;as&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; co&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c792ea;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;std&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;time&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;::{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;Duration&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; Instant&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;};&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c792ea;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#82aaff;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;() {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c792ea;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;go!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(|| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#82aaff;&quot;&gt;main_task&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;());&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+    t&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#82aaff;&quot;&gt;join&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;();&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c792ea;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#82aaff;&quot;&gt;main_task&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;() {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c792ea;&quot;&gt;let &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c792ea;&quot;&gt;mut&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; tasks &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;vec!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;[];&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c792ea;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; i &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f78c6c;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;..&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f78c6c;&quot;&gt;10 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+        &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c792ea;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; task &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;go!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c792ea;&quot;&gt;move &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;|| { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#82aaff;&quot;&gt;child_task&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;) });&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+        tasks&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#82aaff;&quot;&gt;push&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;task&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;);&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+    co&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;sleep&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;Duration&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;from_secs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f78c6c;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;));&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c792ea;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; t&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;) in (&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;tasks&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f78c6c;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;..&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f78c6c;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;]).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#82aaff;&quot;&gt;iter&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#82aaff;&quot;&gt;enumerate&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;() {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c792ea;&quot;&gt;unsafe &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+            t&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#82aaff;&quot;&gt;coroutine&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#82aaff;&quot;&gt;cancel&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;();&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+            println!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c3e88d;&quot;&gt;child &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c3e88d;&quot;&gt;: cancelled&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;&amp;quot;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;);&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c792ea;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;in&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; tasks &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+        t&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#82aaff;&quot;&gt;join&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;();&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+    println!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c3e88d;&quot;&gt;all done!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;&amp;quot;);&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c792ea;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#82aaff;&quot;&gt;child_task&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f78c6c;&quot;&gt;index&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c792ea;&quot;&gt;usize&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;) {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c792ea;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; now &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;Instant&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;now&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;();&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c792ea;&quot;&gt;loop &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+        &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c792ea;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; now&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#82aaff;&quot;&gt;elapsed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;() &amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;Duration&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;from_secs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f78c6c;&quot;&gt;20&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;) {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+            println!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c3e88d;&quot;&gt;child &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c3e88d;&quot;&gt;: done&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;&amp;quot;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; index&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;);&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+            &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c792ea;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+        println!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c3e88d;&quot;&gt;child &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c3e88d;&quot;&gt;: running&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;&amp;quot;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt; index&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;);&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+        co&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;sleep&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;Duration&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;from_millis&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f78c6c;&quot;&gt;500&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;));&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;cancelde-xian-jing&quot;&gt;Cancel的陷阱&lt;&#x2F;h2&gt;
+&lt;p&gt;使用&lt;code&gt;cancel&lt;&#x2F;code&gt;后发现程序在&lt;code&gt;release&lt;&#x2F;code&gt;模式下莫名的崩溃。
+调试及查看源代码，发现是由于&lt;code&gt;May&lt;&#x2F;code&gt;的&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Xudong-Huang&#x2F;may&#x2F;blob&#x2F;master&#x2F;src&#x2F;cancel.rs&quot;&gt;cancel&lt;&#x2F;a&gt;机制使用&lt;code&gt;rust&lt;&#x2F;code&gt;的&lt;code&gt;panic&lt;&#x2F;code&gt;机制。所以无法在编译时优化使用自定义的&lt;code&gt;panic&lt;&#x2F;code&gt;处理机制。&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#89ddff;&quot;&gt;[profile.release]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f07178;&quot;&gt;panic &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c3e88d;&quot;&gt;abort&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;如果使用这个配置，&lt;code&gt;cancel()&lt;&#x2F;code&gt;时应用程序会崩溃退出。&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+    </channel>
+</rss>

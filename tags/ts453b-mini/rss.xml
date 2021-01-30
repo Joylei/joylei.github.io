@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Lei&#x27;s Blog</title>
+        <link>https://blog.dotone.top</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>zh</language>
+        <atom:link href="https://blog.dotone.top/tags/ts453b-mini/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Mon, 07 Sep 2020 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>qute 代码发布到github</title>
+                <pubDate>Mon, 07 Sep 2020 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/blog/it/qute-published-to-github/</link>
+                <guid>https://blog.dotone.top/blog/it/qute-published-to-github/</guid>
+                <description>&lt;p&gt;今天把我为&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Joylei&#x2F;qute&quot;&gt;&lt;code&gt;qute&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;发布到了&lt;code&gt;github&lt;&#x2F;code&gt;。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;wei-shi-yao&quot;&gt;为什么&lt;&#x2F;h2&gt;
+&lt;p&gt;我有一台&lt;code&gt;TS453B mini&lt;&#x2F;code&gt;，但是说实话用的并不是很顺畅，系统特别不稳定，总是容易卡死。想着换成其它系统，最后选择了&lt;code&gt;Alpine Linux&lt;&#x2F;code&gt;。
+虽然遇到了一些困难，总算是解决了，顺利运行起来。但是有个问题一直无解，那就是没法控制风扇的转速。在&lt;code&gt;BIOS&lt;&#x2F;code&gt;中可以设置风扇为&lt;code&gt;auto&lt;&#x2F;code&gt;或者&lt;code&gt;manual&lt;&#x2F;code&gt;。
+实测&lt;code&gt;auto&lt;&#x2F;code&gt;不靠谱，机器会热死机。设置&lt;code&gt;manual&lt;&#x2F;code&gt;的话，风扇在机器启动时以100%转速运转，如果可以忍耐这个噪音的话，到这一步就可以了。
+那么能不能直接控制风扇呢？没有任何头绪，直到发现了&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;guedou&#x2F;TS-453Be&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;guedou&#x2F;TS-453Be&lt;&#x2F;a&gt;，然后折腾一番，没有在&lt;code&gt;QTS&lt;&#x2F;code&gt;中运行起来，
+报了&lt;code&gt;segment fault&lt;&#x2F;code&gt;错误。作者提供了完整的步骤和思路，我就想自己写一个吧，大概是从6、7月份开始的，用&lt;code&gt;radare2&lt;&#x2F;code&gt;进行逆向分析，然后就有了&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Joylei&#x2F;qute&quot;&gt;qute&lt;&#x2F;a&gt;。期间还想了很多，例如是不是写成驱动形式，是不是写一个自动控制调整转速的逻辑，是不是支持获取其它设备的温度；所以看了怎么实现&lt;code&gt;Linux&lt;&#x2F;code&gt;驱动和&lt;code&gt;Linux&lt;&#x2F;code&gt;驱动相关实现代码，怎么用&lt;code&gt;rust&lt;&#x2F;code&gt;写&lt;code&gt;Linux&lt;&#x2F;code&gt;驱动，硬盘&lt;code&gt;SMART&lt;&#x2F;code&gt;属性读取等等。写成驱动形式好处就是可以配合其它&lt;code&gt;PWM&lt;&#x2F;code&gt;调度控制的程序，不用自己去写控制逻辑。想了很多但最后都放弃了没有实现。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;shi-shi-yao&quot;&gt;是什么&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;qute&lt;&#x2F;code&gt;是用&lt;code&gt;rust&lt;&#x2F;code&gt;写的通过&lt;code&gt;EC&lt;&#x2F;code&gt;协议来控制&lt;code&gt;QNAP NAS&lt;&#x2F;code&gt;的风扇转速。理论上只要是基于&lt;code&gt;ITE8528&lt;&#x2F;code&gt;的&lt;code&gt;QNAP NAS&lt;&#x2F;code&gt;都可以控制。
+除了控制风扇和获取温度，还可以设置&lt;code&gt;EuP&lt;&#x2F;code&gt;, &lt;code&gt;Power Recovery Mode&lt;&#x2F;code&gt;。&lt;&#x2F;p&gt;
+&lt;p&gt;关于&lt;code&gt;EC&lt;&#x2F;code&gt;协议，请查看我的另一片文章&lt;a href=&quot;https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;ec-protocol&#x2F;&quot;&gt;EC 协议简析&lt;&#x2F;a&gt;。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;zen-yao-yong&quot;&gt;怎么用&lt;&#x2F;h2&gt;
+&lt;p&gt;注意：需要&lt;code&gt;root&lt;&#x2F;code&gt;权限运行。&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;qute v0.1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+QNAP device control. Use AT YOUR OWN RISK!!!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+USAGE: qute [OPTIONS] [COMMANDS]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+OPTIONS:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+  -V, --version                 Show version number&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+  -h, --help                    Show help message&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+  -v, --verbose [level:N]       Show verbose messages&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+  -q, --quiet                   Silence all output&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+COMMANDS:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+  eup                           get or set Eup mode&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+  fan                            get or set fan speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+  power                       get or set power recovery mode&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+  temp                         get temperature&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;more&quot;&gt;More&lt;&#x2F;h2&gt;
+&lt;p&gt;请移步&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Joylei&#x2F;qute&quot;&gt;&lt;code&gt;github&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;了解更多。&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+    </channel>
+</rss>

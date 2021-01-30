@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Lei&#x27;s Blog</title>
+        <link>https://blog.dotone.top</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>zh</language>
+        <atom:link href="https://blog.dotone.top/tags/router/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Sun, 10 May 2020 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>WSL ubuntu build padavan</title>
+                <pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/blog/it/WSL-ubuntu-build-padavan/</link>
+                <guid>https://blog.dotone.top/blog/it/WSL-ubuntu-build-padavan/</guid>
+                <description>&lt;p&gt;首先说结论，折腾了半天，报了一堆错，放弃了。建议直接完整ubuntu环境，很顺利编译。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;git-repository&quot;&gt;git repository&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;https:&#x2F;&#x2F;gitlab.com&#x2F;dm38&#x2F;padavan-ng.git&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;bian-yi&quot;&gt;编译&lt;&#x2F;h2&gt;
+&lt;p&gt;首先遇到的问题是不能 build toolchain。
+运行&lt;code&gt;.&#x2F;clean_sources.sh&lt;&#x2F;code&gt;，报错：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;=================REMOVE-OLD-BUILD-TREE==================&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+make: &#x2F;usr&#x2F;bin&#x2F;bash: Command not found&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+make: &#x2F;usr&#x2F;bin&#x2F;bash: Command not found&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&#x2F;mnt&#x2F;d&#x2F;padavan-ng&#x2F;toolchain&#x2F;scripts&#x2F;scripts.mk:63: recipe for target &amp;#39;distclean&amp;#39; failed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+make: *** [distclean] Error 127&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;运行&lt;code&gt;.&#x2F;build_toolchain.sh&lt;&#x2F;code&gt;报错：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;================ START BUILDING TOOLCHAIN ==============&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+============== CLEANING OLD BUILD TREE =================&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+make: &#x2F;usr&#x2F;bin&#x2F;bash: Command not found&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+make: &#x2F;usr&#x2F;bin&#x2F;bash: Command not found&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ct-ng:333: recipe for target &amp;#39;clean&amp;#39; failed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+make: *** [clean] Error 127&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+make: &#x2F;usr&#x2F;bin&#x2F;bash: Command not found&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+make: *** No rule to make target &amp;#39;mipsel-linux-uclibc&amp;#39;.  Stop.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;查看toolchain目录下用到的是crosstool-ng。rosstool-ng文档说明需要执行：&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;.&#x2F;bootstrap&lt;&#x2F;li&gt;
+&lt;li&gt;.&#x2F;configure --enable-local&lt;&#x2F;li&gt;
+&lt;li&gt;make&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;但是最后make时报错：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;CDPATH=&amp;quot;${ZSH_VERSION+.}:&amp;quot; &amp;amp;&amp;amp; cd . &amp;amp;&amp;amp; &#x2F;bin&#x2F;bash &#x2F;opt&#x2F;rt-n56u&#x2F;toolchain&#x2F;scripts&#x2F;missing aclocal-1.16&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&#x2F;opt&#x2F;rt-n56u&#x2F;toolchain&#x2F;scripts&#x2F;missing: line 81: aclocal-1.16: command not found&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+WARNING: &amp;#39;aclocal-1.16&amp;#39; is missing on your system.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         You should only need it if you modified &amp;#39;acinclude.m4&amp;#39; or&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         &amp;#39;configure.ac&amp;#39; or m4 files included by &amp;#39;configure.ac&amp;#39;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         The &amp;#39;aclocal&amp;#39; program is part of the GNU Automake package:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         &amp;lt;http:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;automake&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         It also requires GNU Autoconf, GNU m4 and Perl in order to run:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         &amp;lt;http:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;autoconf&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         &amp;lt;http:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;m4&#x2F;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         &amp;lt;http:&#x2F;&#x2F;www.perl.org&#x2F;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Makefile:2599: recipe for target &amp;#39;aclocal.m4&amp;#39; failed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+make: *** [aclocal.m4] Error 127&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;搜索后发现需要执行命令：&lt;code&gt;autoreconf -r -i&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;Copying file ABOUT-NLS&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file scripts&#x2F;config.rpath&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;codeset.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;extern-inline.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;fcntl-o.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;glibc2.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;glibc21.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;intdiv0.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;intl.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;intldir.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;intmax.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;inttypes-pri.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;inttypes_h.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;lcmessage.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;lock.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;longlong.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;printf-posix.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;size_max.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;stdint_h.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;threadlib.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;uintmax_t.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;visibility.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;wchar_t.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;wint_t.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file m4&#x2F;xsize.m4&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Creating directory po&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file po&#x2F;Makefile.in.in&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file po&#x2F;Makevars.template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file po&#x2F;Rules-quot&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file po&#x2F;boldquot.sed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file po&#x2F;en@boldquot.header&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file po&#x2F;en@quot.header&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file po&#x2F;insert-header.sin&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file po&#x2F;quot.sed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Copying file po&#x2F;remove-potcdate.sin&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+automake: warnings are treated as errors&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Makefile.am:6: warning: AM_GNU_GETTEXT used but &amp;#39;po&amp;#39; not in SUBDIRS&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+autoreconf: automake failed with exit status: 1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;再次执行make&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt; cd . &amp;amp;&amp;amp; &#x2F;bin&#x2F;bash &#x2F;opt&#x2F;rt-n56u&#x2F;toolchain&#x2F;scripts&#x2F;missing automake-1.16 --foreign&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&#x2F;opt&#x2F;rt-n56u&#x2F;toolchain&#x2F;scripts&#x2F;missing: line 81: automake-1.16: command not found&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+WARNING: &amp;#39;automake-1.16&amp;#39; is missing on your system.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         You should only need it if you modified &amp;#39;Makefile.am&amp;#39; or&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         &amp;#39;configure.ac&amp;#39; or m4 files included by &amp;#39;configure.ac&amp;#39;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         The &amp;#39;automake&amp;#39; program is part of the GNU Automake package:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         &amp;lt;http:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;automake&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         It also requires GNU Autoconf, GNU m4 and Perl in order to run:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         &amp;lt;http:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;autoconf&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         &amp;lt;http:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;m4&#x2F;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+         &amp;lt;http:&#x2F;&#x2F;www.perl.org&#x2F;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+Makefile:2570: recipe for target &amp;#39;Makefile.in&amp;#39; failed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+make: *** [Makefile.in] Error 1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;看起来automake版本不对，确认版本：&lt;code&gt;automake --version&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;automake (GNU automake) 1.15.1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;apt search automake&lt;&#x2F;code&gt;发现源里最高版本是1.15&lt;&#x2F;p&gt;
+&lt;p&gt;下载安装automake&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;sudo apt-get autoremove automake&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+wget http:&#x2F;&#x2F;ftp.gnu.org&#x2F;gnu&#x2F;automake&#x2F;automake-1.16.2.tar.gz&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+tar -xf automake-1.16.2.tar.gz&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+cd automake-1.16.2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+.&#x2F;bootstrap&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+.&#x2F;configure&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+make&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+sudo make install&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;</description>
+            </item>
+        
+            <item>
+                <title>WSL fakeroot issue</title>
+                <pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/notes/WSL-fakeroot-issue/</link>
+                <guid>https://blog.dotone.top/notes/WSL-fakeroot-issue/</guid>
+                <description>&lt;p&gt;&lt;img src=&quot;:&#x2F;0d50e08f163a466b8867c38cbcc017d2&quot; alt=&quot;a64e0b6ded4484df1aac60537b756add.png&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;sudo update-alternatives --set fakeroot &#x2F;usr&#x2F;bin&#x2F;fakeroot-tcp&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;https:&#x2F;&#x2F;github.com&#x2F;Microsoft&#x2F;WSL&#x2F;issues&#x2F;2465#issuecomment-377583291&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+    </channel>
+</rss>

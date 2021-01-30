@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Lei&#x27;s Blog</title>
+        <link>https://blog.dotone.top</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>zh</language>
+        <atom:link href="https://blog.dotone.top/tags/hui-fu/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>N1 ddbr 备份与恢复</title>
+                <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/blog/it/N1-ddbr/</link>
+                <guid>https://blog.dotone.top/blog/it/N1-ddbr/</guid>
+                <description>&lt;p&gt;使用&lt;code&gt;ddbr&lt;&#x2F;code&gt;来备份内存，以便随时快速恢复。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;bei-fen&quot;&gt;备份&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;root@aml:~# ddbr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ DO YOU WANT TO BACKUP OR RESTORE ?&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ BACKUP=(b) RESTORE=(r) b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ AVAILABLE DEVICES: mmcblk1 sda1 sda2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ YOU ARE RUNNING bionic FROM sda2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ INTERNAL EMMC IS: mmcblk1 SIZE:        7634944&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ ROOT (sda2) FREE SPACE IS:             118886072&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ DO YOU WANT COMPRESSION ?&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ YES=(y) NO=(n) y&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ SAVING AND COMPRESSING mmcblk1 TO &#x2F;ddbr&#x2F;BACKUP-s9xxx-emmc.img.gz...&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+15269888+0 records inMiB&#x2F;s] [==============================================================================&amp;gt;] 100% ETA 0:00:00&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+15269888+0 records out&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+7.28GiB 0:10:53 [11.4MiB&#x2F;s] [==============================================================================&amp;gt;] 100%&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+7818182656 bytes (7.8 GB, 7.3 GiB) copied, 653.739 s, 12.0 MB&#x2F;s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ JOB FINISHED!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+root@aml:~# ls &#x2F;ddbr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+BACKUP-s9xxx-emmc.img.gz  install&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;hui-fu&quot;&gt;恢复&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;root@aml:~# ls &#x2F;ddbr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+BACKUP-s9xxx-emmc.img  BACKUP-s9xxx-emmc.img.gz.bak  install&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+root@aml:~# ddbr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ DO YOU WANT TO BACKUP OR RESTORE ?&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ BACKUP=(b) RESTORE=(r) r&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ AVAILABLE DEVICES: mmcblk1 sda1 sda2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ YOU ARE RUNNING bionic FROM sda2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ DID YOU USED COMPRESSION WHEN YOU TOOK THE BACKUP ?&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ YES=(y) NO=(n) n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ YOU ARE ABOUT TO MAKE SERIOUS CHANGES TO YOUR SYSTEM!!!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ FILE &#x2F;ddbr&#x2F;BACKUP-s9xxx-emmc.img IS GOING TO BE WRITEN TO mmcblk1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ MAKE SURE EVERYTHING LOOKS OK AND:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ PRESS ENTER TO CONTINUE OR CTRL+C TO CANCEL&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ RESTORING &#x2F;ddbr&#x2F;BACKUP-s9xxx-emmc.img TO &#x2F;dev&#x2F;mmcblk1 | PLEASE WAIT...&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+6283264+0 records in2MiB&#x2F;s] [===============================&amp;gt;                                                ] 41% ETA 0:05:50&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+6283264+0 records out&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+3217031168 bytes (3.2 GB, 3.0 GiB) copied, 244.506 s, 13.2 MB&#x2F;s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+3.00GiB 0:04:04 [12.5MiB&#x2F;s] [===============================&amp;gt;                                                ] 41%&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+6283264+0 records in&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+6283264+0 records out&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+3217031168 bytes (3.2 GB, 3.0 GiB) copied, 248.16 s, 13.0 MB&#x2F;s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+ JOB FINISHED!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;</description>
+            </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Lei&#x27;s Blog</title>
+        <link>https://blog.dotone.top</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>zh</language>
+        <atom:link href="https://blog.dotone.top/tags/ipv4/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Wed, 15 Jul 2020 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>linux prefer ipv4 other than ipv6</title>
+                <pubDate>Wed, 15 Jul 2020 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/notes/linux-ipv4-over-ipv6/</link>
+                <guid>https://blog.dotone.top/notes/linux-ipv4-over-ipv6/</guid>
+                <description>&lt;p&gt;双栈环境下，Linux怎么设置IPv4优先于IPv6？
+由于中国大陆很多情况下网络访问IPv6慢于IPv4，所以最好设置IPv4优先。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;how&quot;&gt;How&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;&#x2F;etc&#x2F;gai.conf&lt;&#x2F;code&gt;
+如果没有这个文件就创建这个文件，添加或修改以下内容&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;precedence ::ffff:0:0&#x2F;96 100&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;sf-alpha.bjgang.org&#x2F;wordpress&#x2F;2012&#x2F;08&#x2F;linux-prefer-ipv4-over-ipv6-in-dual-stack-environment-and-prevent-problems-when-only-ipv4-exists&#x2F;&quot;&gt;http:&#x2F;&#x2F;sf-alpha.bjgang.org&#x2F;wordpress&#x2F;2012&#x2F;08&#x2F;linux-prefer-ipv4-over-ipv6-in-dual-stack-environment-and-prevent-problems-when-only-ipv4-exists&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+    </channel>
+</rss>

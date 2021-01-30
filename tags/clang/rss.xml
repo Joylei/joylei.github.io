@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Lei&#x27;s Blog</title>
+        <link>https://blog.dotone.top</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>zh</language>
+        <atom:link href="https://blog.dotone.top/tags/clang/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Wed, 16 Sep 2020 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>opencv-rust: libclang not loaded</title>
+                <pubDate>Wed, 16 Sep 2020 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/blog/it/opencv-rust-libclang-not-loaded/</link>
+                <guid>https://blog.dotone.top/blog/it/opencv-rust-libclang-not-loaded/</guid>
+                <description>&lt;p&gt;I failed to build a project when use &lt;code&gt;opencv-rust&lt;&#x2F;code&gt; as dependency on Windows 10. The error message said&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;thread &amp;#39;main&amp;#39; panicked at &amp;#39;a `libclang` shared library is not loaded on this thread&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;It&#x27;s a little strange. Because &lt;code&gt;libclang.dll&lt;&#x2F;code&gt; do exist and  can be found in &lt;code&gt;PATH&lt;&#x2F;code&gt; env, and other projects that depends on &lt;code&gt;bindgen&lt;&#x2F;code&gt; can be built successfully.&lt;&#x2F;p&gt;
+&lt;p&gt;Finally, found that I have to enable &lt;code&gt;clang-runtime&lt;&#x2F;code&gt;  feature to get the project compiled.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#f07178;&quot;&gt;opencv &lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f07178;&quot;&gt;version&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c3e88d;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f07178;&quot;&gt;features&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;=[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c3e88d;&quot;&gt;buildtime-bindgen&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c3e88d;&quot;&gt;clang-runtime&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;&amp;quot;]}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;</description>
+            </item>
+        
+            <item>
+                <title>rust bindgen error: &#x27;stddef.h&#x27; file not found</title>
+                <pubDate>Fri, 03 Jul 2020 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/blog/it/rust-bindgen-error-stddef.h-file-not-found/</link>
+                <guid>https://blog.dotone.top/blog/it/rust-bindgen-error-stddef.h-file-not-found/</guid>
+                <description>&lt;p&gt;solution:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#eeffff;&quot;&gt;sudo apt-get install clang&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;</description>
+            </item>
+        
+    </channel>
+</rss>

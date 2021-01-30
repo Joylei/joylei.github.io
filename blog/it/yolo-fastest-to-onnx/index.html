@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - convert model of Yolo-Fastest to onnx</title>
+
+    
+
+    <script defer src="https:&#x2F;&#x2F;blog.dotone.top&#x2F;vendor&#x2F;instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https:&#x2F;&#x2F;blog.dotone.top&#x2F;vendor&#x2F;medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https:&#x2F;&#x2F;blog.dotone.top&#x2F;vendor&#x2F;slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https:&#x2F;&#x2F;blog.dotone.top&#x2F;vendor&#x2F;katex@0.10.0&#x2F;katex.min.js">
+    </script>
+    <script defer src="https:&#x2F;&#x2F;blog.dotone.top&#x2F;vendor&#x2F;katex@0.10.0&#x2F;mathtex-script-type.min.js">
+    </script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;site.css">
+    
+    <link rel="stylesheet" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;vendor&#x2F;katex@0.10.0&#x2F;katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Notes</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Notes</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/yolo-fastest-to-onnx/#why" class="toc-link">why</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/yolo-fastest-to-onnx/#how" class="toc-link">how</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/yolo-fastest-to-onnx/#class-convparams" class="toc-link">class ConvParams</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/yolo-fastest-to-onnx/#function-load-one-param-type-of-class-weightloader" class="toc-link">function _load_one_param_type of class WeightLoader:</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/yolo-fastest-to-onnx/#function-make-conv-node-of-class-graphbuilderonnx" class="toc-link">function _make_conv_node of class GraphBuilderONNX</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/yolo-fastest-to-onnx/#references" class="toc-link">references</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;yolo-fastest-to-onnx&#x2F;">convert model of Yolo-Fastest to onnx</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>3 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2020-12-15</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <h2 id="why">why</h2>
+<p>The model generated by <a href="https://github.com/dog-qiuqiu/Yolo-Fastest">Yolo-Fastest</a> cannot be converted to onnx, because grouped convolution is used many places by <code>Yolo-Fastest</code> and is not supported by the script<code>yolo_to_onnx.py</code>.</p>
+<h2 id="how">how</h2>
+<p>To support grouped convolution, just modify 3 places.</p>
+<h3 id="class-convparams">class ConvParams</h3>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">    </span><span style="font-style:italic;color:#c792ea;">def </span><span style="color:#82aaff;">__init__</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">self</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">node_name</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">batch_normalize</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">conv_weight_dims</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">groups</span><span style="color:#89ddff;">):</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#4a4a4a;">&quot;&quot;&quot;Constructor based on the base node name (e.g. 101_convolutional), the batch</span><span style="font-style:italic;color:#4a4a4a;">
+        normalization setting, and the convolutional weights shape.</span><span style="font-style:italic;color:#4a4a4a;">
+</span><span style="font-style:italic;color:#4a4a4a;">
+        Keyword arguments:</span><span style="font-style:italic;color:#4a4a4a;">
+        node_name -- base name of this YOLO convolutional layer</span><span style="font-style:italic;color:#4a4a4a;">
+        batch_normalize -- bool value if batch normalization is used</span><span style="font-style:italic;color:#4a4a4a;">
+        conv_weight_dims -- the dimensions of this layer&#39;s convolutional weights</span><span style="font-style:italic;color:#4a4a4a;">
+        &quot;&quot;&quot;</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#eeffff;">groups </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">groups</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#eeffff;">node_name </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">node_name</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#eeffff;">batch_normalize </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">batch_normalize</span><span style="color:#eeffff;">
+        </span><span style="color:#c792ea;">assert </span><span style="color:#82aaff;">len</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">conv_weight_dims</span><span style="color:#89ddff;">) == </span><span style="color:#f78c6c;">4</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#eeffff;">conv_weight_dims </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">conv_weight_dims</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#eeffff;">groups </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">groups</span><span style="color:#eeffff;">
+</span></pre><h3 id="function-load-one-param-type-of-class-weightloader">function _load_one_param_type of class WeightLoader:</h3>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">    </span><span style="font-style:italic;color:#c792ea;">def </span><span style="color:#82aaff;">_load_one_param_type</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">self</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">conv_params</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">param_category</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">suffix</span><span style="color:#89ddff;">):</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#4a4a4a;">&quot;&quot;&quot;Deserializes the weights from a file stream in the DarkNet order.</span><span style="font-style:italic;color:#4a4a4a;">
+</span><span style="font-style:italic;color:#4a4a4a;">
+        Keyword arguments:</span><span style="font-style:italic;color:#4a4a4a;">
+        conv_params -- a ConvParams object</span><span style="font-style:italic;color:#4a4a4a;">
+        param_category -- the category of parameters to be created (&#39;bn&#39; or &#39;conv&#39;)</span><span style="font-style:italic;color:#4a4a4a;">
+        suffix -- a string determining the sub-type of above param_category (e.g.,</span><span style="font-style:italic;color:#4a4a4a;">
+        &#39;weights&#39; or &#39;bias&#39;)</span><span style="font-style:italic;color:#4a4a4a;">
+        &quot;&quot;&quot;</span><span style="color:#eeffff;">
+        param_name </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">conv_params</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">generate_param_name</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">param_category</span><span style="color:#89ddff;">, </span><span style="color:#82aaff;">suffix</span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+        channels_out, channels_in, filter_h, filter_w </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">conv_params</span><span style="color:#89ddff;">.</span><span style="color:#eeffff;">conv_weight_dims</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#eeffff;">param_category </span><span style="color:#89ddff;">== &#39;</span><span style="color:#c3e88d;">bn</span><span style="color:#89ddff;">&#39;:</span><span style="color:#eeffff;">
+            param_shape </span><span style="color:#89ddff;">= [</span><span style="color:#eeffff;">channels_out</span><span style="color:#89ddff;">]</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#c792ea;">elif </span><span style="color:#eeffff;">param_category </span><span style="color:#89ddff;">== &#39;</span><span style="color:#c3e88d;">conv</span><span style="color:#89ddff;">&#39;:</span><span style="color:#eeffff;">
+            </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#eeffff;">suffix </span><span style="color:#89ddff;">== &#39;</span><span style="color:#c3e88d;">weights</span><span style="color:#89ddff;">&#39;:</span><span style="color:#eeffff;">
+                param_shape </span><span style="color:#89ddff;">= [</span><span style="color:#eeffff;">channels_out</span><span style="color:#89ddff;">, </span><span style="color:#eeffff;">channels_in</span><span style="color:#89ddff;">, </span><span style="color:#eeffff;">filter_h</span><span style="color:#89ddff;">, </span><span style="color:#eeffff;">filter_w</span><span style="color:#89ddff;">]</span><span style="color:#eeffff;">
+            </span><span style="font-style:italic;color:#c792ea;">elif </span><span style="color:#eeffff;">suffix </span><span style="color:#89ddff;">== &#39;</span><span style="color:#c3e88d;">bias</span><span style="color:#89ddff;">&#39;:</span><span style="color:#eeffff;">
+                param_shape </span><span style="color:#89ddff;">= [</span><span style="color:#eeffff;">channels_out</span><span style="color:#89ddff;">]</span><span style="color:#eeffff;">
+        param_size </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">np</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">product</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">np</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">array</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">param_shape</span><span style="color:#89ddff;">))</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#eeffff;">conv_params</span><span style="color:#89ddff;">.</span><span style="color:#eeffff;">groups </span><span style="color:#89ddff;">&gt; </span><span style="color:#f78c6c;">1 </span><span style="color:#89ddff;">and </span><span style="color:#eeffff;">suffix </span><span style="color:#89ddff;">== &#39;</span><span style="color:#c3e88d;">weights</span><span style="color:#89ddff;">&#39;:</span><span style="color:#eeffff;">
+            param_size </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">param_size </span><span style="color:#89ddff;">// </span><span style="color:#eeffff;">conv_params</span><span style="color:#89ddff;">.</span><span style="color:#eeffff;">groups</span><span style="color:#eeffff;">
+            param_shape </span><span style="color:#89ddff;">= [</span><span style="color:#eeffff;">channels_out</span><span style="color:#89ddff;">, </span><span style="color:#eeffff;">channels_in</span><span style="color:#89ddff;">//</span><span style="color:#eeffff;">conv_params</span><span style="color:#89ddff;">.</span><span style="color:#eeffff;">groups</span><span style="color:#89ddff;">, </span><span style="color:#eeffff;">filter_h</span><span style="color:#89ddff;">, </span><span style="color:#eeffff;">filter_w</span><span style="color:#89ddff;">]</span><span style="color:#eeffff;">
+        </span><span style="color:#ffcb6b;">buffer</span><span style="color:#89ddff;">=</span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">weights_file</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">read</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">param_size </span><span style="color:#89ddff;">* </span><span style="color:#f78c6c;">4</span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#4a4a4a;">#print(param_name,param_shape,param_size*4,len(buffer))</span><span style="font-style:italic;color:#4a4a4a;">
+        </span><span style="color:#eeffff;">param_data </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">np</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">ndarray</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">
+            </span><span style="color:#f78c6c;">shape</span><span style="color:#89ddff;">=[</span><span style="color:#82aaff;">param_size</span><span style="color:#89ddff;">],</span><span style="color:#82aaff;">
+            </span><span style="color:#f78c6c;">dtype</span><span style="color:#89ddff;">=&#39;</span><span style="color:#c3e88d;">float32</span><span style="color:#89ddff;">&#39;,</span><span style="color:#82aaff;">
+            </span><span style="color:#f78c6c;">buffer</span><span style="color:#89ddff;">=</span><span style="color:#ffcb6b;">buffer</span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+        param_data </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">param_data</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">flatten</span><span style="color:#89ddff;">().</span><span style="color:#82aaff;">astype</span><span style="color:#89ddff;">(</span><span style="color:#ffcb6b;">float</span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#c792ea;">return </span><span style="color:#eeffff;">param_name, param_data, param_shape</span><span style="color:#eeffff;">
+</span></pre><h3 id="function-make-conv-node-of-class-graphbuilderonnx">function _make_conv_node of class GraphBuilderONNX</h3>
+<pre style="background-color:#212121;">
+<span style="color:#eeffff;">    </span><span style="font-style:italic;color:#c792ea;">def </span><span style="color:#82aaff;">_make_conv_node</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">self</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">layer_name</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">layer_dict</span><span style="color:#89ddff;">):</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#4a4a4a;">&quot;&quot;&quot;Create an ONNX Conv node with optional batch normalization and</span><span style="font-style:italic;color:#4a4a4a;">
+        activation nodes.</span><span style="font-style:italic;color:#4a4a4a;">
+</span><span style="font-style:italic;color:#4a4a4a;">
+        Keyword arguments:</span><span style="font-style:italic;color:#4a4a4a;">
+        layer_name -- the layer&#39;s name (also the corresponding key in layer_configs)</span><span style="font-style:italic;color:#4a4a4a;">
+        layer_dict -- a layer parameter dictionary (one element of layer_configs)</span><span style="font-style:italic;color:#4a4a4a;">
+        &quot;&quot;&quot;</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#4a4a4a;">#print(layer_name, layer_dict)</span><span style="font-style:italic;color:#4a4a4a;">
+        </span><span style="color:#eeffff;">previous_node_specs </span><span style="color:#89ddff;">= </span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">_get_previous_node_specs</span><span style="color:#89ddff;">()</span><span style="color:#eeffff;">
+        inputs </span><span style="color:#89ddff;">= [</span><span style="color:#eeffff;">previous_node_specs</span><span style="color:#89ddff;">.</span><span style="color:#eeffff;">name</span><span style="color:#89ddff;">]</span><span style="color:#eeffff;">
+        previous_channels </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">previous_node_specs</span><span style="color:#89ddff;">.</span><span style="color:#eeffff;">channels</span><span style="color:#eeffff;">
+        kernel_size </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">layer_dict</span><span style="color:#89ddff;">[&#39;</span><span style="color:#c3e88d;">size</span><span style="color:#89ddff;">&#39;]</span><span style="color:#eeffff;">
+        stride </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">layer_dict</span><span style="color:#89ddff;">[&#39;</span><span style="color:#c3e88d;">stride</span><span style="color:#89ddff;">&#39;]</span><span style="color:#eeffff;">
+        filters </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">layer_dict</span><span style="color:#89ddff;">[&#39;</span><span style="color:#c3e88d;">filters</span><span style="color:#89ddff;">&#39;]</span><span style="color:#eeffff;">
+        groups </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">layer_dict</span><span style="color:#89ddff;">[&#39;</span><span style="color:#c3e88d;">groups</span><span style="color:#89ddff;">&#39;] </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">groups</span><span style="color:#89ddff;">&#39; in </span><span style="color:#82aaff;">layer_dict</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">keys</span><span style="color:#89ddff;">() </span><span style="font-style:italic;color:#c792ea;">else </span><span style="color:#f78c6c;">1</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#eeffff;">groups </span><span style="color:#89ddff;">&lt; </span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">:</span><span style="color:#eeffff;">
+            groups </span><span style="color:#89ddff;">= </span><span style="color:#f78c6c;">1</span><span style="color:#eeffff;">
+        batch_normalize </span><span style="color:#89ddff;">= </span><span style="color:#f78c6c;">False</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">batch_normalize</span><span style="color:#89ddff;">&#39; in </span><span style="color:#82aaff;">layer_dict</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">keys</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">
+        </span><span style="color:#89ddff;">) and </span><span style="color:#eeffff;">layer_dict</span><span style="color:#89ddff;">[&#39;</span><span style="color:#c3e88d;">batch_normalize</span><span style="color:#89ddff;">&#39;] == </span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">:</span><span style="color:#eeffff;">
+            batch_normalize </span><span style="color:#89ddff;">= </span><span style="color:#f78c6c;">True</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+        kernel_shape </span><span style="color:#89ddff;">= [</span><span style="color:#eeffff;">kernel_size</span><span style="color:#89ddff;">, </span><span style="color:#eeffff;">kernel_size</span><span style="color:#89ddff;">]</span><span style="color:#eeffff;">
+        weights_shape </span><span style="color:#89ddff;">= [</span><span style="color:#eeffff;">filters</span><span style="color:#89ddff;">, </span><span style="color:#eeffff;">previous_channels</span><span style="color:#89ddff;">] + </span><span style="color:#eeffff;">kernel_shape</span><span style="color:#eeffff;">
+        conv_params </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">ConvParams</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">layer_name</span><span style="color:#89ddff;">, </span><span style="color:#82aaff;">batch_normalize</span><span style="color:#89ddff;">, </span><span style="color:#82aaff;">weights_shape</span><span style="color:#89ddff;">, </span><span style="color:#82aaff;">groups</span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+        strides </span><span style="color:#89ddff;">= [</span><span style="color:#eeffff;">stride</span><span style="color:#89ddff;">, </span><span style="color:#eeffff;">stride</span><span style="color:#89ddff;">]</span><span style="color:#eeffff;">
+        dilations </span><span style="color:#89ddff;">= [</span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">]</span><span style="color:#eeffff;">
+        weights_name </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">conv_params</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">generate_param_name</span><span style="color:#89ddff;">(&#39;</span><span style="color:#c3e88d;">conv</span><span style="color:#89ddff;">&#39;, &#39;</span><span style="color:#c3e88d;">weights</span><span style="color:#89ddff;">&#39;)</span><span style="color:#eeffff;">
+        </span><span style="color:#82aaff;">inputs</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">append</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">weights_name</span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#89ddff;">not </span><span style="color:#eeffff;">batch_normalize</span><span style="color:#89ddff;">:</span><span style="color:#eeffff;">
+            bias_name </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">conv_params</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">generate_param_name</span><span style="color:#89ddff;">(&#39;</span><span style="color:#c3e88d;">conv</span><span style="color:#89ddff;">&#39;, &#39;</span><span style="color:#c3e88d;">bias</span><span style="color:#89ddff;">&#39;)</span><span style="color:#eeffff;">
+            </span><span style="color:#82aaff;">inputs</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">append</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">bias_name</span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+        padding </span><span style="color:#89ddff;">= (</span><span style="color:#eeffff;">kernel_size</span><span style="color:#89ddff;">-</span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">)//</span><span style="color:#f78c6c;">2</span><span style="color:#eeffff;">
+        conv_node </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">helper</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">make_node</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">
+            </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">Conv</span><span style="color:#89ddff;">&#39;,</span><span style="color:#82aaff;">
+            </span><span style="color:#f78c6c;">inputs</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">inputs</span><span style="color:#89ddff;">,</span><span style="color:#82aaff;">
+            </span><span style="color:#f78c6c;">outputs</span><span style="color:#89ddff;">=[</span><span style="color:#82aaff;">layer_name</span><span style="color:#89ddff;">],</span><span style="color:#82aaff;">
+            </span><span style="color:#f78c6c;">kernel_shape</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">kernel_shape</span><span style="color:#89ddff;">,</span><span style="color:#82aaff;">
+            </span><span style="color:#f78c6c;">strides</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">strides</span><span style="color:#89ddff;">,</span><span style="color:#82aaff;">
+            </span><span style="color:#f78c6c;">pads</span><span style="color:#89ddff;">=[</span><span style="color:#82aaff;">padding</span><span style="color:#89ddff;">,</span><span style="color:#82aaff;">padding</span><span style="color:#89ddff;">,</span><span style="color:#82aaff;">padding</span><span style="color:#89ddff;">+ (</span><span style="color:#f78c6c;">1 </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">kernel_size</span><span style="color:#89ddff;">-</span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">)%</span><span style="color:#f78c6c;">2 </span><span style="font-style:italic;color:#c792ea;">else </span><span style="color:#f78c6c;">0</span><span style="color:#89ddff;">),</span><span style="color:#82aaff;">padding</span><span style="color:#89ddff;">+ (</span><span style="color:#f78c6c;">1 </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">kernel_size</span><span style="color:#89ddff;">-</span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">)%</span><span style="color:#f78c6c;">2 </span><span style="font-style:italic;color:#c792ea;">else </span><span style="color:#f78c6c;">0</span><span style="color:#89ddff;">)],</span><span style="color:#82aaff;">
+            </span><span style="font-style:italic;color:#4a4a4a;">#auto_pad=&#39;SAME_LOWER&#39;,</span><span style="font-style:italic;color:#4a4a4a;">
+            </span><span style="color:#f78c6c;">dilations</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">dilations</span><span style="color:#89ddff;">,</span><span style="color:#82aaff;">
+            </span><span style="color:#f78c6c;">groups</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">groups</span><span style="color:#89ddff;">,</span><span style="color:#82aaff;">
+            </span><span style="color:#f78c6c;">name</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">layer_name</span><span style="color:#82aaff;">
+        </span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">_nodes</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">append</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">conv_node</span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+        inputs </span><span style="color:#89ddff;">= [</span><span style="color:#eeffff;">layer_name</span><span style="color:#89ddff;">]</span><span style="color:#eeffff;">
+        layer_name_output </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">layer_name</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#eeffff;">batch_normalize</span><span style="color:#89ddff;">:</span><span style="color:#eeffff;">
+            layer_name_bn </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">layer_name </span><span style="color:#89ddff;">+ &#39;</span><span style="color:#c3e88d;">_bn</span><span style="color:#89ddff;">&#39;</span><span style="color:#eeffff;">
+            bn_param_suffixes </span><span style="color:#89ddff;">= [&#39;</span><span style="color:#c3e88d;">scale</span><span style="color:#89ddff;">&#39;, &#39;</span><span style="color:#c3e88d;">bias</span><span style="color:#89ddff;">&#39;, &#39;</span><span style="color:#c3e88d;">mean</span><span style="color:#89ddff;">&#39;, &#39;</span><span style="color:#c3e88d;">var</span><span style="color:#89ddff;">&#39;]</span><span style="color:#eeffff;">
+            </span><span style="font-style:italic;color:#c792ea;">for </span><span style="color:#eeffff;">suffix </span><span style="font-style:italic;color:#c792ea;">in </span><span style="color:#eeffff;">bn_param_suffixes</span><span style="color:#89ddff;">:</span><span style="color:#eeffff;">
+                bn_param_name </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">conv_params</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">generate_param_name</span><span style="color:#89ddff;">(&#39;</span><span style="color:#c3e88d;">bn</span><span style="color:#89ddff;">&#39;, </span><span style="color:#82aaff;">suffix</span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+                </span><span style="color:#82aaff;">inputs</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">append</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">bn_param_name</span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+            batchnorm_node </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">helper</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">make_node</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">
+                </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">BatchNormalization</span><span style="color:#89ddff;">&#39;,</span><span style="color:#82aaff;">
+                </span><span style="color:#f78c6c;">inputs</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">inputs</span><span style="color:#89ddff;">,</span><span style="color:#82aaff;">
+                </span><span style="color:#f78c6c;">outputs</span><span style="color:#89ddff;">=[</span><span style="color:#82aaff;">layer_name_bn</span><span style="color:#89ddff;">],</span><span style="color:#82aaff;">
+                </span><span style="color:#f78c6c;">epsilon</span><span style="color:#89ddff;">=</span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">epsilon_bn</span><span style="color:#89ddff;">,</span><span style="color:#82aaff;">
+                </span><span style="color:#f78c6c;">momentum</span><span style="color:#89ddff;">=</span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">momentum_bn</span><span style="color:#89ddff;">,</span><span style="color:#82aaff;">
+                </span><span style="color:#f78c6c;">name</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">layer_name_bn</span><span style="color:#82aaff;">
+            </span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+            </span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">_nodes</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">append</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">batchnorm_node</span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+            inputs </span><span style="color:#89ddff;">= [</span><span style="color:#eeffff;">layer_name_bn</span><span style="color:#89ddff;">]</span><span style="color:#eeffff;">
+            layer_name_output </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">layer_name_bn</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#eeffff;">layer_dict</span><span style="color:#89ddff;">[&#39;</span><span style="color:#c3e88d;">activation</span><span style="color:#89ddff;">&#39;] == &#39;</span><span style="color:#c3e88d;">leaky</span><span style="color:#89ddff;">&#39;:</span><span style="color:#eeffff;">
+            layer_name_lrelu </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">layer_name </span><span style="color:#89ddff;">+ &#39;</span><span style="color:#c3e88d;">_lrelu</span><span style="color:#89ddff;">&#39;</span><span style="color:#eeffff;">
+            lrelu_node </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">helper</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">make_node</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">
+                </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">LeakyRelu</span><span style="color:#89ddff;">&#39;,</span><span style="color:#82aaff;">
+                </span><span style="color:#f78c6c;">inputs</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">inputs</span><span style="color:#89ddff;">,</span><span style="color:#82aaff;">
+                </span><span style="color:#f78c6c;">outputs</span><span style="color:#89ddff;">=[</span><span style="color:#82aaff;">layer_name_lrelu</span><span style="color:#89ddff;">],</span><span style="color:#82aaff;">
+                </span><span style="color:#f78c6c;">name</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">layer_name_lrelu</span><span style="color:#89ddff;">,</span><span style="color:#82aaff;">
+                </span><span style="color:#f78c6c;">alpha</span><span style="color:#89ddff;">=</span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">alpha_lrelu</span><span style="color:#82aaff;">
+            </span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+            </span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">_nodes</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">append</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">lrelu_node</span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+            inputs </span><span style="color:#89ddff;">= [</span><span style="color:#eeffff;">layer_name_lrelu</span><span style="color:#89ddff;">]</span><span style="color:#eeffff;">
+            layer_name_output </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">layer_name_lrelu</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#c792ea;">elif  </span><span style="color:#eeffff;">layer_dict</span><span style="color:#89ddff;">[&#39;</span><span style="color:#c3e88d;">activation</span><span style="color:#89ddff;">&#39;]==&#39;</span><span style="color:#c3e88d;">mish</span><span style="color:#89ddff;">&#39;:</span><span style="color:#eeffff;">
+            layer_name_mish </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">layer_name </span><span style="color:#89ddff;">+ &#39;</span><span style="color:#c3e88d;">_mish</span><span style="color:#89ddff;">&#39;</span><span style="color:#eeffff;">
+            lrelu_node </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">helper</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">make_node</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">
+                </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">Mish</span><span style="color:#89ddff;">&#39;,</span><span style="color:#82aaff;">
+                </span><span style="color:#f78c6c;">inputs</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">inputs</span><span style="color:#89ddff;">,</span><span style="color:#82aaff;">
+                </span><span style="color:#f78c6c;">outputs</span><span style="color:#89ddff;">=[</span><span style="color:#82aaff;">layer_name_mish</span><span style="color:#89ddff;">],</span><span style="color:#82aaff;">
+                </span><span style="color:#f78c6c;">name</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">layer_name_mish</span><span style="color:#89ddff;">,</span><span style="color:#82aaff;">
+            </span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+            </span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">_nodes</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">append</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">lrelu_node</span><span style="color:#89ddff;">)</span><span style="color:#eeffff;">
+            inputs </span><span style="color:#89ddff;">= [</span><span style="color:#eeffff;">layer_name_mish</span><span style="color:#89ddff;">]</span><span style="color:#eeffff;">
+            layer_name_output </span><span style="color:#89ddff;">= </span><span style="color:#eeffff;">layer_name_mish</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#c792ea;">elif </span><span style="color:#eeffff;">layer_dict</span><span style="color:#89ddff;">[&#39;</span><span style="color:#c3e88d;">activation</span><span style="color:#89ddff;">&#39;] == &#39;</span><span style="color:#c3e88d;">linear</span><span style="color:#89ddff;">&#39;:</span><span style="color:#eeffff;">
+            </span><span style="font-style:italic;color:#c792ea;">pass</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#c792ea;">else</span><span style="color:#89ddff;">:</span><span style="color:#eeffff;">
+            </span><span style="color:#82aaff;">print</span><span style="color:#89ddff;">(&#39;</span><span style="color:#c3e88d;">Activation not supported.</span><span style="color:#89ddff;">&#39;)</span><span style="color:#eeffff;">
+</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#eeffff;">param_dict</span><span style="color:#89ddff;">[</span><span style="color:#eeffff;">layer_name</span><span style="color:#89ddff;">] = </span><span style="color:#eeffff;">conv_params</span><span style="color:#eeffff;">
+        </span><span style="font-style:italic;color:#c792ea;">return </span><span style="color:#eeffff;">layer_name_output, filters</span><span style="color:#eeffff;">
+</span></pre>
+<p>Full code can be get from <a href="https://github.com/Joylei/Yolo-Fastest/blob/master/yolo_to_onnx.py">here</a>.</p>
+<h2 id="references">references</h2>
+<ul>
+<li>https://github.com/CaoWGG/TensorRT-YOLOv4/blob/master/tools/yolo_to_onnx.py</li>
+<li>https://github.com/jkjung-avt/tensorrt_demos/blob/master/yolo/yolo_to_onnx.py</li>
+</ul>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags&#x2F;onnx&#x2F;">#onnx</a>
+            
+            <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags&#x2F;yolo&#x2F;">#yolo</a>
+            
+            <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags&#x2F;machine-learning&#x2F;">#machine learning</a>
+            
+        </div>
+        
+        
+        <div class="post-nav">
+            
+            <a class="previous" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;build-warpctc-on-windows&#x2F;">‹ Windows下编译WarpCTC</a>
+            
+            
+            <a class="next" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;onnxruntime-failed-to-load-dll&#x2F;">Cannot load onnxruntime.capi. Error: DLL load failed ›</a>
+            
+            
+            
+        </div>
+        
+
+        
+
+    </div>
+
+    
+    
+    <section id="beaudar">
+        <script src="https://beaudar.lipk.org/client.js" repo="Joylei/joylei.github.io" issue-term="pathname" label="💬"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+        </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https:&#x2F;&#x2F;blog.dotone.top&#x2F;even.js"></script>
+    
+</body>
+
+</html>

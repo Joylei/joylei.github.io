@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Lei&#x27;s Blog</title>
+        <link>https://blog.dotone.top</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>zh</language>
+        <atom:link href="https://blog.dotone.top/tags/stackwalker/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Thu, 24 Dec 2020 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>Profiling rust on windows with Luke Stackwalker</title>
+                <pubDate>Thu, 24 Dec 2020 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/blog/it/profiling-rust-on-windows-with-Luke-Stackwalker/</link>
+                <guid>https://blog.dotone.top/blog/it/profiling-rust-on-windows-with-Luke-Stackwalker/</guid>
+                <description>&lt;p&gt;There are great profiling tools for rust, such as &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;profiling&quot;&gt;profiling&lt;&#x2F;a&gt;, &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;gperftools&quot;&gt;gperftools&lt;&#x2F;a&gt;, &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;flamegraph&quot;&gt;flamegraph&lt;&#x2F;a&gt;, etc.  But I would recommend to try
+&lt;a href=&quot;https:&#x2F;&#x2F;sourceforge.net&#x2F;p&#x2F;lukestackwalker&quot;&gt;Luke Stackwalker&lt;&#x2F;a&gt; which also works with rust.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;sourceforge.net&#x2F;p&#x2F;lukestackwalker&quot;&gt;Luke Stackwalker&lt;&#x2F;a&gt; is a GUI-based C&#x2F;C++ source profiler for windows.It samples your application&#x27;s stack while the application is running to find out where the application spends most of its time.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;To get start, you need to turn on debug info for rust.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#89ddff;&quot;&gt;[profile.release]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f07178;&quot;&gt;debug&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f78c6c;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eeffff;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;And start &lt;code&gt;Luke Stackwalker&lt;&#x2F;code&gt; with administrator privilege, otherwise it would crash.&lt;&#x2F;p&gt;
+&lt;p&gt;When I tried it on my project, everything looks good at first. Most cpu time was cost on &lt;code&gt;WaitForSingleObject&lt;&#x2F;code&gt;, it&#x27;s totally fine, because the code is waiting for incoming http requests. Then I noticed there were abnormally file open calls on the top list, which should be very very low. I found that I mistakenly open the log file every time there is a write operation.&lt;&#x2F;p&gt;
+&lt;p&gt;Have a try.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+    </channel>
+</rss>

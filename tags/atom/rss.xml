@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Lei&#x27;s Blog</title>
+        <link>https://blog.dotone.top</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>zh</language>
+        <atom:link href="https://blog.dotone.top/tags/atom/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Thu, 31 Mar 2016 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>got atom-shell 404 issue when updating atom</title>
+                <pubDate>Thu, 31 Mar 2016 00:00:00 +0000</pubDate>
+                <link>https://blog.dotone.top/blog/it/got-atom-shell-404-issue-when-updating-atom/</link>
+                <guid>https://blog.dotone.top/blog/it/got-atom-shell-404-issue-when-updating-atom/</guid>
+                <description>&lt;p&gt;Recent days I tried several times to update Atom packages from both Atom and apm update command, but failed finally.&lt;&#x2F;p&gt;
+&lt;p&gt;So I decided to look what happened by running command:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212121;&quot;&gt;
+&lt;span style=&quot;color:#82aaff;&quot;&gt;apm update&lt;&#x2F;span&gt;&lt;span style=&quot;color:#89ddff;&quot;&gt; --&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f78c6c;&quot;&gt;verbose
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;It seems it failed to download atom-shell.&lt;&#x2F;p&gt;
+&lt;p&gt;Googled with &#x27;atom-shell 404&#x27; and found this link https:&#x2F;&#x2F;github.com&#x2F;atom&#x2F;atom&#x2F;issues&#x2F;11080.&lt;&#x2F;p&gt;
+&lt;p&gt;The solution mentioned did the trick.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+    </channel>
+</rss>
