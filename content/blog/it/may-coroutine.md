@@ -85,7 +85,7 @@ fn child_task(index: usize) {
 
 ```
 
-## Cancel的陷阱
+## Cancel的问题
 
 使用`cancel`后发现程序在`release`模式下莫名的崩溃。
 调试及查看源代码，发现是由于`May`的[cancel](https://github.com/Xudong-Huang/may/blob/master/src/cancel.rs)机制使用`rust`的`panic`机制。所以无法在编译时优化使用自定义的`panic`处理机制。
@@ -96,3 +96,5 @@ panic = "abort"
 ```
 
 如果使用这个配置，`cancel()`时应用程序会崩溃退出。
+
+进一步阅读`may`的代码发现，`may`不会主动`panic`，`panic`是由于其它代码`panic`被它捕捉到了。可能是哪里`unwrap`之类的调用抛出的。
