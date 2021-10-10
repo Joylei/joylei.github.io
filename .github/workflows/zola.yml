@@ -1,17 +1,17 @@
 on:
   push:
     branches:
-      - code 
+      - code
   pull_request:
 jobs:
   build:
     runs-on: ubuntu-latest
     if: github.ref != 'refs/heads/code'
     steps:
-      - name: 'Checkout'
-        uses: actions/checkout@main
-      - name: 'Build only' 
-        uses: shalzz/zola-deploy-action@v0.10.1
+      - name: "Checkout"
+        uses: actions/checkout@master
+      - name: "Build only"
+        uses: shalzz/zola-deploy-action
         env:
           BUILD_DIR: .
           TOKEN: ${{ secrets.TOKEN }}
@@ -20,10 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/code'
     steps:
-      - name: 'Checkout'
-        uses: actions/checkout@main
-      - name: 'Build and deploy'
-        uses: shalzz/zola-deploy-action@v0.10.1
+      - name: "Checkout"
+        uses: actions/checkout@master
+      - name: "Build and deploy"
+        uses: shalzz/zola-deploy-action
         env:
           PAGES_BRANCH: master
           BUILD_DIR: .

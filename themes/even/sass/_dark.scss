@@ -32,13 +32,22 @@
         background: #212121;
     }
 
-    main .about code,
-    main .post code {
+    main .about  code,
+    main .post  code {
         color: silver !important;
         font-style: italic;
     }
 
     main .pagination>a {
         color: $main-colour !important;
+    }
+
+    main table {
+        thead {
+            background: #8d3b6cd8 !important;
+        }
+        tr:hover {
+            background-color: #8d3b6cd8 !important;
+        }
     }
 }
