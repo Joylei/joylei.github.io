@@ -11,7 +11,7 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@master
       - name: "Build only"
-        uses: shalzz/zola-deploy-action
+        uses: shalzz/zola-deploy-action@master
         env:
           BUILD_DIR: .
           TOKEN: ${{ secrets.TOKEN }}
@@ -23,7 +23,7 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@master
       - name: "Build and deploy"
-        uses: shalzz/zola-deploy-action
+        uses: shalzz/zola-deploy-action@master
         env:
           PAGES_BRANCH: master
           BUILD_DIR: .
