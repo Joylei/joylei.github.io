@@ -33,7 +33,7 @@ paths="safe"
 highlight_code = true
 
 [extra]
-even_title="Lei's Notes"
+even_title="Lei's Blog"
 even_menu = [
     {url = "$BASE_URL", name = "Home"},
     {url = "$BASE_URL/categories", name = "Categories"},
