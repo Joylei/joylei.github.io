@@ -13,11 +13,7 @@ tags=["rust", "may", "coroutine"]
 
 [`May`](https://github.com/Xudong-Huang/may)是一个用`pure rust`写的基于栈的协程库。官方的介绍如下：
 
-```text
-May is a high-performant library for programming stackful coroutines with which you can easily
-develop and maintain massive concurrent programs. It can be thought as the Rust version of the
-popular Goroutine.
-```
+> May is a high-performant library for programming stackful coroutines with which you can easily develop and maintain massive concurrent programs. It can be thought as the Rust version of the popular Goroutine.
 
 常见的协程库，在`python`下有`gevent`, `c\c++`有`libuv`。在`rust`下也有其它基于`ffi`封装的`libuv`等库。
 
@@ -85,7 +81,7 @@ fn child_task(index: usize) {
 
 ```
 
-## Cancel的问题
+## Cancel 的问题
 
 使用`cancel`后发现程序在`release`模式下莫名的崩溃。
 调试及查看源代码，发现是由于`May`的[cancel](https://github.com/Xudong-Huang/may/blob/master/src/cancel.rs)机制使用`rust`的`panic`机制。所以无法在编译时优化使用自定义的`panic`处理机制。
