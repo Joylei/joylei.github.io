@@ -25,11 +25,8 @@ alpine linux:
 apk install zola
 ```
 
-还可以使用`cargo`安装：
-
-```shell
-cargo install zola
-```
+Windows
+使用`Scoop`或者`Chocolatey`安装。
 
 # 使用
 
