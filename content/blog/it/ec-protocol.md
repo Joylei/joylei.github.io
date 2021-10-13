@@ -33,6 +33,6 @@ tags=["ec", "bios"]
 
 ## 参考
 
-- <http://wiki.laptop.org/go/Revised_EC_Port_6C_Command_Protocol>
-- <http://wiki.laptop.org/go/Ec_specification#Old_Port_6c_Command_Protocol>
-- <https://blog.csdn.net/zhao_longwei/article/details/50454779>
+- http://wiki.laptop.org/go/Revised_EC_Port_6C_Command_Protocol
+- http://wiki.laptop.org/go/Ec_specification#Old_Port_6c_Command_Protocol
+- https://blog.csdn.net/zhao_longwei/article/details/50454779
