@@ -1,5 +1,5 @@
 +++
-title = "EC 协议简析"
+title = "Learn about EC"
 date=2020-06-28
 
 [taxonomies]

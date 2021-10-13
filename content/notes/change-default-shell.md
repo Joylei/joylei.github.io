@@ -1,5 +1,5 @@
 +++
-title="Linux修改默认shell"
+title="Change default shell for Linux"
 date=2020-07-15
 
 [taxonomies]
