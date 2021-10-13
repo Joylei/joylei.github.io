@@ -4,7 +4,7 @@ date=2020-09-07
 
 [taxonomies]
 categories=["Programming"]
-tags=["qute", "QNAP", "TS453B mini", "Fan Control", "Reverse Engineering", "rust"]
+tags=["qute", "QNAP", "TS453B mini", "Fan Control", "Reverse Engineering", "rust", "radare"]
 +++
 
 今天把我为[`qute`](https://github.com/Joylei/qute)发布到了`github`。
@@ -48,6 +48,34 @@ COMMANDS:
   temp                         get temperature
 ```
 
-## More
+## TS-453B mini 规格信息
+```
+453Bmini
+
+Intel Celeron J3455 CPU is a 1.5GHz frequency, that can be bursted to 2.3GHz per core
+
+HD Graphics 500 GPU with 12 EUs
+
+DDR3L 1600 RAM
+
+风扇 fan: xtreme BD121232LB  元山科技
+
+(120 mm, 12 V,1700 RPM, 23 CFM, 42.5 dBA, and 80000 MTBF)
+
++12V DC
+4PIN (PWM)
+120 x 120 x 32mm
+1500 min^-1 nominal
+Cable length 250 mm
+Mounting holes 105 x 105 +/0.3 mm
+0.19A
+```
+内存可以加到16GB。
+
+## 更多
 
 请移步[`github`](https://github.com/Joylei/qute)了解更多。
+
+## 参考
+
+- https://github.com/guedou/TS-453Be
