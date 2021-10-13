@@ -1,5 +1,5 @@
 +++
-title="Windows下编译WarpCTC"
+title="Build WarpCTC on Windows"
 date=2020-11-09
 
 [taxonomies]

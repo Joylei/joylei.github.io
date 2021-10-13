@@ -1,5 +1,5 @@
 +++
-title = "zola 简单使用说明"
+title = "Zola Introduction"
 date=2020-09-04
 
 [taxonomies]

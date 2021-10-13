@@ -1,5 +1,5 @@
 +++
-title = "qute 代码发布到github"
+title = "qute published to Github"
 date=2020-09-07
 
 [taxonomies]
