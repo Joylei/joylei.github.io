@@ -20,18 +20,18 @@ Write down something meaningful or nonsense.
 
 > **anim-rs**
 > <br/> 
-> [![Test and Build](https://github.com/joylei/anim-rs/workflows/Test%20and%20Build/badge.svg?branch=master)](https://github.com/joylei/anim-rs/actions?query=workflow%3A%22Test+and+Build%22)
-> [![Documentation](https://docs.rs/anim/badge.svg)](https://docs.rs/anim) 
 > [![Crates.io](https://img.shields.io/crates/v/anim.svg)](https://crates.io/crates/anim)
+> [![Documentation](https://docs.rs/anim/badge.svg)](https://docs.rs/anim) 
+> [![Test and Build](https://github.com/joylei/anim-rs/workflows/Test%20and%20Build/badge.svg?branch=master)](https://github.com/joylei/anim-rs/actions?query=workflow%3A%22Test+and+Build%22)
 > [![License](https://img.shields.io/crates/l/anim.svg)](https://github.com/joylei/anim-rs/blob/master/LICENSE)
 > <br/>
 > A framework independent animation library for rust, works nicely with [Iced](https://github.com/hecrj/iced) and the others.
 
 > **plotters-iced**
 > <br/> 
-> [![Test and Build](https://github.com/joylei/plotters-iced/workflows/Test%20and%20Build/badge.svg?branch=master)](https://github.com/joylei/plotters-iced/actions?query=workflow%3A%22Test+and+Build%22)
-> [![Documentation](https://docs.rs/plotters-iced/badge.svg)](https://docs.rs/plotters-iced)
 > [![Crates.io](https://img.shields.io/crates/v/plotters-iced.svg)](https://crates.io/crates/plotters-iced)
+> [![Documentation](https://docs.rs/plotters-iced/badge.svg)](https://docs.rs/plotters-iced)
+> [![Test and Build](https://github.com/joylei/plotters-iced/workflows/Test%20and%20Build/badge.svg?branch=master)](https://github.com/joylei/plotters-iced/actions?query=workflow%3A%22Test+and+Build%22)
 > [![License](https://img.shields.io/crates/l/plotters-iced.svg)](https://github.com/joylei/plotters-iced/blob/master/LICENSE)
 > <br/> 
 > [Iced](https://github.com/hecrj/iced) backend for Plotters
