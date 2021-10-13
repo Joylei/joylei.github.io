@@ -1,5 +1,5 @@
 +++
-title = "在Windows下编译运行EJDB2"
+title = "Build EJDB2 on Windows"
 date=2021-01-22
 
 [taxonomies]
