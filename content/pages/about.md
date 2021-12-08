@@ -18,12 +18,21 @@ Write down something meaningful or nonsense.
 
 ## Open source projects
 
+> **rseip**
+> <br/>
+> [![crates.io](https://img.shields.io/crates/v/rseip.svg)](https://crates.io/crates/rseip)
+> [![docs](https://docs.rs/rseip/badge.svg)](https://docs.rs/rseip)
+> [![build](https://github.com/joylei/eip-rs/workflows/build/badge.svg?branch=main)](https://github.com/joylei/eip-rs/actions?query=workflow%3A%22build%22)
+> [![license](https://img.shields.io/crates/l/rseip.svg)](https://github.com/joylei/eip-rs/blob/master/LICENSE)
+> <br/>
+> EIP&CIP client in pure Rust
+
 > **anim-rs**
 > <br/> 
-> [![Crates.io](https://img.shields.io/crates/v/anim.svg)](https://crates.io/crates/anim)
-> [![Documentation](https://docs.rs/anim/badge.svg)](https://docs.rs/anim) 
-> [![Test and Build](https://github.com/joylei/anim-rs/workflows/Test%20and%20Build/badge.svg?branch=master)](https://github.com/joylei/anim-rs/actions?query=workflow%3A%22Test+and+Build%22)
-> [![License](https://img.shields.io/crates/l/anim.svg)](https://github.com/joylei/anim-rs/blob/master/LICENSE)
+> [![crates.io](https://img.shields.io/crates/v/anim.svg)](https://crates.io/crates/anim)
+> [![docs](https://docs.rs/anim/badge.svg)](https://docs.rs/anim) 
+> [![build](https://github.com/joylei/anim-rs/workflows/Test%20and%20Build/badge.svg?branch=master)](https://github.com/joylei/anim-rs/actions?query=workflow%3A%22Test+and+Build%22)
+> [![license](https://img.shields.io/crates/l/anim.svg)](https://github.com/joylei/anim-rs/blob/master/LICENSE)
 > <br/>
 > A framework independent animation library for rust, works nicely with [Iced](https://github.com/hecrj/iced) and the others.
 
