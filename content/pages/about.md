@@ -25,7 +25,7 @@ Write down something meaningful or nonsense.
 > [![build](https://github.com/joylei/eip-rs/workflows/build/badge.svg?branch=main)](https://github.com/joylei/eip-rs/actions?query=workflow%3A%22build%22)
 > [![license](https://img.shields.io/crates/l/rseip.svg)](https://github.com/joylei/eip-rs/blob/master/LICENSE)
 > <br/>
-> EIP&CIP client in pure Rust
+> EIP&CIP client in pure Rust, for generic CIP and AB PLC
 
 > **anim-rs**
 > <br/> 
