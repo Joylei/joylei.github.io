@@ -13,6 +13,6 @@ unable to configure virtual network port: could not open TUN/TAP device: No such
 ```
 
 Solution:
-```shell
+```sh
 modprobe tun
 ```

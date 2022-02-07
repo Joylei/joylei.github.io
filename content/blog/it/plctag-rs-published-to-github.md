@@ -11,7 +11,7 @@ tags=["plc", "plctag", "tag", "UDT", "rust", "ffi"]
 
 ## plctag-rs
 
-```text
+```
 a rust wrapper of libplctag, with rust style APIs and useful extensions.
 ```
 

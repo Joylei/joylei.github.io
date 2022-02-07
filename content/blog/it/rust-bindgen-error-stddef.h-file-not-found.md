@@ -9,6 +9,6 @@ tags=["rust", "bindgen", "clang"]
 
 solution:
 
-```shell
+```sh
 sudo apt-get install clang
 ```

@@ -9,6 +9,6 @@ tags=["linux","parted", "align", "hdd"]
 parted
 
 自动对齐
-```shell
+```sh
 mkpart primary ext4 0% 100%
 ```

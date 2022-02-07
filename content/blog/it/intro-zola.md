@@ -15,7 +15,7 @@ tags=["blog", "static", "zola", "rust"]
 
 MacOS
 
-```shell
+```sh
 brew install zola
 ```
 
@@ -32,7 +32,7 @@ Windows
 
 ## 建立新站点
 
-```shell
+```sh
 zola init mysite
 ```
 
@@ -42,7 +42,7 @@ zola init mysite
 
 建好后的目录结构
 
-```text
+```
 mysite
 - content
 - public
@@ -73,7 +73,7 @@ mysite
 
 在markdown文件中定义的元数据区域，以`+++`来标识起始和结束。类似于：
 
-```text
+```
 +++
 title = "Something new"
 date = 2017-09-25
@@ -190,7 +190,7 @@ generate_feed = true
 
 本地`serve`预览：
 
-```shell
+```sh
 zola serve --interface 0.0.0.0 --port 2000
 ```
 
@@ -198,7 +198,7 @@ zola serve --interface 0.0.0.0 --port 2000
 
 构建静态页面：
 
-```shell
+```sh
 zola build
 ```
 
@@ -214,7 +214,7 @@ zola build
 - 把这个`token`的值添加到项目的设置的`Secrets`里，并且名字为`TOKEN`
 - 添加`github action`：在``code`分支创建`.github/workflows/zola.yml`，内容为
 
-```text
+```
 on:
   push:
     branches:

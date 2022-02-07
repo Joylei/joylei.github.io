@@ -12,12 +12,12 @@ tags=["windows", "network", "wireless"]
 
 - 首选频带
 
-```text
+```
 3.首选5GHz频带
 ```
 
 - 吞吐量助推器
 
-```text
+```
 已启用
 ```

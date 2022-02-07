@@ -20,7 +20,7 @@ https://gitlab.com/dm38/padavan-ng.git
 首先遇到的问题是不能 build toolchain。
 运行`./clean_sources.sh`，报错：
 
-```text
+```
 =================REMOVE-OLD-BUILD-TREE==================
 make: /usr/bin/bash: Command not found
 make: /usr/bin/bash: Command not found
@@ -69,7 +69,7 @@ make: *** [aclocal.m4] Error 127
 
 搜索后发现需要执行命令：`autoreconf -r -i`
 
-```text
+```
 Copying file ABOUT-NLS
 Copying file scripts/config.rpath
 Copying file m4/codeset.m4
@@ -112,7 +112,7 @@ autoreconf: automake failed with exit status: 1
 
 再次执行make
 
-```text
+```
  cd . && /bin/bash /opt/rt-n56u/toolchain/scripts/missing automake-1.16 --foreign
 /opt/rt-n56u/toolchain/scripts/missing: line 81: automake-1.16: command not found
 WARNING: 'automake-1.16' is missing on your system.
@@ -131,7 +131,7 @@ make: *** [Makefile.in] Error 1
 
 看起来automake版本不对，确认版本：`automake --version`
 
-```text
+```
 automake (GNU automake) 1.15.1
 ```
 
@@ -139,7 +139,7 @@ automake (GNU automake) 1.15.1
 
 下载安装automake
 
-```shell
+```sh
 sudo apt-get autoremove automake
 wget http://ftp.gnu.org/gnu/automake/automake-1.16.2.tar.gz
 tar -xf automake-1.16.2.tar.gz

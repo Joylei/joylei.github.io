@@ -11,7 +11,7 @@ tags=["N1", "ddbr", "备份", "恢复", "刷机"]
 
 ## 备份
 
-```text
+```
 root@aml:~# ddbr
  DO YOU WANT TO BACKUP OR RESTORE ?
  BACKUP=(b) RESTORE=(r) b
@@ -34,7 +34,7 @@ BACKUP-s9xxx-emmc.img.gz  install
 
 ## 恢复
 
-```text
+```
 root@aml:~# ls /ddbr
 BACKUP-s9xxx-emmc.img  BACKUP-s9xxx-emmc.img.gz.bak  install
 root@aml:~# ddbr

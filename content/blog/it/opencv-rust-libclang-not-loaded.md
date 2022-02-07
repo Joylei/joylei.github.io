@@ -9,7 +9,7 @@ tags=["opencv", "bindgen", "clang", "rust", "windows"]
 
 I failed to build a project when use `opencv-rust` as dependency on Windows 10. The error message said
 
-```text
+```
 thread 'main' panicked at 'a `libclang` shared library is not loaded on this thread'
 ```
 

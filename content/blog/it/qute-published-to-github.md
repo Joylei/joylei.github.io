@@ -28,7 +28,7 @@ tags=["qute", "QNAP", "TS453B mini", "Fan Control", "Reverse Engineering", "rust
 
 注意：需要`root`权限运行。
 
-```text
+```
 qute v0.1
 
 QNAP device control. Use AT YOUR OWN RISK!!!
