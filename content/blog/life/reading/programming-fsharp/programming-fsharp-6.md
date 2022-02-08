@@ -23,38 +23,40 @@ tags=["Programming", "F#"]
 ## 笔记
 Computation Expression:
 
-    作用：改变代码执行逻辑；减少重复代码；扩展F#语言
+作用：改变代码执行逻辑；减少重复代码；扩展F#语言
 
-    限制：1.不能在Computation Expression中定义新类型
+限制：
+- 1.不能在Computation Expression中定义新类型
+- 2.不能在Computation Expression中使用mutable变量，用ref变量代替
 
-            2.不能在Computation Expression中使用mutable变量，用ref变量代替
 
-    下面定义一个允许使用let!和return关键字的computation expression
+下面定义一个允许使用let!和return关键字的computation expression
+```f#
+type DefinedBuilder() =
+    member this.Bind((x:int),(rest:int->int)) = //允许使用let!
+        printfn "x:%d" x
+        match x with
+        | x when x>0 ->rest x
+        | _ -> x
+    member this.Return(x:'a) = x //允许使用return
 
-    type DefinedBuilder() =
-        member this.Bind((x:int),(rest:int->int)) = //允许使用let!
-            printfn "x:%d" x
-            match x with
-            | x when x>0 ->rest x
-            | _ -> x
-        member this.Return(x:'a) = x //允许使用return
+let defined = DefinedBuilder()
 
-    let defined = DefinedBuilder()
+let expr a b c =
+    defined{
+        let! x = a *2 //只有当x>0时才会执行以下剩余语句，否则返回x
+        let! y = b - 5//只有当y>0时才会执行以下剩余语句，否则返回y
+        let! z = c % 3//只有当z>0时才会执行以下剩余语句，否则返回z
+        return x + y + z
+    }
 
-    let expr a b c =
-        defined{
-            let! x = a *2 //只有当x>0时才会执行以下剩余语句，否则返回x
-            let! y = b - 5//只有当y>0时才会执行以下剩余语句，否则返回y
-            let! z = c % 3//只有当z>0时才会执行以下剩余语句，否则返回z
-            return x + y + z
-        }
+printfn "expr -2 3 5 = %d" (expr -2 3 5) //返回x
+printfn "expr 1 3 5 = %d" (expr 1 3 5) //返回y
+printfn "expr 1 6 3 = %d" (expr 1 6 3) //返回z
+printfn "expr 1 6 5 = %d" (expr 1 6 5) //返回x+y+z
+```
 
-    printfn "expr -2 3 5 = %d" (expr -2 3 5) //返回x
-    printfn "expr 1 3 5 = %d" (expr 1 3 5) //返回y
-    printfn "expr 1 6 3 = %d" (expr 1 6 3) //返回z
-    printfn "expr 1 6 5 = %d" (expr 1 6 5) //返回x+y+z
-
-    Computation Expresssion所有方法：
+Computation Expresssion所有方法：
     方法 描述
 
     member For:
