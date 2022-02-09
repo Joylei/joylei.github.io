@@ -53,10 +53,10 @@ type expr =
 | Sub of expr * expr
 | Mul of expr * expr
 | Div of expr * expr
-
+```
  
 定义语法规则：
-
+```f#
 Parser.fsy
 %{
 open wowin.Ast
@@ -94,7 +94,8 @@ Expr:
 | LPAREN Expr RPAREN { $2 }
 ```
 
-通过命令 fsyacc Parser.fsy --module wowin.Parser 生成Parser.fs和Parser.fsi文件。--module选项是为了指定生成的Parser的模块名称。
+通过命令`fsyacc Parser.fsy --module wowin.Parser`生成Parser.fs和Parser.fsi文件。
+`--module`选项是为了指定生成的Parser的模块名称。
 
  
 主程序：
@@ -110,57 +111,57 @@ open wowin.Ast
 let parseText text =
 let lexbuf = LexBuffer<_>.FromString text
 try
-wowin.Parser.start wowin.Lexer.token lexbuf
+    wowin.Parser.start wowin.Lexer.token lexbuf
 with e ->
-let pos = lexbuf.EndPos
-failwithf "Error near line %d, character %d\n" pos.Line pos.Column
+    let pos = lexbuf.EndPos
+    failwithf "Error near line %d, character %d\n" pos.Line pos.Column
 
 //计算表达式
 let rec evalExpr(exp:wowin.Ast.expr):float =
-match exp with
-| Int v -> float v
-| Float v -> v
-| Add(lft,rgt) -> (evalExpr lft) + (evalExpr rgt)
-| Sub(lft,rgt) -> (evalExpr lft) - (evalExpr rgt)
-| Mul(lft,rgt) -> (evalExpr lft) * (evalExpr rgt)
-| Div(lft,rgt) -> (evalExpr lft) / (evalExpr rgt)
+    match exp with
+    | Int v -> float v
+    | Float v -> v
+    | Add(lft,rgt) -> (evalExpr lft) + (evalExpr rgt)
+    | Sub(lft,rgt) -> (evalExpr lft) - (evalExpr rgt)
+    | Mul(lft,rgt) -> (evalExpr lft) * (evalExpr rgt)
+    | Div(lft,rgt) -> (evalExpr lft) / (evalExpr rgt)
 
 [< EntryPoint >]
 let main args=
-let rec loop(detail)=
-printf ">"
-let line = Console.ReadLine()
-match line with
-| "#quit" -> ()
-| _ ->
-try
-let exp = parseText line
-evalExpr exp
-|>printfn "val it=%f"
-if detail then
-printfn "\texpr=%A" exp
-with
-| ex ->
-printfn "msg:%s" ex.Message
-loop(detail)
-let start detail =
-printfn "use #quit to exit"
-loop(detail)
-if args.Length > 0 then
-match args.[0] with
-| "--detail" | "-d" ->
-start(true)
-| "--help" | "-h" ->
-printfn "wowin calc\r\n\
-\toptions:\r\n\
-\t--detail:print expression tree\r\n\
-\t--help:show help\r\n\
-\t-d:short for --detail\r\n\
-\t-h:short for -- help"
-| _ -> start(false)
-else
-start(false)
-0
+    let rec loop(detail)=
+        printf ">"
+        let line = Console.ReadLine()
+        match line with
+        | "#quit" -> ()
+        | _ ->
+        try
+            let exp = parseText line
+            evalExpr exp
+            |>printfn "val it=%f"
+            if detail then
+                printfn "\texpr=%A" exp
+        with
+            | ex ->
+            printfn "msg:%s" ex.Message
+        loop(detail)
+    let start detail =
+        printfn "use #quit to exit"
+        loop(detail)
+    if args.Length > 0 then
+        match args.[0] with
+        | "--detail" | "-d" ->
+            start(true)
+        | "--help" | "-h" ->
+            printfn "wowin calc\r\n\
+            \toptions:\r\n\
+            \t--detail:print expression tree\r\n\
+            \t--help:show help\r\n\
+            \t-d:short for --detail\r\n\
+            \t-h:short for -- help"
+        | _ -> start(false)
+    else
+        start(false)
+    0
 ```
  
 
