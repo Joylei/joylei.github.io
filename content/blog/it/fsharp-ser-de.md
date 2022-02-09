@@ -12,7 +12,9 @@ namespace PersonType
 open System
 open System.IO
 open System.Xml.Serialization
-open System.Runtime.Serialization.Formatters.Binary[<Serializable>]
+open System.Runtime.Serialization.Formatters.Binary
+
+[<Serializable>]
 type Person= val mutable 
     private name:string val mutable 
     private birthday:DateTime val mutable 
