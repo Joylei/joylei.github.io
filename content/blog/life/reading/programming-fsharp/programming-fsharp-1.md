@@ -5,7 +5,7 @@ date=2010-01-23
 
 [taxonomies]
 categories=["Reading"]
-tags=["Programming", "F#"]
+tags=["Programming", "F#",  ".Net"]
 +++
 ## 索引
 - [《Programming F#》读书笔记一](@/blog/life/reading/programming-fsharp/programming-fsharp-1.md)

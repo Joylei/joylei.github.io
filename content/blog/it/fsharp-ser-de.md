@@ -4,7 +4,7 @@ date=2010-09-10
 
 [taxonomies]
 categories=["Programming"]
-tags=["F#", "serialization", "xml", ".net"]
+tags=["F#", "serialization", "xml", ".Net"]
 +++
 借助F#熟悉一下序列化与反序列化。
 ```f#

@@ -4,7 +4,7 @@ date=2010-03-09
 
 [taxonomies]
 categories=["Reading"]
-tags=["Programming", "F#"]
+tags=["Programming", "F#", ".Net"]
 +++
 
 ## 索引
