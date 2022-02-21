@@ -48,7 +48,7 @@
         {% if page.taxonomies.tags %}
         <div class="post-tags">
             {% for tag in page.taxonomies.tags %}
-            <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">#{{ tag }}</a>
+            <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">#{{ tag }}</a>
             {% endfor %}
         </div>
         {% endif %}
@@ -70,15 +70,14 @@
         {% endif %}
 
         {% endblock page_footer %}
-
     </div>
 
     {% block page_after_footer %}
     {% if current_url is starting_with(config.extra.base_url) %}
-    <section id="beaudar">
-        <script src="https://beaudar.lipk.org/client.js" repo="Joylei/joylei.github.io" issue-term="pathname" label="💬"
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
             theme="preferred-color-scheme" crossorigin="anonymous" async>
-        </script>
+            </script>
     </section>
     {% endif %}
     {% endblock page_after_footer %}
