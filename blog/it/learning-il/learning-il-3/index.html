@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - IL学习(三)</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-3/#yuan-shi-zi-fu-chuan" class="toc-link">原始字符串</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-3/#lei-de-ji-cheng" class="toc-link">类的继承</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-3/#shi-xian-jie-kou" class="toc-link">实现接口</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-3/#xi-gou-han-shu" class="toc-link">析构函数</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-3/#fang-wen-xiu-shi-fu-internal" class="toc-link">访问修饰符internal</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-3/#qiang-zhi-lei-xing-zhuan-huan" class="toc-link">强制类型转换</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-3/#literal" class="toc-link">literal</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-3/#initonly" class="toc-link">initonly</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;learning-il&#x2F;learning-il-3&#x2F;">IL学习(三)</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>5 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-05-05</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <h2 id="yuan-shi-zi-fu-chuan">原始字符串</h2>
+<p>IL中没有原始字符串，如C#中的@&quot;&quot;在IL中则是已经经过编译器转义的字符串&quot;\&quot;。</p>
+<h2 id="lei-de-ji-cheng">类的继承</h2>
+<p>IL使用extends关键字表示类的继承</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>.assembly my{}
+</span><span>.class auto ansi Animal
+</span><span>{
+</span><span>.method static void main() il managed
+</span><span>{
+</span><span>    .entrypoint
+</span><span>    newobj instance void Dog::.ctor()
+</span><span>    callvirt instance void Animal::run()
+</span><span>    ret
+</span><span>}
+</span><span>.method instance void .ctor() il managed
+</span><span>{
+</span><span>    ret
+</span><span>}
+</span><span>.method virtual instance void run() il managed
+</span><span>{
+</span><span>    ldstr &quot;an Animal is running&quot;
+</span><span>    call void [mscorlib]System.Console::WriteLine(string)
+</span><span>    ret
+</span><span>}
+</span><span>}
+</span><span>.class auto ansi Dog extends Animal
+</span><span>{
+</span><span>.method instance void .ctor() il managed
+</span><span>{
+</span><span>    ldarg.0
+</span><span>    call instance void Animal::.ctor()
+</span><span>    ret
+</span><span>}
+</span><span>.method virtual instance void run() il managed
+</span><span>{
+</span><span>    ldstr &quot;an Dog is running&quot;
+</span><span>    call void [mscorlib]System.Console::WriteLine(string)
+</span><span>    ret
+</span><span>}
+</span><span>}
+</span></code></pre>
+<p>子类的构造函数必须调用父类的构造函数，否则会报InvalidProgramException异常。
+实例方法如果没有呢new/virtual关键字，则默认为new，virtaul则标明为虚方法，表明方法可以重写或覆盖了父类的方法（在C#中用override）。
+callvirt：在运行时决定要调用的方法。</p>
+<h2 id="shi-xian-jie-kou">实现接口</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>.assembly my{}
+</span><span>.class interface IRunnable
+</span><span>{
+</span><span>.method public virtual abstract void run() il managed
+</span><span>   {}
+</span><span>}
+</span><span>.class auto ansi Animal implements IRunnable
+</span><span>{
+</span><span>.method static void main() il managed
+</span><span>{
+</span><span>    .entrypoint
+</span><span>    newobj instance void Dog::.ctor()
+</span><span>    callvirt instance void Animal::run()
+</span><span>    ret
+</span><span>}
+</span><span>.method instance void .ctor() il managed
+</span><span>{
+</span><span>    ret
+</span><span>}
+</span><span>.method public virtual newslot instance void run() il managed
+</span><span>{
+</span><span>    ldstr &quot;an Animal is running&quot;
+</span><span>    call void [mscorlib]System.Console::WriteLine(string)
+</span><span>    ret
+</span><span>}
+</span><span>}
+</span><span>.class auto ansi Dog extends Animal
+</span><span>{
+</span><span>.method instance void .ctor() il managed
+</span><span>{
+</span><span>    ldarg.0
+</span><span>    call instance void Animal::.ctor()
+</span><span>    ret
+</span><span>}
+</span><span>.method public virtual instance void run() il managed
+</span><span>{
+</span><span>    ldstr &quot;an Dog is running&quot;
+</span><span>    call void [mscorlib]System.Console::WriteLine(string)
+</span><span>    ret
+</span><span>}
+</span><span>}
+</span></code></pre>
+<p>实现接口时如果方法签名不匹配或为实现接口中的方法，将报TypeLoadException异常。
+newslot:当第一次把方法声明为virtual方法时，最好把它标记为newslot，它表明虚方法的根。</p>
+<h2 id="xi-gou-han-shu">析构函数</h2>
+<p>C#中的析构函数编译成IL后，转化成Finalize()方法。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>.assembly my{}
+</span><span>.class interface IRunnable
+</span><span>{
+</span><span>.method public virtual abstract void run() il managed
+</span><span>   {}
+</span><span>}
+</span><span>.class auto ansi Animal implements IRunnable
+</span><span>{
+</span><span>.method static void main() il managed
+</span><span>{
+</span><span>    .entrypoint
+</span><span>    newobj instance void Animal::.ctor()
+</span><span>    callvirt instance void Animal::run()
+</span><span>    ret
+</span><span>}
+</span><span>.method instance void .ctor() il managed
+</span><span>{
+</span><span>    ret
+</span><span>}
+</span><span>.method public virtual newslot instance void run() il managed
+</span><span>{
+</span><span>    ldstr &quot;an Animal is running&quot;
+</span><span>    call void [mscorlib]System.Console::WriteLine(string)
+</span><span>    ret
+</span><span>}
+</span><span>.method family hidebysig virtual instance void Finalize() il managed
+</span><span>{
+</span><span>    ldstr &quot;in class Animal destructor&quot;
+</span><span>    call void [mscorlib]System.Console::WriteLine(string)
+</span><span>    ret
+</span><span>}
+</span><span>}
+</span></code></pre>
+<p>虽然Finalize的执行是由运行时决定的，但是在这个例子中还是可以看见执行的。
+类不会继承构造函数和析构函数。</p>
+<h2 id="fang-wen-xiu-shi-fu-internal">访问修饰符internal</h2>
+<p>C#的访问修饰符internal只是C#词法的一部分，与IL没有任何关系。
+C#中父类的可访问性不能比子类小，但是在IL中不遵循这个规则。
+C#中方法的可访问性受它所在的类的可访问性的限制，但是在IL中没有这个限制。</p>
+<h2 id="qiang-zhi-lei-xing-zhuan-huan">强制类型转换</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>.assembly my{}
+</span><span>.class interface IRunnable
+</span><span>{
+</span><span>.method public virtual abstract void run() il managed
+</span><span>   {}
+</span><span>}
+</span><span>.class auto ansi Animal implements IRunnable
+</span><span>{
+</span><span>.method static void main() il managed
+</span><span>{
+</span><span>    .entrypoint
+</span><span>    .locals(class Animal V_0,class Dog V_1)
+</span><span>    newobj instance void Dog::.ctor()
+</span><span>    stloc.0    //转换成Animal
+</span><span>    ldloc.0
+</span><span>    callvirt instance void Animal::run()
+</span><span>    ldloc.0
+</span><span>    castclass Dog //转换成Dog
+</span><span>    call instance void Dog::run()
+</span><span>    ret
+</span><span>}
+</span><span>.method instance void .ctor() il managed
+</span><span>{
+</span><span>    ret
+</span><span>}
+</span><span>.method public virtual newslot instance void run() il managed
+</span><span>{
+</span><span>    ldstr &quot;an Animal is running&quot;
+</span><span>    call void [mscorlib]System.Console::WriteLine(string)
+</span><span>    ret
+</span><span>}
+</span><span>.method family hidebysig virtual instance void Finalize() il managed
+</span><span>{
+</span><span>    ldstr &quot;in class Animal destructor&quot;
+</span><span>    call void [mscorlib]System.Console::WriteLine(string)
+</span><span>    ret
+</span><span>}
+</span><span>}
+</span><span>.class auto ansi Dog extends Animal
+</span><span>{
+</span><span>.method instance void .ctor() il managed
+</span><span>{
+</span><span>    ldarg.0
+</span><span>    call instance void Animal::.ctor()
+</span><span>    ret
+</span><span>}
+</span><span>.method public virtual instance void run() il managed
+</span><span>{
+</span><span>    ldstr &quot;an Dog is running&quot;
+</span><span>    call void [mscorlib]System.Console::WriteLine(string)
+</span><span>    ret
+</span><span>}
+</span><span>}
+</span></code></pre>
+<p>如果转换失败，将抛出InvalidCastException异常。</p>
+<p>C#中不能继承标明Sealed的类，但在IL中可以。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>.assembly my{}
+</span><span>.class private auto ansi sealed zzz extends System.Object
+</span><span>{
+</span><span>    .method public hidebysig static void vijay() il managed
+</span><span>    {
+</span><span>        .entrypoint
+</span><span>        ret
+</span><span>    }
+</span><span>}
+</span><span>.class private auto ansi yyy extends zzz
+</span><span>{
+</span><span>}
+</span></code></pre>
+<h2 id="literal">literal</h2>
+<p>C#编译器会在编译时计算所有常量的值。literal字段代表常量，但是不可以在IL中访问，如果访问会在运行时报错MissingFieldException。</p>
+<h2 id="initonly">initonly</h2>
+<p>C#中用readonly标记只读字段，在IL中使用initonly。</p>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/net/">#.Net</a>
+            
+            <a href="https://blog.dotone.top/tags/il/">#IL</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

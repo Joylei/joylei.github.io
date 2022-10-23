@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - fslex和fsyacc的简单应用：四则运算(续)</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;fslex-fsyacc-2&#x2F;">fslex和fsyacc的简单应用：四则运算(续)</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>3 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-07-22</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>上一篇文章中有一个有遗留问题:就是负号的处理。
+导致1-3不能识别的原因是1识别为一个token，-3识别为一个token，这样就不符合语法规则中定义的任何一条规则。
+现在重新定义词法规则，不把负号和数字当作一个整体，负号留在语法规则中处理。
+Lexer.fsl内容如下：</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">{
+</span><span>module wowin.Lexer
+</span><span>open System
+</span><span>open Microsoft.FSharp.Text.Lexing
+</span><span>
+</span><span>open wowin.Parser
+</span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">num        </span><span style="color:#b48ead;">= [</span><span style="color:#a3be8c;">&#39;0&#39;</span><span style="color:#b48ead;">-</span><span style="color:#a3be8c;">&#39;9&#39;</span><span style="color:#b48ead;">]+
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">intNum     </span><span style="color:#b48ead;">=</span><span> num
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">floatNum   </span><span style="color:#b48ead;">=</span><span> num </span><span style="color:#b48ead;">(</span><span style="color:#a3be8c;">&#39;.&#39;</span><span> num</span><span style="color:#b48ead;">)</span><span>? </span><span style="color:#b48ead;">([</span><span style="color:#a3be8c;">&#39;e&#39; &#39;E&#39;</span><span style="color:#b48ead;">]</span><span> num</span><span style="color:#b48ead;">)</span><span>?
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">whitespace </span><span style="color:#b48ead;">= </span><span style="color:#a3be8c;">&#39; &#39; </span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;\t&#39;
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">newline    </span><span style="color:#b48ead;">= </span><span style="color:#a3be8c;">&#39;\n&#39; </span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;\r&#39; &#39;\n&#39;
+</span><span>rule token </span><span style="color:#b48ead;">=</span><span> parse
+</span><span style="color:#b48ead;">|</span><span> intNum     </span><span style="color:#b48ead;">{</span><span> INT </span><span style="color:#b48ead;">(</span><span>int </span><span style="color:#b48ead;">(new</span><span> String</span><span style="color:#b48ead;">(</span><span>lexbuf.Lexeme</span><span style="color:#b48ead;">))) }
+</span><span style="color:#b48ead;">|</span><span> floatNum   </span><span style="color:#b48ead;">{</span><span> FLOAT </span><span style="color:#b48ead;">(</span><span>float </span><span style="color:#b48ead;">(new</span><span> String</span><span style="color:#b48ead;">(</span><span>lexbuf.Lexeme</span><span style="color:#b48ead;">))) }
+</span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;(&#39;        </span><span style="color:#b48ead;">{</span><span> LPAREN</span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;)&#39;        </span><span style="color:#b48ead;">{</span><span> RPAREN</span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;+&#39;        </span><span style="color:#b48ead;">{</span><span> ADD </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;-&#39;        </span><span style="color:#b48ead;">{</span><span> SUB </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;*&#39;        </span><span style="color:#b48ead;">{</span><span> MUL </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;/&#39;        </span><span style="color:#b48ead;">{</span><span> DIV </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">|</span><span> whitespace </span><span style="color:#b48ead;">{</span><span> token lexbuf </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">|</span><span> newline    </span><span style="color:#b48ead;">{</span><span> token lexbuf </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">|</span><span> eof        </span><span style="color:#b48ead;">{</span><span> EOF </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">| _          {</span><span> failwithf &quot;</span><span style="color:#a3be8c;">unrecognized input: &#39;</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;">&#39;</span><span>&quot; </span><span style="color:#b48ead;">(new</span><span> String</span><span style="color:#b48ead;">(</span><span>lexbuf.Lexeme</span><span style="color:#b48ead;">)) }
+</span></code></pre>
+<p>重新定义语法树，增加负数表达式。Ast.fs内容如下：</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">module </span><span style="color:#8fa1b3;">wowin.Ast
+</span><span style="color:#b48ead;">type </span><span>expr </span><span style="color:#b48ead;">=
+</span><span style="color:#b48ead;">|</span><span> Int </span><span style="color:#b48ead;">of </span><span>int
+</span><span style="color:#b48ead;">|</span><span> Float </span><span style="color:#b48ead;">of </span><span>float
+</span><span style="color:#b48ead;">|</span><span> Add </span><span style="color:#b48ead;">of </span><span>expr </span><span style="color:#b48ead;">* </span><span>expr
+</span><span style="color:#b48ead;">|</span><span> Sub </span><span style="color:#b48ead;">of </span><span>expr </span><span style="color:#b48ead;">* </span><span>expr
+</span><span style="color:#b48ead;">|</span><span> Mul </span><span style="color:#b48ead;">of </span><span>expr </span><span style="color:#b48ead;">* </span><span>expr
+</span><span style="color:#b48ead;">|</span><span> Div </span><span style="color:#b48ead;">of </span><span>expr </span><span style="color:#b48ead;">* </span><span>expr
+</span><span style="color:#b48ead;">|</span><span> Neg </span><span style="color:#b48ead;">of </span><span>expr
+</span></code></pre>
+<p>在语法规则中，将使用%prec terminal的语法来定义基于上下文的优先级。在语法规则中使用了一个不实际存在的USUB，%left USUB 指定它具有最高的优先级，将会优先识别SUB Expr。Parser.fsy内容如下：</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span>%</span><span style="color:#b48ead;">{
+</span><span>open wowin.Ast
+</span><span>%</span><span style="color:#b48ead;">}
+</span><span>
+</span><span style="color:#65737e;">// The start token becomes a parser function in the compiled code.
+</span><span>%start start
+</span><span>
+</span><span style="color:#65737e;">// These are the terminal tokens of the grammar along with the types of
+</span><span style="color:#65737e;">// the data carried by each token:
+</span><span>%token </span><span style="color:#b48ead;">&lt;</span><span>int</span><span style="color:#b48ead;">&gt;</span><span> INT
+</span><span>%token </span><span style="color:#b48ead;">&lt;</span><span>double</span><span style="color:#b48ead;">&gt;</span><span> FLOAT
+</span><span>%token ADD SUB MUL DIV
+</span><span>%token LPAREN RPAREN
+</span><span>%token EOF
+</span><span>
+</span><span style="color:#65737e;">// Associativity and Precedences - Lowest precedence comes first
+</span><span>%left ADD SUB
+</span><span>%left MUL DIV
+</span><span>%left USUB
+</span><span>
+</span><span style="color:#65737e;">// This is the type of the data produced by a successful reduction
+</span><span style="color:#65737e;">// of the &#39;start&#39; symbol:
+</span><span>%</span><span style="color:#b48ead;">type &lt;</span><span>wowin.Ast.expr</span><span style="color:#b48ead;">&gt; </span><span>start
+</span><span>
+</span><span>%%
+</span><span>
+</span><span>start</span><span style="color:#b48ead;">:</span><span> Expr EOF                  </span><span style="color:#b48ead;">{</span><span> $</span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">}
+</span><span>Expr</span><span style="color:#b48ead;">:
+</span><span style="color:#b48ead;">|</span><span> Expr ADD Expr              </span><span style="color:#b48ead;">{</span><span> Add </span><span style="color:#b48ead;">(</span><span>$</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">,</span><span> $</span><span style="color:#d08770;">3</span><span style="color:#b48ead;">) }
+</span><span style="color:#b48ead;">|</span><span> Expr SUB Expr              </span><span style="color:#b48ead;">{</span><span> Sub </span><span style="color:#b48ead;">(</span><span>$</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">,</span><span> $</span><span style="color:#d08770;">3</span><span style="color:#b48ead;">) }
+</span><span style="color:#b48ead;">|</span><span> Expr MUL Expr              </span><span style="color:#b48ead;">{</span><span> Mul </span><span style="color:#b48ead;">(</span><span>$</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">,</span><span> $</span><span style="color:#d08770;">3</span><span style="color:#b48ead;">) }
+</span><span style="color:#b48ead;">|</span><span> Expr DIV Expr              </span><span style="color:#b48ead;">{</span><span> Div </span><span style="color:#b48ead;">(</span><span>$</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">,</span><span> $</span><span style="color:#d08770;">3</span><span style="color:#b48ead;">) }
+</span><span style="color:#b48ead;">|</span><span> FLOAT                      </span><span style="color:#b48ead;">{</span><span> Float $</span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">|</span><span> INT                        </span><span style="color:#b48ead;">{</span><span> Int $</span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">|</span><span> LPAREN Expr RPAREN         </span><span style="color:#b48ead;">{</span><span> $</span><span style="color:#d08770;">2 </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">|</span><span> SUB Expr %prec USUB        </span><span style="color:#b48ead;">{</span><span> Neg $</span><span style="color:#d08770;">2 </span><span style="color:#b48ead;">} </span><span style="color:#65737e;">//负数
+</span></code></pre>
+<p>修改Program.fs中的evalExpr函数，增加对负数的处理：</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">let rec </span><span style="color:#bf616a;">evalExpr</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">exp</span><span style="color:#b48ead;">:</span><span>wowin.Ast.expr</span><span style="color:#b48ead;">):</span><span>float </span><span style="color:#b48ead;">=
+</span><span style="color:#b48ead;">match</span><span> exp </span><span style="color:#b48ead;">with  
+</span><span style="color:#b48ead;">|</span><span> Int v </span><span style="color:#b48ead;">-&gt;</span><span> float v
+</span><span style="color:#b48ead;">|</span><span> Float v </span><span style="color:#b48ead;">-&gt;</span><span> v
+</span><span style="color:#b48ead;">|</span><span> Add</span><span style="color:#b48ead;">(</span><span>lft</span><span style="color:#b48ead;">,</span><span>rgt</span><span style="color:#b48ead;">) -&gt; (</span><span>evalExpr lft</span><span style="color:#b48ead;">) + (</span><span>evalExpr rgt</span><span style="color:#b48ead;">)
+</span><span style="color:#b48ead;">|</span><span> Sub</span><span style="color:#b48ead;">(</span><span>lft</span><span style="color:#b48ead;">,</span><span>rgt</span><span style="color:#b48ead;">) -&gt; (</span><span>evalExpr lft</span><span style="color:#b48ead;">) - (</span><span>evalExpr rgt</span><span style="color:#b48ead;">)
+</span><span style="color:#b48ead;">|</span><span> Mul</span><span style="color:#b48ead;">(</span><span>lft</span><span style="color:#b48ead;">,</span><span>rgt</span><span style="color:#b48ead;">) -&gt; (</span><span>evalExpr lft</span><span style="color:#b48ead;">) * (</span><span>evalExpr rgt</span><span style="color:#b48ead;">)
+</span><span style="color:#b48ead;">|</span><span> Div</span><span style="color:#b48ead;">(</span><span>lft</span><span style="color:#b48ead;">,</span><span>rgt</span><span style="color:#b48ead;">) -&gt; (</span><span>evalExpr lft</span><span style="color:#b48ead;">) / (</span><span>evalExpr rgt</span><span style="color:#b48ead;">)
+</span><span style="color:#b48ead;">|</span><span> Neg</span><span style="color:#b48ead;">(</span><span>e</span><span style="color:#b48ead;">) -&gt; -</span><span>evalExpr</span><span style="color:#b48ead;">(</span><span>e</span><span style="color:#b48ead;">)
+</span></code></pre>
+<p>现在运行程序可以看到它完全正常工作了。</p>
+<p><img src="https://blog.dotone.top/blog/it/fslex-fsyacc-2/./db48deb4783ed8338ad4b223.png" alt="db48deb4783ed8338ad4b223.png" /></p>
+<p>参考：<a href="http://plus.kaist.ac.kr/~shoh/ocaml/ocamllex-ocamlyacc/ocamlyacc-tutorial/sec-context-dependent-precedence.html">Ocalmlyacc Tutorial</a></p>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/programming/">#Programming</a>
+            
+            <a href="https://blog.dotone.top/tags/f/">#F#</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

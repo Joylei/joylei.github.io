@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - 《Programming F#》读书笔记五</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/#suo-yin" class="toc-link">索引</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/#bi-ji" class="toc-link">笔记</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/#jie-kou" class="toc-link">接口</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/#dui-xiang-biao-da-shi" class="toc-link">对象表达式</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/#kuo-zhan-fang-fa" class="toc-link">扩展方法</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/#kuo-zhan-mo-kuai" class="toc-link">扩展模块</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/#mei-ju" class="toc-link">枚举</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/#jie-gou-ti" class="toc-link">结构体</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/#active-pattern" class="toc-link">Active Pattern</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;life&#x2F;reading&#x2F;programming-fsharp&#x2F;programming-fsharp-5&#x2F;">《Programming F#》读书笔记五</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>6 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-01-27</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <h2 id="suo-yin">索引</h2>
+<ul>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-1/">《Programming F#》读书笔记一</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-2/">《Programming F#》读书笔记二</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-3/">《Programming F#》读书笔记三</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-4/">《Programming F#》读书笔记四</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/">《Programming F#》读书笔记五</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-6/">《Programming F#》读书笔记六</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-7/">《Programming F#》读书笔记七</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-8/">《Programming F#》读书笔记八</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-9/">《Programming F#》读书笔记九</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-10/">《Programming F#》读书笔记十</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/">《Programming F#》读书笔记十一</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-12/">《Programming F#》读书笔记十二</a></li>
+</ul>
+<h2 id="bi-ji">笔记</h2>
+<h3 id="jie-kou">接口</h3>
+<p>定义接口：</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">type </span><span>IPerson </span><span style="color:#b48ead;">=   </span><span style="color:#65737e;">//所有方法和属性都是抽象的
+</span><span>        </span><span style="color:#b48ead;">abstract</span><span> Name</span><span style="color:#b48ead;">:</span><span>string
+</span><span>        </span><span style="color:#b48ead;">abstract</span><span> Age</span><span style="color:#b48ead;">:</span><span>int
+</span><span>        </span><span style="color:#b48ead;">abstract</span><span> TalkWith</span><span style="color:#b48ead;">:</span><span>IPerson –</span><span style="color:#b48ead;">&gt; </span><span>unit
+</span><span>
+</span><span style="color:#b48ead;">type </span><span>IPerson </span><span style="color:#b48ead;">= </span><span style="color:#65737e;">//另一种形式
+</span><span>        </span><span style="color:#b48ead;">interface
+</span><span>            </span><span style="color:#b48ead;">abstract</span><span> Name</span><span style="color:#b48ead;">:</span><span>string
+</span><span>            </span><span style="color:#b48ead;">abstract</span><span> Age</span><span style="color:#b48ead;">:</span><span>int
+</span><span>            </span><span style="color:#b48ead;">abstract</span><span> TalkWith</span><span style="color:#b48ead;">:</span><span>IPerson –</span><span style="color:#b48ead;">&gt; </span><span>unit
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">end
+</span></code></pre>
+<p>实现接口：</p>
+<p>F#中实现接口必须实现接口中的所有属性和方法；实现接口时必须实现接口的所有基接口中的所有属性和方法。</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">type </span><span>IPerson </span><span style="color:#b48ead;">=   </span><span style="color:#65737e;">//所有方法和属性都是抽象的
+</span><span>        </span><span style="color:#b48ead;">abstract</span><span> Name</span><span style="color:#b48ead;">:</span><span>string </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#b48ead;">,</span><span>set </span><span style="color:#65737e;">//可读写属性
+</span><span>        </span><span style="color:#b48ead;">abstract</span><span> Age</span><span style="color:#b48ead;">:</span><span>int </span><span style="color:#65737e;">//只读属性
+</span><span>        </span><span style="color:#b48ead;">abstract</span><span> TalkWith</span><span style="color:#b48ead;">:</span><span>IPerson </span><span style="color:#b48ead;">-&gt; </span><span>unit </span><span style="color:#65737e;">//方法
+</span><span>
+</span><span style="color:#b48ead;">type </span><span>IStudent </span><span style="color:#b48ead;">=
+</span><span>        </span><span style="color:#b48ead;">inherit</span><span> IPerson
+</span><span>        </span><span style="color:#b48ead;">abstract</span><span> ClassRoom</span><span style="color:#b48ead;">:</span><span>string
+</span><span>
+</span><span style="color:#b48ead;">type </span><span>Student </span><span style="color:#b48ead;">=
+</span><span>    </span><span style="color:#b48ead;">val mutable </span><span style="color:#bf616a;">name</span><span style="color:#b48ead;">:</span><span>string
+</span><span>    </span><span style="color:#b48ead;">val mutable </span><span style="color:#bf616a;">age</span><span style="color:#b48ead;">:</span><span>int
+</span><span>    </span><span style="color:#b48ead;">val mutable </span><span style="color:#bf616a;">room</span><span style="color:#b48ead;">:</span><span>string
+</span><span>    </span><span style="color:#b48ead;">new</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">= {</span><span>name</span><span style="color:#b48ead;">=</span><span>&quot;&quot;</span><span style="color:#b48ead;">;</span><span>age</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">;</span><span>room</span><span style="color:#b48ead;">=</span><span>&quot;</span><span style="color:#a3be8c;">room1</span><span>&quot;</span><span style="color:#b48ead;">}
+</span><span>    </span><span style="color:#b48ead;">interface</span><span> IPerson </span><span style="color:#b48ead;">with
+</span><span>        </span><span style="color:#b48ead;">override </span><span style="color:#bf616a;">this.Name </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> this.name
+</span><span>                            </span><span style="color:#b48ead;">and</span><span> set value </span><span style="color:#b48ead;">=</span><span> this.name </span><span style="color:#b48ead;">&lt;-</span><span> value
+</span><span>        </span><span style="color:#b48ead;">override </span><span style="color:#bf616a;">this.Age </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> this.age
+</span><span>                            </span><span style="color:#65737e;">//and set value = this.age &lt;- value
+</span><span>        </span><span style="color:#b48ead;">override </span><span style="color:#bf616a;">this.TalkWith</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">p</span><span style="color:#b48ead;">:</span><span>IPerson</span><span style="color:#b48ead;">) =
+</span><span>            printfn &quot;</span><span style="color:#a3be8c;">talk with </span><span style="color:#b48ead;">%s</span><span>&quot; p.Name
+</span><span>    </span><span style="color:#b48ead;">interface</span><span> IStudent </span><span style="color:#b48ead;">with
+</span><span>        </span><span style="color:#b48ead;">override </span><span style="color:#bf616a;">this.ClassRoom </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> this.room
+</span><span>                                </span><span style="color:#65737e;">//and set value = this.room &lt;- value
+</span></code></pre>
+<p>调用接口</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>F#中对象必须显示的转换成接口才能调用接口成员
+</span></code></pre>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">let </span><span style="color:#bf616a;">s </span><span style="color:#b48ead;">= new</span><span> Student</span><span style="color:#d08770;">()
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">i </span><span style="color:#b48ead;">=</span><span> s </span><span style="color:#b48ead;">:&gt;</span><span> IPerson
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">n </span><span style="color:#b48ead;">=</span><span> i.Name
+</span></code></pre>
+<h3 id="dui-xiang-biao-da-shi">对象表达式</h3>
+<p>匿名对象,与java中的类似，可以直接实现接口和抽象类</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">let </span><span style="color:#bf616a;">o </span><span style="color:#b48ead;">= {
+</span><span>    </span><span style="color:#b48ead;">new</span><span> IComparer</span><span style="color:#b48ead;">&lt;</span><span>IPerson</span><span style="color:#b48ead;">&gt; with
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.Compare</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">l</span><span style="color:#b48ead;">,</span><span style="color:#bf616a;">r</span><span style="color:#b48ead;">) =
+</span><span>            </span><span style="color:#b48ead;">if</span><span> l.Age </span><span style="color:#b48ead;">&gt;</span><span> r.Age </span><span style="color:#b48ead;">then </span><span style="color:#d08770;">1
+</span><span>            </span><span style="color:#b48ead;">elif</span><span> lAge </span><span style="color:#b48ead;">=</span><span> r.Age </span><span style="color:#b48ead;">then </span><span style="color:#d08770;">0
+</span><span>            </span><span style="color:#b48ead;">else -</span><span style="color:#d08770;">1
+</span><span style="color:#b48ead;">}
+</span></code></pre>
+<h3 id="kuo-zhan-fang-fa">扩展方法</h3>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>type System.Int32 with
+</span><span>    member this.ToHexString() = sprintf &quot;0x%x&quot; this;;
+</span></code></pre>
+<p>扩展方法必须定义在模块中，只能在F#中起作用，.net不能识别</p>
+<h3 id="kuo-zhan-mo-kuai">扩展模块</h3>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>只要名字相同就就是扩展
+</span></code></pre>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">namespace </span><span style="color:#8fa1b3;">FSCollectionExtensions
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System.Collections.Generic
+</span><span style="color:#b48ead;">module </span><span style="color:#8fa1b3;">List </span><span style="color:#b48ead;">=
+</span><span>    </span><span style="color:#65737e;">/// Skips the first n elements of the list
+</span><span>    </span><span style="color:#b48ead;">let rec </span><span style="color:#bf616a;">skip n list </span><span style="color:#b48ead;">=
+</span><span>        </span><span style="color:#b48ead;">match</span><span> n</span><span style="color:#b48ead;">,</span><span> list </span><span style="color:#b48ead;">with
+</span><span>        </span><span style="color:#b48ead;">| _, []       -&gt; []
+</span><span>        </span><span style="color:#b48ead;">| </span><span style="color:#d08770;">0</span><span style="color:#b48ead;">,</span><span> list     </span><span style="color:#b48ead;">-&gt;</span><span> list
+</span><span>        </span><span style="color:#b48ead;">|</span><span> n</span><span style="color:#b48ead;">,</span><span> hd </span><span style="color:#b48ead;">::</span><span> tl </span><span style="color:#b48ead;">-&gt;</span><span> skip </span><span style="color:#b48ead;">(</span><span>n </span><span style="color:#b48ead;">- </span><span style="color:#d08770;">1</span><span style="color:#b48ead;">)</span><span> tl
+</span></code></pre>
+<h3 id="mei-ju">枚举</h3>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">type </span><span>Color </span><span style="color:#b48ead;">=
+</span><span>        </span><span style="color:#b48ead;">|</span><span> Red </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">0
+</span><span>        </span><span style="color:#b48ead;">|</span><span> Green</span><span style="color:#b48ead;">= </span><span style="color:#d08770;">1
+</span><span>        </span><span style="color:#b48ead;">|</span><span> Black</span><span style="color:#b48ead;">= </span><span style="color:#d08770;">2
+</span><span>
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">i</span><span style="color:#b48ead;">:</span><span>int </span><span style="color:#b48ead;">=</span><span> int Color.Green </span><span style="color:#65737e;">//枚举值转换为int
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">o </span><span style="color:#b48ead;">= enum&lt;</span><span>Color</span><span style="color:#b48ead;">&gt;(</span><span>i</span><span style="color:#b48ead;">) </span><span style="color:#65737e;">//int转换为枚举值
+</span></code></pre>
+<h3 id="jie-gou-ti">结构体</h3>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#96b5b4;">[&lt;Struct&gt;]
+</span><span style="color:#b48ead;">type </span><span>StructPoint</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">x </span><span style="color:#b48ead;">:</span><span> int</span><span style="color:#b48ead;">, </span><span style="color:#bf616a;">y </span><span style="color:#b48ead;">:</span><span> int</span><span style="color:#b48ead;">) =
+</span><span>    </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.X </span><span style="color:#b48ead;">=</span><span> x
+</span><span>    </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.Y </span><span style="color:#b48ead;">=</span><span> y
+</span><span style="color:#b48ead;">type </span><span>StructRect</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">top </span><span style="color:#b48ead;">:</span><span> int</span><span style="color:#b48ead;">, </span><span style="color:#bf616a;">bottom </span><span style="color:#b48ead;">:</span><span> int</span><span style="color:#b48ead;">, </span><span style="color:#bf616a;">left </span><span style="color:#b48ead;">:</span><span> int</span><span style="color:#b48ead;">, </span><span style="color:#bf616a;">right </span><span style="color:#b48ead;">:</span><span> in
+</span><span>    </span><span style="color:#b48ead;">struct
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.Top    </span><span style="color:#b48ead;">=</span><span> top
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.Bottom </span><span style="color:#b48ead;">=</span><span> bottom
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.Left   </span><span style="color:#b48ead;">=</span><span> left
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.Right </span><span style="color:#b48ead;">=</span><span> right
+</span><span>        </span><span style="color:#b48ead;">override </span><span style="color:#bf616a;">this.ToString</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=
+</span><span>            sprintf &quot;</span><span style="color:#a3be8c;">[</span><span style="color:#b48ead;">%d</span><span style="color:#a3be8c;">, </span><span style="color:#b48ead;">%d</span><span style="color:#a3be8c;">, </span><span style="color:#b48ead;">%d</span><span style="color:#a3be8c;">, </span><span style="color:#b48ead;">%d</span><span style="color:#a3be8c;">]</span><span>&quot; top bottom left right
+</span><span>    </span><span style="color:#b48ead;">end
+</span></code></pre>
+<p>不能使用隐式构造，不能重写默认构造；其它结构体同C#中的结构体表现一样。</p>
+<h3 id="active-pattern">Active Pattern</h3>
+<p>Single-Case Active Patterns:</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System.IO
+</span><span>
+</span><span style="color:#b48ead;">let (|</span><span style="color:#bf616a;">FileExtension</span><span style="color:#b48ead;">|)</span><span style="color:#bf616a;"> filePath </span><span style="color:#b48ead;">=</span><span> Path.GetExtension</span><span style="color:#b48ead;">(</span><span>filePath</span><span style="color:#b48ead;">) </span><span style="color:#65737e;">//定义了一个active pattern
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">determineFileType </span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">filePath </span><span style="color:#b48ead;">: </span><span>string</span><span style="color:#b48ead;">) =
+</span><span>    </span><span style="color:#b48ead;">match</span><span> filePath </span><span style="color:#b48ead;">with
+</span><span>    </span><span style="color:#65737e;">// Without active patterns
+</span><span>    </span><span style="color:#b48ead;">|</span><span> filePath </span><span style="color:#b48ead;">when</span><span> Path.GetExtension</span><span style="color:#b48ead;">(</span><span>filePath</span><span style="color:#b48ead;">) = </span><span>&quot;</span><span style="color:#a3be8c;">.txt</span><span>&quot;
+</span><span>        </span><span style="color:#b48ead;">-&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">It is a text file.</span><span>&quot;
+</span><span>    </span><span style="color:#65737e;">// Converting the data using an active pattern
+</span><span>    </span><span style="color:#b48ead;">|</span><span> FileExtension &quot;</span><span style="color:#a3be8c;">.jpg</span><span>&quot;
+</span><span>    </span><span style="color:#b48ead;">|</span><span> FileExtension &quot;</span><span style="color:#a3be8c;">.png</span><span>&quot;
+</span><span>    </span><span style="color:#b48ead;">|</span><span> FileExtension &quot;</span><span style="color:#a3be8c;">.gif</span><span>&quot;
+</span><span>        </span><span style="color:#b48ead;">-&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">It is an image file.</span><span>&quot;
+</span><span>    </span><span style="color:#65737e;">// Binding a new value
+</span><span>    </span><span style="color:#b48ead;">|</span><span> FileExtension ext
+</span><span>        </span><span style="color:#b48ead;">-&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">Unknown file extension [</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;">]</span><span>&quot; ext
+</span></code></pre>
+<p>Partial-Case Active Patterns: //只匹配返回结果为Some(_)的值</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System
+</span><span style="color:#b48ead;">let (|</span><span style="color:#bf616a;">ToBool</span><span style="color:#b48ead;">|</span><span style="color:#bf616a;">_</span><span style="color:#b48ead;">|)</span><span style="color:#bf616a;"> x </span><span style="color:#b48ead;">=
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">success, result </span><span style="color:#b48ead;">=</span><span> Boolean.TryParse</span><span style="color:#b48ead;">(</span><span>x</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#b48ead;">if</span><span> success </span><span style="color:#b48ead;">then</span><span> Some</span><span style="color:#b48ead;">(</span><span>result</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#b48ead;">else</span><span>            None
+</span><span style="color:#b48ead;">let (|</span><span style="color:#bf616a;">ToInt</span><span style="color:#b48ead;">|</span><span style="color:#bf616a;">_</span><span style="color:#b48ead;">|)</span><span style="color:#bf616a;"> x </span><span style="color:#b48ead;">=
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">success, result </span><span style="color:#b48ead;">=</span><span> Int32.TryParse</span><span style="color:#b48ead;">(</span><span>x</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#b48ead;">if</span><span> success </span><span style="color:#b48ead;">then</span><span> Some</span><span style="color:#b48ead;">(</span><span>result</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#b48ead;">else</span><span>            None
+</span><span>
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">describeString str </span><span style="color:#b48ead;">=
+</span><span>    </span><span style="color:#b48ead;">match</span><span> str </span><span style="color:#b48ead;">with
+</span><span>    </span><span style="color:#b48ead;">|</span><span> ToBool b </span><span style="color:#b48ead;">-&gt;</span><span> printfn &quot;</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;"> is a bool with value </span><span style="color:#b48ead;">%b</span><span>&quot; str b     
+</span><span>    </span><span style="color:#b48ead;">|</span><span> ToInt   i </span><span style="color:#b48ead;">-&gt;</span><span> printfn &quot;</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;"> is an integer with value </span><span style="color:#b48ead;">%d</span><span>&quot; str i
+</span><span>    </span><span style="color:#b48ead;">| _         -&gt;</span><span> printfn &quot;</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;"> is not a bool, int, or float</span><span>&quot; str
+</span></code></pre>
+<p>Parameterized Active Patterns://参数紧跟在pattern名称之后</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System.Text.RegularExpressions
+</span><span style="color:#65737e;">// Use a regular expression to capture three groups
+</span><span style="color:#b48ead;">let (|</span><span style="color:#bf616a;">RegexMatch3</span><span style="color:#b48ead;">|</span><span style="color:#bf616a;">_</span><span style="color:#b48ead;">|) (</span><span style="color:#bf616a;">pattern </span><span style="color:#b48ead;">: </span><span>string</span><span style="color:#b48ead;">) (</span><span style="color:#bf616a;">input </span><span style="color:#b48ead;">: </span><span>string</span><span style="color:#b48ead;">) =
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">result </span><span style="color:#b48ead;">=</span><span> Regex.Match</span><span style="color:#b48ead;">(</span><span>input</span><span style="color:#b48ead;">,</span><span> pattern</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#b48ead;">if</span><span> result.Success </span><span style="color:#b48ead;">then
+</span><span>        </span><span style="color:#b48ead;">match (</span><span>List.tail </span><span style="color:#b48ead;">[ for</span><span> g </span><span style="color:#b48ead;">in</span><span> result.Groups </span><span style="color:#b48ead;">-&gt;</span><span> g.Value </span><span style="color:#b48ead;">]) with
+</span><span>        </span><span style="color:#b48ead;">|</span><span> fst </span><span style="color:#b48ead;">::</span><span> snd </span><span style="color:#b48ead;">::</span><span> trd </span><span style="color:#b48ead;">:: []
+</span><span>                </span><span style="color:#b48ead;">-&gt;</span><span> Some </span><span style="color:#b48ead;">(</span><span>fst</span><span style="color:#b48ead;">,</span><span> snd</span><span style="color:#b48ead;">,</span><span> trd</span><span style="color:#b48ead;">)
+</span><span>        </span><span style="color:#b48ead;">| [] -&gt;</span><span> failwith </span><span style="color:#b48ead;">&lt;| </span><span>&quot;</span><span style="color:#a3be8c;">Match succeeded, but no groups found.</span><span style="color:#d08770;">\n</span><span>&quot; </span><span style="color:#b48ead;">+
+</span><span>                            &quot;</span><span style="color:#a3be8c;">Use &#39;(.*)&#39; to capture groups</span><span>&quot;
+</span><span>        </span><span style="color:#b48ead;">| _ -&gt;</span><span> failwith &quot;</span><span style="color:#a3be8c;">Match succeeded, but did not find exactly three group</span><span>&quot;
+</span><span>    </span><span style="color:#b48ead;">else
+</span><span>        None
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">parseTime input </span><span style="color:#b48ead;">=
+</span><span>    </span><span style="color:#b48ead;">match</span><span> input </span><span style="color:#b48ead;">with
+</span><span>    </span><span style="color:#65737e;">// Match input of the form &quot;6/20/2008&quot;
+</span><span>    </span><span style="color:#b48ead;">|</span><span> RegexMatch3 &quot;</span><span style="color:#a3be8c;">(\d+)/(\d+)/(\d\d\d\d)</span><span>&quot; </span><span style="color:#b48ead;">(</span><span>month</span><span style="color:#b48ead;">,</span><span> day</span><span style="color:#b48ead;">,</span><span> year</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#65737e;">// Match input of the form &quot;2004-12-8&quot;
+</span><span>    </span><span style="color:#b48ead;">|</span><span> RegexMatch3 &quot;</span><span style="color:#a3be8c;">(\d\d\d\d)-(\d+)-(\d+)</span><span>&quot; </span><span style="color:#b48ead;">(</span><span>year</span><span style="color:#b48ead;">,</span><span> month</span><span style="color:#b48ead;">,</span><span> day</span><span style="color:#b48ead;">)
+</span><span>        </span><span style="color:#b48ead;">-&gt;</span><span> Some</span><span style="color:#b48ead;">( new</span><span> DateTime</span><span style="color:#b48ead;">(</span><span>int year</span><span style="color:#b48ead;">,</span><span> int month</span><span style="color:#b48ead;">,</span><span> int day</span><span style="color:#b48ead;">) )
+</span><span>    </span><span style="color:#b48ead;">| _</span><span> –</span><span style="color:#b48ead;">&gt;</span><span> None
+</span></code></pre>
+<p>Multi-Case Active Patterns:</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">let (|</span><span style="color:#bf616a;"> Hour </span><span style="color:#b48ead;">|</span><span style="color:#bf616a;"> Minite </span><span style="color:#b48ead;">|</span><span style="color:#bf616a;"> Second </span><span style="color:#b48ead;">|</span><span style="color:#bf616a;"> Other </span><span style="color:#b48ead;">|) (</span><span style="color:#bf616a;">text</span><span style="color:#b48ead;">:</span><span>string</span><span style="color:#b48ead;">) =
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">parts </span><span style="color:#b48ead;">=</span><span> text.Split</span><span style="color:#b48ead;">(</span><span style="color:#a3be8c;">&#39;:&#39;</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#b48ead;">if</span><span> Array.length parts </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">3 </span><span style="color:#b48ead;">then
+</span><span>        Hour</span><span style="color:#b48ead;">(</span><span>int parts.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">],</span><span>int parts.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">],</span><span>int parts.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">2</span><span style="color:#b48ead;">])
+</span><span>    </span><span style="color:#b48ead;">elif</span><span> Array.length parts </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">2 </span><span style="color:#b48ead;">then
+</span><span>        Minite</span><span style="color:#b48ead;">(</span><span>int parts.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">],</span><span>int parts.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">])
+</span><span>    </span><span style="color:#b48ead;">elif</span><span> Array.length parts </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">then
+</span><span>        Second</span><span style="color:#b48ead;">(</span><span>int parts.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">])
+</span><span>    </span><span style="color:#b48ead;">else
+</span><span>        Other
+</span><span>
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">seconds </span><span style="color:#b48ead;">=
+</span><span>    </span><span style="color:#b48ead;">function
+</span><span>    </span><span style="color:#b48ead;">|</span><span> Hour </span><span style="color:#b48ead;">(</span><span>h</span><span style="color:#b48ead;">,</span><span>i</span><span style="color:#b48ead;">,</span><span>s</span><span style="color:#b48ead;">) -&gt;</span><span> h</span><span style="color:#b48ead;">*</span><span style="color:#d08770;">3600 </span><span style="color:#b48ead;">+</span><span> i </span><span style="color:#b48ead;">* </span><span style="color:#d08770;">60 </span><span style="color:#b48ead;">+</span><span> s
+</span><span>    </span><span style="color:#b48ead;">|</span><span> Minite </span><span style="color:#b48ead;">(</span><span>i</span><span style="color:#b48ead;">,</span><span>s</span><span style="color:#b48ead;">) -&gt;</span><span> i </span><span style="color:#b48ead;">* </span><span style="color:#d08770;">60 </span><span style="color:#b48ead;">+</span><span> s
+</span><span>    </span><span style="color:#b48ead;">|</span><span> Second </span><span style="color:#b48ead;">(</span><span>s</span><span style="color:#b48ead;">) -&gt;</span><span> s
+</span><span>    </span><span style="color:#b48ead;">| _ -&gt; </span><span style="color:#d08770;">0
+</span></code></pre>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/programming/">#Programming</a>
+            
+            <a href="https://blog.dotone.top/tags/f/">#F#</a>
+            
+            <a href="https://blog.dotone.top/tags/net/">#.Net</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

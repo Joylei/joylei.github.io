@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - WSL ubuntu build padavan</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/WSL-ubuntu-build-padavan/#git-repository" class="toc-link">git repository</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/WSL-ubuntu-build-padavan/#bian-yi" class="toc-link">编译</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;WSL-ubuntu-build-padavan&#x2F;">WSL ubuntu build padavan</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>4 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2020-05-10</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>首先说结论，折腾了半天，报了一堆错，放弃了。建议直接完整ubuntu环境，很顺利编译。</p>
+<h2 id="git-repository">git repository</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>https://gitlab.com/dm38/padavan-ng.git
+</span></code></pre>
+<h2 id="bian-yi">编译</h2>
+<p>首先遇到的问题是不能 build toolchain。
+运行<code>./clean_sources.sh</code>，报错：</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>=================REMOVE-OLD-BUILD-TREE==================
+</span><span>make: /usr/bin/bash: Command not found
+</span><span>make: /usr/bin/bash: Command not found
+</span><span>/mnt/d/padavan-ng/toolchain/scripts/scripts.mk:63: recipe for target &#39;distclean&#39; failed
+</span><span>make: *** [distclean] Error 127
+</span><span>
+</span></code></pre>
+<p>运行<code>./build_toolchain.sh</code>报错：</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>================ START BUILDING TOOLCHAIN ==============
+</span><span>============== CLEANING OLD BUILD TREE =================
+</span><span>make: /usr/bin/bash: Command not found
+</span><span>make: /usr/bin/bash: Command not found
+</span><span>ct-ng:333: recipe for target &#39;clean&#39; failed
+</span><span>make: *** [clean] Error 127
+</span><span>make: /usr/bin/bash: Command not found
+</span><span>make: *** No rule to make target &#39;mipsel-linux-uclibc&#39;.  Stop.
+</span><span>
+</span></code></pre>
+<p>查看toolchain目录下用到的是crosstool-ng。rosstool-ng文档说明需要执行：</p>
+<ul>
+<li>./bootstrap</li>
+<li>./configure --enable-local</li>
+<li>make</li>
+</ul>
+<p>但是最后make时报错：</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>CDPATH=&quot;${ZSH_VERSION+.}:&quot; &amp;&amp; cd . &amp;&amp; /bin/bash /opt/rt-n56u/toolchain/scripts/missing aclocal-1.16
+</span><span>/opt/rt-n56u/toolchain/scripts/missing: line 81: aclocal-1.16: command not found
+</span><span>WARNING: &#39;aclocal-1.16&#39; is missing on your system.
+</span><span>         You should only need it if you modified &#39;acinclude.m4&#39; or
+</span><span>         &#39;configure.ac&#39; or m4 files included by &#39;configure.ac&#39;.
+</span><span>         The &#39;aclocal&#39; program is part of the GNU Automake package:
+</span><span>         &lt;http://www.gnu.org/software/automake&gt;
+</span><span>         It also requires GNU Autoconf, GNU m4 and Perl in order to run:
+</span><span>         &lt;http://www.gnu.org/software/autoconf&gt;
+</span><span>         &lt;http://www.gnu.org/software/m4/&gt;
+</span><span>         &lt;http://www.perl.org/&gt;
+</span><span>Makefile:2599: recipe for target &#39;aclocal.m4&#39; failed
+</span><span>make: *** [aclocal.m4] Error 127
+</span></code></pre>
+<p>搜索后发现需要执行命令：<code>autoreconf -r -i</code></p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Copying file ABOUT-NLS
+</span><span>Copying file scripts/config.rpath
+</span><span>Copying file m4/codeset.m4
+</span><span>Copying file m4/extern-inline.m4
+</span><span>Copying file m4/fcntl-o.m4
+</span><span>Copying file m4/glibc2.m4
+</span><span>Copying file m4/glibc21.m4
+</span><span>Copying file m4/intdiv0.m4
+</span><span>Copying file m4/intl.m4
+</span><span>Copying file m4/intldir.m4
+</span><span>Copying file m4/intmax.m4
+</span><span>Copying file m4/inttypes-pri.m4
+</span><span>Copying file m4/inttypes_h.m4
+</span><span>Copying file m4/lcmessage.m4
+</span><span>Copying file m4/lock.m4
+</span><span>Copying file m4/longlong.m4
+</span><span>Copying file m4/printf-posix.m4
+</span><span>Copying file m4/size_max.m4
+</span><span>Copying file m4/stdint_h.m4
+</span><span>Copying file m4/threadlib.m4
+</span><span>Copying file m4/uintmax_t.m4
+</span><span>Copying file m4/visibility.m4
+</span><span>Copying file m4/wchar_t.m4
+</span><span>Copying file m4/wint_t.m4
+</span><span>Copying file m4/xsize.m4
+</span><span>Creating directory po
+</span><span>Copying file po/Makefile.in.in
+</span><span>Copying file po/Makevars.template
+</span><span>Copying file po/Rules-quot
+</span><span>Copying file po/boldquot.sed
+</span><span>Copying file po/en@boldquot.header
+</span><span>Copying file po/en@quot.header
+</span><span>Copying file po/insert-header.sin
+</span><span>Copying file po/quot.sed
+</span><span>Copying file po/remove-potcdate.sin
+</span><span>automake: warnings are treated as errors
+</span><span>Makefile.am:6: warning: AM_GNU_GETTEXT used but &#39;po&#39; not in SUBDIRS
+</span><span>autoreconf: automake failed with exit status: 1
+</span></code></pre>
+<p>再次执行make</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span> cd . &amp;&amp; /bin/bash /opt/rt-n56u/toolchain/scripts/missing automake-1.16 --foreign
+</span><span>/opt/rt-n56u/toolchain/scripts/missing: line 81: automake-1.16: command not found
+</span><span>WARNING: &#39;automake-1.16&#39; is missing on your system.
+</span><span>         You should only need it if you modified &#39;Makefile.am&#39; or
+</span><span>         &#39;configure.ac&#39; or m4 files included by &#39;configure.ac&#39;.
+</span><span>         The &#39;automake&#39; program is part of the GNU Automake package:
+</span><span>         &lt;http://www.gnu.org/software/automake&gt;
+</span><span>         It also requires GNU Autoconf, GNU m4 and Perl in order to run:
+</span><span>         &lt;http://www.gnu.org/software/autoconf&gt;
+</span><span>         &lt;http://www.gnu.org/software/m4/&gt;
+</span><span>         &lt;http://www.perl.org/&gt;
+</span><span>Makefile:2570: recipe for target &#39;Makefile.in&#39; failed
+</span><span>make: *** [Makefile.in] Error 1
+</span><span>
+</span></code></pre>
+<p>看起来automake版本不对，确认版本：<code>automake --version</code></p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>automake (GNU automake) 1.15.1
+</span></code></pre>
+<p><code>apt search automake</code>发现源里最高版本是1.15</p>
+<p>下载安装automake</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sudo</span><span> apt-get autoremove automake
+</span><span style="color:#bf616a;">wget</span><span> http://ftp.gnu.org/gnu/automake/automake-1.16.2.tar.gz
+</span><span style="color:#bf616a;">tar -xf</span><span> automake-1.16.2.tar.gz
+</span><span style="color:#96b5b4;">cd</span><span> automake-1.16.2
+</span><span style="color:#bf616a;">./bootstrap
+</span><span style="color:#bf616a;">./configure
+</span><span style="color:#bf616a;">make
+</span><span style="color:#bf616a;">sudo</span><span> make install
+</span></code></pre>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/wsl/">#WSL</a>
+            
+            <a href="https://blog.dotone.top/tags/ubuntu/">#ubuntu</a>
+            
+            <a href="https://blog.dotone.top/tags/padavan/">#padavan</a>
+            
+            <a href="https://blog.dotone.top/tags/router/">#router</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

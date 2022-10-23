@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - IL学习(五)</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-5/#zhi-zhen" class="toc-link">指针</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-5/#fei-tuo-guan-zhi-zhen" class="toc-link">非托管指针</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-5/#tong-guo-zhi-zhen-jia-zai-bian-liang" class="toc-link">通过指针加载变量</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-5/#transientzhi-zhen" class="toc-link">transient指针</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;learning-il&#x2F;learning-il-5&#x2F;">IL学习(五)</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>2 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-05-22</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <h2 id="zhi-zhen">指针</h2>
+<ul>
+<li><code>&amp;</code>用于托管的指针</li>
+<li><code>*</code>用于非托管的指针</li>
+</ul>
+<h2 id="fei-tuo-guan-zhi-zhen">非托管指针</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>这个概念借鉴了c和c++
+</span><span>使用没有限制
+</span><span>被执行引擎识别为无符号数
+</span><span>不被垃圾回收器管理
+</span></code></pre>
+<p>指针变量是一个无符号数</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>.assembly my{}
+</span><span>.class test
+</span><span>{
+</span><span>    .method public static void main() il managed
+</span><span>    {
+</span><span>        .entrypoint
+</span><span>        .locals(int32 *V_0,int32 V_1)
+</span><span>        ldc.i4 20
+</span><span>        stloc V_0   //将int类型的数值存放在指针变量中
+</span><span>        ldloc V_0   //加载数据
+</span><span>        call void [mscorlib]System.Console::WriteLine(int32)
+</span><span>        ldloca V_0 //获取V_0地址
+</span><span>        stloc V_1   //存放在V_1中
+</span><span>        ldloc V_1
+</span><span>        call void [mscorlib]System.Console::WriteLine(int32)
+</span><span>        ret
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="tong-guo-zhi-zhen-jia-zai-bian-liang">通过指针加载变量</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>.assembly my{}
+</span><span>.class test
+</span><span>{
+</span><span>    .method public static void main() il managed
+</span><span>    {
+</span><span>        .entrypoint
+</span><span>        .locals(int32 V_0)
+</span><span>        ldc.i4 20
+</span><span>        stloc V_0
+</span><span>        ldloca V_0 //指针地址
+</span><span>        ldobj int32 //加载地址指向的变量
+</span><span>        call void [mscorlib]System.Console::WriteLine(int32)
+</span><span>        ret
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>ldobj:从栈顶存放的地址加载变量到栈顶</p>
+<p>所有的局部变量都创建在栈上，其它的创建在堆上。栈中只能存放数字。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>.assembly my{}
+</span><span>.class test
+</span><span>{
+</span><span>    .method public static void main() il managed
+</span><span>    {
+</span><span>        .entrypoint
+</span><span>        .locals(int32 V_0)
+</span><span>        ldstr &quot;测试1&quot;
+</span><span>        call void [mscorlib]System.Console::WriteLine(int32) //输出栈顶的字符串的地址
+</span><span>        ldstr &quot;测试2&quot;
+</span><span>        stloc V_0
+</span><span>        ldloca V_0
+</span><span>        ldobj int32
+</span><span>        call void [mscorlib]System.Console::WriteLine(int32)
+</span><span>        ret
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span>.assembly my{}
+</span><span>.class test
+</span><span>{
+</span><span>    .field int32 i
+</span><span>    .field static int32 j
+</span><span>    .method public static void main() il managed
+</span><span>    {
+</span><span>        .entrypoint
+</span><span>        newobj void test::.ctor()
+</span><span>        ldflda int32 test::i //载入i的地址
+</span><span>        call void [mscorlib]System.Console::WriteLine(int32)
+</span><span>        ldsflda int32 test::j //载入j的地址
+</span><span>        call void [mscorlib]System.Console::WriteLine(int32)
+</span><span>        ret
+</span><span>    }
+</span><span>    .method instance void .ctor()
+</span><span>    {
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="transientzhi-zhen">transient指针</h2>
+<p>这是介于托管和非托管之间的指针，它只能由执行引擎创建。</p>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/net/">#.Net</a>
+            
+            <a href="https://blog.dotone.top/tags/il/">#IL</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

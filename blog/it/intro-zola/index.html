@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - Zola Introduction</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/intro-zola/#an-zhuang-zola" class="toc-link">安装zola</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/intro-zola/#shi-yong" class="toc-link">使用</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/intro-zola/#jian-li-xin-zhan-dian" class="toc-link">建立新站点</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/intro-zola/#mu-lu-jie-gou" class="toc-link">目录结构</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/intro-zola/#xia-zai-zhu-ti" class="toc-link">下载主题</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/intro-zola/#nei-rong-xiang-guan-gai-nian" class="toc-link">内容相关概念</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/intro-zola/#serve" class="toc-link">Serve</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/intro-zola/#build" class="toc-link">Build</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/intro-zola/#deploy-to-github" class="toc-link">Deploy to github</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/intro-zola/#more" class="toc-link">More</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;intro-zola&#x2F;">Zola Introduction</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>6 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2020-09-04</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p><a href="https://www.getzola.org/">zola</a>是用<code>pure rust</code>写的静态建站工具，类似的工具有用<code>go</code>写的<code>hugo</code>。</p>
+<h1 id="an-zhuang-zola">安装zola</h1>
+<p>可以直接下载二进制文件。也可以使用各系统对应的安装工具安装。</p>
+<p>MacOS</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">brew</span><span> install zola
+</span></code></pre>
+<p>alpine linux:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>apk install zola
+</span></code></pre>
+<p>Windows
+使用<code>Scoop</code>或者<code>Chocolatey</code>安装。</p>
+<h1 id="shi-yong">使用</h1>
+<h2 id="jian-li-xin-zhan-dian">建立新站点</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">zola</span><span> init mysite
+</span></code></pre>
+<p>这里<code>mysite</code>是你的站点名字，会创建对应的目录。</p>
+<h2 id="mu-lu-jie-gou">目录结构</h2>
+<p>建好后的目录结构</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mysite
+</span><span>- content
+</span><span>- public
+</span><span>- sass
+</span><span>- static
+</span><span>- templates
+</span><span>- themes
+</span><span>- config.toml
+</span></code></pre>
+<p><code>content</code>里存放markdown文件
+<code>public</code>里存放编译好的文件
+<code>sass</code> 存放自定义的sass文件
+<code>static</code>存放额外的静态资源
+<code>templates</code>存放自定义的模板文件
+<code>themes</code>存放下载的主题
+<code>config.toml</code>站点的配置文件</p>
+<h2 id="xia-zai-zhu-ti">下载主题</h2>
+<p>官方已经有一些主题，可以到<a href="https://www.getzola.org/themes/">这里</a>查看。</p>
+<p>下载下来放在<code>themes</code>目录就可以了。每个主题都有使用说明，按照说明操作。</p>
+<h2 id="nei-rong-xiang-guan-gai-nian">内容相关概念</h2>
+<h3 id="front-matter">front matter</h3>
+<p>在markdown文件中定义的元数据区域，以<code>+++</code>来标识起始和结束。类似于：</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>+++
+</span><span>title = &quot;Something new&quot;
+</span><span>date = 2017-09-25
+</span><span>
+</span><span>[taxonomies]
+</span><span>categories = [&quot;Prog&quot;]
+</span><span>tags = [&quot;rust&quot;, &quot;async&quot;]
+</span><span>+++
+</span></code></pre>
+<h3 id="section">Section</h3>
+<p><code>content</code>目录下的任何一个目录，只要它下面有<code>_index.md</code>文件，那么这个目录就是一个<code>section</code>。
+<code>_index.md</code>就是元数据文件。
+<code>section</code>需要<code>section.html</code>模板来渲染内容，如果在主题的<code>templates</code>目录没有这个文件，按照<code>index.html</code>修改一个。
+不同的地方就是<code>index.html</code>中使用<code>paginator</code>变量，在<code>section.html</code>中使用<code>section</code>变量，它们的属性是一样的。</p>
+<p><code>section</code>相关元数据定义</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#bf616a;">title</span><span>=&quot;&quot;
+</span><span style="color:#bf616a;">description</span><span>=&quot;&quot;
+</span><span style="color:#bf616a;">sorted_by</span><span>=&quot;</span><span style="color:#a3be8c;">none</span><span>&quot;
+</span><span style="color:#bf616a;">template</span><span>=&quot;</span><span style="color:#a3be8c;">section.html</span><span>&quot;
+</span><span>
+</span><span style="color:#65737e;"># render为true时会显示section的页面，false时不显示
+</span><span style="color:#bf616a;">render</span><span>=</span><span style="color:#d08770;">true
+</span><span style="color:#65737e;"># transparent为true时内容对父section可见，false时不可见
+</span><span style="color:#bf616a;">transparent</span><span>=</span><span style="color:#d08770;">false
+</span></code></pre>
+<p>更多内容查看<a href="https://www.getzola.org/documentation/content/section/"><code>section</code>定义页面</a>。</p>
+<h3 id="page">Page</h3>
+<p><code>page</code>就是一个个页面。
+如果一个目录下有<code>index.md</code>，那么这个目录就会渲染成一个页面。例如<code>content\life\my-note\index.md</code>，会形成URL类似于<code>http://base_url/life/my-note</code>。
+如果文件的名字不是<code>index.md</code>，而是<code>something.md</code>，那么形成的URL类似于<code>http://base_url/life/something</code>。</p>
+<p><code>page</code>的主要<code>front matter</code>属性：</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#bf616a;">title </span><span>= &quot;</span><span style="color:#a3be8c;">Something new</span><span>&quot;
+</span><span style="color:#bf616a;">date </span><span>= </span><span style="color:#d08770;">2017-09-25
+</span><span>
+</span><span>[taxonomies]
+</span><span style="color:#bf616a;">categories </span><span>= [&quot;</span><span style="color:#a3be8c;">Prog</span><span>&quot;]
+</span><span style="color:#bf616a;">tags </span><span>= [&quot;</span><span style="color:#a3be8c;">rust</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">zola</span><span>&quot;]
+</span></code></pre>
+<p>每个页面基本上只设置上述属性就够了，更多查看<a href="https://www.getzola.org/documentation/content/page/#front-matter">这里</a>。</p>
+<h3 id="jing-tai-zi-yuan">静态资源</h3>
+<p>静态资源可以在markdown文件中用相对路径引用，<code>zola</code>在build时会把资源复制到<code>public</code>目录对应的位置。</p>
+<h3 id="yu-fa-gao-liang">语法高亮</h3>
+<p>需要在<code>config.toml</code>启用，并配置一个主题。</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#bf616a;">highlight_code </span><span>= </span><span style="color:#d08770;">true
+</span><span>
+</span><span style="color:#bf616a;">highlight_theme </span><span>= &quot;</span><span style="color:#a3be8c;">material-dark</span><span>&quot;
+</span><span>
+</span></code></pre>
+<p>更多语法高亮主题看<a href="https://www.getzola.org/documentation/getting-started/configuration/#syntax-highlighting">这里</a>。</p>
+<h3 id="taxonomies">Taxonomies</h3>
+<p>在config.toml中配置分类和标签。</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>taxonomies = [
+</span><span>    {name = &quot;</span><span style="color:#a3be8c;">categories</span><span>&quot;, rss = </span><span style="color:#d08770;">true</span><span>},
+</span><span>    {name = &quot;</span><span style="color:#a3be8c;">tags</span><span>&quot;, rss = </span><span style="color:#d08770;">true</span><span>},
+</span><span>]
+</span></code></pre>
+<h3 id="feed">Feed</h3>
+<p>在 config.toml中配置：</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#bf616a;">generate_feed </span><span>= </span><span style="color:#d08770;">true
+</span></code></pre>
+<h3 id="lian-jie-yu-yin-yong">链接与引用</h3>
+<p>锚点</p>
+<p><code>zola</code>会为内容中的标题生成唯一锚点。如：</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># Something exciting! &lt;- something-exciting
+</span><span>## Example code &lt;- example-code
+</span><span>
+</span><span># Something else &lt;- something-else
+</span><span>## Example code &lt;- example-code-1
+</span></code></pre>
+<p>也可以手动指定锚点:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># Something manual! {#manual}
+</span></code></pre>
+<p>内部链接引用
+<code>content</code>目录下的页面可以直接以<code>@/</code>开头引用。例如：
+<code>content/pages/about.md</code> 这样引用 <code>[my link](@/pages/about.md)</code>。</p>
+<h2 id="serve">Serve</h2>
+<p>本地<code>serve</code>预览：</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">zola</span><span> serve</span><span style="color:#bf616a;"> --interface</span><span> 0.0.0.0</span><span style="color:#bf616a;"> --port</span><span> 2000
+</span></code></pre>
+<h2 id="build">Build</h2>
+<p>构建静态页面：</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">zola</span><span> build
+</span></code></pre>
+<h2 id="deploy-to-github">Deploy to github</h2>
+<p>使用github actions部署。
+简单的来说<code>github</code>允许选择哪个分支来发布。
+你可以把所有代码上传到某个分支，然后使用<a href="https://github.com/shalzz/zola-deploy-action"><code>zola-deploy-action</code></a>来自动构建和发布。</p>
+<p>这里示例的是用<code>code</code>分支存放所有代码，用<code>master</code>分支做<code>Github Pages</code>。</p>
+<ul>
+<li>在<code>Github</code>创建一个<code>Personal Access Token</code>: <a href="https://github.com/settings/tokens">https://github.com/settings/tokens</a>，记住这个<code>token</code>的值</li>
+<li>把这个<code>token</code>的值添加到项目的设置的<code>Secrets</code>里，并且名字为<code>TOKEN</code></li>
+<li>添加<code>github action</code>：在``code<code>分支创建</code>.github/workflows/zola.yml`，内容为</li>
+</ul>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>on:
+</span><span>  push:
+</span><span>    branches:
+</span><span>      - code
+</span><span>  pull_request:
+</span><span>jobs:
+</span><span>  build:
+</span><span>    runs-on: ubuntu-latest
+</span><span>    if: github.ref != &#39;refs/heads/code&#39;
+</span><span>    steps:
+</span><span>      - name: &#39;Checkout&#39;
+</span><span>        uses: actions/checkout@main
+</span><span>      - name: &#39;Build only&#39;
+</span><span>        uses: shalzz/zola-deploy-action@v0.10.1
+</span><span>        env:
+</span><span>          BUILD_DIR: .
+</span><span>          TOKEN: ${{ secrets.TOKEN }}
+</span><span>          BUILD_ONLY: true
+</span><span>  build_and_deploy:
+</span><span>    runs-on: ubuntu-latest
+</span><span>    if: github.ref == &#39;refs/heads/code&#39;
+</span><span>    steps:
+</span><span>      - name: &#39;Checkout&#39;
+</span><span>        uses: actions/checkout@main
+</span><span>      - name: &#39;Build and deploy&#39;
+</span><span>        uses: shalzz/zola-deploy-action@v0.10.1
+</span><span>        env:
+</span><span>          PAGES_BRANCH: master
+</span><span>          BUILD_DIR: .
+</span><span>          TOKEN: ${{ secrets.TOKEN }}
+</span></code></pre>
+<ul>
+<li>当你对远程仓库执行<code>pull</code>或者<code>push</code>代码到<code>code</code>分支时就会自动运行<code>workflow</code></li>
+</ul>
+<h2 id="more">More</h2>
+<p>到<a href="https://www.getzola.org/">官网</a>去探索更多内容吧。</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/blog/">#blog</a>
+            
+            <a href="https://blog.dotone.top/tags/static/">#static</a>
+            
+            <a href="https://blog.dotone.top/tags/zola/">#zola</a>
+            
+            <a href="https://blog.dotone.top/tags/rust/">#rust</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

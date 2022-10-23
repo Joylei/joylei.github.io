@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - 《Programming F#》读书笔记七</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-7/#suo-yin" class="toc-link">索引</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-7/#bi-ji" class="toc-link">笔记</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;life&#x2F;reading&#x2F;programming-fsharp&#x2F;programming-fsharp-7&#x2F;">《Programming F#》读书笔记七</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>4 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-03-09</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <h2 id="suo-yin">索引</h2>
+<ul>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-1/">《Programming F#》读书笔记一</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-2/">《Programming F#》读书笔记二</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-3/">《Programming F#》读书笔记三</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-4/">《Programming F#》读书笔记四</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/">《Programming F#》读书笔记五</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-6/">《Programming F#》读书笔记六</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-7/">《Programming F#》读书笔记七</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-8/">《Programming F#》读书笔记八</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-9/">《Programming F#》读书笔记九</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-10/">《Programming F#》读书笔记十</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/">《Programming F#》读书笔记十一</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-12/">《Programming F#》读书笔记十二</a></li>
+</ul>
+<h2 id="bi-ji">笔记</h2>
+<p>异步</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>async 表达式
+</span><span>
+</span><span>Async&lt;’T&gt;类型：
+</span><span>
+</span><span>Async.Start 异步执行
+</span><span>
+</span><span>Async.Parallel seq&lt;Async&lt;’T&gt;&gt; 并行执行
+</span><span>
+</span><span>Async.RunSynchronously同步执行，并获取返回值，通常在Async.Parallel之后调用
+</span><span>
+</span><span>异步中的异常处理：
+</span><span>
+</span><span>未捕捉的异常将中断进程
+</span><span>
+</span><span>1.可以在async表达式中使用try with表达式
+</span><span>
+</span><span>2.使用Async.Catch延迟处理异常
+</span><span>
+</span><span>例如：
+</span><span>
+</span><span>open System.IO
+</span><span>let filePath = &quot;&quot;
+</span><span>let processBytes data:byte[] =
+</span><span>    data
+</span><span>
+</span><span>async {
+</span><span>    printfn &quot;Processing file [%s]&quot; (Path.GetFileName(filePath))
+</span><span>    use fileStream = new FileStream(filePath, FileMode.Open)
+</span><span>    let bytesToRead = int fileStream.Length
+</span><span>    let! data = fileStream.AsyncRead(bytesToRead)
+</span><span>    printfn
+</span><span>        &quot;Opened [%s], read [%d] bytes&quot;
+</span><span>        (Path.GetFileName(filePath))
+</span><span>        data.Length
+</span><span>    let data&#39; = processBytes data
+</span><span>    use resultFile = new FileStream(filePath + &quot;.results&quot;, FileMode.Create)
+</span><span>    do! resultFile.AsyncWrite(data&#39;, 0, data&#39;.Length)
+</span><span>    printfn &quot;Finished processing file [%s]&quot; &lt;| Path.GetFileName(filePath)
+</span><span>}
+</span><span>|&gt; Async.Catch
+</span><span>|&gt; Async.RunSynchronously
+</span><span>|&gt; function
+</span><span>| Choice1Of2 result -&gt; printfn &quot;%A&quot; result
+</span><span>| Choice2Of2 (ex:exn) -&gt; printfn &quot;%s&quot; ex.Message
+</span><span>
+</span><span>3.Async.StartWithContinuations
+</span><span>
+</span><span>Async.StartWithContinuations(
+</span><span>    superAwesomeAsyncTask,
+</span><span>    (fun result -&gt; printfn &quot;Task completed with result %A&quot; result),
+</span><span>    (fun exn    -&gt; printfn &quot;Task threw an exception with Message: %s&quot; exn.Message),
+</span><span>    (fun oce    -&gt; printfn &quot;Task was cancelled. Message: %s&quot; oce.Message)
+</span><span>)
+</span><span>
+</span><span>异步中的取消：
+</span><span>
+</span><span>不同于Thread.Abort()，调用取消不会立即终止线程，它会在下一次调用let!、do!等操作时停止执行剩余代码，执行取消处理代码。CancelDefaultToken用来跟踪是否执行取消处理,Async.CancelDefaultToken()取消最后一个启动的任务
+</span><span>
+</span><span>例：取消最后一个启动的任务
+</span><span>
+</span><span>open System
+</span><span>open System.Threading
+</span><span>let cancelableTask =
+</span><span>    async {
+</span><span>        printfn &quot;Waiting 10 seconds...&quot;
+</span><span>        for i = 1 to 10 do
+</span><span>            printfn &quot;%d...&quot; i
+</span><span>            do! Async.Sleep(1000)
+</span><span>        printfn &quot;Finished!&quot;
+</span><span>    }
+</span><span>// Callback used when the operation is canceled
+</span><span>let cancelHandler (ex : OperationCanceledException) =
+</span><span>    printfn &quot;The task has been canceled.&quot;
+</span><span>Async.TryCancelled(cancelableTask, cancelHandler)
+</span><span>|&gt; Async.Start
+</span><span>// ...
+</span><span>Async.CancelDefaultToken()
+</span><span>
+</span><span>如何取消所有异步任务：
+</span><span>
+</span><span>open System.Threading
+</span><span>let computation = Async.TryCancelled(cancelableTask, cancelHandler)
+</span><span>let cancellationSource = new CancellationTokenSource()
+</span><span>Async.Start(computation, cancellationSource.Token)
+</span><span>// ...
+</span><span>cancellationSource.Cancel()
+</span><span>
+</span><span>Async.Sleep:
+</span><span>
+</span><span>Async.Sleep不同于Thread.Sleep，它不阻塞工作线程，sleep的线程被其他工作线程重用，当sleep结束，将唤醒另一个线程来完成剩余工作
+</span><span>
+</span><span>自定义异步扩展方法:
+</span><span>
+</span><span>使用Async.FromBeginEnd方法来自定义异步扩展方法
+</span><span>
+</span><span>open System
+</span><span>open System.IO
+</span><span>type System.IO.Directory with
+</span><span>    /// Retrieve all files under a path asynchronously
+</span><span>    static member AsyncGetFiles(path : string, searchPattern : string) =
+</span><span>        let dele = new Func&lt;string * string, string[]&gt;(Directory.GetFiles)
+</span><span>        Async.FromBeginEnd(
+</span><span>            (path, searchPattern),
+</span><span>            dele.BeginInvoke,
+</span><span>            dele.EndInvoke)
+</span></code></pre>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/programming/">#Programming</a>
+            
+            <a href="https://blog.dotone.top/tags/f/">#F#</a>
+            
+            <a href="https://blog.dotone.top/tags/net/">#.Net</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

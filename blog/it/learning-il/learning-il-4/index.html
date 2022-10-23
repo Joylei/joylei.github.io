@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - IL学习(四)</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-4/#jie-kou-xian-zhi" class="toc-link">接口限制</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-4/#jie-gou-ti" class="toc-link">结构体</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/learning-il/learning-il-4/#zhuang-xiang-yu-chai-xiang" class="toc-link">装箱与拆箱</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;learning-il&#x2F;learning-il-4&#x2F;">IL学习(四)</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>4 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-05-17</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <h2 id="jie-kou-xian-zhi">接口限制</h2>
+<ul>
+<li>接口中所有方法必须是abstract或static</li>
+<li>虚方法必须是abstract和public</li>
+<li>不能有实例字段</li>
+<li>接口不能实例化</li>
+<li>接口不能从类继承</li>
+</ul>
+<p>直接使用call调用接口方法和使用callvirt动态调用的效果是一样的。</p>
+<h2 id="jie-gou-ti">结构体</h2>
+<p>il不直接支持结构体
+引用类型从Object类继承，值类型从ValueType继承</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>.assembly my{}
+</span><span>.class value point
+</span><span>{
+</span><span>    .field int32 x
+</span><span>    .field int32 y
+</span><span>    .method static void main() il managed
+</span><span>    {
+</span><span>        .entrypoint
+</span><span>        .locals(value class point V_0,value class point V_1)
+</span><span>        ldloca V_0
+</span><span>        initobj value class point
+</span><span>        ldloca V_0
+</span><span>        ldfld int32 point::x
+</span><span>        call void [mscorlib]System.Console::WriteLine(int32)
+</span><span>
+</span><span>        ldloca V_1
+</span><span>        initobj value class point
+</span><span>        ldloca V_1
+</span><span>        ldc.i4 10
+</span><span>        ldc.i4 20
+</span><span>        call instance void point::.ctor(int32,int32)
+</span><span>        ldstr &quot;point:x={0},y={1}&quot;
+</span><span>        ldloca V_1
+</span><span>        ldfld int32 point::x
+</span><span>        ldloca V_1
+</span><span>        ldfld int32 point::y
+</span><span>        call void [mscorlib]System.Console::WriteLine(string,object,object)
+</span><span>        ret
+</span><span>    }
+</span><span>    .method instance void .ctor(int32 x,int32 y) il managed
+</span><span>    {
+</span><span>        ldarg.0
+</span><span>        ldarg.1
+</span><span>        stfld int32 point::x
+</span><span>        ldarg.0
+</span><span>        ldarg.2
+</span><span>        stfld int32 point::y
+</span><span>        ret
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>initobj:用于初始化结构体的字段为0值，它不会调用结构体的构造函数。对于结构体初始化，不用initobj也可以，这样各个字段就得到一个随机值。</p>
+<p>结构体也可以有static、virtual和instance方法
+《c# to il》书上说值类型在调用virtual方法时只能使用call，不能使用callvirt。但是经验证是可以的，可能是.net4中改变了规则。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>.assembly my {}
+</span><span>.class interface IFly
+</span><span>{
+</span><span>    .method public abstract instance void fly() il managed{}
+</span><span>}
+</span><span>.class value private auto ansi bird implements IFly
+</span><span>{
+</span><span>    .field private int32 i
+</span><span>    .method public instance void .ctor() il managed
+</span><span>    {
+</span><span>        ldarg.0    //this
+</span><span>        ldc.i4    10
+</span><span>        stfld int32 bird::i
+</span><span>        ret
+</span><span>    }
+</span><span>    .method virtual public instance void fly() il managed
+</span><span>    {
+</span><span>        ldstr &quot;fly&quot;
+</span><span>        ldarg.1
+</span><span>        call void [mscorlib]System.Console::WriteLine(string,object)
+</span><span>        ret
+</span><span>    }
+</span><span>    .method public hidebysig static void main() il managed
+</span><span>    {
+</span><span>        .entrypoint
+</span><span>        .locals(value class bird V_0,class IFly V_1)
+</span><span>        ldloca V_0
+</span><span>        call instance void bird::.ctor()
+</span><span>        ldloca V_0
+</span><span>        callvirt instance void bird::fly() //运行时决定
+</span><span>        ldloca V_0
+</span><span>        box bird
+</span><span>        //castclass IFly
+</span><span>        stloc.1
+</span><span>        ldloc.1
+</span><span>        callvirt instance void IFly::fly()
+</span><span>        ret
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="zhuang-xiang-yu-chai-xiang">装箱与拆箱</h2>
+<p>装箱：将值类型转换成引用类型进行的操作
+拆箱：将引用类型转换成值类型进行的操作</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>.assembly my{}
+</span><span>.class value auto ansi sealed point
+</span><span>{
+</span><span>    .field int32 x
+</span><span>    .field int32 y
+</span><span>    .method static void main() il managed
+</span><span>    {
+</span><span>        .entrypoint
+</span><span>        .locals(value class point V_0,object V_1,value class point V_2)
+</span><span>        ldloca V_0
+</span><span>        ldc.i4 10
+</span><span>        ldc.i4 20
+</span><span>        call instance void point::.ctor(int32,int32) //调用构造函数
+</span><span>        ldloca V_0
+</span><span>        call instance void point::print()
+</span><span>        ldloca V_0
+</span><span>        box point //装箱成object对象,栈顶放入对象地址
+</span><span>        stloc.1
+</span><span>        ldloc.1
+</span><span>        unbox point //拆箱，得到新结构体的地址
+</span><span>        ldobj point //根据地址装载对象
+</span><span>        stloc.2
+</span><span>        ldloca V_2
+</span><span>        call instance void point::print()
+</span><span>        ret
+</span><span>    }
+</span><span>    .method instance void .ctor(int32 x,int32 y) il managed
+</span><span>    {
+</span><span>        ldarg.0 //this
+</span><span>        ldarg.1
+</span><span>        stfld int32 point::x
+</span><span>        ldarg.0
+</span><span>        ldarg.2
+</span><span>        stfld int32 point::y
+</span><span>        ret
+</span><span>    }
+</span><span>    .method public instance void print() il managed
+</span><span>    {
+</span><span>        ldstr &quot;point:x={0},y={1}&quot;
+</span><span>        ldarg.0 //this
+</span><span>        ldfld int32 point::x
+</span><span>        box int32 //装箱
+</span><span>        ldarg.0
+</span><span>        ldfld int32 point::y
+</span><span>        box int32
+</span><span>        call void [mscorlib]System.Console::WriteLine(string,object,object)
+</span><span>        ret
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<ul>
+<li>box:装箱</li>
+<li>unbox:拆箱</li>
+<li>ldobj:从地址加载对象</li>
+</ul>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/net/">#.Net</a>
+            
+            <a href="https://blog.dotone.top/tags/il/">#IL</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

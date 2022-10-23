@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - 《Programming F#》读书笔记六</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-6/#suo-yin" class="toc-link">索引</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-6/#bi-ji" class="toc-link">笔记</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;life&#x2F;reading&#x2F;programming-fsharp&#x2F;programming-fsharp-6&#x2F;">《Programming F#》读书笔记六</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>4 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-03-09</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <h2 id="suo-yin">索引</h2>
+<ul>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-1/">《Programming F#》读书笔记一</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-2/">《Programming F#》读书笔记二</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-3/">《Programming F#》读书笔记三</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-4/">《Programming F#》读书笔记四</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/">《Programming F#》读书笔记五</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-6/">《Programming F#》读书笔记六</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-7/">《Programming F#》读书笔记七</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-8/">《Programming F#》读书笔记八</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-9/">《Programming F#》读书笔记九</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-10/">《Programming F#》读书笔记十</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/">《Programming F#》读书笔记十一</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-12/">《Programming F#》读书笔记十二</a></li>
+</ul>
+<h2 id="bi-ji">笔记</h2>
+<p>Computation Expression:</p>
+<p>作用：改变代码执行逻辑；减少重复代码；扩展F#语言</p>
+<p>限制：</p>
+<ul>
+<li>1.不能在Computation Expression中定义新类型</li>
+<li>2.不能在Computation Expression中使用mutable变量，用ref变量代替</li>
+</ul>
+<p>下面定义一个允许使用let!和return关键字的computation expression</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">type </span><span>DefinedBuilder</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=
+</span><span>    </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.Bind</span><span style="color:#b48ead;">((</span><span style="color:#bf616a;">x</span><span style="color:#b48ead;">:</span><span>int</span><span style="color:#b48ead;">),(</span><span style="color:#bf616a;">rest</span><span style="color:#b48ead;">:</span><span>int</span><span style="color:#b48ead;">-&gt;</span><span>int</span><span style="color:#b48ead;">)) = </span><span style="color:#65737e;">//允许使用let!
+</span><span>        printfn &quot;</span><span style="color:#a3be8c;">x:</span><span style="color:#b48ead;">%d</span><span>&quot; x
+</span><span>        </span><span style="color:#b48ead;">match</span><span> x </span><span style="color:#b48ead;">with
+</span><span>        </span><span style="color:#b48ead;">|</span><span> x </span><span style="color:#b48ead;">when</span><span> x</span><span style="color:#b48ead;">&gt;</span><span style="color:#d08770;">0 </span><span style="color:#b48ead;">-&gt;</span><span>rest x
+</span><span>        </span><span style="color:#b48ead;">| _ -&gt;</span><span> x
+</span><span>    </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.Return</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">x</span><span style="color:#b48ead;">:</span><span>&#39;a</span><span style="color:#b48ead;">) =</span><span> x </span><span style="color:#65737e;">//允许使用return
+</span><span>
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">defined </span><span style="color:#b48ead;">=</span><span> DefinedBuilder</span><span style="color:#d08770;">()
+</span><span>
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">expr a b c </span><span style="color:#b48ead;">=
+</span><span>    defined</span><span style="color:#b48ead;">{
+</span><span>        </span><span style="color:#b48ead;">let! </span><span style="color:#bf616a;">x </span><span style="color:#b48ead;">=</span><span> a </span><span style="color:#b48ead;">*</span><span style="color:#d08770;">2 </span><span style="color:#65737e;">//只有当x&gt;0时才会执行以下剩余语句，否则返回x
+</span><span>        </span><span style="color:#b48ead;">let! </span><span style="color:#bf616a;">y </span><span style="color:#b48ead;">=</span><span> b </span><span style="color:#b48ead;">- </span><span style="color:#d08770;">5</span><span style="color:#65737e;">//只有当y&gt;0时才会执行以下剩余语句，否则返回y
+</span><span>        </span><span style="color:#b48ead;">let! </span><span style="color:#bf616a;">z </span><span style="color:#b48ead;">=</span><span> c % </span><span style="color:#d08770;">3</span><span style="color:#65737e;">//只有当z&gt;0时才会执行以下剩余语句，否则返回z
+</span><span>        </span><span style="color:#b48ead;">return</span><span> x </span><span style="color:#b48ead;">+</span><span> y </span><span style="color:#b48ead;">+</span><span> z
+</span><span>    </span><span style="color:#b48ead;">}
+</span><span>
+</span><span>printfn &quot;</span><span style="color:#a3be8c;">expr -2 3 5 = </span><span style="color:#b48ead;">%d</span><span>&quot; </span><span style="color:#b48ead;">(</span><span>expr </span><span style="color:#b48ead;">-</span><span style="color:#d08770;">2 3 5</span><span style="color:#b48ead;">) </span><span style="color:#65737e;">//返回x
+</span><span>printfn &quot;</span><span style="color:#a3be8c;">expr 1 3 5 = </span><span style="color:#b48ead;">%d</span><span>&quot; </span><span style="color:#b48ead;">(</span><span>expr </span><span style="color:#d08770;">1 3 5</span><span style="color:#b48ead;">) </span><span style="color:#65737e;">//返回y
+</span><span>printfn &quot;</span><span style="color:#a3be8c;">expr 1 6 3 = </span><span style="color:#b48ead;">%d</span><span>&quot; </span><span style="color:#b48ead;">(</span><span>expr </span><span style="color:#d08770;">1 6 3</span><span style="color:#b48ead;">) </span><span style="color:#65737e;">//返回z
+</span><span>printfn &quot;</span><span style="color:#a3be8c;">expr 1 6 5 = </span><span style="color:#b48ead;">%d</span><span>&quot; </span><span style="color:#b48ead;">(</span><span>expr </span><span style="color:#d08770;">1 6 5</span><span style="color:#b48ead;">) </span><span style="color:#65737e;">//返回x+y+z
+</span></code></pre>
+<p>Computation Expresssion所有方法：
+方法 描述</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>member For:
+</span><span>seq&lt;&#39;a&gt; * (&#39;a -&gt; Result&lt;unit&gt;) -&gt;
+</span><span>Result&lt;unit&gt;
+</span><span>允许使用for循环，参数是循环的所有数据项和循环的主体代码
+</span><span>
+</span><span>member Zero:
+</span><span>unit -&gt; Result&lt;unit&gt;
+</span><span>允许执行unit表达式
+</span><span>
+</span><span>member Combine:
+</span><span>Result&lt;unit&gt; * Result&lt;&#39;a&gt; -&gt;
+</span><span>Result&lt;&#39;a&gt;
+</span><span>把computation expression各部分连接起来
+</span><span>
+</span><span>member While:
+</span><span>(unit -&gt; bool) * Result&lt;unit&gt; -&gt;
+</span><span>Result&lt;unit&gt;
+</span><span>允许使用while循环
+</span><span>
+</span><span>member Return:
+</span><span>&#39;a -&gt; Result&lt;&#39;a&gt;
+</span><span>允许使用return关键字
+</span><span>
+</span><span>member ReturnFrom:
+</span><span>&#39;a -&gt; Result&lt;&#39;a&gt;
+</span><span>允许使用return!关键字
+</span><span>
+</span><span>member Yield:
+</span><span>&#39;a -&gt; Result&lt;&#39;a&gt;
+</span><span>允许使用yield关键字
+</span><span>
+</span><span>member YieldFrom:
+</span><span>seq&lt;&#39;a&gt; -&gt; Result&lt;&#39;a&gt;
+</span><span>允许使用yield!关键字
+</span><span>
+</span><span>member Delay:
+</span><span>(unit -&gt; Result&lt;&#39;a&gt;) -&gt;
+</span><span>Result&lt;&#39;a&gt;
+</span><span>这个操作通常和Combine一起使用，以确保操作以正确的顺序执行
+</span><span>
+</span><span>member Run:
+</span><span>Result&lt;&#39;a&gt; -&gt; Result&lt;&#39;a&gt;
+</span><span>在Computation Expression的开始执行时被调用
+</span><span>
+</span><span>member Using:
+</span><span>&#39;a * (&#39;a -&gt; Result&lt;&#39;b&gt;) -&gt;
+</span><span>Result&lt;&#39;b&gt; when &#39;a :&gt;
+</span><span>System.IDisposable
+</span><span>允许使用use!关键字，负责IDisposable.Dispose()
+</span><span>
+</span><span>member Bind:
+</span><span>Result&lt;&#39;a&gt; * (&#39;a -&gt; Result&lt;&#39;b&gt;) -&gt;
+</span><span>Result&lt;&#39;b&gt;
+</span><span>允许使用let!关键字(do!是let!的特殊形式，Bind返回
+</span><span>
+</span><span>Result&lt;unit&gt;)
+</span><span>
+</span><span>member TryFinally:
+</span><span>Result&lt;&#39;a&gt; * (unit -&gt; unit) -&gt;
+</span><span>Result&lt;&#39;a&gt;
+</span><span>允许使用try finally表达式，参数:try代码块的结果和finally代码块代表的函数
+</span><span>
+</span><span>member TryWith:
+</span><span>Result&lt;&#39;a&gt; * (exn -&gt; Result&lt;&#39;a&gt;) -&gt;
+</span><span>Result&lt;&#39;a&gt;
+</span><span>允许使用try with表达式，参数:try代码块的结果和with代码块代表的函数 
+</span></code></pre>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/programming/">#Programming</a>
+            
+            <a href="https://blog.dotone.top/tags/f/">#F#</a>
+            
+            <a href="https://blog.dotone.top/tags/net/">#.Net</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

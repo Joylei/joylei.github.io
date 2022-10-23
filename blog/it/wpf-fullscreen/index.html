@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - Wpf应用程序进入全屏和退出全屏</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/wpf-fullscreen/#can-kao-wen-zhang" class="toc-link">参考文章</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;wpf-fullscreen&#x2F;">Wpf应用程序进入全屏和退出全屏</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>4 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2009-06-24</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>因为想尝试一下使Wpf应用程序的全屏状态，但是Wpf没有全屏操作的直接实现，在网上搜索一下，发现很多都是使用pinvoke调用win32动态链接库来实现，而且功能也不全，当发现参考文章中的内容时，发现了全屏的简单方法，而且也不用使用Pinvoke，随即修改和完善了功能，代码如下：</p>
+<pre data-lang="c#" style="background-color:#2b303b;color:#c0c5ce;" class="language-c# "><code class="language-c#" data-lang="c#"><span>
+</span><span style="color:#b48ead;">using </span><span>System;
+</span><span style="color:#b48ead;">using </span><span>System.Windows;
+</span><span style="color:#b48ead;">using </span><span>System.Windows.Forms;
+</span><span style="color:#b48ead;">using </span><span>System.Windows.Interop;
+</span><span>
+</span><span style="color:#b48ead;">namespace </span><span>PhotoViewer
+</span><span>{
+</span><span>    </span><span style="color:#65737e;">/// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+</span><span style="color:#65737e;">    /// Wpf应用程序全屏辅助类
+</span><span style="color:#65737e;">    ///
+</span><span style="color:#65737e;">    /// ——全部使用.Net类进行操作
+</span><span style="color:#65737e;">    /// ——可进入全屏和退出全屏
+</span><span style="color:#65737e;">    /// ——可恢复到全屏前的状态
+</span><span style="color:#65737e;">    /// ——全屏时可切换到其他应用程序
+</span><span style="color:#65737e;">    ///
+</span><span style="color:#65737e;">    /// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+</span><span>    </span><span style="color:#b48ead;">public static class </span><span style="color:#ebcb8b;">FullScreenHelper
+</span><span style="color:#eff1f5;">    {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private static </span><span style="color:#eff1f5;">Window </span><span style="color:#bf616a;">_fullWindow</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private static </span><span style="color:#eff1f5;">WindowState </span><span style="color:#bf616a;">_windowState</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private static </span><span style="color:#eff1f5;">WindowStyle </span><span style="color:#bf616a;">_windowStyle</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private static bool </span><span style="color:#bf616a;">_windowTopMost</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private static </span><span style="color:#eff1f5;">ResizeMode </span><span style="color:#bf616a;">_windowResizeMode</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">private static </span><span style="color:#eff1f5;">Rect </span><span style="color:#bf616a;">_windowRect</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">/// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+</span><span style="color:#65737e;">        /// 进入全屏
+</span><span style="color:#65737e;">        /// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+</span><span style="color:#65737e;">        /// &lt;</span><span style="color:#bf616a;">param </span><span style="color:#d08770;">name</span><span style="color:#65737e;">=</span><span style="color:#a3be8c;">&quot;window&quot;</span><span style="color:#65737e;">&gt;&lt;/</span><span style="color:#bf616a;">param</span><span style="color:#65737e;">&gt;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public static void </span><span style="color:#8fa1b3;">GoFullscreen</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">this </span><span style="color:#eff1f5;">Window </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">        {
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">//已经是全屏
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if</span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">IsFullscreen</span><span style="color:#eff1f5;">()) </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">//存储窗体信息
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">_windowState </span><span>= </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">WindowState</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">_windowStyle </span><span>= </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">WindowStyle</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">_windowTopMost </span><span>= </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Topmost</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">_windowResizeMode </span><span>= </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">ResizeMode</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">_windowRect</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">X </span><span>= </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Left</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">_windowRect</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Y </span><span>= </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Top</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">_windowRect</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Width </span><span>= </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Width</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">_windowRect</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Height </span><span>= </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Height</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">//变成无边窗体
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">WindowState </span><span>= </span><span style="color:#bf616a;">WindowState</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Normal</span><span style="color:#eff1f5;">;</span><span style="color:#65737e;">//假如已经是Maximized，就不能进入全屏，所以这里先调整状态
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">WindowStyle </span><span>= </span><span style="color:#bf616a;">WindowStyle</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">None</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">ResizeMode </span><span>= </span><span style="color:#bf616a;">ResizeMode</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">NoResize</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Topmost </span><span>= </span><span style="color:#d08770;">true</span><span style="color:#eff1f5;">;</span><span style="color:#65737e;">//最大化后总是在最上面
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">//获取窗口句柄
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">handle </span><span>= new </span><span style="color:#eff1f5;">WindowInteropHelper(</span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">).</span><span style="color:#bf616a;">Handle</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">//获取当前显示器屏幕
+</span><span style="color:#eff1f5;">            Screen </span><span style="color:#bf616a;">screen </span><span>= </span><span style="color:#bf616a;">Screen</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">FromHandle</span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">handle</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">//调整窗口最大化,全屏的关键代码就是下面3句
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">MaxWidth </span><span>= </span><span style="color:#bf616a;">screen</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Bounds</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Width</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">MaxHeight </span><span>= </span><span style="color:#bf616a;">screen</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Bounds</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Height</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">WindowState </span><span>= </span><span style="color:#bf616a;">WindowState</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Maximized</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">           
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">//解决切换应用程序的问题
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Activated </span><span>+= new </span><span style="color:#eff1f5;">EventHandler(</span><span style="color:#bf616a;">window_Activated</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Deactivated </span><span>+= new </span><span style="color:#eff1f5;">EventHandler(</span><span style="color:#bf616a;">window_Deactivated</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">//记住成功最大化的窗体
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">_fullWindow </span><span>= </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        }
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">static void </span><span style="color:#8fa1b3;">window_Deactivated</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">object </span><span style="color:#bf616a;">sender</span><span style="color:#eff1f5;">, EventArgs </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">        {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">window </span><span>= </span><span style="color:#bf616a;">sender </span><span>as </span><span style="color:#eff1f5;">Window;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Topmost </span><span>= </span><span style="color:#d08770;">false</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        }
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">static void </span><span style="color:#8fa1b3;">window_Activated</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">object </span><span style="color:#bf616a;">sender</span><span style="color:#eff1f5;">, EventArgs </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">        {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">window </span><span>= </span><span style="color:#bf616a;">sender </span><span>as </span><span style="color:#eff1f5;">Window;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Topmost </span><span>= </span><span style="color:#d08770;">true</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        }
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">/// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+</span><span style="color:#65737e;">        /// 退出全屏
+</span><span style="color:#65737e;">        /// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+</span><span style="color:#65737e;">        /// &lt;</span><span style="color:#bf616a;">param </span><span style="color:#d08770;">name</span><span style="color:#65737e;">=</span><span style="color:#a3be8c;">&quot;window&quot;</span><span style="color:#65737e;">&gt;&lt;/</span><span style="color:#bf616a;">param</span><span style="color:#65737e;">&gt;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public static void </span><span style="color:#8fa1b3;">ExitFullscreen</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">this </span><span style="color:#eff1f5;">Window </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">        {
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">//已经不是全屏无操作
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span>!</span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">IsFullscreen</span><span style="color:#eff1f5;">()) </span><span style="color:#b48ead;">return</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">//恢复窗口先前信息，这样就退出了全屏
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Topmost </span><span>= </span><span style="color:#bf616a;">_windowTopMost</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">WindowStyle </span><span>= </span><span style="color:#bf616a;">_windowStyle</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">ResizeMode </span><span>= </span><span style="color:#bf616a;">ResizeMode</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">CanResize</span><span style="color:#eff1f5;">;</span><span style="color:#65737e;">//设置为可调整窗体大小
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Left </span><span>= </span><span style="color:#bf616a;">_windowRect</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Left</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Width </span><span>= </span><span style="color:#bf616a;">_windowRect</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Width</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Top </span><span>= </span><span style="color:#bf616a;">_windowRect</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Top</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Height </span><span>= </span><span style="color:#bf616a;">_windowRect</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Height</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">WindowState </span><span>= </span><span style="color:#bf616a;">_windowState</span><span style="color:#eff1f5;">;</span><span style="color:#65737e;">//恢复窗口状态信息
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">ResizeMode </span><span>= </span><span style="color:#bf616a;">_windowResizeMode</span><span style="color:#eff1f5;">;</span><span style="color:#65737e;">//恢复窗口可调整信息
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">//移除不需要的事件
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Activated </span><span>-= </span><span style="color:#bf616a;">window_Activated</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Deactivated </span><span>-= </span><span style="color:#bf616a;">window_Deactivated</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">_fullWindow </span><span>= </span><span style="color:#d08770;">null</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        }
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">/// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+</span><span style="color:#65737e;">        /// 窗体是否在全屏状态
+</span><span style="color:#65737e;">        /// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+</span><span style="color:#65737e;">        /// &lt;</span><span style="color:#bf616a;">param </span><span style="color:#d08770;">name</span><span style="color:#65737e;">=</span><span style="color:#a3be8c;">&quot;window&quot;</span><span style="color:#65737e;">&gt;&lt;/</span><span style="color:#bf616a;">param</span><span style="color:#65737e;">&gt;
+</span><span style="color:#65737e;">        /// &lt;</span><span style="color:#bf616a;">returns</span><span style="color:#65737e;">&gt;&lt;/</span><span style="color:#bf616a;">returns</span><span style="color:#65737e;">&gt;
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">public static bool </span><span style="color:#8fa1b3;">IsFullscreen</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">this </span><span style="color:#eff1f5;">Window </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">        {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if</span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">window</span><span>==</span><span style="color:#d08770;">null</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">            {
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">throw </span><span>new </span><span style="color:#eff1f5;">ArgumentNullException(</span><span>&quot;</span><span style="color:#a3be8c;">window</span><span>&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">            }
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">_fullWindow </span><span>== </span><span style="color:#bf616a;">window</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        }
+</span><span style="color:#eff1f5;">    }
+</span><span>}
+</span></code></pre>
+<p>还有一个不爽的问题是，在最大化时如果已经是最大化状态，必须先退出最大化状态，造成多闪烁一次，目前还没有找到解决方法。</p>
+<p>演示程序截图</p>
+<p>非全屏状态：
+<img src="https://blog.dotone.top/blog/it/wpf-fullscreen/c3efa7cc62fff93601e9281b.jpg" alt="c3efa7cc62fff93601e9281b.jpg" /></p>
+<p>全屏状态：
+<img src="https://blog.dotone.top/blog/it/wpf-fullscreen/bc3dddf9230f147f252df21b.jpg" alt="bc3dddf9230f147f252df21b.jpg" /></p>
+<h2 id="can-kao-wen-zhang">参考文章</h2>
+<ul>
+<li>http://www.swart.ws/2009/03/kiosk-full-screen-wpf-applications.html</li>
+</ul>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/wpf/">#WPF</a>
+            
+            <a href="https://blog.dotone.top/tags/net/">#.Net</a>
+            
+            <a href="https://blog.dotone.top/tags/c/">#c#</a>
+            
+            <a href="https://blog.dotone.top/tags/fullscreen/">#fullscreen</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

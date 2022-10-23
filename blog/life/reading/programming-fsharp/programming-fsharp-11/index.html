@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - 《Programming F#》读书笔记十一</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/#suo-yin" class="toc-link">索引</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/#bi-ji" class="toc-link">笔记</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/#yin-yong-biao-da-shi-quotation-expression" class="toc-link">引用表达式(quotation expression)</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/#chang-liang-zhi" class="toc-link">常量值</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/#han-shu-ti-yin-yong-biao-da-shi" class="toc-link">函数体引用表达式</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/#tong-yong-pi-pei" class="toc-link">通用匹配</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/#chuang-jian-biao-da-shi" class="toc-link">创建表达式</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/#expression-hole" class="toc-link">Expression Hole</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/#biao-da-shi-ji-suan" class="toc-link">表达式计算</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;life&#x2F;reading&#x2F;programming-fsharp&#x2F;programming-fsharp-11&#x2F;">《Programming F#》读书笔记十一</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>5 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-07-18</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <h2 id="suo-yin">索引</h2>
+<ul>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-1/">《Programming F#》读书笔记一</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-2/">《Programming F#》读书笔记二</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-3/">《Programming F#》读书笔记三</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-4/">《Programming F#》读书笔记四</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/">《Programming F#》读书笔记五</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-6/">《Programming F#》读书笔记六</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-7/">《Programming F#》读书笔记七</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-8/">《Programming F#》读书笔记八</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-9/">《Programming F#》读书笔记九</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-10/">《Programming F#》读书笔记十</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/">《Programming F#》读书笔记十一</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-12/">《Programming F#》读书笔记十二</a></li>
+</ul>
+<h2 id="bi-ji">笔记</h2>
+<h3 id="yin-yong-biao-da-shi-quotation-expression">引用表达式(quotation expression)</h3>
+<p>引用表达式代表F#抽象语法树</p>
+<ul>
+<li>&lt;@ @&gt;代表泛型的Expr</li>
+<li>&lt;@@ @@&gt;代表非泛型的Expr
+表达式匹配</li>
+</ul>
+<h3 id="chang-liang-zhi">常量值</h3>
+<ul>
+<li>Int32(i)匹配整型</li>
+<li>Double(f)匹配浮点型</li>
+<li>String(s)匹配字符串</li>
+<li>成员方法或静态方法</li>
+<li>Call(obj,method,args)匹配所有的成员方法</li>
+<li>lambda表达式
+Lambda(var,args)匹配lambda表达式</li>
+<li>SpecificCall
+SpecificCall用来匹配具体的某一个方法或函数</li>
+</ul>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span>#r &quot;</span><span style="color:#a3be8c;">FSharp.PowerPack.dll</span><span>&quot;
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">Microsoft.FSharp.Quotations
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">Microsoft.FSharp.Quotations.Patterns
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">Microsoft.FSharp.Quotations.DerivedPatterns
+</span><span>
+</span><span style="color:#b48ead;">let rec </span><span style="color:#bf616a;">printExpr</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">expr</span><span style="color:#b48ead;">:</span><span>Expr</span><span style="color:#b48ead;">)=
+</span><span>   </span><span style="color:#b48ead;">match</span><span> expr </span><span style="color:#b48ead;">with
+</span><span>   </span><span style="color:#b48ead;">|</span><span> Int32</span><span style="color:#b48ead;">(</span><span>i</span><span style="color:#b48ead;">) -&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">整型:</span><span style="color:#b48ead;">%d</span><span>&quot; i
+</span><span>   </span><span style="color:#b48ead;">|</span><span> Double</span><span style="color:#b48ead;">(</span><span>f</span><span style="color:#b48ead;">) -&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">浮点型:</span><span style="color:#b48ead;">%f</span><span>&quot; f
+</span><span>   </span><span style="color:#b48ead;">|</span><span> String</span><span style="color:#b48ead;">(</span><span>s</span><span style="color:#b48ead;">) -&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">字符串:</span><span style="color:#b48ead;">%s</span><span>&quot; s
+</span><span>   </span><span style="color:#b48ead;">|</span><span> SpecificCall </span><span style="color:#b48ead;">&lt;@ (+) @&gt; (_,_,[</span><span>lft</span><span style="color:#b48ead;">;</span><span>rgt</span><span style="color:#b48ead;">]) -&gt;
+</span><span>      printfn &quot;</span><span style="color:#a3be8c;">SpecificCall:</span><span style="color:#b48ead;">%A</span><span style="color:#a3be8c;">+</span><span style="color:#b48ead;">%A</span><span>&quot; lft rgt
+</span><span>   </span><span style="color:#b48ead;">|</span><span> Call</span><span style="color:#b48ead;">(</span><span>o</span><span style="color:#b48ead;">,</span><span>meth</span><span style="color:#b48ead;">,</span><span>args</span><span style="color:#b48ead;">) -&gt;
+</span><span>      </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">c </span><span style="color:#b48ead;">=
+</span><span>         </span><span style="color:#b48ead;">match</span><span> o </span><span style="color:#b48ead;">with
+</span><span>         </span><span style="color:#b48ead;">|</span><span> Some</span><span style="color:#b48ead;">(</span><span>x</span><span style="color:#b48ead;">) -&gt;</span><span> sprintf &quot;</span><span style="color:#b48ead;">%O</span><span>&quot; x
+</span><span>         </span><span style="color:#b48ead;">|</span><span> None </span><span style="color:#b48ead;">-&gt; </span><span>&quot;</span><span style="color:#a3be8c;">(static method)</span><span>&quot;
+</span><span>      printfn &quot;</span><span style="color:#a3be8c;">方法</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;">.</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;">(</span><span style="color:#b48ead;">%A</span><span style="color:#a3be8c;">)</span><span>&quot; c </span><span style="color:#b48ead;">(</span><span>meth.Name</span><span style="color:#b48ead;">)</span><span> args
+</span><span>   </span><span style="color:#b48ead;">|</span><span> Lambda</span><span style="color:#b48ead;">(</span><span>var</span><span style="color:#b48ead;">,</span><span>body</span><span style="color:#b48ead;">)-&gt;
+</span><span>      printfn &quot;</span><span style="color:#a3be8c;">lambda value:</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;"> type:</span><span style="color:#b48ead;">%s</span><span>&quot; var.Name var.Type.Name
+</span><span>      printfn &quot;</span><span style="color:#a3be8c;">lambda body:</span><span>&quot;
+</span><span>      printExpr</span><span style="color:#b48ead;">(</span><span>body</span><span style="color:#b48ead;">)
+</span><span>   </span><span style="color:#b48ead;">| _ -&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">unwanted expr:</span><span style="color:#b48ead;">%A</span><span>&quot; expr
+</span><span>
+</span><span>printExpr </span><span style="color:#b48ead;">&lt;@ </span><span style="color:#d08770;">1</span><span style="color:#b48ead;">+</span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">@&gt;
+</span><span>printExpr </span><span style="color:#b48ead;">&lt;@</span><span> System.Console.ReadLine</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">@&gt;
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">add</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">x</span><span style="color:#b48ead;">,</span><span style="color:#bf616a;">y</span><span style="color:#b48ead;">) =</span><span> x</span><span style="color:#b48ead;">+</span><span>y
+</span><span>printExpr </span><span style="color:#b48ead;">&lt;@</span><span> add </span><span style="color:#b48ead;">@&gt;
+</span><span>Console.ReadLine</span><span style="color:#d08770;">()
+</span></code></pre>
+<h3 id="han-shu-ti-yin-yong-biao-da-shi">函数体引用表达式</h3>
+<p>F#默认不能返回函数或成员方法函数体的引用表达式。
+函数加了[<code>&lt;ReflectedDefinition&gt;</code>]属性之后，F#会把函数体的定义持久化到一个表中，嵌入到dll或exe中，这样就可以获取到函数体的引用表达式。</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">Microsoft.FSharp.Quotations
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">Microsoft.FSharp.Quotations.Patterns
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">Microsoft.FSharp.Quotations.DerivedPatterns
+</span><span>
+</span><span style="color:#65737e;">//对比注释掉下一行和未注释的输出
+</span><span style="color:#96b5b4;">[&lt;ReflectedDefinition&gt;]
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">add</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">x</span><span style="color:#b48ead;">,</span><span style="color:#bf616a;">y</span><span style="color:#b48ead;">) =</span><span> x</span><span style="color:#b48ead;">+</span><span>y
+</span><span>
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">task1</span><span style="color:#d08770;">()</span><span style="color:#b48ead;">=
+</span><span>   </span><span style="color:#b48ead;">let rec </span><span style="color:#bf616a;">printExpr</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">expr</span><span style="color:#b48ead;">:</span><span>Expr</span><span style="color:#b48ead;">)=
+</span><span>   </span><span style="color:#b48ead;">match</span><span> expr </span><span style="color:#b48ead;">with
+</span><span>   </span><span style="color:#b48ead;">|</span><span> Int32</span><span style="color:#b48ead;">(</span><span>i</span><span style="color:#b48ead;">) -&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">整型:</span><span style="color:#b48ead;">%d</span><span>&quot; i
+</span><span>   </span><span style="color:#b48ead;">|</span><span> Double</span><span style="color:#b48ead;">(</span><span>f</span><span style="color:#b48ead;">) -&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">浮点型:</span><span style="color:#b48ead;">%f</span><span>&quot; f
+</span><span>   </span><span style="color:#b48ead;">|</span><span> String</span><span style="color:#b48ead;">(</span><span>s</span><span style="color:#b48ead;">) -&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">字符串:</span><span style="color:#b48ead;">%s</span><span>&quot; s
+</span><span>   </span><span style="color:#b48ead;">|</span><span> SpecificCall </span><span style="color:#b48ead;">&lt;@ (+) @&gt; (_,_,[</span><span>lft</span><span style="color:#b48ead;">;</span><span>rgt</span><span style="color:#b48ead;">]) -&gt;
+</span><span>      printfn &quot;</span><span style="color:#a3be8c;">SpecificCall:</span><span style="color:#b48ead;">%A</span><span style="color:#a3be8c;">+</span><span style="color:#b48ead;">%A</span><span>&quot; lft rgt
+</span><span>   </span><span style="color:#b48ead;">|</span><span> Call</span><span style="color:#b48ead;">(</span><span>o</span><span style="color:#b48ead;">,</span><span>meth</span><span style="color:#b48ead;">,</span><span>args</span><span style="color:#b48ead;">) -&gt;
+</span><span>      </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">c </span><span style="color:#b48ead;">=
+</span><span>         </span><span style="color:#b48ead;">match</span><span> o </span><span style="color:#b48ead;">with
+</span><span>         </span><span style="color:#b48ead;">|</span><span> Some</span><span style="color:#b48ead;">(</span><span>x</span><span style="color:#b48ead;">) -&gt;</span><span> sprintf &quot;</span><span style="color:#b48ead;">%O</span><span>&quot; x
+</span><span>         </span><span style="color:#b48ead;">|</span><span> None </span><span style="color:#b48ead;">-&gt; </span><span>&quot;</span><span style="color:#a3be8c;">(static method)</span><span>&quot;
+</span><span>      printfn &quot;</span><span style="color:#a3be8c;">方法:</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;">.</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;">(</span><span style="color:#b48ead;">%A</span><span style="color:#a3be8c;">)</span><span>&quot; c </span><span style="color:#b48ead;">(</span><span>meth.Name</span><span style="color:#b48ead;">)</span><span> args
+</span><span>      </span><span style="color:#b48ead;">match</span><span> meth </span><span style="color:#b48ead;">with
+</span><span>      </span><span style="color:#b48ead;">|</span><span>MethodWithReflectedDefinition</span><span style="color:#b48ead;">(</span><span>m</span><span style="color:#b48ead;">) -&gt;
+</span><span>         printfn &quot;</span><span style="color:#a3be8c;">展开</span><span style="color:#b48ead;">%s</span><span>&quot; meth.Name
+</span><span>         printExpr</span><span style="color:#b48ead;">(</span><span>m</span><span style="color:#b48ead;">)
+</span><span>      </span><span style="color:#b48ead;">| _ -&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">不能展开：</span><span style="color:#b48ead;">%s</span><span>&quot; meth.Name
+</span><span>   </span><span style="color:#b48ead;">|</span><span> Lambda</span><span style="color:#b48ead;">(</span><span>var</span><span style="color:#b48ead;">,</span><span>body</span><span style="color:#b48ead;">)-&gt;
+</span><span>      printfn &quot;</span><span style="color:#a3be8c;">lambda value:</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;"> type:</span><span style="color:#b48ead;">%s</span><span>&quot; var.Name var.Type.Name
+</span><span>      printfn &quot;</span><span style="color:#a3be8c;">lambda body:</span><span>&quot;
+</span><span>      printExpr</span><span style="color:#b48ead;">(</span><span>body</span><span style="color:#b48ead;">)
+</span><span>   </span><span style="color:#b48ead;">| _ -&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">unwanted expr:</span><span style="color:#b48ead;">%A</span><span>&quot; expr
+</span><span>
+</span><span>printExpr </span><span style="color:#b48ead;">&lt;@</span><span> add</span><span style="color:#b48ead;">(</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">2</span><span style="color:#b48ead;">) @&gt;
+</span><span>Console.ReadLine</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">|&gt;</span><span>ignore
+</span><span>
+</span><span style="color:#96b5b4;">[&lt;EntryPoint&gt;]
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">main args </span><span style="color:#b48ead;">=
+</span><span>   task1</span><span style="color:#d08770;">()
+</span><span>   </span><span style="color:#d08770;">0
+</span></code></pre>
+<h3 id="tong-yong-pi-pei">通用匹配</h3>
+<p>可以用来匹配大部分有意义的Expr，减少工作量。可以和前面的其它匹配一起使用。</p>
+<ul>
+<li>SharpVar(var) 匹配值</li>
+<li>ShapeLambda(var,body)匹配函数</li>
+<li>ShapeCombination(_,exprs)匹配复杂的表达式，分解出所有子表达式</li>
+</ul>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span>#r &quot;</span><span style="color:#a3be8c;">FSharp.PowerPack.dll</span><span>&quot;
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">Microsoft.FSharp.Quotations
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">Microsoft.FSharp.Quotations.ExprShape
+</span><span>
+</span><span style="color:#b48ead;">let rec </span><span style="color:#bf616a;">printExpr</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">expr</span><span style="color:#b48ead;">:</span><span>Expr</span><span style="color:#b48ead;">)=
+</span><span>    </span><span style="color:#b48ead;">match</span><span> expr </span><span style="color:#b48ead;">with
+</span><span>    </span><span style="color:#b48ead;">|</span><span> ShapeVar</span><span style="color:#b48ead;">(</span><span>var</span><span style="color:#b48ead;">) -&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">var:</span><span style="color:#b48ead;">%s</span><span>&quot; var.Name
+</span><span>    </span><span style="color:#b48ead;">|</span><span> ShapeLambda</span><span style="color:#b48ead;">(</span><span>var</span><span style="color:#b48ead;">,</span><span>body</span><span style="color:#b48ead;">) -&gt;
+</span><span>        printfn &quot;</span><span style="color:#a3be8c;">lambda:</span><span style="color:#b48ead;">%s</span><span>&quot; var.Name
+</span><span>        printfn &quot;</span><span style="color:#a3be8c;">lambda body:</span><span>&quot;
+</span><span>        printExpr body
+</span><span>    </span><span style="color:#b48ead;">|</span><span> ShapeCombination</span><span style="color:#b48ead;">(_,</span><span>exprs</span><span style="color:#b48ead;">) -&gt;
+</span><span>        printfn &quot;</span><span style="color:#a3be8c;">combination:</span><span>&quot;
+</span><span>        exprs
+</span><span>        </span><span style="color:#b48ead;">|&gt;</span><span> List.iter printExpr
+</span><span>
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">add a b </span><span style="color:#b48ead;">=</span><span> a </span><span style="color:#b48ead;">+</span><span> b
+</span><span>printExpr </span><span style="color:#b48ead;">&lt;@</span><span> add </span><span style="color:#b48ead;">@&gt;
+</span></code></pre>
+<h3 id="chuang-jian-biao-da-shi">创建表达式</h3>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&gt; let expr =
+</span><span>&gt; &lt;@ let x = (1,2)
+</span><span>&gt; (x,x)@&gt;
+</span><span>&gt; ;;
+</span><span>
+</span><span>val expr : Expr&lt;(int * int) * (int * int)&gt; =
+</span><span>Let (x, NewTuple (Value (1), Value (2)), NewTuple (x, x))
+</span><span>
+</span><span>&gt; let expr =
+</span><span>&gt;Expr.Let(new Var(&quot;x&quot;,typeof&lt;int*int&gt;),
+</span><span>&gt;Expr.NewTuple([Expr.Value(1);Expr.Value(2)]),
+</span><span>&gt;Expr.NewTuple([Expr.GlobalVar(&quot;x&quot;);Expr.GlobalVar(&quot;x&quot;)]));;
+</span><span>
+</span><span>val expr : Expr = Let (x, NewTuple (Value (1), Value (2)), NewTuple (x, x))
+</span></code></pre>
+<h3 id="expression-hole">Expression Hole</h3>
+<p>使用符号在引用表达式中表示一个引用表达式。</p>
+<p>%在泛型表达式中使用，%%在非泛型表达式中使用</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&gt; let add a b = &lt;@ %a + %b @&gt;;;
+</span><span>val add : Expr&lt;int&gt; -&gt; Expr&lt;int&gt; -&gt; Expr&lt;int&gt;
+</span><span>&gt; add &lt;@ 1 @&gt; &lt;@ 2 @&gt;;;
+</span><span>val it : Expr&lt;int&gt; =
+</span><span>Call (None, Int32 op_Addition[Int32,Int32,Int32](Int32, Int32),
+</span><span>[Value (1), Value (2)])
+</span></code></pre>
+<h3 id="biao-da-shi-ji-suan">表达式计算</h3>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span>#r &quot;</span><span style="color:#a3be8c;">System.Core.dll</span><span>&quot;
+</span><span>#r &quot;</span><span style="color:#a3be8c;">FSharp.PowerPack.dll</span><span>&quot;
+</span><span>#r &quot;</span><span style="color:#a3be8c;">FSharp.PowerPack.Linq.dll</span><span>&quot;
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">Microsoft.FSharp.Linq.QuotationEvaluation</span><span>;;
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">expr </span><span style="color:#b48ead;">= &lt;@ fun (</span><span style="color:#bf616a;">a</span><span style="color:#b48ead;">,</span><span style="color:#bf616a;">b</span><span style="color:#b48ead;">) -&gt;</span><span> a</span><span style="color:#b48ead;">+</span><span>b </span><span style="color:#b48ead;">@&gt;
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">func </span><span style="color:#b48ead;">=</span><span> expr.Compile</span><span style="color:#d08770;">()()</span><span style="color:#b48ead;">;
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">func2 </span><span style="color:#b48ead;">=</span><span> expr.Eval</span><span style="color:#d08770;">()
+</span></code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&gt; val expr : Expr&lt;(int * int -&gt; int)&gt; =
+</span><span>&gt; Lambda (tupledArg,
+</span><span>&gt; Let (a, TupleGet (tupledArg, 0),
+</span><span>&gt; Let (b, TupleGet (tupledArg, 1),
+</span><span>&gt; Call (None, Int32 op_Addition[Int32,Int32,Int32](Int32, Int32),
+</span><span>&gt; [a, b]))))
+</span><span>val func : (int * int -&gt; int)
+</span><span>val func2 : (int * int -&gt; int)
+</span><span>
+</span><span>&gt; func2(1,2);;
+</span><span>val it : int = 3
+</span><span>
+</span><span>&gt; func(1,2);;
+</span><span>val it : int = 3
+</span></code></pre>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/programming/">#Programming</a>
+            
+            <a href="https://blog.dotone.top/tags/f/">#F#</a>
+            
+            <a href="https://blog.dotone.top/tags/net/">#.Net</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

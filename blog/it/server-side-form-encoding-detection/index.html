@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - 解决外部网站提交Form表单乱码问题</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;server-side-form-encoding-detection&#x2F;">解决外部网站提交Form表单乱码问题</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>3 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2009-11-22</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>有时处理的FORM表单是乱码，这是因为提交页和处理时的编码不同造成的。</p>
+<p>如果两个页面都是所用的编码都是可控制的，那就没什么好说的，配置或修改一致就可以了。</p>
+<p>但是外部网站是不可控的，所以只能由本地网站上在接收时进行判断处理。</p>
+<p><code>Asp.net</code>的接收数据处理受配置文件中的<code>requestEncoding</code>的影响，默认使用utf-8编码。这样接收到得数据就使用这个编码来进行解码，所以如果能够判断出数据所用的编码，并在解码时使用这个新的编码，那就解决问题了。幸好<code>Asp.net</code>提供了读取原始输入流的方法和设置处理编码的属性。</p>
+<p>以下是一个简单的示例：</p>
+<p>使用<code>gb2312</code>编码的<code>test.html</code></p>
+<pre data-lang="html" style="background-color:#2b303b;color:#c0c5ce;" class="language-html "><code class="language-html" data-lang="html"><span>&lt;</span><span style="color:#bf616a;">html</span><span>&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">head</span><span>&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">title</span><span>&gt;test&lt;/</span><span style="color:#bf616a;">title</span><span>&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">meta </span><span style="color:#d08770;">http-equiv</span><span>=&quot;</span><span style="color:#a3be8c;">Content-Type</span><span>&quot; </span><span style="color:#d08770;">content</span><span>=&quot;</span><span style="color:#a3be8c;">text/html; charset=GB2312</span><span>&quot; /&gt;
+</span><span>&lt;/</span><span style="color:#bf616a;">head</span><span>&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">body</span><span>&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">form </span><span style="color:#d08770;">action</span><span>=&quot;</span><span style="color:#a3be8c;">TestHandler.ashx</span><span>&quot; </span><span style="color:#d08770;">method</span><span>=&quot;</span><span style="color:#a3be8c;">post</span><span>&quot; </span><span style="color:#d08770;">enctype</span><span>=&quot;</span><span style="color:#a3be8c;">application/x-www-form-urlencoded</span><span>&quot;&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">input </span><span style="color:#d08770;">name</span><span>=&quot;</span><span style="color:#a3be8c;">txtName</span><span>&quot; </span><span style="color:#8fa1b3;">id</span><span>=&quot;</span><span style="color:#a3be8c;">txtName</span><span>&quot; </span><span style="color:#d08770;">type</span><span>=&quot;</span><span style="color:#a3be8c;">text</span><span>&quot; </span><span style="color:#d08770;">value</span><span>=&quot;&quot;/&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">input </span><span style="color:#d08770;">type</span><span>=&quot;</span><span style="color:#a3be8c;">submit</span><span>&quot; </span><span style="color:#d08770;">value</span><span>=&quot;</span><span style="color:#a3be8c;">提交</span><span>&quot;/&gt;
+</span><span>&lt;/</span><span style="color:#bf616a;">from</span><span>&gt;
+</span><span>&lt;/</span><span style="color:#bf616a;">body</span><span>&gt;
+</span></code></pre>
+<p>处理页面<code>TestHandler.ashx</code></p>
+<pre data-lang="c#" style="background-color:#2b303b;color:#c0c5ce;" class="language-c# "><code class="language-c#" data-lang="c#"><span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">TestHandler </span><span style="color:#eff1f5;">: </span><span style="color:#a3be8c;">IHttpHandler </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">   
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">ProcessRequest </span><span style="color:#eff1f5;">(HttpContext </span><span style="color:#bf616a;">context</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">rawBytes </span><span>= </span><span style="color:#bf616a;">context</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Request</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">BinaryRead</span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">context</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Request</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">ContentLength</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">decodedBytes </span><span>= </span><span style="color:#bf616a;">HttpUtility</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">UrlDecodeToBytes</span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">rawBytes</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">       
+</span><span style="color:#eff1f5;">        </span><span style="color:#65737e;">//如果没有下面的判断，很可能乱码
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if</span><span style="color:#eff1f5;">(</span><span>!</span><span style="color:#bf616a;">IsUTF8Bytes</span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">decodedBytes</span><span style="color:#eff1f5;">))
+</span><span style="color:#eff1f5;">        {
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">context</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Request</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">ContentEncoding </span><span>= </span><span style="color:#bf616a;">Encoding</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">GetEncoding</span><span style="color:#eff1f5;">(</span><span>&quot;</span><span style="color:#a3be8c;">GB18030</span><span>&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">        }
+</span><span style="color:#eff1f5;">       
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">context</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Response</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">ContentType </span><span>= &quot;</span><span style="color:#a3be8c;">text/plain</span><span>&quot;</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">context</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Response</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Write</span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">context</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Request</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Form</span><span style="color:#eff1f5;">[</span><span>&quot;</span><span style="color:#a3be8c;">txtName</span><span>&quot;</span><span style="color:#eff1f5;">]);
+</span><span style="color:#eff1f5;">    }
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#65737e;">//网上找的一个简单判断utf-8编码方法
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public bool </span><span style="color:#8fa1b3;">IsUTF8Bytes</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">byte</span><span style="color:#eff1f5;">[] </span><span style="color:#bf616a;">data</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">    {
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">charByteCounter </span><span>= </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">;　 </span><span style="color:#65737e;">//计算当前正分析的字符应还有的字节数
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">byte </span><span style="color:#bf616a;">curByte</span><span style="color:#eff1f5;">; </span><span style="color:#65737e;">//当前分析的字节.
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">for </span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">i </span><span>= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">; </span><span style="color:#bf616a;">i </span><span>&lt; </span><span style="color:#bf616a;">data</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">Length</span><span style="color:#eff1f5;">; </span><span style="color:#bf616a;">i</span><span>++</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">        {
+</span><span style="color:#eff1f5;">            </span><span style="color:#bf616a;">curByte </span><span>= </span><span style="color:#bf616a;">data</span><span style="color:#eff1f5;">[</span><span style="color:#bf616a;">i</span><span style="color:#eff1f5;">];
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">charByteCounter </span><span>== </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">            {
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">curByte </span><span>&gt;= </span><span style="color:#d08770;">0x80</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">                {
+</span><span style="color:#eff1f5;">                    </span><span style="color:#65737e;">//判断当前
+</span><span style="color:#eff1f5;">                    </span><span style="color:#b48ead;">while </span><span style="color:#eff1f5;">(((</span><span style="color:#bf616a;">curByte </span><span>&lt;&lt;= </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">) </span><span>&amp; </span><span style="color:#d08770;">0x80</span><span style="color:#eff1f5;">) </span><span>!= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">                    {
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">                        </span><span style="color:#bf616a;">charByteCounter</span><span>++</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">                    }
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">                    </span><span style="color:#65737e;">//标记位首位若为非0 则至少以2个1开始 如:110XXXXX...........1111110X　
+</span><span style="color:#eff1f5;">                    </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">charByteCounter </span><span>== </span><span style="color:#d08770;">1 </span><span>|| </span><span style="color:#bf616a;">charByteCounter </span><span>&gt; </span><span style="color:#d08770;">6</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">                    {
+</span><span style="color:#eff1f5;">                        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">                    }
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">                }
+</span><span style="color:#eff1f5;">            }
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">else
+</span><span style="color:#eff1f5;">            {
+</span><span style="color:#eff1f5;">                </span><span style="color:#65737e;">//若是UTF-8 此时第一位必须为1
+</span><span style="color:#eff1f5;">                </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">((</span><span style="color:#bf616a;">curByte </span><span>&amp; </span><span style="color:#d08770;">0xC0</span><span style="color:#eff1f5;">) </span><span>!= </span><span style="color:#d08770;">0x80</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">                {
+</span><span style="color:#eff1f5;">                    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">                }
+</span><span style="color:#eff1f5;">                </span><span style="color:#bf616a;">charByteCounter</span><span>--</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">            }
+</span><span style="color:#eff1f5;">        }
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">if </span><span style="color:#eff1f5;">(</span><span style="color:#bf616a;">charByteCounter </span><span>&gt; </span><span style="color:#d08770;">1</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">        {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">throw </span><span>new </span><span style="color:#eff1f5;">Exception(</span><span>&quot;</span><span style="color:#a3be8c;">非预期的byte格式</span><span>&quot;</span><span style="color:#eff1f5;">);
+</span><span style="color:#eff1f5;">        }
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">true</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">    }
+</span><span style="color:#eff1f5;">   
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public bool </span><span style="color:#bf616a;">IsReusable </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">get </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span style="color:#eff1f5;">;
+</span><span style="color:#eff1f5;">        }
+</span><span style="color:#eff1f5;">    }
+</span><span style="color:#eff1f5;">
+</span><span style="color:#eff1f5;">}
+</span></code></pre>
+<p>可以看出这里只是简单判断了是否<code>uft-8</code>编码，也许你需要更复杂的编码探测程序，这不是本文探讨的内容。</p>
+<p>希望本文对有相同问题困扰的朋友有所帮助。</p>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/c/">#c#</a>
+            
+            <a href="https://blog.dotone.top/tags/asp-net/">#asp.net</a>
+            
+            <a href="https://blog.dotone.top/tags/encoding/">#encoding</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

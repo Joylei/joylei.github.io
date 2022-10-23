@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - fslex和fsyacc的简单应用：四则运算</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;fslex-fsyacc-1&#x2F;">fslex和fsyacc的简单应用：四则运算</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>3 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-07-21</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>定义词法规则:</p>
+<p>Lexer.fsl</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">{
+</span><span>module wowin.Lexer
+</span><span>open System
+</span><span>open Microsoft.FSharp.Text.Lexing
+</span><span>
+</span><span>open wowin.Parser
+</span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">num </span><span style="color:#b48ead;">= [</span><span style="color:#a3be8c;">&#39;0&#39;</span><span style="color:#b48ead;">-</span><span style="color:#a3be8c;">&#39;9&#39;</span><span style="color:#b48ead;">]+
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">intNum </span><span style="color:#b48ead;">= </span><span style="color:#a3be8c;">&#39;-&#39;</span><span>? num
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">floatNum </span><span style="color:#b48ead;">= </span><span style="color:#a3be8c;">&#39;-&#39;</span><span>? num </span><span style="color:#b48ead;">(</span><span style="color:#a3be8c;">&#39;.&#39;</span><span> num</span><span style="color:#b48ead;">)</span><span>? </span><span style="color:#b48ead;">([</span><span style="color:#a3be8c;">&#39;e&#39; &#39;E&#39;</span><span style="color:#b48ead;">]</span><span> num</span><span style="color:#b48ead;">)</span><span>?
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">whitespace </span><span style="color:#b48ead;">= </span><span style="color:#a3be8c;">&#39; &#39; </span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;\t&#39;
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">newline </span><span style="color:#b48ead;">= </span><span style="color:#a3be8c;">&#39;\n&#39; </span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;\r&#39; &#39;\n&#39;
+</span><span>rule token </span><span style="color:#b48ead;">=</span><span> parse
+</span><span style="color:#b48ead;">|</span><span> intNum </span><span style="color:#b48ead;">{</span><span> INT </span><span style="color:#b48ead;">(</span><span>int </span><span style="color:#b48ead;">(new</span><span> String</span><span style="color:#b48ead;">(</span><span>lexbuf.Lexeme</span><span style="color:#b48ead;">))) }
+</span><span style="color:#b48ead;">|</span><span> floatNum </span><span style="color:#b48ead;">{</span><span> FLOAT </span><span style="color:#b48ead;">(</span><span>float </span><span style="color:#b48ead;">(new</span><span> String</span><span style="color:#b48ead;">(</span><span>lexbuf.Lexeme</span><span style="color:#b48ead;">))) }
+</span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;(&#39; </span><span style="color:#b48ead;">{</span><span> LPAREN</span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;)&#39; </span><span style="color:#b48ead;">{</span><span> RPAREN</span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;+&#39; </span><span style="color:#b48ead;">{</span><span> ADD </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;-&#39; </span><span style="color:#b48ead;">{</span><span> SUB </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;*&#39; </span><span style="color:#b48ead;">{</span><span> MUL </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">| </span><span style="color:#a3be8c;">&#39;/&#39; </span><span style="color:#b48ead;">{</span><span> DIV </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">|</span><span> whitespace </span><span style="color:#b48ead;">{</span><span> token lexbuf </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">|</span><span> newline </span><span style="color:#b48ead;">{</span><span> token lexbuf </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">|</span><span> eof </span><span style="color:#b48ead;">{</span><span> EOF </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">| _ {</span><span> failwithf &quot;</span><span style="color:#a3be8c;">unrecognized input: &#39;</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;">&#39;</span><span>&quot; </span><span style="color:#b48ead;">(new</span><span> String</span><span style="color:#b48ead;">(</span><span>lexbuf.Lexeme</span><span style="color:#b48ead;">)) }
+</span></code></pre>
+<p>通过命令 fslex Lexer.fsl --unicode 生成Lexer.fs文件。默认生成Lexer是LexBuffer<byte>类型，使用--unicode程序处理unicode文件，是LexBuffer<char>类型</p>
+<p>定义语法树：</p>
+<p>Ast.fs</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">module </span><span style="color:#8fa1b3;">wowin.Ast
+</span><span style="color:#b48ead;">type </span><span>expr </span><span style="color:#b48ead;">=
+</span><span style="color:#b48ead;">|</span><span> Int </span><span style="color:#b48ead;">of </span><span>int
+</span><span style="color:#b48ead;">|</span><span> Float </span><span style="color:#b48ead;">of </span><span>float
+</span><span style="color:#b48ead;">|</span><span> Add </span><span style="color:#b48ead;">of </span><span>expr </span><span style="color:#b48ead;">* </span><span>expr
+</span><span style="color:#b48ead;">|</span><span> Sub </span><span style="color:#b48ead;">of </span><span>expr </span><span style="color:#b48ead;">* </span><span>expr
+</span><span style="color:#b48ead;">|</span><span> Mul </span><span style="color:#b48ead;">of </span><span>expr </span><span style="color:#b48ead;">* </span><span>expr
+</span><span style="color:#b48ead;">|</span><span> Div </span><span style="color:#b48ead;">of </span><span>expr </span><span style="color:#b48ead;">* </span><span>expr
+</span></code></pre>
+<p>定义语法规则：</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span>Parser.fsy
+</span><span>%</span><span style="color:#b48ead;">{
+</span><span>open wowin.Ast
+</span><span>%</span><span style="color:#b48ead;">}
+</span><span>
+</span><span style="color:#65737e;">// The start token becomes a parser function in the compiled code.
+</span><span>%start start
+</span><span>
+</span><span style="color:#65737e;">// These are the terminal tokens of the grammar along with the types of
+</span><span style="color:#65737e;">// the data carried by each token:
+</span><span>%token </span><span style="color:#b48ead;">&lt;</span><span>int</span><span style="color:#b48ead;">&gt;</span><span> INT
+</span><span>%token </span><span style="color:#b48ead;">&lt;</span><span>float</span><span style="color:#b48ead;">&gt;</span><span> FLOAT
+</span><span>%token ADD SUB MUL DIV
+</span><span>%token LPAREN RPAREN
+</span><span>%token EOF
+</span><span>
+</span><span style="color:#65737e;">// Associativity and Precedences - Lowest precedence comes first
+</span><span>%left ADD SUB
+</span><span>%left MUL DIV
+</span><span>
+</span><span style="color:#65737e;">// This is the type of the data produced by a successful reduction
+</span><span style="color:#65737e;">// of the &#39;start&#39; symbol:
+</span><span>%</span><span style="color:#b48ead;">type &lt;</span><span>wowin.Ast.expr</span><span style="color:#b48ead;">&gt; </span><span>start
+</span><span>
+</span><span>%%
+</span><span>
+</span><span>start</span><span style="color:#b48ead;">:</span><span> Expr EOF </span><span style="color:#b48ead;">{</span><span> $</span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">}
+</span><span>Expr</span><span style="color:#b48ead;">:
+</span><span style="color:#b48ead;">|</span><span> Expr ADD Expr </span><span style="color:#b48ead;">{</span><span> Add </span><span style="color:#b48ead;">(</span><span>$</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">,</span><span> $</span><span style="color:#d08770;">3</span><span style="color:#b48ead;">) }
+</span><span style="color:#b48ead;">|</span><span> Expr SUB Expr </span><span style="color:#b48ead;">{</span><span> Sub </span><span style="color:#b48ead;">(</span><span>$</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">,</span><span> $</span><span style="color:#d08770;">3</span><span style="color:#b48ead;">) }
+</span><span style="color:#b48ead;">|</span><span> Expr MUL Expr </span><span style="color:#b48ead;">{</span><span> Mul </span><span style="color:#b48ead;">(</span><span>$</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">,</span><span> $</span><span style="color:#d08770;">3</span><span style="color:#b48ead;">) }
+</span><span style="color:#b48ead;">|</span><span> Expr DIV Expr </span><span style="color:#b48ead;">{</span><span> Div </span><span style="color:#b48ead;">(</span><span>$</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">,</span><span> $</span><span style="color:#d08770;">3</span><span style="color:#b48ead;">) }
+</span><span style="color:#b48ead;">|</span><span> FLOAT </span><span style="color:#b48ead;">{</span><span> Float $</span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">|</span><span> INT </span><span style="color:#b48ead;">{</span><span> Int $</span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">}
+</span><span style="color:#b48ead;">|</span><span> LPAREN Expr RPAREN </span><span style="color:#b48ead;">{</span><span> $</span><span style="color:#d08770;">2 </span><span style="color:#b48ead;">}
+</span></code></pre>
+<p>通过命令<code>fsyacc Parser.fsy --module wowin.Parser</code>生成Parser.fs和Parser.fsi文件。
+<code>--module</code>选项是为了指定生成的Parser的模块名称。</p>
+<p>主程序：</p>
+<p>Program.fs</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">module </span><span style="color:#8fa1b3;">main
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">Microsoft.FSharp.Text.Lexing
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">wowin.Ast
+</span><span>
+</span><span style="color:#65737e;">//解析表达式
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">parseText text </span><span style="color:#b48ead;">=
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">lexbuf </span><span style="color:#b48ead;">=</span><span> LexBuffer</span><span style="color:#b48ead;">&lt;_&gt;</span><span>.FromString text
+</span><span style="color:#b48ead;">try
+</span><span>    wowin.Parser.start wowin.Lexer.token lexbuf
+</span><span style="color:#b48ead;">with</span><span> e </span><span style="color:#b48ead;">-&gt;
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">pos </span><span style="color:#b48ead;">=</span><span> lexbuf.EndPos
+</span><span>    failwithf &quot;</span><span style="color:#a3be8c;">Error near line </span><span style="color:#b48ead;">%d</span><span style="color:#a3be8c;">, character </span><span style="color:#b48ead;">%d</span><span style="color:#d08770;">\n</span><span>&quot; pos.Line pos.Column
+</span><span>
+</span><span style="color:#65737e;">//计算表达式
+</span><span style="color:#b48ead;">let rec </span><span style="color:#bf616a;">evalExpr</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">exp</span><span style="color:#b48ead;">:</span><span>wowin.Ast.expr</span><span style="color:#b48ead;">):</span><span>float </span><span style="color:#b48ead;">=
+</span><span>    </span><span style="color:#b48ead;">match</span><span> exp </span><span style="color:#b48ead;">with
+</span><span>    </span><span style="color:#b48ead;">|</span><span> Int v </span><span style="color:#b48ead;">-&gt;</span><span> float v
+</span><span>    </span><span style="color:#b48ead;">|</span><span> Float v </span><span style="color:#b48ead;">-&gt;</span><span> v
+</span><span>    </span><span style="color:#b48ead;">|</span><span> Add</span><span style="color:#b48ead;">(</span><span>lft</span><span style="color:#b48ead;">,</span><span>rgt</span><span style="color:#b48ead;">) -&gt; (</span><span>evalExpr lft</span><span style="color:#b48ead;">) + (</span><span>evalExpr rgt</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#b48ead;">|</span><span> Sub</span><span style="color:#b48ead;">(</span><span>lft</span><span style="color:#b48ead;">,</span><span>rgt</span><span style="color:#b48ead;">) -&gt; (</span><span>evalExpr lft</span><span style="color:#b48ead;">) - (</span><span>evalExpr rgt</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#b48ead;">|</span><span> Mul</span><span style="color:#b48ead;">(</span><span>lft</span><span style="color:#b48ead;">,</span><span>rgt</span><span style="color:#b48ead;">) -&gt; (</span><span>evalExpr lft</span><span style="color:#b48ead;">) * (</span><span>evalExpr rgt</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#b48ead;">|</span><span> Div</span><span style="color:#b48ead;">(</span><span>lft</span><span style="color:#b48ead;">,</span><span>rgt</span><span style="color:#b48ead;">) -&gt; (</span><span>evalExpr lft</span><span style="color:#b48ead;">) / (</span><span>evalExpr rgt</span><span style="color:#b48ead;">)
+</span><span>
+</span><span style="color:#96b5b4;">[&lt; EntryPoint &gt;]
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">main args</span><span style="color:#b48ead;">=
+</span><span>    </span><span style="color:#b48ead;">let rec </span><span style="color:#bf616a;">loop</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">detail</span><span style="color:#b48ead;">)=
+</span><span>        printf &quot;</span><span style="color:#a3be8c;">&gt;</span><span>&quot;
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">line </span><span style="color:#b48ead;">=</span><span> Console.ReadLine</span><span style="color:#d08770;">()
+</span><span>        </span><span style="color:#b48ead;">match</span><span> line </span><span style="color:#b48ead;">with
+</span><span>        </span><span style="color:#b48ead;">| </span><span>&quot;</span><span style="color:#a3be8c;">#quit</span><span>&quot; </span><span style="color:#b48ead;">-&gt; </span><span style="color:#d08770;">()
+</span><span>        </span><span style="color:#b48ead;">| _ -&gt;
+</span><span>        </span><span style="color:#b48ead;">try
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">exp </span><span style="color:#b48ead;">=</span><span> parseText line
+</span><span>            evalExpr exp
+</span><span>            </span><span style="color:#b48ead;">|&gt;</span><span>printfn &quot;</span><span style="color:#a3be8c;">val it=</span><span style="color:#b48ead;">%f</span><span>&quot;
+</span><span>            </span><span style="color:#b48ead;">if</span><span> detail </span><span style="color:#b48ead;">then
+</span><span>                printfn &quot;</span><span style="color:#d08770;">\t</span><span style="color:#a3be8c;">expr=</span><span style="color:#b48ead;">%A</span><span>&quot; exp
+</span><span>        </span><span style="color:#b48ead;">with
+</span><span>            </span><span style="color:#b48ead;">|</span><span> ex </span><span style="color:#b48ead;">-&gt;
+</span><span>            printfn &quot;</span><span style="color:#a3be8c;">msg:</span><span style="color:#b48ead;">%s</span><span>&quot; ex.Message
+</span><span>        loop</span><span style="color:#b48ead;">(</span><span>detail</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">start detail </span><span style="color:#b48ead;">=
+</span><span>        printfn &quot;</span><span style="color:#a3be8c;">use #quit to exit</span><span>&quot;
+</span><span>        loop</span><span style="color:#b48ead;">(</span><span>detail</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#b48ead;">if</span><span> args.Length </span><span style="color:#b48ead;">&gt; </span><span style="color:#d08770;">0 </span><span style="color:#b48ead;">then
+</span><span>        </span><span style="color:#b48ead;">match</span><span> args.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">] with
+</span><span>        </span><span style="color:#b48ead;">| </span><span>&quot;</span><span style="color:#a3be8c;">--detail</span><span>&quot; </span><span style="color:#b48ead;">| </span><span>&quot;</span><span style="color:#a3be8c;">-d</span><span>&quot; </span><span style="color:#b48ead;">-&gt;
+</span><span>            start</span><span style="color:#b48ead;">(</span><span style="color:#d08770;">true</span><span style="color:#b48ead;">)
+</span><span>        </span><span style="color:#b48ead;">| </span><span>&quot;</span><span style="color:#a3be8c;">--help</span><span>&quot; </span><span style="color:#b48ead;">| </span><span>&quot;</span><span style="color:#a3be8c;">-h</span><span>&quot; </span><span style="color:#b48ead;">-&gt;
+</span><span>            printfn &quot;</span><span style="color:#a3be8c;">wowin calc</span><span style="color:#d08770;">\r\n</span><span style="color:#a3be8c;">\
+</span><span style="color:#a3be8c;">            </span><span style="color:#d08770;">\t</span><span style="color:#a3be8c;">options:</span><span style="color:#d08770;">\r\n</span><span style="color:#a3be8c;">\
+</span><span style="color:#a3be8c;">            </span><span style="color:#d08770;">\t</span><span style="color:#a3be8c;">--detail:print expression tree</span><span style="color:#d08770;">\r\n</span><span style="color:#a3be8c;">\
+</span><span style="color:#a3be8c;">            </span><span style="color:#d08770;">\t</span><span style="color:#a3be8c;">--help:show help</span><span style="color:#d08770;">\r\n</span><span style="color:#a3be8c;">\
+</span><span style="color:#a3be8c;">            </span><span style="color:#d08770;">\t</span><span style="color:#a3be8c;">-d:short for --detail</span><span style="color:#d08770;">\r\n</span><span style="color:#a3be8c;">\
+</span><span style="color:#a3be8c;">            </span><span style="color:#d08770;">\t</span><span style="color:#a3be8c;">-h:short for -- help</span><span>&quot;
+</span><span>        </span><span style="color:#b48ead;">| _ -&gt;</span><span> start</span><span style="color:#b48ead;">(</span><span style="color:#d08770;">false</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#b48ead;">else
+</span><span>        start</span><span style="color:#b48ead;">(</span><span style="color:#d08770;">false</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#d08770;">0
+</span></code></pre>
+<p>运行截图：</p>
+<p><img src="https://blog.dotone.top/blog/it/fslex-fsyacc-1/dd7c211f99001488a6866959.jpg" alt="dd7c211f99001488a6866959.jpg" /></p>
+<p>问题：</p>
+<ul>
+<li>表达式中有减法运算时，如果 - 紧跟着数字，它们一起被识别成了负数，这样就产生了错误。</li>
+</ul>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/programming/">#Programming</a>
+            
+            <a href="https://blog.dotone.top/tags/f/">#F#</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

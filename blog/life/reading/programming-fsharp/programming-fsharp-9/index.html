@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - 《Programming F#》读书笔记九</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-9/#suo-yin" class="toc-link">索引</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-9/#bi-ji" class="toc-link">笔记</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;life&#x2F;reading&#x2F;programming-fsharp&#x2F;programming-fsharp-9&#x2F;">《Programming F#》读书笔记九</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>5 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-06-27</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <h2 id="suo-yin">索引</h2>
+<ul>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-1/">《Programming F#》读书笔记一</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-2/">《Programming F#》读书笔记二</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-3/">《Programming F#》读书笔记三</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-4/">《Programming F#》读书笔记四</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/">《Programming F#》读书笔记五</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-6/">《Programming F#》读书笔记六</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-7/">《Programming F#》读书笔记七</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-8/">《Programming F#》读书笔记八</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-9/">《Programming F#》读书笔记九</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-10/">《Programming F#》读书笔记十</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/">《Programming F#》读书笔记十一</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-12/">《Programming F#》读书笔记十二</a></li>
+</ul>
+<h2 id="bi-ji">笔记</h2>
+<p>List.reduce与List.fold</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>List.reduce:以list的第一个元素作为初始值，要求list中至少有一个元素，否则抛出异常System.ArgumentException。聚合的结果的类型必须与list中的元素的类型相同。
+</span><span>
+</span><span>如：
+</span><span>
+</span><span>&gt; let acc r n = r + n;;
+</span><span>
+</span><span>val acc : int -&gt; int -&gt; int
+</span><span>
+</span><span>&gt; List.reduce acc [];;
+</span><span>System.ArgumentException: The input list was empty.
+</span><span>Parameter name: list
+</span><span>   at Microsoft.FSharp.Collections.ListModule.Reduce[T](FSharpFunc`2 reduction, FSharpList`1 list)
+</span><span>   at &lt;StartupCode$FSI_0006&gt;.$FSI_0006.main@()
+</span><span>Stopped due to error
+</span><span>&gt; List.reduce acc [1];;
+</span><span>val it : int = 1
+</span><span>&gt; List.reduce acc [1..5];;
+</span><span>val it : int = 15
+</span><span>
+</span><span>&gt; let acc (r:string) n = r + n.ToString();;
+</span><span>
+</span><span>val acc : string -&gt; &#39;a -&gt; string
+</span><span>
+</span><span>&gt; List.reduce acc [1..5];;
+</span><span>
+</span><span>List.reduce acc [1..5];;
+</span><span>----------------^^^^^^
+</span><span>
+</span><span>stdin(11,17): error FS0001: The type &#39;string&#39; does not support any operators named &#39;get_One&#39;
+</span><span>
+</span><span>List.fold:需要指定初始值，聚合结果的类型不必与list中的元素的类型相同，list也可以为空集合。
+</span><span>
+</span><span>&gt; List.fold acc &quot;&quot; [];;
+</span><span>val it : string = &quot;&quot;
+</span><span>&gt; List.fold acc &quot;&quot; [1..5];;
+</span><span>val it : string = &quot;12345&quot;
+</span></code></pre>
+<p>函数编程语言关键特征：</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>不可变数据
+</span><span>组合使用函数
+</span><span>函数可用作数据
+</span><span>延迟计算
+</span><span>模式匹配
+</span></code></pre>
+<p>匿名函数</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>C#中叫lambda表达式
+</span><span>
+</span><span>let add = fun x y-&gt; x+y
+</span><span>
+</span><span>add 3 4
+</span></code></pre>
+<p>部分函数</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&gt; let add x y = x + y;;
+</span><span>
+</span><span>val add : int -&gt; int -&gt; int
+</span><span>
+</span><span>&gt; let part = add 3;;
+</span><span>
+</span><span>val part : (int -&gt; int)
+</span><span>
+</span><span>&gt; let c = part 4;;
+</span><span>
+</span><span>val c : int = 7
+</span><span>
+</span><span>在C#中进行类似的操作：
+</span><span>             Func&lt;int,int,int&gt; add = (x,y)=&gt;x+y;
+</span><span>             Func&lt;int,int&gt; part = y=&gt;add(3,y);
+</span><span>             int c = part(4);
+</span><span>             Console.WriteLine(c);如果只有一个参数，可以使用匿名部分函数来避免使用lambda表达式：
+</span><span>
+</span><span>&gt; List.iter (printfn &quot;item is %d\r\n&quot;) [1..5];;
+</span><span>item is 1
+</span><span>
+</span><span>item is 2
+</span><span>
+</span><span>item is 3
+</span><span>
+</span><span>item is 4
+</span><span>
+</span><span>item is 5
+</span><span>
+</span><span>val it : unit = ()
+</span></code></pre>
+<p>Pipe-Forward Operator（|&gt;）</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>可以把调整书写顺序，把最后一个参数写在前面，使得代码看起来更顺畅和简单。
+</span><span>
+</span><span>&gt; let compute dir =
+</span><span>    dir
+</span><span>    |&gt;Directory.GetFiles
+</span><span>    |&gt;Array.map (fun file-&gt; new FileInfo(file))
+</span><span>    |&gt;Array.map (fun info-&gt;info.Length)
+</span><span>    |&gt;Array.sum;;
+</span><span>
+</span><span>val compute : string -&gt; int64
+</span><span>
+</span><span>&gt; compute @&quot;D:\&quot;;;
+</span><span>val it : int64 = 2220474411L
+</span><span>
+</span><span>&gt; let computeOrdered dir=
+</span><span>    Array.sum (
+</span><span>        Array.map (fun (info:FileInfo)-&gt;info.Length)
+</span><span>            (Array.map (fun file-&gt;new FileInfo(file))
+</span><span>                (Directory.GetFiles dir)
+</span><span>            )
+</span><span>    );;
+</span><span>
+</span><span>val computeOrdered : string -&gt; int64
+</span><span>
+</span><span>&gt; computeOrdered @&quot;D:\&quot;;;
+</span><span>val it : int64 = 2220474411L
+</span></code></pre>
+<p>Forward composition operator（&gt;&gt;）</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>把嵌套调用的函数组合成一个从左到右的顺序调用的函数，它不需要在定义时指定参数，它的参数是第一个函数的参数：let f g x = f(g(x))
+</span><span>
+</span><span>&gt; let computeComposed =
+</span><span>    Directory.GetFiles
+</span><span>    &gt;&gt;Array.map (fun file-&gt; new FileInfo(file))
+</span><span>    &gt;&gt;Array.map (fun info-&gt;info.Length)
+</span><span>    &gt;&gt;Array.sum;;
+</span><span>
+</span><span>val computeComposed : (string -&gt; int64)
+</span><span>
+</span><span>&gt; computeComposed @&quot;D:\&quot;;;
+</span><span>val it : int64 = 2220474411L
+</span><span>
+</span><span>Pipe-backward operator（&lt;|）
+</span><span>
+</span><span>用于调整运算的优先级，使&lt;|右边部分先计算，可以省掉一对括号
+</span><span>
+</span><span>&gt; add 5 (add 1 2);;
+</span><span>val it : int = 8
+</span><span>&gt; add 5 &lt;| add 1 2;;
+</span><span>val it : int = 8
+</span></code></pre>
+<p>Backward composition operator(&lt;&lt;)</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>把嵌套调用的函数组合成一个从右到左的顺序调用的函数，与Forward composition operator（&gt;&gt;）的作用相反；let f g x = g(f(x))
+</span><span>
+</span><span>&gt; let computeBC =
+</span><span>    Array.sum
+</span><span>    &lt;&lt;Array.map (fun (info:FileInfo)-&gt;info.Length)
+</span><span>    &lt;&lt;Array.map (fun file-&gt; new FileInfo(file))
+</span><span>    &lt;&lt;Directory.GetFiles;;
+</span><span>
+</span><span>val computeBC : (string -&gt; int64)
+</span><span>
+</span><span>&gt; computeBC @&quot;D:\&quot;;;
+</span><span>val it : int64 = 2220474411L
+</span><span>
+</span><span>可以看出这个顺序和上文中computeOrdered函数中的调用顺序是一致的。
+</span></code></pre>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/programming/">#Programming</a>
+            
+            <a href="https://blog.dotone.top/tags/f/">#F#</a>
+            
+            <a href="https://blog.dotone.top/tags/net/">#.Net</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>
