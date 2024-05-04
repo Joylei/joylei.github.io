@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - Misc</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/categories/misc/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-09-08T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/categories/misc/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>Blog switched to zola</title>
+        <published>2020-09-08T00:00:00+00:00</published>
+        <updated>2020-09-08T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/blog-switched-to-zola/"/>
+        <id>https://blog.dotone.top/blog/it/blog-switched-to-zola/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/blog-switched-to-zola/">&lt;p&gt;My blog switched to zola today. It&#x27;s a fresh new start.&lt;&#x2F;p&gt;
+&lt;p&gt;博客切换到 &lt;code&gt;zola&lt;&#x2F;code&gt;, 重新出发。
+主题基于&lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;themes&#x2F;even&#x2F;&quot;&gt;even&lt;&#x2F;a&gt;微调，添加了&lt;code&gt;dark mode&lt;&#x2F;code&gt;。
+添加了基于&lt;code&gt;github issue&lt;&#x2F;code&gt;的评论系统&lt;a href=&quot;https:&#x2F;&#x2F;beaudar.lipk.org&#x2F;&quot;&gt;beaudar&lt;&#x2F;a&gt;。&lt;&#x2F;p&gt;
+&lt;p&gt;后续会继续整理和添加更多内容。&lt;&#x2F;p&gt;
+&lt;p&gt;到&lt;a href=&quot;https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;intro-zola&#x2F;&quot;&gt;这里&lt;&#x2F;a&gt;查看怎么使用&lt;code&gt;zola&lt;&#x2F;code&gt;。&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>Zola Introduction</title>
+        <published>2020-09-04T00:00:00+00:00</published>
+        <updated>2020-09-04T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/intro-zola/"/>
+        <id>https://blog.dotone.top/blog/it/intro-zola/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/intro-zola/">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;&quot;&gt;zola&lt;&#x2F;a&gt;是用&lt;code&gt;pure rust&lt;&#x2F;code&gt;写的静态建站工具，类似的工具有用&lt;code&gt;go&lt;&#x2F;code&gt;写的&lt;code&gt;hugo&lt;&#x2F;code&gt;。&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;an-zhuang-zola&quot;&gt;安装zola&lt;&#x2F;h1&gt;
+&lt;p&gt;可以直接下载二进制文件。也可以使用各系统对应的安装工具安装。&lt;&#x2F;p&gt;
+&lt;p&gt;MacOS&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;brew&lt;&#x2F;span&gt;&lt;span&gt; install zola
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;alpine linux:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;apk install zola
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Windows
+使用&lt;code&gt;Scoop&lt;&#x2F;code&gt;或者&lt;code&gt;Chocolatey&lt;&#x2F;code&gt;安装。&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;shi-yong&quot;&gt;使用&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;jian-li-xin-zhan-dian&quot;&gt;建立新站点&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;zola&lt;&#x2F;span&gt;&lt;span&gt; init mysite
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;这里&lt;code&gt;mysite&lt;&#x2F;code&gt;是你的站点名字，会创建对应的目录。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;mu-lu-jie-gou&quot;&gt;目录结构&lt;&#x2F;h2&gt;
+&lt;p&gt;建好后的目录结构&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;mysite
+&lt;&#x2F;span&gt;&lt;span&gt;- content
+&lt;&#x2F;span&gt;&lt;span&gt;- public
+&lt;&#x2F;span&gt;&lt;span&gt;- sass
+&lt;&#x2F;span&gt;&lt;span&gt;- static
+&lt;&#x2F;span&gt;&lt;span&gt;- templates
+&lt;&#x2F;span&gt;&lt;span&gt;- themes
+&lt;&#x2F;span&gt;&lt;span&gt;- config.toml
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;content&lt;&#x2F;code&gt;里存放markdown文件
+&lt;code&gt;public&lt;&#x2F;code&gt;里存放编译好的文件
+&lt;code&gt;sass&lt;&#x2F;code&gt; 存放自定义的sass文件
+&lt;code&gt;static&lt;&#x2F;code&gt;存放额外的静态资源
+&lt;code&gt;templates&lt;&#x2F;code&gt;存放自定义的模板文件
+&lt;code&gt;themes&lt;&#x2F;code&gt;存放下载的主题
+&lt;code&gt;config.toml&lt;&#x2F;code&gt;站点的配置文件&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;xia-zai-zhu-ti&quot;&gt;下载主题&lt;&#x2F;h2&gt;
+&lt;p&gt;官方已经有一些主题，可以到&lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;themes&#x2F;&quot;&gt;这里&lt;&#x2F;a&gt;查看。&lt;&#x2F;p&gt;
+&lt;p&gt;下载下来放在&lt;code&gt;themes&lt;&#x2F;code&gt;目录就可以了。每个主题都有使用说明，按照说明操作。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;nei-rong-xiang-guan-gai-nian&quot;&gt;内容相关概念&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;front-matter&quot;&gt;front matter&lt;&#x2F;h3&gt;
+&lt;p&gt;在markdown文件中定义的元数据区域，以&lt;code&gt;+++&lt;&#x2F;code&gt;来标识起始和结束。类似于：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;+++
+&lt;&#x2F;span&gt;&lt;span&gt;title = &amp;quot;Something new&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;date = 2017-09-25
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[taxonomies]
+&lt;&#x2F;span&gt;&lt;span&gt;categories = [&amp;quot;Prog&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;tags = [&amp;quot;rust&amp;quot;, &amp;quot;async&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;+++
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;section&quot;&gt;Section&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;content&lt;&#x2F;code&gt;目录下的任何一个目录，只要它下面有&lt;code&gt;_index.md&lt;&#x2F;code&gt;文件，那么这个目录就是一个&lt;code&gt;section&lt;&#x2F;code&gt;。
+&lt;code&gt;_index.md&lt;&#x2F;code&gt;就是元数据文件。
+&lt;code&gt;section&lt;&#x2F;code&gt;需要&lt;code&gt;section.html&lt;&#x2F;code&gt;模板来渲染内容，如果在主题的&lt;code&gt;templates&lt;&#x2F;code&gt;目录没有这个文件，按照&lt;code&gt;index.html&lt;&#x2F;code&gt;修改一个。
+不同的地方就是&lt;code&gt;index.html&lt;&#x2F;code&gt;中使用&lt;code&gt;paginator&lt;&#x2F;code&gt;变量，在&lt;code&gt;section.html&lt;&#x2F;code&gt;中使用&lt;code&gt;section&lt;&#x2F;code&gt;变量，它们的属性是一样的。&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;section&lt;&#x2F;code&gt;相关元数据定义&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;title&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;description&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sorted_by&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;none&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;section.html&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# render为true时会显示section的页面，false时不显示
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;render&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# transparent为true时内容对父section可见，false时不可见
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;transparent&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;更多内容查看&lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;documentation&#x2F;content&#x2F;section&#x2F;&quot;&gt;&lt;code&gt;section&lt;&#x2F;code&gt;定义页面&lt;&#x2F;a&gt;。&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;page&quot;&gt;Page&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;page&lt;&#x2F;code&gt;就是一个个页面。
+如果一个目录下有&lt;code&gt;index.md&lt;&#x2F;code&gt;，那么这个目录就会渲染成一个页面。例如&lt;code&gt;content\life\my-note\index.md&lt;&#x2F;code&gt;，会形成URL类似于&lt;code&gt;http:&#x2F;&#x2F;base_url&#x2F;life&#x2F;my-note&lt;&#x2F;code&gt;。
+如果文件的名字不是&lt;code&gt;index.md&lt;&#x2F;code&gt;，而是&lt;code&gt;something.md&lt;&#x2F;code&gt;，那么形成的URL类似于&lt;code&gt;http:&#x2F;&#x2F;base_url&#x2F;life&#x2F;something&lt;&#x2F;code&gt;。&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;page&lt;&#x2F;code&gt;的主要&lt;code&gt;front matter&lt;&#x2F;code&gt;属性：&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;title &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Something new&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;date &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2017-09-25
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[taxonomies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;categories &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Prog&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tags &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rust&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;zola&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;每个页面基本上只设置上述属性就够了，更多查看&lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;documentation&#x2F;content&#x2F;page&#x2F;#front-matter&quot;&gt;这里&lt;&#x2F;a&gt;。&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;jing-tai-zi-yuan&quot;&gt;静态资源&lt;&#x2F;h3&gt;
+&lt;p&gt;静态资源可以在markdown文件中用相对路径引用，&lt;code&gt;zola&lt;&#x2F;code&gt;在build时会把资源复制到&lt;code&gt;public&lt;&#x2F;code&gt;目录对应的位置。&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;yu-fa-gao-liang&quot;&gt;语法高亮&lt;&#x2F;h3&gt;
+&lt;p&gt;需要在&lt;code&gt;config.toml&lt;&#x2F;code&gt;启用，并配置一个主题。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;highlight_code &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;highlight_theme &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;material-dark&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;更多语法高亮主题看&lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;documentation&#x2F;getting-started&#x2F;configuration&#x2F;#syntax-highlighting&quot;&gt;这里&lt;&#x2F;a&gt;。&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;taxonomies&quot;&gt;Taxonomies&lt;&#x2F;h3&gt;
+&lt;p&gt;在config.toml中配置分类和标签。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;taxonomies = [
+&lt;&#x2F;span&gt;&lt;span&gt;    {name = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;categories&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, rss = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;},
+&lt;&#x2F;span&gt;&lt;span&gt;    {name = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;tags&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, rss = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;},
+&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;feed&quot;&gt;Feed&lt;&#x2F;h3&gt;
+&lt;p&gt;在 config.toml中配置：&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;generate_feed &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;lian-jie-yu-yin-yong&quot;&gt;链接与引用&lt;&#x2F;h3&gt;
+&lt;p&gt;锚点&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;zola&lt;&#x2F;code&gt;会为内容中的标题生成唯一锚点。如：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;# Something exciting! &amp;lt;- something-exciting
+&lt;&#x2F;span&gt;&lt;span&gt;## Example code &amp;lt;- example-code
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;# Something else &amp;lt;- something-else
+&lt;&#x2F;span&gt;&lt;span&gt;## Example code &amp;lt;- example-code-1
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;也可以手动指定锚点:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;# Something manual! {#manual}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;内部链接引用
+&lt;code&gt;content&lt;&#x2F;code&gt;目录下的页面可以直接以&lt;code&gt;@&#x2F;&lt;&#x2F;code&gt;开头引用。例如：
+&lt;code&gt;content&#x2F;pages&#x2F;about.md&lt;&#x2F;code&gt; 这样引用 &lt;code&gt;[my link](@&#x2F;pages&#x2F;about.md)&lt;&#x2F;code&gt;。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;serve&quot;&gt;Serve&lt;&#x2F;h2&gt;
+&lt;p&gt;本地&lt;code&gt;serve&lt;&#x2F;code&gt;预览：&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;zola&lt;&#x2F;span&gt;&lt;span&gt; serve&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --interface&lt;&#x2F;span&gt;&lt;span&gt; 0.0.0.0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --port&lt;&#x2F;span&gt;&lt;span&gt; 2000
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;build&quot;&gt;Build&lt;&#x2F;h2&gt;
+&lt;p&gt;构建静态页面：&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;zola&lt;&#x2F;span&gt;&lt;span&gt; build
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;deploy-to-github&quot;&gt;Deploy to github&lt;&#x2F;h2&gt;
+&lt;p&gt;使用github actions部署。
+简单的来说&lt;code&gt;github&lt;&#x2F;code&gt;允许选择哪个分支来发布。
+你可以把所有代码上传到某个分支，然后使用&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;shalzz&#x2F;zola-deploy-action&quot;&gt;&lt;code&gt;zola-deploy-action&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;来自动构建和发布。&lt;&#x2F;p&gt;
+&lt;p&gt;这里示例的是用&lt;code&gt;code&lt;&#x2F;code&gt;分支存放所有代码，用&lt;code&gt;master&lt;&#x2F;code&gt;分支做&lt;code&gt;Github Pages&lt;&#x2F;code&gt;。&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;在&lt;code&gt;Github&lt;&#x2F;code&gt;创建一个&lt;code&gt;Personal Access Token&lt;&#x2F;code&gt;: &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;settings&#x2F;tokens&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;settings&#x2F;tokens&lt;&#x2F;a&gt;，记住这个&lt;code&gt;token&lt;&#x2F;code&gt;的值&lt;&#x2F;li&gt;
+&lt;li&gt;把这个&lt;code&gt;token&lt;&#x2F;code&gt;的值添加到项目的设置的&lt;code&gt;Secrets&lt;&#x2F;code&gt;里，并且名字为&lt;code&gt;TOKEN&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;添加&lt;code&gt;github action&lt;&#x2F;code&gt;：在``code&lt;code&gt;分支创建&lt;&#x2F;code&gt;.github&#x2F;workflows&#x2F;zola.yml`，内容为&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;on:
+&lt;&#x2F;span&gt;&lt;span&gt;  push:
+&lt;&#x2F;span&gt;&lt;span&gt;    branches:
+&lt;&#x2F;span&gt;&lt;span&gt;      - code
+&lt;&#x2F;span&gt;&lt;span&gt;  pull_request:
+&lt;&#x2F;span&gt;&lt;span&gt;jobs:
+&lt;&#x2F;span&gt;&lt;span&gt;  build:
+&lt;&#x2F;span&gt;&lt;span&gt;    runs-on: ubuntu-latest
+&lt;&#x2F;span&gt;&lt;span&gt;    if: github.ref != &amp;#39;refs&#x2F;heads&#x2F;code&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;    steps:
+&lt;&#x2F;span&gt;&lt;span&gt;      - name: &amp;#39;Checkout&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;        uses: actions&#x2F;checkout@main
+&lt;&#x2F;span&gt;&lt;span&gt;      - name: &amp;#39;Build only&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;        uses: shalzz&#x2F;zola-deploy-action@v0.10.1
+&lt;&#x2F;span&gt;&lt;span&gt;        env:
+&lt;&#x2F;span&gt;&lt;span&gt;          BUILD_DIR: .
+&lt;&#x2F;span&gt;&lt;span&gt;          TOKEN: ${{ secrets.TOKEN }}
+&lt;&#x2F;span&gt;&lt;span&gt;          BUILD_ONLY: true
+&lt;&#x2F;span&gt;&lt;span&gt;  build_and_deploy:
+&lt;&#x2F;span&gt;&lt;span&gt;    runs-on: ubuntu-latest
+&lt;&#x2F;span&gt;&lt;span&gt;    if: github.ref == &amp;#39;refs&#x2F;heads&#x2F;code&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;    steps:
+&lt;&#x2F;span&gt;&lt;span&gt;      - name: &amp;#39;Checkout&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;        uses: actions&#x2F;checkout@main
+&lt;&#x2F;span&gt;&lt;span&gt;      - name: &amp;#39;Build and deploy&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;        uses: shalzz&#x2F;zola-deploy-action@v0.10.1
+&lt;&#x2F;span&gt;&lt;span&gt;        env:
+&lt;&#x2F;span&gt;&lt;span&gt;          PAGES_BRANCH: master
+&lt;&#x2F;span&gt;&lt;span&gt;          BUILD_DIR: .
+&lt;&#x2F;span&gt;&lt;span&gt;          TOKEN: ${{ secrets.TOKEN }}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;ul&gt;
+&lt;li&gt;当你对远程仓库执行&lt;code&gt;pull&lt;&#x2F;code&gt;或者&lt;code&gt;push&lt;&#x2F;code&gt;代码到&lt;code&gt;code&lt;&#x2F;code&gt;分支时就会自动运行&lt;code&gt;workflow&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;more&quot;&gt;More&lt;&#x2F;h2&gt;
+&lt;p&gt;到&lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;&quot;&gt;官网&lt;&#x2F;a&gt;去探索更多内容吧。&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - ubuntu</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/ubuntu/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-06-14T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/ubuntu/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>WSL ubuntu add user</title>
+        <published>2020-06-14T00:00:00+00:00</published>
+        <updated>2020-06-14T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/notes/wsl-ubuntu-add-user/"/>
+        <id>https://blog.dotone.top/notes/wsl-ubuntu-add-user/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/notes/wsl-ubuntu-add-user/">&lt;h2 id=&quot;da-kai-ming-ling-xing-yi-rootyong-hu-yun-xing-wsl&quot;&gt;打开命令行，以root用户运行wsl&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;C:\WINDOWS\system32&amp;gt;wsl -u root
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;tian-jia-user&quot;&gt;添加 user&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;root@MYPC:&#x2F;mnt&#x2F;c&#x2F;WINDIWS&#x2F;system32# adduser lei
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;按照提示输入用户名和密码&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;gei-xin-yong-hu-tian-jia-sudoquan-xian&quot;&gt;给新用户添加sudo权限&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;root@MYPC:&#x2F;mnt&#x2F;c&#x2F;WINDIWS&#x2F;system32# usermod -G sudo lei
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;tui-chu-dang-qian-wsl&quot;&gt;退出当前wsl&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;exit
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;qie-huan-mo-ren-yong-hu&quot;&gt;切换默认用户&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;C:\WINDOWS\system32&amp;gt;ubuntu2004 config --default-user lei
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;这里ubuntu版本是20.04，如果是ubuntu 18.04，那么运行的是&lt;code&gt;ubuntu1804 config --default-user &amp;lt;username&amp;gt;&lt;&#x2F;code&gt;；以此类推，如果是其它发行版，改为相应的发行版名称+版本号。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;qi-dong-xin-de-wsl-yan-zheng-xin-yong-hu-he-sudoshi-fou-you-xiao&quot;&gt;启动新的wsl，验证新用户和sudo是否有效&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;C:\WINDOWS\system32&amp;gt;wsl
+&lt;&#x2F;span&gt;&lt;span&gt;lei@MYPC:&#x2F;mnt&#x2F;c&#x2F;WINDIWS&#x2F;system32#sudo apt update
+&lt;&#x2F;span&gt;&lt;span&gt;[sudo] password for lei:
+&lt;&#x2F;span&gt;&lt;span&gt;Get:1 http:&#x2F;&#x2F;archive.ubuntu.com&#x2F;ubuntu focal InRelease [265 kB]
+&lt;&#x2F;span&gt;&lt;span&gt;Get:2 http:&#x2F;&#x2F;security.ubuntu.com&#x2F;ubuntu focal-security InRelease [107 kB]
+&lt;&#x2F;span&gt;&lt;span&gt;Get:3 http:&#x2F;&#x2F;security.ubuntu.com&#x2F;ubuntu focal-security&#x2F;main amd64 Packages [103 kB]
+&lt;&#x2F;span&gt;&lt;span&gt;Get:4 http:&#x2F;&#x2F;security.ubuntu.com&#x2F;ubuntu focal-security&#x2F;main Translation-en [38.5 kB]
+&lt;&#x2F;span&gt;&lt;span&gt;Get:5 http:&#x2F;&#x2F;archive.ubuntu.com&#x2F;ubuntu focal-updates InRelease [107 kB]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;can-kao&quot;&gt;参考&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.microsoft.com&#x2F;zh-cn&#x2F;windows&#x2F;wsl&#x2F;wsl-config&quot;&gt;https:&#x2F;&#x2F;docs.microsoft.com&#x2F;zh-cn&#x2F;windows&#x2F;wsl&#x2F;wsl-config&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.tenforums.com&#x2F;tutorials&#x2F;128052-add-user-windows-subsystem-linux-wsl-distro-windows-10-a.html&quot;&gt;https:&#x2F;&#x2F;www.tenforums.com&#x2F;tutorials&#x2F;128052-add-user-windows-subsystem-linux-wsl-distro-windows-10-a.html&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.thewindowsclub.com&#x2F;how-to-set-default-user-switch-user-and-remove-a-user-for-wsl&#x2F;&quot;&gt;https:&#x2F;&#x2F;www.thewindowsclub.com&#x2F;how-to-set-default-user-switch-user-and-remove-a-user-for-wsl&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>WSL ubuntu build padavan</title>
+        <published>2020-05-10T00:00:00+00:00</published>
+        <updated>2020-05-10T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/WSL-ubuntu-build-padavan/"/>
+        <id>https://blog.dotone.top/blog/it/WSL-ubuntu-build-padavan/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/WSL-ubuntu-build-padavan/">&lt;p&gt;首先说结论，折腾了半天，报了一堆错，放弃了。建议直接完整ubuntu环境，很顺利编译。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;git-repository&quot;&gt;git repository&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;https:&#x2F;&#x2F;gitlab.com&#x2F;dm38&#x2F;padavan-ng.git
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;bian-yi&quot;&gt;编译&lt;&#x2F;h2&gt;
+&lt;p&gt;首先遇到的问题是不能 build toolchain。
+运行&lt;code&gt;.&#x2F;clean_sources.sh&lt;&#x2F;code&gt;，报错：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;=================REMOVE-OLD-BUILD-TREE==================
+&lt;&#x2F;span&gt;&lt;span&gt;make: &#x2F;usr&#x2F;bin&#x2F;bash: Command not found
+&lt;&#x2F;span&gt;&lt;span&gt;make: &#x2F;usr&#x2F;bin&#x2F;bash: Command not found
+&lt;&#x2F;span&gt;&lt;span&gt;&#x2F;mnt&#x2F;d&#x2F;padavan-ng&#x2F;toolchain&#x2F;scripts&#x2F;scripts.mk:63: recipe for target &amp;#39;distclean&amp;#39; failed
+&lt;&#x2F;span&gt;&lt;span&gt;make: *** [distclean] Error 127
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;运行&lt;code&gt;.&#x2F;build_toolchain.sh&lt;&#x2F;code&gt;报错：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;================ START BUILDING TOOLCHAIN ==============
+&lt;&#x2F;span&gt;&lt;span&gt;============== CLEANING OLD BUILD TREE =================
+&lt;&#x2F;span&gt;&lt;span&gt;make: &#x2F;usr&#x2F;bin&#x2F;bash: Command not found
+&lt;&#x2F;span&gt;&lt;span&gt;make: &#x2F;usr&#x2F;bin&#x2F;bash: Command not found
+&lt;&#x2F;span&gt;&lt;span&gt;ct-ng:333: recipe for target &amp;#39;clean&amp;#39; failed
+&lt;&#x2F;span&gt;&lt;span&gt;make: *** [clean] Error 127
+&lt;&#x2F;span&gt;&lt;span&gt;make: &#x2F;usr&#x2F;bin&#x2F;bash: Command not found
+&lt;&#x2F;span&gt;&lt;span&gt;make: *** No rule to make target &amp;#39;mipsel-linux-uclibc&amp;#39;.  Stop.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;查看toolchain目录下用到的是crosstool-ng。rosstool-ng文档说明需要执行：&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;.&#x2F;bootstrap&lt;&#x2F;li&gt;
+&lt;li&gt;.&#x2F;configure --enable-local&lt;&#x2F;li&gt;
+&lt;li&gt;make&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;但是最后make时报错：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;CDPATH=&amp;quot;${ZSH_VERSION+.}:&amp;quot; &amp;amp;&amp;amp; cd . &amp;amp;&amp;amp; &#x2F;bin&#x2F;bash &#x2F;opt&#x2F;rt-n56u&#x2F;toolchain&#x2F;scripts&#x2F;missing aclocal-1.16
+&lt;&#x2F;span&gt;&lt;span&gt;&#x2F;opt&#x2F;rt-n56u&#x2F;toolchain&#x2F;scripts&#x2F;missing: line 81: aclocal-1.16: command not found
+&lt;&#x2F;span&gt;&lt;span&gt;WARNING: &amp;#39;aclocal-1.16&amp;#39; is missing on your system.
+&lt;&#x2F;span&gt;&lt;span&gt;         You should only need it if you modified &amp;#39;acinclude.m4&amp;#39; or
+&lt;&#x2F;span&gt;&lt;span&gt;         &amp;#39;configure.ac&amp;#39; or m4 files included by &amp;#39;configure.ac&amp;#39;.
+&lt;&#x2F;span&gt;&lt;span&gt;         The &amp;#39;aclocal&amp;#39; program is part of the GNU Automake package:
+&lt;&#x2F;span&gt;&lt;span&gt;         &amp;lt;http:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;automake&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;         It also requires GNU Autoconf, GNU m4 and Perl in order to run:
+&lt;&#x2F;span&gt;&lt;span&gt;         &amp;lt;http:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;autoconf&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;         &amp;lt;http:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;m4&#x2F;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;         &amp;lt;http:&#x2F;&#x2F;www.perl.org&#x2F;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Makefile:2599: recipe for target &amp;#39;aclocal.m4&amp;#39; failed
+&lt;&#x2F;span&gt;&lt;span&gt;make: *** [aclocal.m4] Error 127
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;搜索后发现需要执行命令：&lt;code&gt;autoreconf -r -i&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Copying file ABOUT-NLS
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file scripts&#x2F;config.rpath
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;codeset.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;extern-inline.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;fcntl-o.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;glibc2.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;glibc21.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;intdiv0.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;intl.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;intldir.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;intmax.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;inttypes-pri.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;inttypes_h.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;lcmessage.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;lock.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;longlong.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;printf-posix.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;size_max.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;stdint_h.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;threadlib.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;uintmax_t.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;visibility.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;wchar_t.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;wint_t.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file m4&#x2F;xsize.m4
+&lt;&#x2F;span&gt;&lt;span&gt;Creating directory po
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file po&#x2F;Makefile.in.in
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file po&#x2F;Makevars.template
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file po&#x2F;Rules-quot
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file po&#x2F;boldquot.sed
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file po&#x2F;en@boldquot.header
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file po&#x2F;en@quot.header
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file po&#x2F;insert-header.sin
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file po&#x2F;quot.sed
+&lt;&#x2F;span&gt;&lt;span&gt;Copying file po&#x2F;remove-potcdate.sin
+&lt;&#x2F;span&gt;&lt;span&gt;automake: warnings are treated as errors
+&lt;&#x2F;span&gt;&lt;span&gt;Makefile.am:6: warning: AM_GNU_GETTEXT used but &amp;#39;po&amp;#39; not in SUBDIRS
+&lt;&#x2F;span&gt;&lt;span&gt;autoreconf: automake failed with exit status: 1
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;再次执行make&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt; cd . &amp;amp;&amp;amp; &#x2F;bin&#x2F;bash &#x2F;opt&#x2F;rt-n56u&#x2F;toolchain&#x2F;scripts&#x2F;missing automake-1.16 --foreign
+&lt;&#x2F;span&gt;&lt;span&gt;&#x2F;opt&#x2F;rt-n56u&#x2F;toolchain&#x2F;scripts&#x2F;missing: line 81: automake-1.16: command not found
+&lt;&#x2F;span&gt;&lt;span&gt;WARNING: &amp;#39;automake-1.16&amp;#39; is missing on your system.
+&lt;&#x2F;span&gt;&lt;span&gt;         You should only need it if you modified &amp;#39;Makefile.am&amp;#39; or
+&lt;&#x2F;span&gt;&lt;span&gt;         &amp;#39;configure.ac&amp;#39; or m4 files included by &amp;#39;configure.ac&amp;#39;.
+&lt;&#x2F;span&gt;&lt;span&gt;         The &amp;#39;automake&amp;#39; program is part of the GNU Automake package:
+&lt;&#x2F;span&gt;&lt;span&gt;         &amp;lt;http:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;automake&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;         It also requires GNU Autoconf, GNU m4 and Perl in order to run:
+&lt;&#x2F;span&gt;&lt;span&gt;         &amp;lt;http:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;autoconf&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;         &amp;lt;http:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;m4&#x2F;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;         &amp;lt;http:&#x2F;&#x2F;www.perl.org&#x2F;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Makefile:2570: recipe for target &amp;#39;Makefile.in&amp;#39; failed
+&lt;&#x2F;span&gt;&lt;span&gt;make: *** [Makefile.in] Error 1
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;看起来automake版本不对，确认版本：&lt;code&gt;automake --version&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;automake (GNU automake) 1.15.1
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;apt search automake&lt;&#x2F;code&gt;发现源里最高版本是1.15&lt;&#x2F;p&gt;
+&lt;p&gt;下载安装automake&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span&gt; apt-get autoremove automake
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;wget&lt;&#x2F;span&gt;&lt;span&gt; http:&#x2F;&#x2F;ftp.gnu.org&#x2F;gnu&#x2F;automake&#x2F;automake-1.16.2.tar.gz
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tar -xf&lt;&#x2F;span&gt;&lt;span&gt; automake-1.16.2.tar.gz
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;cd&lt;&#x2F;span&gt;&lt;span&gt; automake-1.16.2
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&#x2F;bootstrap
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&#x2F;configure
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;make
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span&gt; make install
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>WSL fakeroot issue</title>
+        <published>2020-05-10T00:00:00+00:00</published>
+        <updated>2020-05-10T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/notes/WSL-fakeroot-issue/"/>
+        <id>https://blog.dotone.top/notes/WSL-fakeroot-issue/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/notes/WSL-fakeroot-issue/">&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;blog.dotone.top&#x2F;notes&#x2F;WSL-fakeroot-issue&#x2F;.&#x2F;0d50e08f163a466b8867c38cbcc017d2.png&quot; alt=&quot;0d50e08f163a466b8867c38cbcc017d2.png&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;sudo update-alternatives --set fakeroot &#x2F;usr&#x2F;bin&#x2F;fakeroot-tcp
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;https:&#x2F;&#x2F;github.com&#x2F;Microsoft&#x2F;WSL&#x2F;issues&#x2F;2465#issuecomment-377583291&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

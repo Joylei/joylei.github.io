@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - ec</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/ec/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-06-28T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/ec/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>Learn about EC</title>
+        <published>2020-06-28T00:00:00+00:00</published>
+        <updated>2020-06-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/ec-protocol/"/>
+        <id>https://blog.dotone.top/blog/it/ec-protocol/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/ec-protocol/">&lt;p&gt;最近在用&lt;code&gt;rust&lt;&#x2F;code&gt;为我的&lt;code&gt;TS453B mini&lt;&#x2F;code&gt;写一个风扇控制程序，需要和&lt;code&gt;EC&lt;&#x2F;code&gt;(Embedded Controller)的交互。但是没有找到太多关于&lt;code&gt;EC&lt;&#x2F;code&gt;的资料。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;ioduan-kou&quot;&gt;IO端口&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;TS453B mini&lt;&#x2F;code&gt;使用的是以下端口：&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;0x6c&lt;&#x2F;code&gt; 状态&#x2F;命令端口&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;0x68&lt;&#x2F;code&gt; 数据端口&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;xie-yi-jie-du&quot;&gt;协议解读&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;wiki.laptop.org&#x2F;go&#x2F;Revised_EC_Port_6C_Command_Protocol&quot;&gt;点击这里&lt;&#x2F;a&gt;查看协议全文。&lt;&#x2F;p&gt;
+&lt;p&gt;从&lt;code&gt;Idle&lt;&#x2F;code&gt;状态开始总共有&lt;code&gt;8&lt;&#x2F;code&gt;个状态转换。这里简化为&lt;code&gt;4&lt;&#x2F;code&gt;条。&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;首先EC处于空闲状态，即&lt;code&gt;IBF=0&lt;&#x2F;code&gt;,&lt;code&gt;IOF=0&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;第一步，检测&lt;code&gt;0x6c&lt;&#x2F;code&gt;，&lt;code&gt;IBF=0&lt;&#x2F;code&gt;时（此时最好&lt;code&gt;OBF=0&lt;&#x2F;code&gt;,否则会取消之前的命令和状态），向&lt;code&gt;0x6c&lt;&#x2F;code&gt;发送命令。这里后续可以直接转入空闲状态。&lt;&#x2F;li&gt;
+&lt;li&gt;第二步，检测&lt;code&gt;0x6c&lt;&#x2F;code&gt;，直至&lt;code&gt;IBF,OBF=0,1&lt;&#x2F;code&gt;的时候，可以从&lt;code&gt;0x68&lt;&#x2F;code&gt;读取数据；如果读取后&lt;code&gt;OBF=1&lt;&#x2F;code&gt;，显然还需要继续读取。&lt;&#x2F;li&gt;
+&lt;li&gt;第三步，检测&lt;code&gt;0x6c&lt;&#x2F;code&gt;，直至&lt;code&gt;IBF=0&lt;&#x2F;code&gt;的时候（此时&lt;code&gt;OBF=0&lt;&#x2F;code&gt;），可以向&lt;code&gt;0x68&lt;&#x2F;code&gt;写数据。&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;总结：可以在空闲状态下安全的向&lt;code&gt;0x6c&lt;&#x2F;code&gt;发送命令或者向0x68写数据(触发IBF=1)。如果IBF=1，说明&lt;code&gt;EC&lt;&#x2F;code&gt;尚未处理发送的命令或数据。&lt;&#x2F;p&gt;
+&lt;p&gt;另外可以看到如果不加锁的话，多线程读写会有冲突的。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;can-kao&quot;&gt;参考&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;http:&#x2F;&#x2F;wiki.laptop.org&#x2F;go&#x2F;Revised_EC_Port_6C_Command_Protocol&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;wiki.laptop.org&#x2F;go&#x2F;Ec_specification#Old_Port_6c_Command_Protocol&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;blog.csdn.net&#x2F;zhao_longwei&#x2F;article&#x2F;details&#x2F;50454779&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

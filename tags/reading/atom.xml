@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - reading</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/reading/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2007-08-17T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/reading/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>Core Java 2 Seventh Edition 读书笔记</title>
+        <published>2007-08-17T00:00:00+00:00</published>
+        <updated>2007-08-17T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/life/reading/core-java-2-seventh-edition/"/>
+        <id>https://blog.dotone.top/blog/life/reading/core-java-2-seventh-edition/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/life/reading/core-java-2-seventh-edition/">&lt;p&gt;Java中的字符一般是16位的，即utf16，例如“我爱你hello”字符个数为8。但是有些额外字符是需要32位，高位在前16位，低位在后16位。为了避免出错，尽量不要对字符操作。&lt;&#x2F;p&gt;
+&lt;p&gt;要改变java中的一个字符串，最好是创建一个新的字符串，(原因是编译器可以将字符串共享)。&lt;&#x2F;p&gt;
+&lt;p&gt;检测字符串相等用eques或compareTo方法。&lt;&#x2F;p&gt;
+&lt;p&gt;标准输入流System.in,&lt;&#x2F;p&gt;
+&lt;p&gt;Scanner in = new Scanner(System.in);&lt;&#x2F;p&gt;
+&lt;p&gt;in.next();读入一个单词&lt;&#x2F;p&gt;
+&lt;p&gt;in.nextLine();读入一行&lt;&#x2F;p&gt;
+&lt;p&gt;in.nextInt();读入一个整数&lt;&#x2F;p&gt;
+&lt;p&gt;格式化输出用System.out.printf();用法同C类似。String.format()类似sprintf()。&lt;&#x2F;p&gt;
+&lt;p&gt;不能在嵌套的块中声明同名的变量。&lt;&#x2F;p&gt;
+&lt;p&gt;Java中没有elseif,而是嵌套的if…else。&lt;&#x2F;p&gt;
+&lt;p&gt;Case标签必须是整数或者枚举常量，不能是字符串。&lt;&#x2F;p&gt;
+&lt;p&gt;Break很强大，可以使用数字，表示跳出第几层循环，还可以使用标签，表示跳出块或循环。&lt;&#x2F;p&gt;
+&lt;p&gt;数组拷贝(=)是引用，要复制所有元素，应使用System.arrayCopy(from,fromIndex,to,toIndex,count)。&lt;&#x2F;p&gt;
+&lt;p&gt;未完待续...&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;从我的百度空间导入&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

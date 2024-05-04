@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - HttpHandler</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/httphandler/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2016-08-01T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/httphandler/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>Nancyfx is not good for high number of concurrent users</title>
+        <published>2016-08-01T00:00:00+00:00</published>
+        <updated>2016-08-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/Nancyfx-is-not-good-for-high-number-of-concurrent-users/"/>
+        <id>https://blog.dotone.top/blog/it/Nancyfx-is-not-good-for-high-number-of-concurrent-users/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/Nancyfx-is-not-good-for-high-number-of-concurrent-users/">&lt;p&gt;Recently I was working on a application update service to support application self-update.
+I choosed Nancyfx to implement the API service.&lt;&#x2F;p&gt;
+&lt;p&gt;For the file downloading, we set up a target to support at least 5000 concurrent
+connections to download files at the same time with 2 cloud web servers behide load banlancer.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;testing-environment&quot;&gt;Testing environment&lt;&#x2F;h2&gt;
+&lt;p&gt;Web-server
+CPU: Quad 2.6 GHz AMD Opteron 6238
+Memory: 16GB&lt;&#x2F;p&gt;
+&lt;p&gt;Testing sample file: 5.5MB&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;how-it-works&quot;&gt;How it works&lt;&#x2F;h2&gt;
+&lt;p&gt;At first, to make things work, I used the AsFile() extension method of NancyRequest.
+As you can imagine, the performance was poor, with high CPU and memory utilization.&lt;&#x2F;p&gt;
+&lt;p&gt;To reduce the memory usage, I cached the file content in the memory since there
+is small amount of files and no large files.
+To impove the CPU usage and support large amount of concurrent connections, I used
+the async&#x2F;await pattern to write file content directly the HttpResponse of Asp.Net.&lt;&#x2F;p&gt;
+&lt;p&gt;To my surprise the momery usage was still crazy when performaning testing.&lt;&#x2F;p&gt;
+&lt;p&gt;After several times of tries, I had a doubt that the issue was coming from Nancyfx.
+As a comparision, I wrote a HttpHandler that handles the downloading directly.&lt;&#x2F;p&gt;
+&lt;p&gt;With this handler, it can support more than 10k concurrent downloadings with 2 Web-servers,
+and the CPU utilization was about 60%~70% and memory usage was low. It seemed
+the bottleneck was the network bandwidth.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

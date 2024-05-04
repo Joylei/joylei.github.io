@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - 《Programming F#》读书笔记三</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-3/#suo-yin" class="toc-link">索引</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-3/#bi-ji" class="toc-link">笔记</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;life&#x2F;reading&#x2F;programming-fsharp&#x2F;programming-fsharp-3&#x2F;">《Programming F#》读书笔记三</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>4 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-01-24</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <h2 id="suo-yin">索引</h2>
+<ul>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-1/">《Programming F#》读书笔记一</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-2/">《Programming F#》读书笔记二</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-3/">《Programming F#》读书笔记三</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-4/">《Programming F#》读书笔记四</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/">《Programming F#》读书笔记五</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-6/">《Programming F#》读书笔记六</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-7/">《Programming F#》读书笔记七</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-8/">《Programming F#》读书笔记八</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-9/">《Programming F#》读书笔记九</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-10/">《Programming F#》读书笔记十</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/">《Programming F#》读书笔记十一</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-12/">《Programming F#》读书笔记十二</a></li>
+</ul>
+<h2 id="bi-ji">笔记</h2>
+<p>数组：</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>let x = [| 1;1;3;5|]
+</span><span>
+</span><span>let x = [| 1..10 |]
+</span><span>
+</span><span>let x = [| for i in 1..10 –&gt; i*i |]
+</span><span>
+</span><span>let y = x.[1]
+</span><span>
+</span><span>x.[1] &lt;- 20
+</span><span>
+</span><span>let z = x.[0..3]
+</span><span>
+</span><span>let z = x.[6..]
+</span><span>
+</span><span>let z = x.[..6]
+</span><span>
+</span><span>let z = x.[*]
+</span><span>
+</span><span>let len = Array.length x
+</span><span>
+</span><span>let exists = Array.exists (fun item –&gt; item&gt;50) x         //判断数组是否满足给定条件
+</span><span>
+</span><span>Array.init 根据索引初始化数组
+</span><span>
+</span><span>let z = Array.init 10 (fun index –&gt; index * 10)
+</span><span>
+</span><span>Array.zeroCreate 使用默认值初始化数组
+</span><span>
+</span><span>let z:int array = Array.zeroCreate 10          //初始化为0
+</span><span>
+</span><span>let z:string array = Array.zeroCreate 10      //初始化为null
+</span><span>
+</span><span>用于模式匹配：
+</span><span>
+</span><span>let myMatch =
+</span><span>
+</span><span>     function
+</span><span>
+</span><span>     | null –&gt; printf “匹配到null”
+</span><span>
+</span><span>     | [| |] –&gt; printf “匹配到空数组”
+</span><span>
+</span><span>     | [| x |] –&gt; printf “匹配到一个元素的数组”
+</span><span>
+</span><span>     | [| x;y |] –&gt; printf “匹配到两个元素的数组”
+</span><span>
+</span><span>     | _ –&gt; printf “匹配到更多元素的数组”
+</span><span>
+</span><span>数组相等的判断
+</span><span>
+</span><span>F#中数组相等比较的是数组的内容，而.net中比较的数组的引用
+</span><span>
+</span><span>let eq = [| 0;1;2 |] = [| 0..2 |]   //相等
+</span><span>
+</span><span>let eq = [| 0;1;2 |] = [| 0..10 |] //不等
+</span><span>
+</span><span>规则数组
+</span><span>
+</span><span>let x:int [,] = Array2D.zeroCreate 3 3
+</span><span>
+</span><span>let y = x.[1,1]
+</span><span>
+</span><span>x.[1,1] &lt;- 30
+</span><span>
+</span><span>let y = x.[*,1..2]
+</span><span>
+</span><span>不规则数组，数组的数组
+</span><span>
+</span><span>let x:int [][] = Array.zeroCreate 3;;
+</span></code></pre>
+<p>循环：</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>while循环
+</span><span>
+</span><span>let mutable i= 10
+</span><span>
+</span><span>while i&gt;0 do
+</span><span>
+</span><span>      printf “%d;” i
+</span><span>
+</span><span>      i &lt;- i – 1
+</span><span>
+</span><span>   for循环
+</span><span>
+</span><span>for i = 1 to 10 do
+</span><span>
+</span><span>      printf “%d;” i
+</span><span>
+</span><span>for i = 10 downto 1 do
+</span><span>
+</span><span>      printf “%d;” i
+</span><span>
+</span><span>for i in 1..10 do
+</span><span>
+</span><span>       printf “%d;” i
+</span><span>
+</span><span>F#中没有break和continue，要达到类似的目的，必须使用while语句。
+</span><span>
+</span><span>for循环中进行模式匹配：
+</span><span>
+</span><span>&gt; for a,b in [for x in 1..10 -&gt; (x,x*x)] do printfn &quot;%d&quot; (a+b);;
+</span><span>2
+</span><span>6
+</span><span>12
+</span><span>20
+</span><span>30
+</span><span>42
+</span><span>56
+</span><span>72
+</span><span>90
+</span><span>110
+</span><span>val it : unit = ()
+</span></code></pre>
+<p>异常：</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>自定义F#中的异常
+</span><span>
+</span><span>exception WebSiteNotFound of string
+</span><span>
+</span><span>exception Timeout
+</span><span>
+</span><span>捕捉和抛出异常
+</span><span>
+</span><span>try
+</span><span>
+</span><span>      raise WebSiteNotFound(“http://myWebsite.com”)
+</span><span>
+</span><span>with
+</span><span>
+</span><span>| :? FileNotFoundException
+</span><span>
+</span><span>       -&gt; printf “.Net FileNotFoundException”
+</span><span>
+</span><span>| :? IOException as ex
+</span><span>
+</span><span>     -&gt; printf “.Net IOException:%s” ex.Message
+</span><span>
+</span><span>| WebSiteNotFound(webSite)
+</span><span>
+</span><span>     -&gt; printf “F# WebSiteNotFound:%s” webSite
+</span><span>
+</span><span>| Timeout
+</span><span>
+</span><span>    -&gt; printf “F# Timeout”
+</span><span>
+</span><span>| _ as ex
+</span><span>
+</span><span>    -&gt; reraise ex   //重新抛出异常
+</span><span>
+</span><span>finally
+</span><span>
+</span><span>      printf “finally”
+</span></code></pre>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/programming/">#Programming</a>
+            
+            <a href="https://blog.dotone.top/tags/f/">#F#</a>
+            
+            <a href="https://blog.dotone.top/tags/net/">#.Net</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

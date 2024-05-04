@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - Visual Studio 2010的一个Bug</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;vs2010-bug-high-cpu&#x2F;">Visual Studio 2010的一个Bug</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>2 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2009-06-24</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>装了VS2010和Sqlserver2008后，发现CPU使用率时不时跳到100%，检查不是杀毒软件的问题，发现msiexec.exe这个进程很活跃，查看事件日志，果然安装程序在不断地执行一个事务，详细事件报告如下：</p>
+<pre data-lang="xml" style="background-color:#2b303b;color:#c0c5ce;" class="language-xml "><code class="language-xml" data-lang="xml"><span>&lt;</span><span style="color:#bf616a;">Event </span><span style="color:#d08770;">xmlns</span><span>=&quot;</span><span style="color:#a3be8c;">http://schemas.microsoft.com/win/2004/08/events/event</span><span>&quot;&gt; &lt;</span><span style="color:#bf616a;">System</span><span>&gt; &lt;</span><span style="color:#bf616a;">Provider </span><span style="color:#d08770;">Name</span><span>=&quot;</span><span style="color:#a3be8c;">MsiInstaller</span><span>&quot; /&gt; &lt;</span><span style="color:#bf616a;">EventID </span><span style="color:#d08770;">Qualifiers</span><span>=&quot;</span><span style="color:#a3be8c;">0</span><span>&quot;&gt;1004&lt;/</span><span style="color:#bf616a;">EventID</span><span>&gt; &lt;</span><span style="color:#bf616a;">Level</span><span>&gt;3&lt;/</span><span style="color:#bf616a;">Level</span><span>&gt; &lt;</span><span style="color:#bf616a;">Task</span><span>&gt;0&lt;/</span><span style="color:#bf616a;">Task</span><span>&gt; &lt;</span><span style="color:#bf616a;">Keywords</span><span>&gt;0x80000000000000&lt;/</span><span style="color:#bf616a;">Keywords</span><span>&gt; &lt;</span><span style="color:#bf616a;">TimeCreated </span><span style="color:#d08770;">SystemTime</span><span>=&quot;</span><span style="color:#a3be8c;">2009-06-23T10:48:42.000000000Z</span><span>&quot; /&gt; &lt;</span><span style="color:#bf616a;">EventRecordID</span><span>&gt;18545&lt;/</span><span style="color:#bf616a;">EventRecordID</span><span>&gt; &lt;</span><span style="color:#bf616a;">Channel</span><span>&gt;Application&lt;/</span><span style="color:#bf616a;">Channel</span><span>&gt; &lt;</span><span style="color:#bf616a;">Computer</span><span>&gt;daysky-PC&lt;/</span><span style="color:#bf616a;">Computer</span><span>&gt; &lt;</span><span style="color:#bf616a;">Security </span><span style="color:#d08770;">UserID</span><span>=&quot;</span><span style="color:#a3be8c;">S-1-5-18</span><span>&quot; /&gt; &lt;/</span><span style="color:#bf616a;">System</span><span>&gt; &lt;</span><span style="color:#bf616a;">EventData</span><span>&gt; &lt;</span><span style="color:#bf616a;">Data</span><span>&gt;{316EE0C1-DB94-30BA-95E6-F4959035EE4B}&lt;/</span><span style="color:#bf616a;">Data</span><span>&gt; &lt;</span><span style="color:#bf616a;">Data</span><span>&gt;VB_for_VS_7_Ent_28_x86_enu&lt;/</span><span style="color:#bf616a;">Data</span><span>&gt; &lt;</span><span style="color:#bf616a;">Data</span><span>&gt;{F5686A3B-40B1-40CF-8B60-88D08F50A38A}&lt;/</span><span style="color:#bf616a;">Data</span><span>&gt; &lt;</span><span style="color:#bf616a;">Data</span><span>&gt;D:\Win7\Visual Studio 2010\Common7\IDE\PrivateAssemblies\EN\&lt;/</span><span style="color:#bf616a;">Data</span><span>&gt; &lt;</span><span style="color:#bf616a;">Data</span><span>&gt;(NULL)&lt;/</span><span style="color:#bf616a;">Data</span><span>&gt; &lt;</span><span style="color:#bf616a;">Data</span><span>&gt;(NULL)&lt;/</span><span style="color:#bf616a;">Data</span><span>&gt; &lt;</span><span style="color:#bf616a;">Data </span><span>/&gt; &lt;/</span><span style="color:#bf616a;">EventData</span><span>&gt;
+</span><span>
+</span><span>&lt;/</span><span style="color:#bf616a;">Event</span><span>&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">Event </span><span style="color:#d08770;">xmlns</span><span>=&quot;</span><span style="color:#a3be8c;">http://schemas.microsoft.com/win/2004/08/events/event</span><span>&quot;&gt; &lt;</span><span style="color:#bf616a;">System</span><span>&gt; &lt;</span><span style="color:#bf616a;">Provider </span><span style="color:#d08770;">Name</span><span>=&quot;</span><span style="color:#a3be8c;">MsiInstaller</span><span>&quot; /&gt; &lt;</span><span style="color:#bf616a;">EventID </span><span style="color:#d08770;">Qualifiers</span><span>=&quot;</span><span style="color:#a3be8c;">0</span><span>&quot;&gt;1001&lt;/</span><span style="color:#bf616a;">EventID</span><span>&gt; &lt;</span><span style="color:#bf616a;">Level</span><span>&gt;3&lt;/</span><span style="color:#bf616a;">Level</span><span>&gt; &lt;</span><span style="color:#bf616a;">Task</span><span>&gt;0&lt;/</span><span style="color:#bf616a;">Task</span><span>&gt; &lt;</span><span style="color:#bf616a;">Keywords</span><span>&gt;0x80000000000000&lt;/</span><span style="color:#bf616a;">Keywords</span><span>&gt; &lt;</span><span style="color:#bf616a;">TimeCreated </span><span style="color:#d08770;">SystemTime</span><span>=&quot;</span><span style="color:#a3be8c;">2009-06-23T10:48:42.000000000Z</span><span>&quot; /&gt; &lt;</span><span style="color:#bf616a;">EventRecordID</span><span>&gt;18546&lt;/</span><span style="color:#bf616a;">EventRecordID</span><span>&gt; &lt;</span><span style="color:#bf616a;">Channel</span><span>&gt;Application&lt;/</span><span style="color:#bf616a;">Channel</span><span>&gt; &lt;</span><span style="color:#bf616a;">Computer</span><span>&gt;daysky-PC&lt;/</span><span style="color:#bf616a;">Computer</span><span>&gt; &lt;</span><span style="color:#bf616a;">Security </span><span style="color:#d08770;">UserID</span><span>=&quot;</span><span style="color:#a3be8c;">S-1-5-18</span><span>&quot; /&gt; &lt;/</span><span style="color:#bf616a;">System</span><span>&gt; &lt;</span><span style="color:#bf616a;">EventData</span><span>&gt; &lt;</span><span style="color:#bf616a;">Data</span><span>&gt;{316EE0C1-DB94-30BA-95E6-F4959035EE4B}&lt;/</span><span style="color:#bf616a;">Data</span><span>&gt; &lt;</span><span style="color:#bf616a;">Data</span><span>&gt;VB_for_VS_7_Ent_28_x86_enu&lt;/</span><span style="color:#bf616a;">Data</span><span>&gt; &lt;</span><span style="color:#bf616a;">Data</span><span>&gt;{97909034-45AB-48C6-853B-1CA8B3FBFB58}&lt;/</span><span style="color:#bf616a;">Data</span><span>&gt; &lt;</span><span style="color:#bf616a;">Data</span><span>&gt;(NULL)&lt;/</span><span style="color:#bf616a;">Data</span><span>&gt; &lt;</span><span style="color:#bf616a;">Data</span><span>&gt;(NULL)&lt;/</span><span style="color:#bf616a;">Data</span><span>&gt; &lt;</span><span style="color:#bf616a;">Data</span><span>&gt;(NULL)&lt;/</span><span style="color:#bf616a;">Data</span><span>&gt; &lt;</span><span style="color:#bf616a;">Data </span><span>/&gt; &lt;/</span><span style="color:#bf616a;">EventData</span><span>&gt;
+</span><span>
+</span><span>&lt;/</span><span style="color:#bf616a;">Event</span><span>&gt;
+</span></code></pre>
+<p>通过搜索&quot;F5686A3B-40B1-40CF-8B60-88D08F50A38A&quot;，发现已经有兄弟把此问题提交到微软了，而且大概一个德国兄弟给出了解决方案，解决问题很简单，在&quot;D:\Win7\Visual studio 2010\Common7\IDE\PublicAssemblies&quot;目录下新建一个&quot;en&quot;目录，随即解决了这个问题。同时安装了Visual Studio 2008的话，也需要建立&quot;en&quot;目录。</p>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/visual-studio/">#visual studio</a>
+            
+            <a href="https://blog.dotone.top/tags/bug/">#bug</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - Unsuccessful try of mergerfs on Alpine Linux</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/unsuccessful-try-mergerfs-on-alpine-linux/#install-fuse" class="toc-link">Install fuse</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/unsuccessful-try-mergerfs-on-alpine-linux/#build-install-mergerfs" class="toc-link">Build&amp;install mergerfs</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/unsuccessful-try-mergerfs-on-alpine-linux/#load-fuse-mod-on-boot" class="toc-link">Load fuse mod on boot</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/unsuccessful-try-mergerfs-on-alpine-linux/#mount-mergerfs-on-boot" class="toc-link">Mount mergerfs on boot</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/unsuccessful-try-mergerfs-on-alpine-linux/#setup-samba-share" class="toc-link">Setup Samba share</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/unsuccessful-try-mergerfs-on-alpine-linux/#problems" class="toc-link">Problems</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;unsuccessful-try-mergerfs-on-alpine-linux&#x2F;">Unsuccessful try of mergerfs on Alpine Linux</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>3 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2020-09-16</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>There is no pre-build packages for Alpine Linux.  So I build it by myself.</p>
+<h2 id="install-fuse">Install <code>fuse</code></h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sudo</span><span> apk add fuse3
+</span></code></pre>
+<h2 id="build-install-mergerfs">Build&amp;install <code>mergerfs</code></h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">git</span><span> clone https://github.com/trapexit/mergerfs.git
+</span><span style="color:#96b5b4;">cd</span><span> mergerfs
+</span><span style="color:#bf616a;">git</span><span> checkout tags/2.30.0</span><span style="color:#bf616a;"> -b</span><span> v2.30.0
+</span><span style="color:#bf616a;">make
+</span><span style="color:#bf616a;">sudo</span><span> make install
+</span></code></pre>
+<p><code>mergerfs</code> was installed to <code>/usr/local/bin</code>.</p>
+<h2 id="load-fuse-mod-on-boot">Load <code>fuse</code> mod on boot</h2>
+<p>Add <code>fuse</code> to <code>/boot/extlinux.conf</code></p>
+<pre data-lang="conf" style="background-color:#2b303b;color:#c0c5ce;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#65737e;"># Generated by update-extlinux 6.04_pre1-r6
+</span><span>DEFAULT menu.c32
+</span><span>PROMPT </span><span style="color:#d08770;">0
+</span><span>MENU TITLE Alpine/Linux Boot Menu
+</span><span>MENU HIDDEN
+</span><span>MENU AUTOBOOT Alpine will be booted automatically in </span><span style="color:#65737e;"># seconds.
+</span><span>TIMEOUT </span><span style="color:#d08770;">10
+</span><span>LABEL lts
+</span><span>  </span><span style="color:#bf616a;">MENU </span><span>DEFAULT
+</span><span>  </span><span style="color:#bf616a;">MENU </span><span>LABEL Linux lts
+</span><span>  </span><span style="color:#bf616a;">LINUX </span><span>vmlinuz-lts
+</span><span>  </span><span style="color:#bf616a;">INITRD </span><span>initramfs-lts
+</span><span>  </span><span style="color:#bf616a;">APPEND </span><span>root=UUID=d0f32707-</span><span style="color:#d08770;">6030</span><span>-</span><span style="color:#d08770;">473e</span><span>-a236-823b90dd2e72  modules=sd-mod,usb-storage,ext4,xfs,fuse nomodeset quiet rootfstype=ext4
+</span><span>
+</span><span>MENU SEPARATOR
+</span></code></pre>
+<h2 id="mount-mergerfs-on-boot">Mount <code>mergerfs</code> on boot</h2>
+<p>Modify <code>/etc/fstab</code>:</p>
+<pre data-lang="conf" style="background-color:#2b303b;color:#c0c5ce;" class="language-conf "><code class="language-conf" data-lang="conf"><span>UUID=d0f32707-</span><span style="color:#d08770;">6030</span><span>-</span><span style="color:#d08770;">473e</span><span>-a236-823b90dd2e72	/	ext4	rw,relatime </span><span style="color:#d08770;">0 1
+</span><span>UUID=7794c691-bc03-4c26-</span><span style="color:#d08770;">898f</span><span>-58231b93e780	/boot	ext4	rw,relatime </span><span style="color:#d08770;">0 2
+</span><span>UUID=b5ebf3c5-39b0-</span><span style="color:#d08770;">41ec</span><span>-ae68-7f08e99b7688	swap	swap	defaults	</span><span style="color:#d08770;">0 0
+</span><span>UUID=13534eb9-ae36-4af5-af78-f21b1ef34213       /media/disk1 xfs defaults </span><span style="color:#d08770;">0 0
+</span><span>UUID=4a10fa24-aaea-42f1-</span><span style="color:#d08770;">88ae</span><span>-7d32c0bcab3d       /media/disk2 xfs defaults </span><span style="color:#d08770;">0 0
+</span><span>/media/disk1:/media/disk2                       /media/vdisk fuse.mergerfs defaults,allow_other,noforget,use_ino,inodecalc=path-hash,minfreespace=</span><span style="color:#d08770;">4G</span><span>,ignorepponrename=</span><span style="color:#d08770;">true</span><span>,cache.files=</span><span style="color:#d08770;">off</span><span>,category.search=epff,category.create=mfs,func.getattr=newest,posix_acl=</span><span style="color:#d08770;">true 0 0
+</span><span>/dev/cdrom	/media/cdrom	iso9660	noauto,ro </span><span style="color:#d08770;">0 0
+</span><span>/dev/usbdisk	/media/usb	vfat	noauto	</span><span style="color:#d08770;">0 0
+</span></code></pre>
+<p>Mount <code>mergerfs</code> without reboot:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sudo</span><span> mount /media/vdisk
+</span></code></pre>
+<h2 id="setup-samba-share">Setup Samba share</h2>
+<p>Append below to <code>/etc/samba/smb.conf</code></p>
+<pre data-lang="conf" style="background-color:#2b303b;color:#c0c5ce;" class="language-conf "><code class="language-conf" data-lang="conf"><span style="color:#b48ead;">[shares]
+</span><span>   </span><span style="color:#bf616a;">comment </span><span>= All disks
+</span><span>   </span><span style="color:#bf616a;">path </span><span>= /media/vdisk/
+</span><span>   </span><span style="color:#bf616a;">public </span><span>= </span><span style="color:#d08770;">no
+</span><span>   </span><span style="color:#bf616a;">writable </span><span>= </span><span style="color:#d08770;">yes
+</span><span>   </span><span style="color:#bf616a;">printable </span><span>= </span><span style="color:#d08770;">no
+</span><span>   </span><span style="color:#bf616a;">browsable </span><span>= </span><span style="color:#d08770;">yes     
+</span><span>   </span><span style="color:#bf616a;">valid </span><span>users = lei
+</span><span>   </span><span style="color:#bf616a;">admin </span><span>users = lei
+</span><span>   </span><span style="color:#bf616a;">follow </span><span>symlinks = </span><span style="color:#d08770;">yes
+</span><span>   </span><span style="color:#bf616a;">wide </span><span>links = </span><span style="color:#d08770;">yes
+</span><span>   </span><span style="color:#bf616a;">map </span><span>archive = </span><span style="color:#d08770;">no
+</span><span>   </span><span style="color:#bf616a;">map </span><span>system = </span><span style="color:#d08770;">yes
+</span><span>   </span><span style="color:#bf616a;">map </span><span>hidden = </span><span style="color:#d08770;">yes
+</span></code></pre>
+<p>Restart <code>samba</code> service to make changes take effect:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sudo</span><span> rc-service samba restart
+</span></code></pre>
+<h2 id="problems">Problems</h2>
+<p>It's OK to visit samba share from other computers after these setups. But there's a problem the file system reports <code>no space left on device</code> when you create a file or directory under <code>/media/vdisk/</code>.</p>
+<p>I found that you can modify and save an existing file successfully.
+At first, I thought it's a problem of samba. 
+Then I tried different configurations for samba, such as <code>create mask</code>, <code>directory mask</code>, <code>force create mode</code>, <code>force directory mode</code>, and <code>security mask</code> etc.
+Also tried many combinations of <code>mergerfs</code> options.</p>
+<p>I thought it might be permission issue. Then I changed the permissions of disks.</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sudo</span><span> chown</span><span style="color:#bf616a;"> -R</span><span> lei /media/disk1/
+</span><span style="color:#bf616a;">sudo</span><span> chown</span><span style="color:#bf616a;"> -R</span><span> lei /media/disk2/
+</span><span style="color:#bf616a;">chmod</span><span> 777 /media/disk1/
+</span><span style="color:#bf616a;">chmod</span><span> 777 /media/disk1/
+</span></code></pre>
+<p>Tried different <code>mergerfs</code> versions, but no luck.</p>
+<p>I even tried with different fs type, from <code>ext4</code>to <code>xfs</code>.</p>
+<p>Then I tried to create a file with <code>touch /media/vdisk/temp.txt</code> or <code>mkdir /media/vdisk/temp</code>, and got <code>no space left on device</code> error. Obviously it's something wrong with <code>mergerfs</code>.</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/mergerfs/">#mergerfs</a>
+            
+            <a href="https://blog.dotone.top/tags/unionfs/">#unionfs</a>
+            
+            <a href="https://blog.dotone.top/tags/linux/">#linux</a>
+            
+            <a href="https://blog.dotone.top/tags/alpine/">#alpine</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

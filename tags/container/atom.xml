@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - container</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/container/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-03-27T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/container/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>QNAP Container Station打开时一直loading</title>
+        <published>2020-03-27T00:00:00+00:00</published>
+        <updated>2020-03-27T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/qnap-container-stattion-always-show-loading/"/>
+        <id>https://blog.dotone.top/blog/it/qnap-container-stattion-always-show-loading/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/qnap-container-stattion-always-show-loading/">&lt;p&gt;&lt;code&gt;Container Station&lt;&#x2F;code&gt;打开时一直loading。
+ssh连上QTS后，也不能通过命令进行&lt;code&gt;docker&lt;&#x2F;code&gt;操作，报错：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Can&amp;#39;t connect to docker daemon.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;参考了官方文档和论坛里的帖子，尝试了以下操作都不起任何作用：&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;重启&lt;code&gt;container station&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;重启所有服务&lt;&#x2F;li&gt;
+&lt;li&gt;卸载重装&lt;code&gt;container station&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;删除虚拟交换机，安装&lt;code&gt;container station&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;机器重启后重装&lt;code&gt;container station&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;手动安装&lt;code&gt;container station&lt;&#x2F;code&gt;旧版本&lt;&#x2F;li&gt;
+&lt;li&gt;系统固件更新到旧版本，安装&lt;code&gt;container station&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;系统固件从旧版本更新到新版本，安装&lt;code&gt;container station&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;继续查找原因。&lt;code&gt;Container Stattion&lt;&#x2F;code&gt;的日志在：&lt;code&gt;&#x2F;share&#x2F;CACHEDEV1_DATA&#x2F;.qpkg&#x2F;container-station&#x2F;var&#x2F;log&#x2F;container-station&lt;&#x2F;code&gt;，查看日志都挺正常，只在&lt;code&gt;ctstation.log&lt;&#x2F;code&gt;中发现了异常，都是打不开数据库:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;[2020-03-27 22:29:14,605] ERROR in app: Exception on &#x2F;api&#x2F;v1&#x2F;wizard&#x2F;workspace&#x2F;status [GET]
+&lt;&#x2F;span&gt;&lt;span&gt;Traceback (most recent call last):
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;usr&#x2F;local&#x2F;container-station&#x2F;python&#x2F;lib&#x2F;python2.7&#x2F;site-packages&#x2F;flask&#x2F;app.py&amp;quot;, line 1982, in wsgi_app
+&lt;&#x2F;span&gt;&lt;span&gt;    response = self.full_dispatch_request()
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;usr&#x2F;local&#x2F;container-station&#x2F;python&#x2F;lib&#x2F;python2.7&#x2F;site-packages&#x2F;flask&#x2F;app.py&amp;quot;, line 1614, in full_dispatch_request
+&lt;&#x2F;span&gt;&lt;span&gt;    rv = self.handle_user_exception(e)
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;usr&#x2F;local&#x2F;container-station&#x2F;python&#x2F;lib&#x2F;python2.7&#x2F;site-packages&#x2F;flask&#x2F;app.py&amp;quot;, line 1517, in handle_user_exception
+&lt;&#x2F;span&gt;&lt;span&gt;    reraise(exc_type, exc_value, tb)
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;usr&#x2F;local&#x2F;container-station&#x2F;python&#x2F;lib&#x2F;python2.7&#x2F;site-packages&#x2F;flask&#x2F;app.py&amp;quot;, line 1612, in full_dispatch_request
+&lt;&#x2F;span&gt;&lt;span&gt;    rv = self.dispatch_request()
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;usr&#x2F;local&#x2F;container-station&#x2F;python&#x2F;lib&#x2F;python2.7&#x2F;site-packages&#x2F;flask&#x2F;app.py&amp;quot;, line 1598, in dispatch_request
+&lt;&#x2F;span&gt;&lt;span&gt;    return self.view_functions[rule.endpoint](**req.view_args)
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;home&#x2F;ubuntu&#x2F;src&#x2F;build&#x2F;amd64&#x2F;container-station&#x2F;target&#x2F;ctstation&#x2F;api&#x2F;exception.py&amp;quot;, line 37, in wrapper
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;usr&#x2F;local&#x2F;container-station&#x2F;python&#x2F;lib&#x2F;python2.7&#x2F;site-packages&#x2F;flask_login.py&amp;quot;, line 756, in decorated_view
+&lt;&#x2F;span&gt;&lt;span&gt;    elif not current_user.is_authenticated():
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;usr&#x2F;local&#x2F;container-station&#x2F;python&#x2F;lib&#x2F;python2.7&#x2F;site-packages&#x2F;werkzeug&#x2F;local.py&amp;quot;, line 348, in __getattr__
+&lt;&#x2F;span&gt;&lt;span&gt;    return getattr(self._get_current_object(), name)
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;usr&#x2F;local&#x2F;container-station&#x2F;python&#x2F;lib&#x2F;python2.7&#x2F;site-packages&#x2F;werkzeug&#x2F;local.py&amp;quot;, line 307, in _get_current_object
+&lt;&#x2F;span&gt;&lt;span&gt;    return self.__local()
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;usr&#x2F;local&#x2F;container-station&#x2F;python&#x2F;lib&#x2F;python2.7&#x2F;site-packages&#x2F;flask_login.py&amp;quot;, line 46, in &amp;lt;lambda&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    current_user = LocalProxy(lambda: _get_user())
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;usr&#x2F;local&#x2F;container-station&#x2F;python&#x2F;lib&#x2F;python2.7&#x2F;site-packages&#x2F;flask_login.py&amp;quot;, line 794, in _get_user
+&lt;&#x2F;span&gt;&lt;span&gt;    current_app.login_manager._load_user()
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;usr&#x2F;local&#x2F;container-station&#x2F;python&#x2F;lib&#x2F;python2.7&#x2F;site-packages&#x2F;flask_login.py&amp;quot;, line 340, in _load_user
+&lt;&#x2F;span&gt;&lt;span&gt;    deleted = self._session_protection()
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;usr&#x2F;local&#x2F;container-station&#x2F;python&#x2F;lib&#x2F;python2.7&#x2F;site-packages&#x2F;flask_login.py&amp;quot;, line 373, in _session_protection
+&lt;&#x2F;span&gt;&lt;span&gt;    if &amp;#39;_id&amp;#39; not in sess:
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;usr&#x2F;local&#x2F;container-station&#x2F;python&#x2F;lib&#x2F;python2.7&#x2F;_abcoll.py&amp;quot;, line 348, in __contains__
+&lt;&#x2F;span&gt;&lt;span&gt;    self[key]
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;home&#x2F;ubuntu&#x2F;src&#x2F;build&#x2F;amd64&#x2F;container-station&#x2F;target&#x2F;ctstation&#x2F;common&#x2F;session.py&amp;quot;, line 35, in __getitem__
+&lt;&#x2F;span&gt;&lt;span&gt;  File &amp;quot;&#x2F;home&#x2F;ubuntu&#x2F;src&#x2F;build&#x2F;amd64&#x2F;container-station&#x2F;target&#x2F;ctstation&#x2F;common&#x2F;session.py&amp;quot;, line 68, in _get_conn
+&lt;&#x2F;span&gt;&lt;span&gt;OperationalError: unable to open database file
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;既然是数据库文件打不开，就尝试删除数据库文件。首先停止container station，然后重命名&lt;code&gt;ctstation.sqlite&lt;&#x2F;code&gt;为&lt;code&gt;ctstation.sqlite.bak&lt;&#x2F;code&gt;，让系统生成新的文件。重新启用container station。结果还是不工作。&lt;&#x2F;p&gt;
+&lt;p&gt;继续查找原因， 根据日志里的路径去查看&lt;code&gt;python&lt;&#x2F;code&gt;代码，发现有些是pyc文件，反编译pyc文件，查看session相关的代码，没有发现有什么问题，觉得是系统内部状态出了问题。&lt;&#x2F;p&gt;
+&lt;p&gt;最后不得不重置系统设置来解决问题。
+步骤：&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;在控制台 -&amp;gt; 备份&#x2F;恢复，备份系统设置&lt;&#x2F;li&gt;
+&lt;li&gt;在控制台 -&amp;gt; 备份&#x2F;恢复 -&amp;gt; 恢复出厂默认设置， 选择重置设置，然后等待系统重启&lt;&#x2F;li&gt;
+&lt;li&gt;重启登录后，在控制台 -&amp;gt; 备份&#x2F;恢复，浏览之前备份的系统设置文件，点击恢复，等待系统恢复设置和安装App&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;这次&lt;code&gt;container station&lt;&#x2F;code&gt;终于正常工作了。&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

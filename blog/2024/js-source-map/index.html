@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - Javascript source map</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/2024/js-source-map/#source-map-jie-gou" class="toc-link">source map 结构</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/2024/js-source-map/#mappings" class="toc-link">mappings</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/2024/js-source-map/#base64-vlq" class="toc-link">Base64 VLQ</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/2024/js-source-map/#bian-ma" class="toc-link">编码</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/2024/js-source-map/#jie-ma" class="toc-link">解码</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/2024/js-source-map/#source-mapzen-me-shi-yong" class="toc-link">source map怎么使用</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/2024/js-source-map/#references" class="toc-link">References</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;2024&#x2F;js-source-map&#x2F;">Javascript source map</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>4 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2024-05-04</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>Javascript一般需要打包压缩，或者从其它语言转换到JS。需要用source map来映射代码转换前后的关系，方便调试代码。</p>
+<h2 id="source-map-jie-gou">source map 结构</h2>
+<pre data-lang="json" style="background-color:#2b303b;color:#c0c5ce;" class="language-json "><code class="language-json" data-lang="json"><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">version</span><span>&quot; : </span><span style="color:#d08770;">3</span><span>,
+</span><span>  &quot;</span><span style="color:#a3be8c;">file</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">out.js</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">sourceRoot</span><span>&quot;: &quot;&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">sources</span><span>&quot;: [&quot;</span><span style="color:#a3be8c;">foo.js</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">bar.js</span><span>&quot;],
+</span><span>  &quot;</span><span style="color:#a3be8c;">sourcesContent</span><span>&quot;: [</span><span style="color:#d08770;">null</span><span>, </span><span style="color:#d08770;">null</span><span>],
+</span><span>  &quot;</span><span style="color:#a3be8c;">names</span><span>&quot;: [&quot;</span><span style="color:#a3be8c;">src</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">maps</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">are</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">fun</span><span>&quot;],
+</span><span>  &quot;</span><span style="color:#a3be8c;">mappings</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">A,AAAB;;ABCDE</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">ignoreList</span><span>&quot;: [</span><span style="color:#d08770;">0</span><span>]
+</span><span>}
+</span></code></pre>
+<p>file: 生成的文件
+sourceRoot: 指定根路径，可以简化sources的路径
+sourceContent: 源代码
+names: mappings中使用的符号
+mappings：编码后的映射数据
+ignoreList：在开发者工具中应当忽略的第三方代码</p>
+<h2 id="mappings">mappings</h2>
+<p>mappings定义如下：</p>
+<ul>
+<li>使用分号(;)隔开分组，每个分号(;)代表一行</li>
+<li>使用逗号(,)隔开每个segment</li>
+<li>每个segment可能有1、4或5个数字组成</li>
+</ul>
+<p>segment每个field的定义：</p>
+<ol>
+<li>生成代码中的列号</li>
+<li>sources的索引值</li>
+<li>原始代码的行号</li>
+<li>原始代码的列号</li>
+<li>names的索引值</li>
+</ol>
+<p>此外，segment每个field额外约束是第一次出现使用完整值，之后都使用差值。
+使用差值可以减小编码后数据的大小。</p>
+<h2 id="base64-vlq">Base64 VLQ</h2>
+<p><strong>variable-length quantity</strong> (<strong>VLQ</strong>) 用来编码整型数字。</p>
+<blockquote>
+<p>Base64 VLQ: <a href="https://tc39.es/source-map/#biblio-vlq" title="Variable-length quantity">[VLQ]</a> is a <a href="https://tc39.es/source-map/#biblio-base64" title="The Base16, Base32, and Base64 Data Encodings">[base64]</a> value, where the most significant bit (the 6th bit) is used as the continuation bit, and the &quot;digits&quot; are encoded into the string least significant first, and where the least significant bit of the first digit is used as the sign bit.</p>
+</blockquote>
+<p>把数值编码成VLQ形式，然后编码成Base64形式。
+为了适合Base 64编码，选择了6 bit VLQ编码。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span> 5   | 4 | 3 | 2 | 1 | 0
+</span><span>cont | x | x | x | x | sign
+</span></code></pre>
+<p>如图所示，最高位指示后续是否是当前数字的一部分；最低位表示符号，1表示负数；这里不包括符号位的有效bit只有4位，最高只能表示15 （0b1111）。
+超出这个范围，就需要用到continuation bit，下一个Base64值显然只有5位有效bit，这个时候没有符号位。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span> 5  | 4 | 3 | 2 | 1 | 0     |   5  | 4 | 3 | 2 | 1 | 0
+</span><span> 1  | x | x | x | x | sign  | cont | x | x | x | x | x 
+</span></code></pre>
+<p>理解VLQ之后，编码和解码很直观。</p>
+<h3 id="bian-ma">编码</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">base64_encode</span><span>(</span><span style="color:#bf616a;">v</span><span>: </span><span style="color:#b48ead;">u8</span><span>) -&gt; </span><span style="color:#b48ead;">u8
+</span><span>{
+</span><span>	</span><span style="color:#b48ead;">static </span><span style="color:#d08770;">BASE64_LUT</span><span>:&amp;[</span><span style="color:#b48ead;">u8</span><span>] = </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/</span><span>&quot;;
+</span><span>	</span><span style="color:#d08770;">BASE64_LUT</span><span>[v as </span><span style="color:#b48ead;">usize</span><span>]
+</span><span>}
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">encode</span><span>(</span><span style="color:#bf616a;">num</span><span>:</span><span style="color:#b48ead;">i32</span><span>) -&gt; Vec&lt;</span><span style="color:#b48ead;">u8</span><span>&gt;
+</span><span>{
+</span><span>	</span><span style="color:#b48ead;">let mut</span><span> res = vec![];
+</span><span>	</span><span style="color:#b48ead;">let mut</span><span> num = </span><span style="color:#b48ead;">if</span><span> num &lt; </span><span style="color:#d08770;">0 </span><span>{
+</span><span>		((-num) &lt;&lt; </span><span style="color:#d08770;">1</span><span>) | </span><span style="color:#d08770;">1 
+</span><span>	} </span><span style="color:#b48ead;">else </span><span>{
+</span><span>		num &lt;&lt; </span><span style="color:#d08770;">1
+</span><span>	};
+</span><span>	</span><span style="color:#b48ead;">while</span><span> num != </span><span style="color:#d08770;">0 </span><span>{
+</span><span>		</span><span style="color:#b48ead;">let mut</span><span> v = (num &amp; </span><span style="color:#d08770;">0b11111</span><span>) as </span><span style="color:#b48ead;">u8</span><span>;
+</span><span>		num = num &gt;&gt; </span><span style="color:#d08770;">5</span><span>;
+</span><span>		</span><span style="color:#b48ead;">if</span><span> num != </span><span style="color:#d08770;">0 </span><span>{
+</span><span>			v |= </span><span style="color:#d08770;">1 </span><span>&lt;&lt; </span><span style="color:#d08770;">5</span><span>;
+</span><span>		}
+</span><span>		res.</span><span style="color:#96b5b4;">push</span><span>(</span><span style="color:#96b5b4;">base64_encode</span><span>(v));
+</span><span>	}
+</span><span>	res
+</span><span>}
+</span></code></pre>
+<h3 id="jie-ma">解码</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">base64_decode</span><span>(</span><span style="color:#bf616a;">v</span><span>:</span><span style="color:#b48ead;">u8</span><span>) -&gt; </span><span style="color:#b48ead;">u8
+</span><span>{
+</span><span>	</span><span style="color:#b48ead;">match</span><span> v {
+</span><span>		</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">A</span><span>&#39;..=</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">Z</span><span>&#39; =&gt; v - </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">A</span><span>&#39;,
+</span><span>		</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">a</span><span>&#39;..=</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">z</span><span>&#39; =&gt; v - </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">a</span><span>&#39; + </span><span style="color:#d08770;">26</span><span>,
+</span><span>		</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">0</span><span>&#39;..=</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">9</span><span>&#39; =&gt; v - </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">0</span><span>&#39; + </span><span style="color:#d08770;">52</span><span>,
+</span><span>		</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">+</span><span>&#39; =&gt; </span><span style="color:#d08770;">62</span><span>,
+</span><span>		</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">/</span><span>&#39; =&gt; </span><span style="color:#d08770;">63</span><span>,
+</span><span>		_ =&gt; unreachable!(),
+</span><span>	}
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">decode</span><span>(</span><span style="color:#bf616a;">bytes</span><span>: &amp;[</span><span style="color:#b48ead;">u8</span><span>]) -&gt; Option&lt;(</span><span style="color:#b48ead;">i32</span><span>,</span><span style="color:#b48ead;">usize</span><span>)&gt;
+</span><span>{
+</span><span>	</span><span style="color:#b48ead;">let mut</span><span> num:</span><span style="color:#b48ead;">i32 </span><span>= </span><span style="color:#d08770;">0</span><span>;
+</span><span>	</span><span style="color:#b48ead;">let mut</span><span> n_bits = </span><span style="color:#d08770;">0</span><span>;
+</span><span>	</span><span style="color:#b48ead;">let mut</span><span> cont = </span><span style="color:#d08770;">1</span><span>;
+</span><span>	</span><span style="color:#b48ead;">let mut</span><span> n = </span><span style="color:#d08770;">0</span><span>;
+</span><span>	</span><span style="color:#b48ead;">for </span><span>&amp;v in bytes.</span><span style="color:#96b5b4;">iter</span><span>() {
+</span><span>		</span><span style="color:#b48ead;">let</span><span> v = </span><span style="color:#96b5b4;">base64_decode</span><span>(v);
+</span><span>		num += ((v &amp; </span><span style="color:#d08770;">0b11111</span><span>) as </span><span style="color:#b48ead;">i32</span><span>) &lt;&lt; n_bits;
+</span><span>		cont = v &amp; (</span><span style="color:#d08770;">1 </span><span>&lt;&lt; </span><span style="color:#d08770;">5</span><span>);
+</span><span>		n += </span><span style="color:#d08770;">1</span><span>;
+</span><span>		</span><span style="color:#b48ead;">if</span><span> cont == </span><span style="color:#d08770;">0 </span><span>{
+</span><span>			</span><span style="color:#b48ead;">break</span><span>;
+</span><span>		}
+</span><span>		n_bits += </span><span style="color:#d08770;">5</span><span>;
+</span><span>	}
+</span><span>	</span><span style="color:#b48ead;">if</span><span> cont != </span><span style="color:#d08770;">0 </span><span>{
+</span><span>		</span><span style="color:#b48ead;">return </span><span>None;
+</span><span>	}
+</span><span>	</span><span style="color:#b48ead;">if </span><span>(num &amp; </span><span style="color:#d08770;">1</span><span>) != </span><span style="color:#d08770;">0 </span><span>{
+</span><span>		num = -(num &gt;&gt; </span><span style="color:#d08770;">1</span><span>)
+</span><span>	} </span><span style="color:#b48ead;">else </span><span>{
+</span><span>		num = num &gt;&gt; </span><span style="color:#d08770;">1
+</span><span>	}
+</span><span>	Some((num, n))
+</span><span>}
+</span></code></pre>
+<h2 id="source-mapzen-me-shi-yong">source map怎么使用</h2>
+<p>有几种形式，其中HTTP header优先级最高</p>
+<ul>
+<li>HTTP header</li>
+</ul>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>sourcemap: &lt;url&gt;
+</span></code></pre>
+<ul>
+<li>通过url的形式在生成的代码中指定</li>
+</ul>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>//# sourceMappingUrl=&lt;url&gt;
+</span></code></pre>
+<ul>
+<li>通过base64 url的形式把source map内嵌在生成的代码中</li>
+</ul>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>//# sourceMappingUrl=data:application/json;charset=utf-8;base64,......
+</span></code></pre>
+<p>出于兼容性<code>//# sourceMappingUrl</code>这里的<code>#</code>可以使用<code>@</code>符号代替。新生成的代码应该使用<code>#</code>。</p>
+<h2 id="references">References</h2>
+<ul>
+<li>https://tc39.es/source-map/</li>
+<li>https://en.wikipedia.org/wiki/Variable-length_quantity</li>
+<li>https://www.murzwin.com/base64vlq.html</li>
+</ul>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/sourcemap/">#sourcemap</a>
+            
+            <a href="https://blog.dotone.top/tags/javascript/">#javascript</a>
+            
+            <a href="https://blog.dotone.top/tags/encode/">#encode</a>
+            
+            <a href="https://blog.dotone.top/tags/decode/">#decode</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

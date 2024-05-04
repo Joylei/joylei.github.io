@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - 使用Simple OOXML简化Open Xml操作</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;simple-ooxml&#x2F;">使用Simple OOXML简化Open Xml操作</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>3 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2009-11-14</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p><a href="http://simpleooxml.codeplex.com/">Simple OOXml</a>是CodePlex上的一个开源项目，使用<a href="http://www.microsoft.com/downloads/details.aspx?FamilyId=C6E744E5-36E9-45F5-8D8C-331DF206E0D0">Open Xml SDK 2.0</a> ，封装了一系列读写.docx和.xlsx文档的类，可以很大程度上简化工作。</p>
+<p>首先必须下载Simple OOXml和Open Xml SDK 2.0。</p>
+<p>其次，在项目中添加对<code>WindowsBase.dll</code>的引用；添加对<code>DocumentFormat.OpenXml.dll</code>的引用；添加对<code>DocumentFormat.OpenXml.Extensions.dll</code>的引用。</p>
+<p><img src="https://blog.dotone.top/blog/it/simple-ooxml/./f77e550f495d00046159f362.jpg" alt="f77e550f495d00046159f362.jpg" /></p>
+<p>一、新建一个.xlsx文档，代码如下：</p>
+<pre data-lang="c#" style="background-color:#2b303b;color:#c0c5ce;" class="language-c# "><code class="language-c#" data-lang="c#"><span>
+</span><span>            </span><span style="color:#65737e;">//加载空白.xlsx文件到内存中(DocumentFormat.OpenXml.Extensions中的内嵌资源)
+</span><span>            </span><span style="color:#b48ead;">using </span><span>(</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">stream </span><span>= </span><span style="color:#bf616a;">SpreadsheetReader</span><span>.</span><span style="color:#bf616a;">Create</span><span>())
+</span><span>            {
+</span><span>                </span><span style="color:#b48ead;">using </span><span>(</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">doc </span><span>= </span><span style="color:#bf616a;">SpreadsheetDocument</span><span>.</span><span style="color:#bf616a;">Open</span><span>(</span><span style="color:#bf616a;">stream</span><span>, </span><span style="color:#d08770;">true</span><span>))
+</span><span>                {
+</span><span>                    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">sheet </span><span>= </span><span style="color:#bf616a;">SpreadsheetReader</span><span>.</span><span style="color:#bf616a;">GetWorksheetPartByName</span><span>(</span><span style="color:#bf616a;">doc</span><span>, &quot;</span><span style="color:#a3be8c;">Sheet1</span><span>&quot;);
+</span><span>                    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">writer </span><span>= new WorksheetWriter(</span><span style="color:#bf616a;">doc</span><span>, </span><span style="color:#bf616a;">sheet</span><span>);
+</span><span>
+</span><span>                    </span><span style="color:#65737e;">//获取默认样式
+</span><span>                    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">style1 </span><span>= </span><span style="color:#bf616a;">SpreadsheetStyle</span><span>.</span><span style="color:#bf616a;">GetDefault</span><span>(</span><span style="color:#bf616a;">doc</span><span>);
+</span><span>                    </span><span style="color:#bf616a;">style1</span><span>.</span><span style="color:#bf616a;">SetBackgroundColor</span><span>(&quot;</span><span style="color:#a3be8c;">0080C0</span><span>&quot;);</span><span style="color:#65737e;">//设置背景颜色
+</span><span>                    </span><span style="color:#bf616a;">style1</span><span>.</span><span style="color:#bf616a;">SetHorizontalAlignment</span><span>(</span><span style="color:#bf616a;">HorizontalAlignmentValues</span><span>.</span><span style="color:#bf616a;">Center</span><span>);</span><span style="color:#65737e;">//设置水平居中对齐
+</span><span>                    </span><span style="color:#bf616a;">style1</span><span>.</span><span style="color:#bf616a;">SetColor</span><span>(&quot;</span><span style="color:#a3be8c;">FF0000</span><span>&quot;);</span><span style="color:#65737e;">//设置颜色
+</span><span>                    </span><span style="color:#bf616a;">style1</span><span>.</span><span style="color:#bf616a;">SetBorder</span><span>(&quot;</span><span style="color:#a3be8c;">000000</span><span>&quot;, </span><span style="color:#bf616a;">BorderStyleValues</span><span>.</span><span style="color:#bf616a;">Thin</span><span>);</span><span style="color:#65737e;">//设置边框
+</span><span>                    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">headers </span><span>=new []{&quot;</span><span style="color:#a3be8c;">姓名</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">性别</span><span>&quot;,&quot;</span><span style="color:#a3be8c;">年龄</span><span>&quot;};
+</span><span>                    </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">i </span><span>= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">i </span><span>&lt; </span><span style="color:#bf616a;">headers</span><span>.</span><span style="color:#bf616a;">Length</span><span>; </span><span style="color:#bf616a;">i</span><span>++)
+</span><span>                    {
+</span><span>                        </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">columnName </span><span>= </span><span style="color:#bf616a;">SpreadsheetReader</span><span>.</span><span style="color:#bf616a;">GetColumnName</span><span>(&quot;</span><span style="color:#a3be8c;">A</span><span>&quot;, </span><span style="color:#bf616a;">i</span><span>);</span><span style="color:#65737e;">//获取列名
+</span><span>                        </span><span style="color:#bf616a;">writer</span><span>.</span><span style="color:#bf616a;">PasteText</span><span>(</span><span style="color:#bf616a;">columnName </span><span>+ &quot;</span><span style="color:#a3be8c;">1</span><span>&quot;, </span><span style="color:#bf616a;">headers</span><span>[</span><span style="color:#bf616a;">i</span><span>], </span><span style="color:#bf616a;">style1</span><span>);</span><span style="color:#65737e;">//写入到单元格
+</span><span>                    }
+</span><span>                    </span><span style="color:#bf616a;">writer</span><span>.</span><span style="color:#bf616a;">Save</span><span>();</span><span style="color:#65737e;">//在内存中保存文档结构
+</span><span>                    </span><span style="color:#bf616a;">SpreadsheetWriter</span><span>.</span><span style="color:#bf616a;">StreamToFile</span><span>(&quot;</span><span style="color:#a3be8c;">test.xlsx</span><span>&quot;, </span><span style="color:#bf616a;">stream</span><span>);</span><span style="color:#65737e;">//保存到文件中
+</span><span>                }
+</span><span>            }
+</span></code></pre>
+<p>可以看到效果如下图所示：</p>
+<p><img src="https://blog.dotone.top/blog/it/simple-ooxml/./6b2a327a95c692c32e73b3b0.jpg" alt="6b2a327a95c692c32e73b3b0.jpg" /></p>
+<p>二，打开已存在的.xlsx文件写入数据，代码如下：</p>
+<pre data-lang="c#" style="background-color:#2b303b;color:#c0c5ce;" class="language-c# "><code class="language-c#" data-lang="c#"><span>
+</span><span>            </span><span style="color:#b48ead;">using </span><span>(</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">stream </span><span>= </span><span style="color:#bf616a;">SpreadsheetReader</span><span>.</span><span style="color:#bf616a;">StreamFromFile</span><span>(&quot;</span><span style="color:#a3be8c;">test.xlsx</span><span>&quot;))
+</span><span>            {
+</span><span>                </span><span style="color:#b48ead;">using </span><span>(</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">doc </span><span>= </span><span style="color:#bf616a;">SpreadsheetDocument</span><span>.</span><span style="color:#bf616a;">Open</span><span>(</span><span style="color:#bf616a;">stream</span><span>, </span><span style="color:#d08770;">true</span><span>))
+</span><span>                {
+</span><span>                    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">sheet </span><span>= </span><span style="color:#bf616a;">SpreadsheetReader</span><span>.</span><span style="color:#bf616a;">GetWorksheetPartByName</span><span>(</span><span style="color:#bf616a;">doc</span><span>, &quot;</span><span style="color:#a3be8c;">Sheet1</span><span>&quot;);
+</span><span>                    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">writer </span><span>= new WorksheetWriter(</span><span style="color:#bf616a;">doc</span><span>, </span><span style="color:#bf616a;">sheet</span><span>);
+</span><span>
+</span><span>                    </span><span style="color:#65737e;">//获取默认样式
+</span><span>                    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">style1 </span><span>= </span><span style="color:#bf616a;">SpreadsheetStyle</span><span>.</span><span style="color:#bf616a;">GetDefault</span><span>(</span><span style="color:#bf616a;">doc</span><span>);
+</span><span>                    </span><span style="color:#bf616a;">style1</span><span>.</span><span style="color:#bf616a;">SetBackgroundColor</span><span>(&quot;</span><span style="color:#a3be8c;">97DDFF</span><span>&quot;);</span><span style="color:#65737e;">//设置背景颜色
+</span><span>                    </span><span style="color:#bf616a;">style1</span><span>.</span><span style="color:#bf616a;">SetHorizontalAlignment</span><span>(</span><span style="color:#bf616a;">HorizontalAlignmentValues</span><span>.</span><span style="color:#bf616a;">Center</span><span>);</span><span style="color:#65737e;">//设置水平居中对齐
+</span><span>                    </span><span style="color:#bf616a;">style1</span><span>.</span><span style="color:#bf616a;">SetBorder</span><span>(&quot;</span><span style="color:#a3be8c;">000000</span><span>&quot;, </span><span style="color:#bf616a;">BorderStyleValues</span><span>.</span><span style="color:#bf616a;">Thin</span><span>);</span><span style="color:#65737e;">//设置边框
+</span><span>                    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">data </span><span>= new[] {
+</span><span>                        new </span><span style="color:#eff1f5;">{</span><span style="color:#bf616a;">Name </span><span>= &quot;</span><span style="color:#a3be8c;">小郑</span><span>&quot;</span><span style="color:#eff1f5;">,</span><span style="color:#bf616a;">Sex </span><span>= &quot;</span><span style="color:#a3be8c;">男</span><span>&quot;</span><span style="color:#eff1f5;">,</span><span style="color:#bf616a;">Age </span><span>= </span><span style="color:#d08770;">20</span><span style="color:#eff1f5;">}</span><span>,
+</span><span>                        new </span><span style="color:#eff1f5;">{</span><span style="color:#bf616a;">Name </span><span>= &quot;</span><span style="color:#a3be8c;">小王</span><span>&quot;</span><span style="color:#eff1f5;">,</span><span style="color:#bf616a;">Sex </span><span>= &quot;</span><span style="color:#a3be8c;">女</span><span>&quot;</span><span style="color:#eff1f5;">,</span><span style="color:#bf616a;">Age </span><span>= </span><span style="color:#d08770;">19</span><span style="color:#eff1f5;">}
+</span><span>                    };
+</span><span>
+</span><span>                    </span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">rowIndex </span><span>= </span><span style="color:#d08770;">2</span><span>;
+</span><span>                    </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">i </span><span>= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">i </span><span>&lt; </span><span style="color:#bf616a;">data</span><span>.</span><span style="color:#bf616a;">Length</span><span>; </span><span style="color:#bf616a;">i</span><span>++)
+</span><span>                    {
+</span><span>                        </span><span style="color:#bf616a;">writer</span><span>.</span><span style="color:#bf616a;">PasteText</span><span>(&quot;</span><span style="color:#a3be8c;">A</span><span>&quot; + </span><span style="color:#bf616a;">rowIndex</span><span>, </span><span style="color:#bf616a;">data</span><span>[</span><span style="color:#bf616a;">i</span><span>].</span><span style="color:#bf616a;">Name</span><span>, </span><span style="color:#bf616a;">style1</span><span>);</span><span style="color:#65737e;">//写入姓名
+</span><span>                        </span><span style="color:#bf616a;">writer</span><span>.</span><span style="color:#bf616a;">PasteText</span><span>(&quot;</span><span style="color:#a3be8c;">B</span><span>&quot; + </span><span style="color:#bf616a;">rowIndex</span><span>, </span><span style="color:#bf616a;">data</span><span>[</span><span style="color:#bf616a;">i</span><span>].</span><span style="color:#bf616a;">Sex</span><span>, </span><span style="color:#bf616a;">style1</span><span>);</span><span style="color:#65737e;">//写入性别
+</span><span>                        </span><span style="color:#bf616a;">writer</span><span>.</span><span style="color:#bf616a;">PasteNumber</span><span>(&quot;</span><span style="color:#a3be8c;">C</span><span>&quot; + </span><span style="color:#bf616a;">rowIndex</span><span>, </span><span style="color:#bf616a;">data</span><span>[</span><span style="color:#bf616a;">i</span><span>].</span><span style="color:#bf616a;">Age</span><span>.</span><span style="color:#bf616a;">ToString</span><span>(), </span><span style="color:#bf616a;">style1</span><span>);</span><span style="color:#65737e;">//写入年龄
+</span><span>                        </span><span style="color:#bf616a;">rowIndex</span><span>++;
+</span><span>                    }
+</span><span>                    </span><span style="color:#bf616a;">writer</span><span>.</span><span style="color:#bf616a;">Save</span><span>();</span><span style="color:#65737e;">//在内存中保存文档结构
+</span><span>                    </span><span style="color:#bf616a;">SpreadsheetWriter</span><span>.</span><span style="color:#bf616a;">StreamToFile</span><span>(&quot;</span><span style="color:#a3be8c;">test.xlsx</span><span>&quot;, </span><span style="color:#bf616a;">stream</span><span>);</span><span style="color:#65737e;">//保存到文件中
+</span><span>                }
+</span><span>            }
+</span></code></pre>
+<p>可以看到效果如下图所示：
+<img src="https://blog.dotone.top/blog/it/simple-ooxml/./385081352c403f3f90ef399b.jpg" alt="385081352c403f3f90ef399b.jpg" /></p>
+<p>通过以上两个示例，可以看出操作很简单。</p>
+<p>这样就可以根据需要，定制不同的模板，产生需要的报表。</p>
+<p>在使用的过程中还有以下问题需要注意：</p>
+<p>1.如果有跨越多列合并的单元格，插入行操作时，此单元格中的数据会向下移动，但是此单元格不会变动。</p>
+<p>2.如果模板文件是通过.xls另存为操作转换成.xlsx文件，在进行 <code>writer.Save()</code>操作时会报错，这个可能是个BUG，使用时需要注意。</p>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/c/">#c#</a>
+            
+            <a href="https://blog.dotone.top/tags/open-xml/">#open xml</a>
+            
+            <a href="https://blog.dotone.top/tags/excel/">#excel</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

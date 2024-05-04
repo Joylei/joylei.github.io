@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - hdd</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/hdd/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-07-13T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/hdd/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>parted auto-align</title>
+        <published>2020-07-13T00:00:00+00:00</published>
+        <updated>2020-07-13T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/notes/parted-auto-align/"/>
+        <id>https://blog.dotone.top/notes/parted-auto-align/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/notes/parted-auto-align/">&lt;p&gt;parted&lt;&#x2F;p&gt;
+&lt;p&gt;自动对齐&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mkpart&lt;&#x2F;span&gt;&lt;span&gt; primary ext4 0% 100%
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+</feed>

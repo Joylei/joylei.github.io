@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - WSL ubuntu add user</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/notes/wsl-ubuntu-add-user/#da-kai-ming-ling-xing-yi-rootyong-hu-yun-xing-wsl" class="toc-link">打开命令行，以root用户运行wsl</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/notes/wsl-ubuntu-add-user/#tian-jia-user" class="toc-link">添加 user</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/notes/wsl-ubuntu-add-user/#gei-xin-yong-hu-tian-jia-sudoquan-xian" class="toc-link">给新用户添加sudo权限</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/notes/wsl-ubuntu-add-user/#tui-chu-dang-qian-wsl" class="toc-link">退出当前wsl</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/notes/wsl-ubuntu-add-user/#qie-huan-mo-ren-yong-hu" class="toc-link">切换默认用户</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/notes/wsl-ubuntu-add-user/#qi-dong-xin-de-wsl-yan-zheng-xin-yong-hu-he-sudoshi-fou-you-xiao" class="toc-link">启动新的wsl，验证新用户和sudo是否有效</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/notes/wsl-ubuntu-add-user/#can-kao" class="toc-link">参考</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;notes&#x2F;wsl-ubuntu-add-user&#x2F;">WSL ubuntu add user</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>2 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2020-06-14</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <h2 id="da-kai-ming-ling-xing-yi-rootyong-hu-yun-xing-wsl">打开命令行，以root用户运行wsl</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>C:\WINDOWS\system32&gt;wsl -u root
+</span></code></pre>
+<h2 id="tian-jia-user">添加 user</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>root@MYPC:/mnt/c/WINDIWS/system32# adduser lei
+</span></code></pre>
+<p>按照提示输入用户名和密码</p>
+<h2 id="gei-xin-yong-hu-tian-jia-sudoquan-xian">给新用户添加sudo权限</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>root@MYPC:/mnt/c/WINDIWS/system32# usermod -G sudo lei
+</span></code></pre>
+<h2 id="tui-chu-dang-qian-wsl">退出当前wsl</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>exit
+</span></code></pre>
+<h2 id="qie-huan-mo-ren-yong-hu">切换默认用户</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>C:\WINDOWS\system32&gt;ubuntu2004 config --default-user lei
+</span></code></pre>
+<p>这里ubuntu版本是20.04，如果是ubuntu 18.04，那么运行的是<code>ubuntu1804 config --default-user &lt;username&gt;</code>；以此类推，如果是其它发行版，改为相应的发行版名称+版本号。</p>
+<h2 id="qi-dong-xin-de-wsl-yan-zheng-xin-yong-hu-he-sudoshi-fou-you-xiao">启动新的wsl，验证新用户和sudo是否有效</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>C:\WINDOWS\system32&gt;wsl
+</span><span>lei@MYPC:/mnt/c/WINDIWS/system32#sudo apt update
+</span><span>[sudo] password for lei:
+</span><span>Get:1 http://archive.ubuntu.com/ubuntu focal InRelease [265 kB]
+</span><span>Get:2 http://security.ubuntu.com/ubuntu focal-security InRelease [107 kB]
+</span><span>Get:3 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [103 kB]
+</span><span>Get:4 http://security.ubuntu.com/ubuntu focal-security/main Translation-en [38.5 kB]
+</span><span>Get:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease [107 kB]
+</span></code></pre>
+<h2 id="can-kao">参考</h2>
+<ul>
+<li><a href="https://docs.microsoft.com/zh-cn/windows/wsl/wsl-config">https://docs.microsoft.com/zh-cn/windows/wsl/wsl-config</a></li>
+<li><a href="https://www.tenforums.com/tutorials/128052-add-user-windows-subsystem-linux-wsl-distro-windows-10-a.html">https://www.tenforums.com/tutorials/128052-add-user-windows-subsystem-linux-wsl-distro-windows-10-a.html</a></li>
+<li><a href="https://www.thewindowsclub.com/how-to-set-default-user-switch-user-and-remove-a-user-for-wsl/">https://www.thewindowsclub.com/how-to-set-default-user-switch-user-and-remove-a-user-for-wsl/</a></li>
+</ul>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/windows/">#windows</a>
+            
+            <a href="https://blog.dotone.top/tags/wsl/">#wsl</a>
+            
+            <a href="https://blog.dotone.top/tags/ubuntu/">#ubuntu</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - network</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/network/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-07-15T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/network/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>linux prefer ipv4 other than ipv6</title>
+        <published>2020-07-15T00:00:00+00:00</published>
+        <updated>2020-07-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/notes/linux-ipv4-over-ipv6/"/>
+        <id>https://blog.dotone.top/notes/linux-ipv4-over-ipv6/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/notes/linux-ipv4-over-ipv6/">&lt;p&gt;双栈环境下，怎么设置IPv4优先于IPv6？
+由于中国大陆很多情况下网络访问IPv6慢于IPv4，所以最好设置IPv4优先。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;linux&quot;&gt;Linux&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;&#x2F;etc&#x2F;gai.conf&lt;&#x2F;code&gt;
+如果没有这个文件就创建这个文件，添加或修改以下内容&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;precedence ::ffff:0:0&#x2F;96 100
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;windows&quot;&gt;Windows&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;cha-kan-dang-qian-prefixpolicy&quot;&gt;查看当前&lt;code&gt;prefixpolicy&lt;&#x2F;code&gt;&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;netsh&lt;&#x2F;span&gt;&lt;span&gt; interface ipv6 show prefixpolicies 
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;可以看到&lt;code&gt;::ffff:0:0&#x2F;96&lt;&#x2F;code&gt;对应的优先级和标签。&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;xiu-gai-prefixpolicy&quot;&gt;修改&lt;code&gt;prefixpolicy&lt;&#x2F;code&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;以管理员权限运行：&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;netsh&lt;&#x2F;span&gt;&lt;span&gt; interface ipv6 set prefixpolicy ::ffff:0:0&#x2F;96 100 4
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;命令中&lt;code&gt;100&lt;&#x2F;code&gt;代表优先级， 越大优先级越低。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;http:&#x2F;&#x2F;sf-alpha.bjgang.org&#x2F;wordpress&#x2F;2012&#x2F;08&#x2F;linux-prefer-ipv4-over-ipv6-in-dual-stack-environment-and-prevent-problems-when-only-ipv4-exists&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;bbs.pcbeta.com&#x2F;viewthread-1853059-2-1.html&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>zerotier: unable to configure virtual network port</title>
+        <published>2020-06-22T00:00:00+00:00</published>
+        <updated>2020-06-22T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/zerotier-unable-to-configure-virtual-network-port/"/>
+        <id>https://blog.dotone.top/blog/it/zerotier-unable-to-configure-virtual-network-port/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/zerotier-unable-to-configure-virtual-network-port/">&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;ERROR: 
+&lt;&#x2F;span&gt;&lt;span&gt;unable to configure virtual network port: could not open TUN&#x2F;TAP device: No such file or directory
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Solution:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;modprobe&lt;&#x2F;span&gt;&lt;span&gt; tun
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>基于docker的arm64编译zerotier</title>
+        <published>2020-06-12T00:00:00+00:00</published>
+        <updated>2020-06-12T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/"/>
+        <id>https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/compile-zerotier-for-arm64-based-on-docker/">&lt;p&gt;为了在路由器使用zerotier，但又不想安装entware，自己动手编译zerotier。路由器使用的梅林固件，cpu是arm64架构的。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;zhu-ce-qemu-user-static&quot;&gt;注册qemu-user-static&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;❯ docker run --rm --privileged multiarch&#x2F;qemu-user-static:register --reset
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-alpha-static as binfmt interpreter for alpha
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-arm-static as binfmt interpreter for arm
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-armeb-static as binfmt interpreter for armeb
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-sparc-static as binfmt interpreter for sparc
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-sparc32plus-static as binfmt interpreter for sparc32plus
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-sparc64-static as binfmt interpreter for sparc64
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-ppc-static as binfmt interpreter for ppc
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-ppc64-static as binfmt interpreter for ppc64
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-ppc64le-static as binfmt interpreter for ppc64le
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-m68k-static as binfmt interpreter for m68k
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-mips-static as binfmt interpreter for mips
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-mipsel-static as binfmt interpreter for mipsel
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-mipsn32-static as binfmt interpreter for mipsn32
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-mipsn32el-static as binfmt interpreter for mipsn32el
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-mips64-static as binfmt interpreter for mips64
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-mips64el-static as binfmt interpreter for mips64el
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-sh4-static as binfmt interpreter for sh4
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-sh4eb-static as binfmt interpreter for sh4eb
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-s390x-static as binfmt interpreter for s390x
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-aarch64-static as binfmt interpreter for aarch64
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-aarch64_be-static as binfmt interpreter for aarch64_be
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-hppa-static as binfmt interpreter for hppa
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-riscv32-static as binfmt interpreter for riscv32
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-riscv64-static as binfmt interpreter for riscv64
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-xtensa-static as binfmt interpreter for xtensa
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-xtensaeb-static as binfmt interpreter for xtensaeb
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-microblaze-static as binfmt interpreter for microblaze
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-microblazeel-static as binfmt interpreter for microblazeel
+&lt;&#x2F;span&gt;&lt;span&gt;Setting &#x2F;usr&#x2F;bin&#x2F;qemu-or1k-static as binfmt interpreter for or1k
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;zhun-bei-ubuntu-arm64yuan&quot;&gt;准备ubuntu arm64源&lt;&#x2F;h2&gt;
+&lt;p&gt;默认的源更新太慢了，替换成阿里云的源。注意：这里对应的是ubuntu focal发行版；其它的发行版，请自行替换源地址。
+创建文件&lt;code&gt;sources.list&lt;&#x2F;code&gt;，内容如下：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;# See http:&#x2F;&#x2F;help.ubuntu.com&#x2F;community&#x2F;UpgradeNotes for how to upgrade to
+&lt;&#x2F;span&gt;&lt;span&gt;# newer versions of the distribution.
+&lt;&#x2F;span&gt;&lt;span&gt;deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu-ports&#x2F; focal main restricted
+&lt;&#x2F;span&gt;&lt;span&gt;# deb-src http:&#x2F;&#x2F;archive.ubuntu.com&#x2F;ubuntu&#x2F; focal main restricted
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;## Major bug fix updates produced after the final release of the
+&lt;&#x2F;span&gt;&lt;span&gt;## distribution.
+&lt;&#x2F;span&gt;&lt;span&gt;deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu-ports&#x2F; focal-updates main restricted
+&lt;&#x2F;span&gt;&lt;span&gt;# deb-src http:&#x2F;&#x2F;archive.ubuntu.com&#x2F;ubuntu&#x2F; focal-updates main restricted
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu
+&lt;&#x2F;span&gt;&lt;span&gt;## team. Also, please note that software in universe WILL NOT receive any
+&lt;&#x2F;span&gt;&lt;span&gt;## review or updates from the Ubuntu security team.
+&lt;&#x2F;span&gt;&lt;span&gt;deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu-ports&#x2F; focal universe
+&lt;&#x2F;span&gt;&lt;span&gt;# deb-src http:&#x2F;&#x2F;archive.ubuntu.com&#x2F;ubuntu&#x2F; focal universe
+&lt;&#x2F;span&gt;&lt;span&gt;deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu-ports&#x2F; focal-updates universe
+&lt;&#x2F;span&gt;&lt;span&gt;# deb-src http:&#x2F;&#x2F;archive.ubuntu.com&#x2F;ubuntu&#x2F; focal-updates universe
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu
+&lt;&#x2F;span&gt;&lt;span&gt;## team, and may not be under a free licence. Please satisfy yourself as to
+&lt;&#x2F;span&gt;&lt;span&gt;## your rights to use the software. Also, please note that software in
+&lt;&#x2F;span&gt;&lt;span&gt;## multiverse WILL NOT receive any review or updates from the Ubuntu
+&lt;&#x2F;span&gt;&lt;span&gt;## security team.
+&lt;&#x2F;span&gt;&lt;span&gt;deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu-ports&#x2F; focal multiverse
+&lt;&#x2F;span&gt;&lt;span&gt;# deb-src http:&#x2F;&#x2F;archive.ubuntu.com&#x2F;ubuntu&#x2F; focal multiverse
+&lt;&#x2F;span&gt;&lt;span&gt;deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu-ports&#x2F; focal-updates multiverse
+&lt;&#x2F;span&gt;&lt;span&gt;# deb-src http:&#x2F;&#x2F;archive.ubuntu.com&#x2F;ubuntu&#x2F; focal-updates multiverse
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;## N.B. software from this repository may not have been tested as
+&lt;&#x2F;span&gt;&lt;span&gt;## extensively as that contained in the main release, although it includes
+&lt;&#x2F;span&gt;&lt;span&gt;## newer versions of some applications which may provide useful features.
+&lt;&#x2F;span&gt;&lt;span&gt;## Also, please note that software in backports WILL NOT receive any review
+&lt;&#x2F;span&gt;&lt;span&gt;## or updates from the Ubuntu security team.
+&lt;&#x2F;span&gt;&lt;span&gt;deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu-ports&#x2F; focal-backports main restricted universe multiverse
+&lt;&#x2F;span&gt;&lt;span&gt;# deb-src http:&#x2F;&#x2F;archive.ubuntu.com&#x2F;ubuntu&#x2F; focal-backports main restricted universe multiverse
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;## Uncomment the following two lines to add software from Canonical&amp;#39;s
+&lt;&#x2F;span&gt;&lt;span&gt;## &amp;#39;partner&amp;#39; repository.
+&lt;&#x2F;span&gt;&lt;span&gt;## This software is not part of Ubuntu, but is offered by Canonical and the
+&lt;&#x2F;span&gt;&lt;span&gt;## respective vendors as a service to Ubuntu users.
+&lt;&#x2F;span&gt;&lt;span&gt;# deb http:&#x2F;&#x2F;archive.canonical.com&#x2F;ubuntu focal partner
+&lt;&#x2F;span&gt;&lt;span&gt;# deb-src http:&#x2F;&#x2F;archive.canonical.com&#x2F;ubuntu focal partner
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu-ports&#x2F; focal-security main restricted
+&lt;&#x2F;span&gt;&lt;span&gt;# deb-src http:&#x2F;&#x2F;security.ubuntu.com&#x2F;ubuntu&#x2F; focal-security main restricted
+&lt;&#x2F;span&gt;&lt;span&gt;deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu-ports&#x2F; focal-security universe
+&lt;&#x2F;span&gt;&lt;span&gt;# deb-src http:&#x2F;&#x2F;security.ubuntu.com&#x2F;ubuntu&#x2F; focal-security universe
+&lt;&#x2F;span&gt;&lt;span&gt;deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu-ports&#x2F; focal-security multiverse
+&lt;&#x2F;span&gt;&lt;span&gt;# deb-src http:&#x2F;&#x2F;security.ubuntu.com&#x2F;ubuntu&#x2F; focal-security multiverse
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;zhun-bei-dockerfile&quot;&gt;准备Dockerfile&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;hub.docker.com&#x2F;u&#x2F;multiarch&#x2F;&quot;&gt;https:&#x2F;&#x2F;hub.docker.com&#x2F;u&#x2F;multiarch&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;创建文件&lt;code&gt;Dockerfile&lt;&#x2F;code&gt;,内容如下：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;FROM multiarch&#x2F;ubuntu-core:arm64-focal
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;COPY sources.list &#x2F;etc&#x2F;apt&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;RUN apt-get update -yqq \
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;amp;&amp;amp; apt-get install gcc g++ make curl git -y
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;VOLUME &#x2F;tmp
+&lt;&#x2F;span&gt;&lt;span&gt;WORKDIR &#x2F;tmp
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;ENTRYPOINT [&amp;quot;tail&amp;quot;, &amp;quot;-f&amp;quot;, &amp;quot;&#x2F;dev&#x2F;null&amp;quot;]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;可以自己修改Dockerfile，使用&lt;code&gt;apt-get&lt;&#x2F;code&gt;安装必要的包。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;gou-jian-dockerjing-xiang&quot;&gt;构建docker镜像&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;❯ docker build -t arm64:test .
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;cha-kan-jing-xiang&quot;&gt;查看镜像&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;❯ docker image ls
+&lt;&#x2F;span&gt;&lt;span&gt;REPOSITORY                   TAG                 IMAGE ID            CREATED             SIZE
+&lt;&#x2F;span&gt;&lt;span&gt;arm64                        test                1b6c48260def        3 minutes ago       287MB
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;none&amp;gt;                       &amp;lt;none&amp;gt;              727fd2a54c5f        11 minutes ago      70.2MB
+&lt;&#x2F;span&gt;&lt;span&gt;multiarch&#x2F;ubuntu-core        arm64-focal         ec57294b3a5f        4 days ago          70.2MB
+&lt;&#x2F;span&gt;&lt;span&gt;multiarch&#x2F;qemu-user-static   register            a119103618d8        12 days ago         1.25MB
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;chuang-jian-rong-qi&quot;&gt;创建容器&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;❯ docker run -d --name arm64  -v &#x2F;share&#x2F;homes&#x2F;admin&#x2F;zerotier-dev&#x2F;tmp:&#x2F;tmp arm64:test
+&lt;&#x2F;span&gt;&lt;span&gt;1123a7097cb7aa376a97ac3477b83dab95a44dd457e3daf5d21a82384209d66e
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;bian-yi&quot;&gt;编译&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;zai-bashzhong-zhi-xing-ming-ling&quot;&gt;在bash中执行命令&lt;&#x2F;h3&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;❯ docker exec -it arm64 &#x2F;bin&#x2F;bash
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;root@0aa48fea29b7:&#x2F;tmp# uname -a
+&lt;&#x2F;span&gt;&lt;span&gt;Linux 0aa48fea29b7 4.19.104-microsoft-standard #1 SMP Wed Feb 19 06:37:35 UTC 2020 aarch64 aarch64 aarch64 GNU&#x2F;Linux
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;由于git下载太慢了并且可能中断，所以使用curl下载&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;curl -L -o zerotier-1.4.6.tar.gz --retry 20  https:&#x2F;&#x2F;github.com&#x2F;zerotier&#x2F;ZeroTierOne&#x2F;archive&#x2F;1.4.6.tar.gz
+&lt;&#x2F;span&gt;&lt;span&gt;tar zxf zerotier-1.4.6.tar.gz
+&lt;&#x2F;span&gt;&lt;span&gt;cd ZeroTierOne-1.4.6
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;qing-li&quot;&gt;清理&lt;&#x2F;h3&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;make clean
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;bian-yi-1&quot;&gt;编译&lt;&#x2F;h3&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;make
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;如果需要静态编译:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt; make SHARED=0 CC=&amp;#39;gcc -static&amp;#39; CXX=&amp;#39;g++ -static&amp;#39;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;cha-kan-bian-yi-jie-guo&quot;&gt;查看编译结果&lt;&#x2F;h4&gt;
+&lt;p&gt;下面是动态编译的结果：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;root@0aa48fea29b7:&#x2F;tmp&#x2F;ZeroTierOne-1.4.6# ls -lh | grep zerotier-one
+&lt;&#x2F;span&gt;&lt;span&gt;lrwxrwxrwx  1 root root   12 Jun 15 05:31 zerotier-cli -&amp;gt; zerotier-one
+&lt;&#x2F;span&gt;&lt;span&gt;lrwxrwxrwx  1 root root   12 Jun 15 05:31 zerotier-idtool -&amp;gt; zerotier-one
+&lt;&#x2F;span&gt;&lt;span&gt;-rwxr-xr-x  1 root root 1.7M Jun 15 05:31 zerotier-one
+&lt;&#x2F;span&gt;&lt;span&gt;-rw-rw-r--  1 root root 5.4K Sep  5  2019 zerotier-one.spec
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;cha-kan-dong-tai-bian-yi-ku-yi-lai&quot;&gt;查看动态编译库依赖&lt;&#x2F;h3&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;root@0aa48fea29b7:&#x2F;tmp&#x2F;ZeroTierOne-1.4.6# objdump -x zerotier-one | grep NEEDED
+&lt;&#x2F;span&gt;&lt;span&gt;  NEEDED               libstdc++.so.6
+&lt;&#x2F;span&gt;&lt;span&gt;  NEEDED               libm.so.6
+&lt;&#x2F;span&gt;&lt;span&gt;  NEEDED               libgcc_s.so.1
+&lt;&#x2F;span&gt;&lt;span&gt;  NEEDED               libpthread.so.0
+&lt;&#x2F;span&gt;&lt;span&gt;  NEEDED               libc.so.6
+&lt;&#x2F;span&gt;&lt;span&gt;  NEEDED               ld-linux-aarch64.so.1
+&lt;&#x2F;span&gt;&lt;span&gt;root@0aa48fea29b7:&#x2F;tmp&#x2F;ZeroTierOne-1.4.6# ldd zerotier-one
+&lt;&#x2F;span&gt;&lt;span&gt;        libstdc++.so.6 =&amp;gt; &#x2F;lib&#x2F;aarch64-linux-gnu&#x2F;libstdc++.so.6 (0x0000005501a5c000)
+&lt;&#x2F;span&gt;&lt;span&gt;        libm.so.6 =&amp;gt; &#x2F;lib&#x2F;aarch64-linux-gnu&#x2F;libm.so.6 (0x0000005501c40000)
+&lt;&#x2F;span&gt;&lt;span&gt;        libgcc_s.so.1 =&amp;gt; &#x2F;lib&#x2F;aarch64-linux-gnu&#x2F;libgcc_s.so.1 (0x0000005501ceb000)
+&lt;&#x2F;span&gt;&lt;span&gt;        libpthread.so.0 =&amp;gt; &#x2F;lib&#x2F;aarch64-linux-gnu&#x2F;libpthread.so.0 (0x0000005501d10000)
+&lt;&#x2F;span&gt;&lt;span&gt;        libc.so.6 =&amp;gt; &#x2F;lib&#x2F;aarch64-linux-gnu&#x2F;libc.so.6 (0x0000005501d40000)
+&lt;&#x2F;span&gt;&lt;span&gt;        &#x2F;lib&#x2F;ld-linux-aarch64.so.1 (0x0000005500000000)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;经过检查路由器上&lt;code&gt;&#x2F;lib&lt;&#x2F;code&gt;目录，发现有除了&lt;code&gt;libstdc++.so.6&lt;&#x2F;code&gt;以为的库，而&lt;code&gt;libstdc++.so.6&lt;&#x2F;code&gt;在&lt;code&gt;&#x2F;usr&#x2F;lib&lt;&#x2F;code&gt;目录下存在。
+但是运行&lt;code&gt;zerotier-one --help&lt;&#x2F;code&gt;之后报错：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.&#x2F;zerotier-one: error while loading shared libraries: libstdc++.so.6: cannot open shared object file: No such file or directory
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;指定从&lt;code&gt;&#x2F;usr&#x2F;lib&lt;&#x2F;code&gt;目录加载库之后仍然报错：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt; # LD_LIBRARY_PATH=&#x2F;usr&#x2F;lib .&#x2F;zerotier-one --help
+&lt;&#x2F;span&gt;&lt;span&gt; .&#x2F;zerotier-one: error while loading shared libraries: libstdc++.so.6: wrong ELF class: ELFCLASS32
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;看起来&lt;code&gt;&#x2F;usr&#x2F;lib&#x2F;libstdc++.so.6&lt;&#x2F;code&gt;是32位的。
+所以最后我选择使用静态编译的结果。&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;ba-zerotier-oneshang-chuan-dao-lu-you-qi&quot;&gt;把zerotier-one上传到路由器&lt;&#x2F;h3&gt;
+&lt;p&gt;用sftp工具把&lt;code&gt;zerotier-one&lt;&#x2F;code&gt;上传到路由器，我这里是放在&lt;code&gt;&#x2F;jffs&#x2F;bin&lt;&#x2F;code&gt;。&lt;&#x2F;p&gt;
+&lt;p&gt;添加执行权限：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;cd &#x2F;jffs&#x2F;bin
+&lt;&#x2F;span&gt;&lt;span&gt;chmod u+x zerotier-one
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;创建链接&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;ln -sf zerotier-one zerotier-cli
+&lt;&#x2F;span&gt;&lt;span&gt;ln -sf zerotier-one zerotier-idtool
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;验证是否能运行:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.&#x2F;zerotier-one --help
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;如果正确无误应该得到输出：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;ZeroTier One version 1.4.6
+&lt;&#x2F;span&gt;&lt;span&gt;Copyright (c) 2019 ZeroTier, Inc.
+&lt;&#x2F;span&gt;&lt;span&gt;Licensed under the ZeroTier BSL 1.1 (see LICENSE.txt)
+&lt;&#x2F;span&gt;&lt;span&gt;Usage: .&#x2F;zerotier-one [-switches] [home directory]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Available switches:
+&lt;&#x2F;span&gt;&lt;span&gt;  -h                - Display this help
+&lt;&#x2F;span&gt;&lt;span&gt;  -v                - Show version
+&lt;&#x2F;span&gt;&lt;span&gt;  -U                - Skip privilege check and do not attempt to drop privileges
+&lt;&#x2F;span&gt;&lt;span&gt;  -p&amp;lt;port&amp;gt;          - Port for UDP and TCP&#x2F;HTTP (default: 9993, 0 for random)
+&lt;&#x2F;span&gt;&lt;span&gt;  -d                - Fork and run as daemon (Unix-ish OSes)
+&lt;&#x2F;span&gt;&lt;span&gt;  -i                - Generate and manage identities (zerotier-idtool)
+&lt;&#x2F;span&gt;&lt;span&gt;  -q                - Query API (zerotier-cli)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;把&lt;code&gt;&#x2F;jffs&#x2F;bin&lt;&#x2F;code&gt;加到环境变量$PATH:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;echo &amp;quot;export PATH=&#x2F;jffs&#x2F;bin:\$PATH&amp;quot; &amp;gt;&amp;gt; &#x2F;jffs&#x2F;configs&#x2F;profile.add
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;ZTPID=$(pidof zerotier-one)
+&lt;&#x2F;span&gt;&lt;span&gt;if [ ${ZTPID} -gt 0 ]; then
+&lt;&#x2F;span&gt;&lt;span&gt; exit 0
+&lt;&#x2F;span&gt;&lt;span&gt;fi
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;zerotier-one -d
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;现在开始可以按照zerotier官方文档进行后续操作。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;can-kao&quot;&gt;参考&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;neoautomata.com&#x2F;blog&#x2F;zerotier-arm&#x2F;&quot;&gt;https:&#x2F;&#x2F;neoautomata.com&#x2F;blog&#x2F;zerotier-arm&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;zerotier&#x2F;ZeroTierOne&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;zerotier&#x2F;ZeroTierOne&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>Windows 无线网卡优化设置</title>
+        <published>2020-05-21T00:00:00+00:00</published>
+        <updated>2020-05-21T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/notes/windows-wireless-nic-best-settgins/"/>
+        <id>https://blog.dotone.top/notes/windows-wireless-nic-best-settgins/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/notes/windows-wireless-nic-best-settgins/">&lt;p&gt;无线网卡默认可能没有启用以下设置，启用后看看速度是不是更快了？&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;首选频带&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;3.首选5GHz频带
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;ul&gt;
+&lt;li&gt;吞吐量助推器&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;已启用
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+</feed>

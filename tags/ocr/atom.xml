@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - OCR</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/ocr/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2019-10-23T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/ocr/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>关于OCR</title>
+        <published>2019-10-23T00:00:00+00:00</published>
+        <updated>2019-10-23T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/about-OCR/"/>
+        <id>https://blog.dotone.top/blog/it/about-OCR/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/about-OCR/">&lt;p&gt;对之前一段时间做 OCR 的总结。&lt;&#x2F;p&gt;
+&lt;p&gt;如果想提高的识别效果，可以从以下几个方面入手。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;diao-zheng-guang-yuan-he-xiang-ji&quot;&gt;调整光源和相机&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;如果光源是可控的，尽可能调整好亮度和光照角度&lt;&#x2F;li&gt;
+&lt;li&gt;相机的自动增益可能会导致整体太亮，如果使用了增益，建议手动调整到合适的数值&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;diao-zheng-tu-pian-de-liang-du&quot;&gt;调整图片的亮度&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;考察所有图片的亮度，评估一个参考范围， 程序自动调整过暗或过亮的图片&lt;&#x2F;li&gt;
+&lt;li&gt;Gamma 变换，提升暗部细节&lt;&#x2F;li&gt;
+&lt;li&gt;亮度均衡，让整幅图像亮度比较均衡。
+一般的亮度均衡可能没有很好的效果，可以考察不同的算法。&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;ti-qu-shi-bie-de-mu-biao&quot;&gt;提取识别的目标&lt;&#x2F;h2&gt;
+&lt;p&gt;如果要识别的目标只是大图的一部分，首先可以提取出目标，输入的图像更小，这样可以加快识别的速度。&lt;&#x2F;p&gt;
+&lt;p&gt;怎么提取目标？&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;边缘检测
+尝试各种边缘提取算法，看哪种效果更好。
+可以压缩图像大小，加快处理速度，可能我们并不需要那么精确的边缘。&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;HED 神经网络边缘检测
+具体来说就是要训练 HED 神经网络，更好的做边缘检测，然后拟合直线，找到顶点，判断形状。&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;OpenCV&lt;&#x2F;code&gt;模板匹配
+&lt;code&gt;OpenCV&lt;&#x2F;code&gt;模板匹配对被识别的对象要求比较高，有形变或者变化较大无法做匹配。&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;形状匹配
+形状匹配见&lt;code&gt;https:&#x2F;&#x2F;github.com&#x2F;meiqua&#x2F;shape_based_matching&lt;&#x2F;code&gt;。简单的说就是梯度比边缘更稳定，不受光照和颜色变化的影响。不同尺度下，在梯度边缘上提取一些比较稳定的特征点做匹配。同样，形变较大无法做匹配。&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Yolo等深度学习
+标注目标，训练模型，识别目标。一般不用特别的精确。&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;shi-wen-zi-geng-qing-xi&quot;&gt;使文字更清晰&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;锐化可以强化文字的清晰度，但是同时也会提高干扰对象的清晰度，有可能让本来可以识别的不能被识别。&lt;&#x2F;li&gt;
+&lt;li&gt;提取文字轮廓和原图做融合&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;ti-qu-chu-wen-zi-xing&quot;&gt;提取出文字行&lt;&#x2F;h2&gt;
+&lt;p&gt;提取出文字行可以减少非文本区域的干扰。要注意的是文字行需要留边，否则可能降低识别的效果，因为背景信息太少了，不利于整体去除背景的干扰。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;he-bing-wen-zi-xing&quot;&gt;合并文字行&lt;&#x2F;h2&gt;
+&lt;p&gt;可以将提取到的文字行合并到一起，进行识别。理由同上，有利于整体去除背景的干扰。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;dui-yao-shi-bie-de-zi-ti-xun-lian&quot;&gt;对要识别的字体训练&lt;&#x2F;h2&gt;
+&lt;p&gt;通用性比较好的模型可能误识别比例比较高，对要识别的字体做专门的训练。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;dui-wu-shi-bie-de-tu-pian-zuo-xun-lian&quot;&gt;对误识别的图片做训练&lt;&#x2F;h2&gt;
+&lt;p&gt;标记出每个字符，对其做针对性训练。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;rong-cuo-chu-li&quot;&gt;容错处理&lt;&#x2F;h2&gt;
+&lt;p&gt;最后，如果还是有误识别，进行容错处理。&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

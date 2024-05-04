@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - Windows timer resolution</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/windows-timer-resolution/#timer-resolution" class="toc-link">Timer resolution</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/windows-timer-resolution/#view-system-clock-resolution" class="toc-link">View system clock resolution</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/windows-timer-resolution/#timebeginperiod" class="toc-link">timeBeginPeriod()</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/windows-timer-resolution/#setprocessinformation" class="toc-link">SetProcessInformation()</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/windows-timer-resolution/#high-precision-timing" class="toc-link">High-precision timing</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/windows-timer-resolution/#queryperformancecounter" class="toc-link">QueryPerformanceCounter</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/windows-timer-resolution/#other-solutions" class="toc-link">Other solutions</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/windows-timer-resolution/#summary" class="toc-link">Summary</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/windows-timer-resolution/#references" class="toc-link">References</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;windows-timer-resolution&#x2F;">Windows timer resolution</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>6 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2021-10-10</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>Recently I noticed that the author of libplctagresolved an <a href="https://blog.dotone.top/blog/it/windows-timer-resolution/(https://github.com/libplctag/libplctag/issues/260)">issue</a> with <code>timeBeginPeriod()</code>. It's interesting to learn what happened and timer resolution.</p>
+<h2 id="timer-resolution">Timer resolution</h2>
+<p>The system timer resolution determines how frequently Windows performs two main actions:</p>
+<ul>
+<li>Update the timer tick count if a full tick has elapsed.</li>
+<li>Check whether a scheduled timer object has expired.</li>
+</ul>
+<p>On Windows 7, the default timer resolution is 15.6 ms.</p>
+<p>Let's say sleep for 50ms, it would have its time delay rounded to some multiple of the tick frequency.</p>
+<h2 id="view-system-clock-resolution">View system clock resolution</h2>
+<p>To view your system clock resolution, you need the <a href="https://docs.microsoft.com/en-us/sysinternals/downloads/clockres">clockres</a> tool by sysinternals.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Clockres v2.1 - Clock resolution display utility
+</span><span>Copyright (C) 2016 Mark Russinovich
+</span><span>Sysinternals
+</span><span>
+</span><span>Maximum timer interval: 15.625 ms
+</span><span>Minimum timer interval: 0.500 ms
+</span><span>Current timer interval: 0.997 ms
+</span></code></pre>
+<p>It said that it uses <code>GetSystemTimeAdjustment()</code> function.</p>
+<h2 id="timebeginperiod"><code>timeBeginPeriod()</code></h2>
+<p>As <a href="https://docs.microsoft.com/en-us/windows/win32/multimedia/timer-resolution?redirectedfrom=MSDN">the doc</a> said, <code>timeBeginPeriod()</code> allows you requests a minimum resolution for periodic timers. And you must call this function before using timer services. <code>timeBeginPeriod()</code> should be paired with <code>timeEndPeriod()</code>, and they can be nested.</p>
+<p>The effect of this function:</p>
+<ul>
+<li>Before Windows 10, version 2004</li>
+</ul>
+<p>affects global windows setting</p>
+<ul>
+<li>From Windows 10, version 2004</li>
+</ul>
+<p>for processes that call this function, windows use lowest value requested by any process; For processes which have not called this function, Windows does not guarantee a higher resolution than the default system resolution</p>
+<ul>
+<li>From Windows 11</li>
+</ul>
+<p>if a window-owning process becomes fully occluded, minimized, or otherwise invisible or inaudible to the end user, Windows does not guarantee a higher resolution than the default system resolution</p>
+<p>The doc also suggest to look at <code>SetProcessInformation()</code>.</p>
+<h2 id="setprocessinformation"><code>SetProcessInformation()</code></h2>
+<p><code>SetProcessInformation()</code> is available from Windows 8.</p>
+<blockquote>
+<p>ProcessPowerThrottling enables throttling policies on a process, which can be used to balance out performance and power efficiency in cases where optimal performance is not required</p>
+</blockquote>
+<ul>
+<li>
+<p>when a process enabling PROCESS_POWER_THROTTLING_EXECUTION_SPEED
+the process will be classified as EcoQoS (before Windows 11, labeled as LowQoS).</p>
+</li>
+<li>
+<p>if does not explicitly enable PROCESS_POWER_THROTTLING_EXECUTION_SPEED
+the system will use its own heuristics to automatically infer a Quality of Service level.</p>
+</li>
+<li>
+<p>In Windows 11, if a window-owning process becomes fully occluded, minimized, or otherwise invisible or inaudible to the end user, Windows may automatically ignore the timer resolution request.</p>
+</li>
+</ul>
+<h2 id="high-precision-timing">High-precision timing</h2>
+<p>Another topic related to timer resolution is high-precision timing.
+Some referenced articles described how to get high-precision timing.</p>
+<table><thead><tr><th>Function</th><th>precision</th><th>accuracy</th><th>comments</th></tr></thead><tbody>
+<tr><td>GetTickCount</td><td>1ms</td><td>10ms-55ms</td><td>-</td></tr>
+<tr><td>GetSystemTimeAsFileTime</td><td>100ns</td><td>not better than GetTickCount</td><td>-</td></tr>
+<tr><td>QueryPerformanceCounter</td><td>1 microsecond or better</td><td>-</td><td></td></tr>
+<tr><td>GetSystemTimePreciseAsFileTime</td><td>the highest possible level of precision (&lt;1us)</td><td>-</td><td>in Coordinated Universal Time (UTC) format</td></tr>
+</tbody></table>
+<p>Someone said QPC is not reliable, and must run on the same processor core with thread affinity. But microsoft claims that <a href="https://docs.microsoft.com/en-us/windows/win32/sysinfo/acquiring-high-resolution-time-stamps#faq-about-programming-with-qpc-and-tsc">thread affinity is  not need as this might affect your application's performance</a>. Windows has evolved to improve this, see the next section.</p>
+<h3 id="queryperformancecounter">QueryPerformanceCounter</h3>
+<p>QueryPerformanceCounter depends on hardware timer ( TSC or other motherboard timer) or platform timer. The precision depends on hardware timer resolution and access time, Precision = MAX [ Resolution, AccessTime].</p>
+<table><thead><tr><th>Version</th><th>QPC basis</th><th>Sync across cores</th></tr></thead><tbody>
+<tr><td>XP and 2000</td><td>TSC (some hardware systems' BIOS didn't indicate the hardware CPU characteristics correctly)</td><td>some multi-core or multi-processor systems used processors with TSCs that couldn't be synchronized across cores</td></tr>
+<tr><td>Vista and Server 2008</td><td>used a platform counter (High Precision Event Timer (HPET)) or the ACPI Power Management Timer (PM timer)</td><td>shared between multiple processors</td></tr>
+<tr><td>Windows 7 and Server 2008 R2</td><td>The majority of Windows 7 and Windows Server 2008 R2 computers have processors with constant-rate TSCs and use these counters as the basis for QPC</td><td>Windows use TSCs as the basis of QPC on single-clock domain systems where the operating system (or the hypervisor) is able to tightly synchronize the individual TSCs across all processors</td></tr>
+<tr><td>Windows 8, Server 2012 R2</td><td>TSC</td><td>The TSC synchronization algorithm was significantly improved to better accommodate large systems with many processors</td></tr>
+</tbody></table>
+<h2 id="other-solutions">Other solutions</h2>
+<p>Someone discussed using QueryPerformanceCounter and timeGetTime at the same time , so that if the result of QueryPerformanceCounter is not acceptable, use timeGetTime to fixup. </p>
+<p>Another solution is using Windows kernel events, such as CreateEvent/SetEvent/WaitForSingleObject. WaitForSingleObject doesn't use a timer if you set infinite timeout. It depends on kernel scheduling inside Windows. <a href="https://gist.github.com/GoaLitiuM/aff9fbfa4294fa6c1680">Code</a></p>
+<h2 id="summary">Summary</h2>
+<p>Windows has evolved to be more power-efficient.
+Use high time resolution only when it's necessary. 
+High time resolution might hurt overall system performance and reduce battery run time.</p>
+<p>If your application is performance critical, it should call <code>timeBeginPeriod()</code> to request high timer resolution before using timer service; moreover, your application should not have any window in Windows 11. </p>
+<p>QPC is typically the best method to use for high resolution timing.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/windows/win32/multimedia/timer-resolution?redirectedfrom=MSDN">Timer Resolution</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows/win32/api/timeapi/nf-timeapi-timebeginperiod">timeBeginPeriod function (timeapi.h)</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-setprocessinformation">SetProcessInformation function (processthreadsapi.h)</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows/win32/procthread/quality-of-service">Quality of Service</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/kernel/high-resolution-timers">High-Resolution Timers</a></li>
+<li><a href="https://docs.microsoft.com/en-us/archive/msdn-magazine/2004/march/implementing-a-high-resolution-time-provider-for-windows">Implement a Continuously Updating, High-Resolution Time Provider for Windows</a></li>
+<li><a href="https://randomascii.wordpress.com/2013/07/08/windows-timer-resolution-megawatts-wasted/">Windows Timer Resolution: Megawatts Wasted</a></li>
+<li><a href="https://gist.github.com/GoaLitiuM/aff9fbfa4294fa6c1680">usleep() for Windows (C/C++) + set timer resolution to lowest possible supported by system</a></li>
+<li><a href="https://devblogs.microsoft.com/oldnewthing/20050902-00/?p=34333">Precision is not the same as accuracy</a></li>
+<li><a href="https://download.microsoft.com/download/3/0/2/3027d574-c433-412a-a8b6-5e0a75d5b237/timer-resolution.docx">Timers, Timer Resolution, and Development of Efficient Code</a></li>
+<li><a href="https://arstechnica.com/information-technology/2012/10/better-on-the-inside-under-the-hood-of-windows-8/2/">Better on the inside: under the hood of Windows 8</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows/win32/sysinfo/acquiring-high-resolution-time-stamps">Acquiring high-resolution time stamps</a></li>
+<li><a href="http://yiiyee.cn/blog/2013/09/01/clock-interval/">Windows 系统时钟间隔</a></li>
+</ul>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/windows/">#windows</a>
+            
+            <a href="https://blog.dotone.top/tags/timer/">#timer</a>
+            
+            <a href="https://blog.dotone.top/tags/resolution/">#resolution</a>
+            
+            <a href="https://blog.dotone.top/tags/performance/">#performance</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

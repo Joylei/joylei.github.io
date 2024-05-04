@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - c&#x2F;cpp</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/c-cpp/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2022-10-23T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/c-cpp/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>Implement memory pool</title>
+        <published>2022-10-23T00:00:00+00:00</published>
+        <updated>2022-10-23T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/implement-memory-pool/"/>
+        <id>https://blog.dotone.top/blog/it/implement-memory-pool/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/implement-memory-pool/">&lt;h2 id=&quot;background&quot;&gt;Background&lt;&#x2F;h2&gt;
+&lt;p&gt;The background is that we have very limited memory available for our new board, around 2.2MB.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The upper layer like UI would have a lot of allocations&amp;amp;frees while the system is running.&lt;&#x2F;li&gt;
+&lt;li&gt;As time goes , there will be fragments that cannot be freed,  and the system will finally have no available memory.&lt;&#x2F;li&gt;
+&lt;li&gt;The underline allocator consumes at least 32 bytes for one allocation, because it has to maintain additional information about the allocation, the previous node, the next node, the size, etc.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;First we can do is cutting the code and functionalities.&lt;&#x2F;p&gt;
+&lt;p&gt;To reduce the memory consumption, the &lt;code&gt;cp&lt;&#x2F;code&gt; team splits allocations to one-time allocations and dynamic allocations, and handles them with different strategies.&lt;&#x2F;p&gt;
+&lt;p&gt;Also the &lt;code&gt;cp&lt;&#x2F;code&gt; team hoped that the upper layer can reduce allocations and memory consumption.&lt;&#x2F;p&gt;
+&lt;p&gt;Thus I took the burden to implement  a memory pool for UI to achieve the goals above. &lt;&#x2F;p&gt;
+&lt;h2 id=&quot;design&quot;&gt;Design&lt;&#x2F;h2&gt;
+&lt;p&gt;My design is that:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;different align sizes have different pools&lt;&#x2F;li&gt;
+&lt;li&gt;allocate a block with 1024 bytes (configurable)&lt;&#x2F;li&gt;
+&lt;li&gt;track allocations&amp;amp;frees in a single block with bitmap&lt;&#x2F;li&gt;
+&lt;li&gt;insert&amp;amp;sort blocks by &lt;code&gt;raw&lt;&#x2F;code&gt; pointer address with binary search&lt;&#x2F;li&gt;
+&lt;li&gt;maintain double linked lists for different align sizes&lt;&#x2F;li&gt;
+&lt;li&gt;maintain the &lt;code&gt;free&lt;&#x2F;code&gt; node of a pool for quick path allocations&lt;&#x2F;li&gt;
+&lt;li&gt;each pool keeps at least one node&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The data structures look like:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;block_t {
+&lt;&#x2F;span&gt;&lt;span&gt;    block_t* prev;
+&lt;&#x2F;span&gt;&lt;span&gt;    block_t* next;
+&lt;&#x2F;span&gt;&lt;span&gt;    uint8_t align_size;
+&lt;&#x2F;span&gt;&lt;span&gt;    bitmap_t bitmap;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void&lt;&#x2F;span&gt;&lt;span&gt;* raw;
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;pool_t {
+&lt;&#x2F;span&gt;&lt;span&gt;        block_t* head;
+&lt;&#x2F;span&gt;&lt;span&gt;        block_t* free;
+&lt;&#x2F;span&gt;&lt;span&gt;        uint8_t align_size;
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The benefits of the design are:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;it can quickly determine if a pointer belongs to the pool or not with binary search by &lt;code&gt;raw&lt;&#x2F;code&gt; pointers of blocks&lt;&#x2F;li&gt;
+&lt;li&gt;in a block, it can quickly determine the position by &lt;code&gt;modulo of align size&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;in a block, it can quickly determine the given address is valid or not by checking &lt;code&gt;modulo of align size&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;in a block, it can quickly check the address is freed or not by &lt;code&gt;bitmap&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The allocation steps are straightforward:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;calc the align size for the allocation to determine it should be handled by our pool&lt;&#x2F;li&gt;
+&lt;li&gt;find the pool for the align size&lt;&#x2F;li&gt;
+&lt;li&gt;check if the &lt;code&gt;free&lt;&#x2F;code&gt; node is available and have available spaces&lt;&#x2F;li&gt;
+&lt;li&gt;if not, check if any blocks have available spaces&lt;&#x2F;li&gt;
+&lt;li&gt;if not, allocate a new block from the underline allocator and do the allocation&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;performance&quot;&gt;Performance&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;performance-on-windows-pc-with-single-thread&quot;&gt;Performance on Windows PC with single thread&lt;&#x2F;h3&gt;
+&lt;p&gt;PC details:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Intel cpu i7-4790 3.6GHZ
+&lt;&#x2F;span&gt;&lt;span&gt;DDR3 1600Mhz 8GB
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Perf:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;alloc (20176653.6&#x2F;s)
+&lt;&#x2F;span&gt;&lt;span&gt;free (20470494.1&#x2F;s)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;performance-on-our-board&quot;&gt;Performance on our board&lt;&#x2F;h3&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;alloc (199480.0&#x2F;s)
+&lt;&#x2F;span&gt;&lt;span&gt;free (387777.1&#x2F;s)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - ddbr</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/ddbr/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-05-08T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/ddbr/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>N1 ddbr 备份与恢复</title>
+        <published>2020-05-08T00:00:00+00:00</published>
+        <updated>2020-05-08T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/N1-ddbr/"/>
+        <id>https://blog.dotone.top/blog/it/N1-ddbr/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/N1-ddbr/">&lt;p&gt;使用&lt;code&gt;ddbr&lt;&#x2F;code&gt;来备份内存，以便随时快速恢复。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;bei-fen&quot;&gt;备份&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;root@aml:~# ddbr
+&lt;&#x2F;span&gt;&lt;span&gt; DO YOU WANT TO BACKUP OR RESTORE ?
+&lt;&#x2F;span&gt;&lt;span&gt; BACKUP=(b) RESTORE=(r) b
+&lt;&#x2F;span&gt;&lt;span&gt; AVAILABLE DEVICES: mmcblk1 sda1 sda2
+&lt;&#x2F;span&gt;&lt;span&gt; YOU ARE RUNNING bionic FROM sda2
+&lt;&#x2F;span&gt;&lt;span&gt; INTERNAL EMMC IS: mmcblk1 SIZE:        7634944
+&lt;&#x2F;span&gt;&lt;span&gt; ROOT (sda2) FREE SPACE IS:             118886072
+&lt;&#x2F;span&gt;&lt;span&gt; DO YOU WANT COMPRESSION ?
+&lt;&#x2F;span&gt;&lt;span&gt; YES=(y) NO=(n) y
+&lt;&#x2F;span&gt;&lt;span&gt; SAVING AND COMPRESSING mmcblk1 TO &#x2F;ddbr&#x2F;BACKUP-s9xxx-emmc.img.gz...
+&lt;&#x2F;span&gt;&lt;span&gt;15269888+0 records inMiB&#x2F;s] [==============================================================================&amp;gt;] 100% ETA 0:00:00
+&lt;&#x2F;span&gt;&lt;span&gt;15269888+0 records out
+&lt;&#x2F;span&gt;&lt;span&gt;7.28GiB 0:10:53 [11.4MiB&#x2F;s] [==============================================================================&amp;gt;] 100%
+&lt;&#x2F;span&gt;&lt;span&gt;7818182656 bytes (7.8 GB, 7.3 GiB) copied, 653.739 s, 12.0 MB&#x2F;s
+&lt;&#x2F;span&gt;&lt;span&gt; JOB FINISHED!
+&lt;&#x2F;span&gt;&lt;span&gt;root@aml:~# ls &#x2F;ddbr
+&lt;&#x2F;span&gt;&lt;span&gt;BACKUP-s9xxx-emmc.img.gz  install
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;hui-fu&quot;&gt;恢复&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;root@aml:~# ls &#x2F;ddbr
+&lt;&#x2F;span&gt;&lt;span&gt;BACKUP-s9xxx-emmc.img  BACKUP-s9xxx-emmc.img.gz.bak  install
+&lt;&#x2F;span&gt;&lt;span&gt;root@aml:~# ddbr
+&lt;&#x2F;span&gt;&lt;span&gt; DO YOU WANT TO BACKUP OR RESTORE ?
+&lt;&#x2F;span&gt;&lt;span&gt; BACKUP=(b) RESTORE=(r) r
+&lt;&#x2F;span&gt;&lt;span&gt; AVAILABLE DEVICES: mmcblk1 sda1 sda2
+&lt;&#x2F;span&gt;&lt;span&gt; YOU ARE RUNNING bionic FROM sda2
+&lt;&#x2F;span&gt;&lt;span&gt; DID YOU USED COMPRESSION WHEN YOU TOOK THE BACKUP ?
+&lt;&#x2F;span&gt;&lt;span&gt; YES=(y) NO=(n) n
+&lt;&#x2F;span&gt;&lt;span&gt; YOU ARE ABOUT TO MAKE SERIOUS CHANGES TO YOUR SYSTEM!!!
+&lt;&#x2F;span&gt;&lt;span&gt; FILE &#x2F;ddbr&#x2F;BACKUP-s9xxx-emmc.img IS GOING TO BE WRITEN TO mmcblk1
+&lt;&#x2F;span&gt;&lt;span&gt; MAKE SURE EVERYTHING LOOKS OK AND:
+&lt;&#x2F;span&gt;&lt;span&gt; PRESS ENTER TO CONTINUE OR CTRL+C TO CANCEL
+&lt;&#x2F;span&gt;&lt;span&gt; RESTORING &#x2F;ddbr&#x2F;BACKUP-s9xxx-emmc.img TO &#x2F;dev&#x2F;mmcblk1 | PLEASE WAIT...
+&lt;&#x2F;span&gt;&lt;span&gt;6283264+0 records in2MiB&#x2F;s] [===============================&amp;gt;                                                ] 41% ETA 0:05:50
+&lt;&#x2F;span&gt;&lt;span&gt;6283264+0 records out
+&lt;&#x2F;span&gt;&lt;span&gt;3217031168 bytes (3.2 GB, 3.0 GiB) copied, 244.506 s, 13.2 MB&#x2F;s
+&lt;&#x2F;span&gt;&lt;span&gt;3.00GiB 0:04:04 [12.5MiB&#x2F;s] [===============================&amp;gt;                                                ] 41%
+&lt;&#x2F;span&gt;&lt;span&gt;6283264+0 records in
+&lt;&#x2F;span&gt;&lt;span&gt;6283264+0 records out
+&lt;&#x2F;span&gt;&lt;span&gt;3217031168 bytes (3.2 GB, 3.0 GiB) copied, 248.16 s, 13.0 MB&#x2F;s
+&lt;&#x2F;span&gt;&lt;span&gt; JOB FINISHED!
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+</feed>

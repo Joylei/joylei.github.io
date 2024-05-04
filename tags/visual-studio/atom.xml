@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - visual studio</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/visual-studio/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2009-07-19T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/visual-studio/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>Visual Studio: the project type is not supported by this installation</title>
+        <published>2009-07-19T00:00:00+00:00</published>
+        <updated>2009-07-19T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/visual-studio-the-project-type-is-not-supported-by-this-installation/"/>
+        <id>https://blog.dotone.top/blog/it/visual-studio-the-project-type-is-not-supported-by-this-installation/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/visual-studio-the-project-type-is-not-supported-by-this-installation/">&lt;p&gt;Windows 7 升级功能很好用。只不过这个过程很费时间。升级之后大部分程序都正常使用。&lt;&#x2F;p&gt;
+&lt;p&gt;但是Visual Studio 2008 和 Visual Studio 2010 都罢工了。Visual Studio 2010 打不开界面，一运行就抛出异常，完全卸载后重装解决问题了。&lt;&#x2F;p&gt;
+&lt;p&gt;Visual Studio 2008则是不能创建WPF项目和打不开WPF项目，创建WPF项目确定之后没有反应，打开已有的WPF解决方案，则提示“the project type is not supported by this installation”。卸载重装完全不能解决问题，还好搜索到了解决方案：&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;devenv &#x2F;setup&lt;&#x2F;li&gt;
+&lt;li&gt;regsvr32.exe &amp;quot;%vs80comntools%..\IDE\projectaggregator.dll&amp;quot;&lt;&#x2F;li&gt;
+&lt;li&gt;devenv &#x2F;resetskippkgs&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;记录一下备用。&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;从我的百度空间导入&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>Visual Studio 2010的一个Bug</title>
+        <published>2009-06-24T00:00:00+00:00</published>
+        <updated>2009-06-24T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/vs2010-bug-high-cpu/"/>
+        <id>https://blog.dotone.top/blog/it/vs2010-bug-high-cpu/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/vs2010-bug-high-cpu/">&lt;p&gt;装了VS2010和Sqlserver2008后，发现CPU使用率时不时跳到100%，检查不是杀毒软件的问题，发现msiexec.exe这个进程很活跃，查看事件日志，果然安装程序在不断地执行一个事务，详细事件报告如下：&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;xml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-xml &quot;&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Event &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;xmlns&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;http:&#x2F;&#x2F;schemas.microsoft.com&#x2F;win&#x2F;2004&#x2F;08&#x2F;events&#x2F;event&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;System&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Provider &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Name&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;MsiInstaller&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &#x2F;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;EventID &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Qualifiers&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;gt;1004&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;EventID&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Level&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;3&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Level&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Task&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;0&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Task&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Keywords&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;0x80000000000000&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Keywords&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TimeCreated &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;SystemTime&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;2009-06-23T10:48:42.000000000Z&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &#x2F;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;EventRecordID&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;18545&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;EventRecordID&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Channel&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Application&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Channel&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Computer&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;daysky-PC&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Computer&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Security &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;UserID&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;S-1-5-18&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &#x2F;&amp;gt; &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;System&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;EventData&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;{316EE0C1-DB94-30BA-95E6-F4959035EE4B}&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;VB_for_VS_7_Ent_28_x86_enu&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;{F5686A3B-40B1-40CF-8B60-88D08F50A38A}&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;D:\Win7\Visual Studio 2010\Common7\IDE\PrivateAssemblies\EN\&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;(NULL)&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;(NULL)&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data &lt;&#x2F;span&gt;&lt;span&gt;&#x2F;&amp;gt; &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;EventData&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Event&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Event &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;xmlns&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;http:&#x2F;&#x2F;schemas.microsoft.com&#x2F;win&#x2F;2004&#x2F;08&#x2F;events&#x2F;event&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;System&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Provider &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Name&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;MsiInstaller&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &#x2F;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;EventID &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Qualifiers&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;gt;1001&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;EventID&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Level&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;3&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Level&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Task&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;0&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Task&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Keywords&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;0x80000000000000&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Keywords&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TimeCreated &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;SystemTime&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;2009-06-23T10:48:42.000000000Z&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &#x2F;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;EventRecordID&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;18546&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;EventRecordID&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Channel&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Application&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Channel&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Computer&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;daysky-PC&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Computer&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Security &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;UserID&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;S-1-5-18&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &#x2F;&amp;gt; &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;System&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;EventData&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;{316EE0C1-DB94-30BA-95E6-F4959035EE4B}&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;VB_for_VS_7_Ent_28_x86_enu&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;{97909034-45AB-48C6-853B-1CA8B3FBFB58}&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;(NULL)&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;(NULL)&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;(NULL)&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Data &lt;&#x2F;span&gt;&lt;span&gt;&#x2F;&amp;gt; &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;EventData&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Event&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;通过搜索&amp;quot;F5686A3B-40B1-40CF-8B60-88D08F50A38A&amp;quot;，发现已经有兄弟把此问题提交到微软了，而且大概一个德国兄弟给出了解决方案，解决问题很简单，在&amp;quot;D:\Win7\Visual studio 2010\Common7\IDE\PublicAssemblies&amp;quot;目录下新建一个&amp;quot;en&amp;quot;目录，随即解决了这个问题。同时安装了Visual Studio 2008的话，也需要建立&amp;quot;en&amp;quot;目录。&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;从我的百度空间导入&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>vs2015无法附加，绑定句柄无效</title>
+        <published>2008-04-16T00:00:00+00:00</published>
+        <updated>2008-04-16T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/vs2015-terminal-services/"/>
+        <id>https://blog.dotone.top/blog/it/vs2015-terminal-services/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/vs2015-terminal-services/">&lt;p&gt;在使用VS2005进行web服务调试的过程中会出现“无法附加：绑定句柄无效。是否继续”的提示 。错误的原因就是没有启动Terminal Services服务。&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;从我的百度空间导入&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - N1 ddbr 备份与恢复</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/N1-ddbr/#bei-fen" class="toc-link">备份</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/N1-ddbr/#hui-fu" class="toc-link">恢复</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;N1-ddbr&#x2F;">N1 ddbr 备份与恢复</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>2 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2020-05-08</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>使用<code>ddbr</code>来备份内存，以便随时快速恢复。</p>
+<h2 id="bei-fen">备份</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>root@aml:~# ddbr
+</span><span> DO YOU WANT TO BACKUP OR RESTORE ?
+</span><span> BACKUP=(b) RESTORE=(r) b
+</span><span> AVAILABLE DEVICES: mmcblk1 sda1 sda2
+</span><span> YOU ARE RUNNING bionic FROM sda2
+</span><span> INTERNAL EMMC IS: mmcblk1 SIZE:        7634944
+</span><span> ROOT (sda2) FREE SPACE IS:             118886072
+</span><span> DO YOU WANT COMPRESSION ?
+</span><span> YES=(y) NO=(n) y
+</span><span> SAVING AND COMPRESSING mmcblk1 TO /ddbr/BACKUP-s9xxx-emmc.img.gz...
+</span><span>15269888+0 records inMiB/s] [==============================================================================&gt;] 100% ETA 0:00:00
+</span><span>15269888+0 records out
+</span><span>7.28GiB 0:10:53 [11.4MiB/s] [==============================================================================&gt;] 100%
+</span><span>7818182656 bytes (7.8 GB, 7.3 GiB) copied, 653.739 s, 12.0 MB/s
+</span><span> JOB FINISHED!
+</span><span>root@aml:~# ls /ddbr
+</span><span>BACKUP-s9xxx-emmc.img.gz  install
+</span><span>
+</span></code></pre>
+<h2 id="hui-fu">恢复</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>root@aml:~# ls /ddbr
+</span><span>BACKUP-s9xxx-emmc.img  BACKUP-s9xxx-emmc.img.gz.bak  install
+</span><span>root@aml:~# ddbr
+</span><span> DO YOU WANT TO BACKUP OR RESTORE ?
+</span><span> BACKUP=(b) RESTORE=(r) r
+</span><span> AVAILABLE DEVICES: mmcblk1 sda1 sda2
+</span><span> YOU ARE RUNNING bionic FROM sda2
+</span><span> DID YOU USED COMPRESSION WHEN YOU TOOK THE BACKUP ?
+</span><span> YES=(y) NO=(n) n
+</span><span> YOU ARE ABOUT TO MAKE SERIOUS CHANGES TO YOUR SYSTEM!!!
+</span><span> FILE /ddbr/BACKUP-s9xxx-emmc.img IS GOING TO BE WRITEN TO mmcblk1
+</span><span> MAKE SURE EVERYTHING LOOKS OK AND:
+</span><span> PRESS ENTER TO CONTINUE OR CTRL+C TO CANCEL
+</span><span> RESTORING /ddbr/BACKUP-s9xxx-emmc.img TO /dev/mmcblk1 | PLEASE WAIT...
+</span><span>6283264+0 records in2MiB/s] [===============================&gt;                                                ] 41% ETA 0:05:50
+</span><span>6283264+0 records out
+</span><span>3217031168 bytes (3.2 GB, 3.0 GiB) copied, 244.506 s, 13.2 MB/s
+</span><span>3.00GiB 0:04:04 [12.5MiB/s] [===============================&gt;                                                ] 41%
+</span><span>6283264+0 records in
+</span><span>6283264+0 records out
+</span><span>3217031168 bytes (3.2 GB, 3.0 GiB) copied, 248.16 s, 13.0 MB/s
+</span><span> JOB FINISHED!
+</span><span>
+</span></code></pre>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/n1/">#N1</a>
+            
+            <a href="https://blog.dotone.top/tags/ddbr/">#ddbr</a>
+            
+            <a href="https://blog.dotone.top/tags/bei-fen/">#备份</a>
+            
+            <a href="https://blog.dotone.top/tags/hui-fu/">#恢复</a>
+            
+            <a href="https://blog.dotone.top/tags/shua-ji/">#刷机</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - Implement memory pool</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/implement-memory-pool/#background" class="toc-link">Background</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/implement-memory-pool/#design" class="toc-link">Design</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/it/implement-memory-pool/#performance" class="toc-link">Performance</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/implement-memory-pool/#performance-on-windows-pc-with-single-thread" class="toc-link">Performance on Windows PC with single thread</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/it/implement-memory-pool/#performance-on-our-board" class="toc-link">Performance on our board</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;implement-memory-pool&#x2F;">Implement memory pool</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>3 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2022-10-23</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <h2 id="background">Background</h2>
+<p>The background is that we have very limited memory available for our new board, around 2.2MB.</p>
+<ul>
+<li>The upper layer like UI would have a lot of allocations&amp;frees while the system is running.</li>
+<li>As time goes , there will be fragments that cannot be freed,  and the system will finally have no available memory.</li>
+<li>The underline allocator consumes at least 32 bytes for one allocation, because it has to maintain additional information about the allocation, the previous node, the next node, the size, etc.</li>
+</ul>
+<p>First we can do is cutting the code and functionalities.</p>
+<p>To reduce the memory consumption, the <code>cp</code> team splits allocations to one-time allocations and dynamic allocations, and handles them with different strategies.</p>
+<p>Also the <code>cp</code> team hoped that the upper layer can reduce allocations and memory consumption.</p>
+<p>Thus I took the burden to implement  a memory pool for UI to achieve the goals above. </p>
+<h2 id="design">Design</h2>
+<p>My design is that:</p>
+<ul>
+<li>different align sizes have different pools</li>
+<li>allocate a block with 1024 bytes (configurable)</li>
+<li>track allocations&amp;frees in a single block with bitmap</li>
+<li>insert&amp;sort blocks by <code>raw</code> pointer address with binary search</li>
+<li>maintain double linked lists for different align sizes</li>
+<li>maintain the <code>free</code> node of a pool for quick path allocations</li>
+<li>each pool keeps at least one node</li>
+</ul>
+<p>The data structures look like:</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b48ead;">struct </span><span>block_t {
+</span><span>    block_t* prev;
+</span><span>    block_t* next;
+</span><span>    uint8_t align_size;
+</span><span>    bitmap_t bitmap;
+</span><span>    </span><span style="color:#b48ead;">void</span><span>* raw;
+</span><span>};
+</span><span>
+</span><span style="color:#b48ead;">struct </span><span>pool_t {
+</span><span>        block_t* head;
+</span><span>        block_t* free;
+</span><span>        uint8_t align_size;
+</span><span>};
+</span></code></pre>
+<p>The benefits of the design are:</p>
+<ul>
+<li>it can quickly determine if a pointer belongs to the pool or not with binary search by <code>raw</code> pointers of blocks</li>
+<li>in a block, it can quickly determine the position by <code>modulo of align size</code></li>
+<li>in a block, it can quickly determine the given address is valid or not by checking <code>modulo of align size</code></li>
+<li>in a block, it can quickly check the address is freed or not by <code>bitmap</code></li>
+</ul>
+<p>The allocation steps are straightforward:</p>
+<ul>
+<li>calc the align size for the allocation to determine it should be handled by our pool</li>
+<li>find the pool for the align size</li>
+<li>check if the <code>free</code> node is available and have available spaces</li>
+<li>if not, check if any blocks have available spaces</li>
+<li>if not, allocate a new block from the underline allocator and do the allocation</li>
+</ul>
+<h2 id="performance">Performance</h2>
+<h3 id="performance-on-windows-pc-with-single-thread">Performance on Windows PC with single thread</h3>
+<p>PC details:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Intel cpu i7-4790 3.6GHZ
+</span><span>DDR3 1600Mhz 8GB
+</span></code></pre>
+<p>Perf:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>alloc (20176653.6/s)
+</span><span>free (20470494.1/s)
+</span></code></pre>
+<h3 id="performance-on-our-board">Performance on our board</h3>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>alloc (199480.0/s)
+</span><span>free (387777.1/s)
+</span></code></pre>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/memory-pool/">#memory pool</a>
+            
+            <a href="https://blog.dotone.top/tags/c-cpp/">#c&#x2F;cpp</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

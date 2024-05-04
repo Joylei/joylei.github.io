@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - Unit Test</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/unit-test/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-06-06T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/unit-test/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>读书：《.Net单元测试的艺术》</title>
+        <published>2020-06-06T00:00:00+00:00</published>
+        <updated>2020-06-06T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/life/reading/the-art-of-unit-testing-with-examples-in-.net/"/>
+        <id>https://blog.dotone.top/blog/life/reading/the-art-of-unit-testing-with-examples-in-.net/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/life/reading/the-art-of-unit-testing-with-examples-in-.net/">&lt;p&gt;中文：.Net单元测试的艺术&lt;&#x2F;p&gt;
+&lt;p&gt;英文：The Art of Unit Testing: With Examples in .Net&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;life&#x2F;reading&#x2F;the-art-of-unit-testing-with-examples-in-.net&#x2F;mind.png&quot;&gt;查看原图&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;life&#x2F;reading&#x2F;the-art-of-unit-testing-with-examples-in-.net&#x2F;mind.png&quot; alt=&quot;.Net单元测试的艺术.png&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

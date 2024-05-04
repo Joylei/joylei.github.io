@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - 《Programming F#》读书笔记四</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-4/#suo-yin" class="toc-link">索引</a>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-4/#bi-ji" class="toc-link">笔记</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;life&#x2F;reading&#x2F;programming-fsharp&#x2F;programming-fsharp-4&#x2F;">《Programming F#》读书笔记四</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>5 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-01-27</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <h2 id="suo-yin">索引</h2>
+<ul>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-1/">《Programming F#》读书笔记一</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-2/">《Programming F#》读书笔记二</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-3/">《Programming F#》读书笔记三</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-4/">《Programming F#》读书笔记四</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-5/">《Programming F#》读书笔记五</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-6/">《Programming F#》读书笔记六</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-7/">《Programming F#》读书笔记七</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-8/">《Programming F#》读书笔记八</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-9/">《Programming F#》读书笔记九</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-10/">《Programming F#》读书笔记十</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-11/">《Programming F#》读书笔记十一</a></li>
+<li><a href="https://blog.dotone.top/blog/life/reading/programming-fsharp/programming-fsharp-12/">《Programming F#》读书笔记十二</a></li>
+</ul>
+<h2 id="bi-ji">笔记</h2>
+<p>对象相等：
+元组、可区分的联合、Record都是引用类型，但是在相等比较时进行的是内容比较</p>
+<p>类与继承:
+F#中编译器不会提供默认构造函数</p>
+<p>显示构造函数:</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">type </span><span>Person </span><span style="color:#b48ead;">=
+</span><span>    </span><span style="color:#b48ead;">val mutable </span><span style="color:#bf616a;">name</span><span style="color:#b48ead;">:</span><span>string </span><span style="color:#65737e;">//声明字段，尚未初始化;不能在声明时初始化
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">val mutable </span><span style="color:#bf616a;">age</span><span style="color:#b48ead;">:</span><span>int
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">static member </span><span style="color:#bf616a;">InstanceCount </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">0 </span><span style="color:#65737e;">//定义一个静态成员并初始化
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">new </span><span style="color:#d08770;">() </span><span style="color:#b48ead;">= {</span><span>name </span><span style="color:#b48ead;">= </span><span>&quot;</span><span style="color:#a3be8c;">myName</span><span>&quot;</span><span style="color:#b48ead;">;</span><span> age </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">0</span><span style="color:#b48ead;">}</span><span style="color:#65737e;">//初始化
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">new(</span><span>n</span><span style="color:#b48ead;">,</span><span>a</span><span style="color:#b48ead;">) =
+</span><span>
+</span><span>        printfn &quot;</span><span style="color:#a3be8c;">初始化时可以做额外的操作</span><span>&quot;
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">{</span><span>name</span><span style="color:#b48ead;">=</span><span>n</span><span style="color:#b48ead;">;</span><span>age</span><span style="color:#b48ead;">=</span><span>a</span><span style="color:#b48ead;">}</span><span style="color:#65737e;">//初始化
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">then
+</span><span>                printfn &quot;</span><span style="color:#a3be8c;">初始化完成可以做额外的操作</span><span>&quot;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.Name </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> this.name      </span><span style="color:#65737e;">//有get和set方法的属性，必须通过this引用字段，get方法必须有括号
+</span><span>                                </span><span style="color:#b48ead;">and</span><span> set value </span><span style="color:#b48ead;">=</span><span> this.name </span><span style="color:#b48ead;">&lt;-</span><span>value </span><span style="color:#65737e;">//必须把and和with对齐
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.Age </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> this.age
+</span><span>                            </span><span style="color:#b48ead;">and</span><span> set value </span><span style="color:#b48ead;">=</span><span> this.age </span><span style="color:#b48ead;">&lt;-</span><span> value
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.Text </span><span style="color:#b48ead;">=</span><span> sprintf &quot;</span><span style="color:#a3be8c;">name:</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;">;age:</span><span style="color:#b48ead;">%d</span><span>&quot; this.name this.age   </span><span style="color:#65737e;">//只有get方法的属性
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.TalkWith</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">sb</span><span style="color:#b48ead;">:</span><span>Person</span><span style="color:#b48ead;">) =                   </span><span style="color:#65737e;">//类方法
+</span><span>            printfn &quot;</span><span style="color:#a3be8c;">I’m talking with </span><span style="color:#b48ead;">%s</span><span>&quot; sb.Name
+</span></code></pre>
+<p>隐式构造函数：</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">type </span><span>Person</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">n</span><span style="color:#b48ead;">,</span><span style="color:#bf616a;">a</span><span style="color:#b48ead;">) =
+</span><span>    </span><span style="color:#b48ead;">let mutable </span><span style="color:#bf616a;">name </span><span style="color:#b48ead;">=</span><span> n </span><span style="color:#65737e;">//不能显式的定义字段，let定义的变量会在编译后转化为类字段
+</span><span>    </span><span style="color:#b48ead;">let mutable </span><span style="color:#bf616a;">age </span><span style="color:#b48ead;">=</span><span> a
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">do
+</span><span>        printfn &quot;</span><span style="color:#a3be8c;">初始化后进行的操作</span><span>&quot;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">static member </span><span style="color:#bf616a;">InstanceCount </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">0
+</span><span>    </span><span style="color:#b48ead;">new</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">= new</span><span> Person</span><span style="color:#b48ead;">(</span><span>&quot;&quot;</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#b48ead;">new (</span><span>text</span><span style="color:#b48ead;">:</span><span>string</span><span style="color:#b48ead;">) =
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">parts </span><span style="color:#b48ead;">=</span><span> text.Split</span><span style="color:#b48ead;">(</span><span style="color:#a3be8c;">&#39;,&#39;</span><span style="color:#b48ead;">)
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">nm </span><span style="color:#b48ead;">=</span><span> parts.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">]
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">ag </span><span style="color:#b48ead;">=</span><span> int parts.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">]
+</span><span>        </span><span style="color:#b48ead;">new</span><span> Person</span><span style="color:#b48ead;">(</span><span>nm</span><span style="color:#b48ead;">,</span><span> ag</span><span style="color:#b48ead;">)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.Age </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> age </span><span style="color:#65737e;">//不是类成员，不能通过this引用
+</span><span>                                </span><span style="color:#b48ead;">and</span><span> set value </span><span style="color:#b48ead;">=</span><span> age </span><span style="color:#b48ead;">&lt;-</span><span> value
+</span></code></pre>
+<p>类方法：</p>
+<p>类方法递归时不需要rec关键字</p>
+<p>泛型：</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">type </span><span>Person</span><span style="color:#b48ead;">&lt;</span><span>’a</span><span style="color:#b48ead;">&gt;
+</span></code></pre>
+<p>泛型参数以英文单引号开头</p>
+<p>在构造函数中初始化属性：</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">let </span><span style="color:#bf616a;">p </span><span style="color:#b48ead;">= new</span><span> Person</span><span style="color:#b48ead;">(</span><span>Name</span><span style="color:#b48ead;">=</span><span>&quot;</span><span style="color:#a3be8c;">Bob</span><span>&quot;</span><span style="color:#b48ead;">,</span><span>Age</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">30</span><span style="color:#b48ead;">)
+</span></code></pre>
+<p>可访问性：public | private | internal</p>
+<p>默认可访问性是public //书上说字段默认为private，经验证字段默认也是public</p>
+<p>模块中的成员也可以使用可访问性</p>
+<p>可以使用fsi签名文件来控制可访问性，类似于C++中的头文件；不在签名文件中的代码默认为private，签名中的默认为public</p>
+<p>继承：
+从有显示构造函数的类继承：</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">type </span><span>Student</span><span style="color:#b48ead;">=
+</span><span>    </span><span style="color:#b48ead;">inherit</span><span> Person
+</span><span>    </span><span style="color:#65737e;">//let mutable _sno = sno
+</span><span>    </span><span style="color:#b48ead;">val mutable </span><span style="color:#bf616a;">_sno</span><span style="color:#b48ead;">:</span><span>int
+</span><span>    </span><span style="color:#b48ead;">new(</span><span>text</span><span style="color:#b48ead;">:</span><span>string</span><span style="color:#b48ead;">) =
+</span><span>        </span><span style="color:#b48ead;">{
+</span><span>            </span><span style="color:#b48ead;">inherit</span><span> Person</span><span style="color:#b48ead;">(</span><span>text</span><span style="color:#b48ead;">)
+</span><span>            </span><span style="color:#b48ead;">_</span><span>sno </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">0
+</span><span>        </span><span style="color:#b48ead;">}
+</span><span>    </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.SNO </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> this.</span><span style="color:#b48ead;">_</span><span>sno
+</span><span>                    </span><span style="color:#b48ead;">and</span><span> set value </span><span style="color:#b48ead;">=</span><span> this.</span><span style="color:#b48ead;">_</span><span>sno </span><span style="color:#b48ead;">&lt;-</span><span> value
+</span></code></pre>
+<p>从有隐式构造函数的类继承;</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span>    </span><span style="color:#b48ead;">type </span><span>Student</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">sno</span><span style="color:#b48ead;">:</span><span>int</span><span style="color:#b48ead;">)=
+</span><span>        </span><span style="color:#b48ead;">inherit</span><span> Person</span><span style="color:#d08770;">() </span><span style="color:#65737e;">//必须调用基类构造函数
+</span><span>        </span><span style="color:#b48ead;">let mutable </span><span style="color:#bf616a;">_sno </span><span style="color:#b48ead;">=</span><span> sno
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">this.SNO </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">= _</span><span>sno
+</span><span>                        </span><span style="color:#b48ead;">and</span><span> set value </span><span style="color:#b48ead;">= _</span><span>sno </span><span style="color:#b48ead;">&lt;-</span><span> value
+</span></code></pre>
+<p>重写：
+要重写的方法和属性使用abstract标记，可以使用default为属性提供默认实现</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">type </span><span>Sandwich</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=
+</span><span>    </span><span style="color:#b48ead;">abstract</span><span> Ingredients </span><span style="color:#b48ead;">: </span><span>string list
+</span><span>    </span><span style="color:#b48ead;">default </span><span style="color:#bf616a;">this.Ingredients </span><span style="color:#b48ead;">= []
+</span><span>    </span><span style="color:#b48ead;">abstract</span><span> Calories </span><span style="color:#b48ead;">: </span><span>int
+</span><span>    </span><span style="color:#b48ead;">default </span><span style="color:#bf616a;">this.Calories </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">0
+</span></code></pre>
+<p><code>[&lt;AbstractClass&gt;]</code>属性标记抽象类</p>
+<p><code>[&lt;Sealed&gt;]</code>属性标记Sealed类</p>
+<p>类型转换：</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">let </span><span style="color:#bf616a;">p </span><span style="color:#b48ead;">= new</span><span> Person</span><span style="color:#d08770;">()
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">o </span><span style="color:#b48ead;">=</span><span> p </span><span style="color:#b48ead;">:&gt;</span><span> obj </span><span style="color:#65737e;">//静态转换
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">p2 </span><span style="color:#b48ead;">=</span><span> obj </span><span style="color:#b48ead;">:?&gt;</span><span> Person </span><span style="color:#65737e;">//动态转换
+</span></code></pre>
+<p>用于模式匹配</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">let </span><span style="color:#bf616a;">whatIs </span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">x </span><span style="color:#b48ead;">: </span><span>obj</span><span style="color:#b48ead;">) =
+</span><span>    </span><span style="color:#b48ead;">match</span><span> x </span><span style="color:#b48ead;">with
+</span><span>    </span><span style="color:#b48ead;">| :</span><span>? string    </span><span style="color:#b48ead;">as</span><span> s </span><span style="color:#b48ead;">-&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">x is a string \&quot;</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;">\&quot;</span><span>&quot; s
+</span><span>    </span><span style="color:#b48ead;">| :</span><span>? int       </span><span style="color:#b48ead;">as</span><span> i </span><span style="color:#b48ead;">-&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">x is an int </span><span style="color:#b48ead;">%d</span><span>&quot; i
+</span><span>    </span><span style="color:#b48ead;">| :</span><span>? list</span><span style="color:#b48ead;">&lt;</span><span>int</span><span style="color:#b48ead;">&gt; as</span><span> l </span><span style="color:#b48ead;">-&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">x is an int list &#39;</span><span style="color:#b48ead;">%A</span><span style="color:#a3be8c;">&#39;</span><span>&quot; l
+</span><span>    </span><span style="color:#b48ead;">| _ -&gt;</span><span> printfn &quot;</span><span style="color:#a3be8c;">x is a &#39;</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;">&#39;</span><span>&quot; </span><span style="color:#b48ead;">&lt;|</span><span> x.GetType</span><span style="color:#d08770;">()</span><span>.Name</span><span style="color:#b48ead;">;;
+</span></code></pre>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/programming/">#Programming</a>
+            
+            <a href="https://blog.dotone.top/tags/f/">#F#</a>
+            
+            <a href="https://blog.dotone.top/tags/net/">#.Net</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - IL</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/il/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2010-05-22T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/il/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>IL学习(五)</title>
+        <published>2010-05-22T00:00:00+00:00</published>
+        <updated>2010-05-22T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/learning-il/learning-il-5/"/>
+        <id>https://blog.dotone.top/blog/it/learning-il/learning-il-5/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/learning-il/learning-il-5/">&lt;h2 id=&quot;zhi-zhen&quot;&gt;指针&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;amp;&lt;&#x2F;code&gt;用于托管的指针&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;*&lt;&#x2F;code&gt;用于非托管的指针&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;fei-tuo-guan-zhi-zhen&quot;&gt;非托管指针&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;这个概念借鉴了c和c++
+&lt;&#x2F;span&gt;&lt;span&gt;使用没有限制
+&lt;&#x2F;span&gt;&lt;span&gt;被执行引擎识别为无符号数
+&lt;&#x2F;span&gt;&lt;span&gt;不被垃圾回收器管理
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;指针变量是一个无符号数&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class test
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public static void main() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(int32 *V_0,int32 V_1)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 20
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc V_0   &#x2F;&#x2F;将int类型的数值存放在指针变量中
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc V_0   &#x2F;&#x2F;加载数据
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_0 &#x2F;&#x2F;获取V_0地址
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc V_1   &#x2F;&#x2F;存放在V_1中
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc V_1
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;tong-guo-zhi-zhen-jia-zai-bian-liang&quot;&gt;通过指针加载变量&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class test
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public static void main() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(int32 V_0)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 20
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc V_0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_0 &#x2F;&#x2F;指针地址
+&lt;&#x2F;span&gt;&lt;span&gt;        ldobj int32 &#x2F;&#x2F;加载地址指向的变量
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;ldobj:从栈顶存放的地址加载变量到栈顶&lt;&#x2F;p&gt;
+&lt;p&gt;所有的局部变量都创建在栈上，其它的创建在堆上。栈中只能存放数字。&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class test
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public static void main() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(int32 V_0)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;测试1&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32) &#x2F;&#x2F;输出栈顶的字符串的地址
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;测试2&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc V_0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldobj int32
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class test
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .field int32 i
+&lt;&#x2F;span&gt;&lt;span&gt;    .field static int32 j
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public static void main() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        newobj void test::.ctor()
+&lt;&#x2F;span&gt;&lt;span&gt;        ldflda int32 test::i &#x2F;&#x2F;载入i的地址
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldsflda int32 test::j &#x2F;&#x2F;载入j的地址
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    .method instance void .ctor()
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;transientzhi-zhen&quot;&gt;transient指针&lt;&#x2F;h2&gt;
+&lt;p&gt;这是介于托管和非托管之间的指针，它只能由执行引擎创建。&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;从我的百度空间导入&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>IL学习(四)</title>
+        <published>2010-05-17T00:00:00+00:00</published>
+        <updated>2010-05-17T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/learning-il/learning-il-4/"/>
+        <id>https://blog.dotone.top/blog/it/learning-il/learning-il-4/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/learning-il/learning-il-4/">&lt;h2 id=&quot;jie-kou-xian-zhi&quot;&gt;接口限制&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;接口中所有方法必须是abstract或static&lt;&#x2F;li&gt;
+&lt;li&gt;虚方法必须是abstract和public&lt;&#x2F;li&gt;
+&lt;li&gt;不能有实例字段&lt;&#x2F;li&gt;
+&lt;li&gt;接口不能实例化&lt;&#x2F;li&gt;
+&lt;li&gt;接口不能从类继承&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;直接使用call调用接口方法和使用callvirt动态调用的效果是一样的。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;jie-gou-ti&quot;&gt;结构体&lt;&#x2F;h2&gt;
+&lt;p&gt;il不直接支持结构体
+引用类型从Object类继承，值类型从ValueType继承&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class value point
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .field int32 x
+&lt;&#x2F;span&gt;&lt;span&gt;    .field int32 y
+&lt;&#x2F;span&gt;&lt;span&gt;    .method static void main() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(value class point V_0,value class point V_1)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_0
+&lt;&#x2F;span&gt;&lt;span&gt;        initobj value class point
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldfld int32 point::x
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_1
+&lt;&#x2F;span&gt;&lt;span&gt;        initobj value class point
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_1
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 10
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 20
+&lt;&#x2F;span&gt;&lt;span&gt;        call instance void point::.ctor(int32,int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;point:x={0},y={1}&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_1
+&lt;&#x2F;span&gt;&lt;span&gt;        ldfld int32 point::x
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_1
+&lt;&#x2F;span&gt;&lt;span&gt;        ldfld int32 point::y
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(string,object,object)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    .method instance void .ctor(int32 x,int32 y) il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.1
+&lt;&#x2F;span&gt;&lt;span&gt;        stfld int32 point::x
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.2
+&lt;&#x2F;span&gt;&lt;span&gt;        stfld int32 point::y
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;initobj:用于初始化结构体的字段为0值，它不会调用结构体的构造函数。对于结构体初始化，不用initobj也可以，这样各个字段就得到一个随机值。&lt;&#x2F;p&gt;
+&lt;p&gt;结构体也可以有static、virtual和instance方法
+《c# to il》书上说值类型在调用virtual方法时只能使用call，不能使用callvirt。但是经验证是可以的，可能是.net4中改变了规则。&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my {}
+&lt;&#x2F;span&gt;&lt;span&gt;.class interface IFly
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public abstract instance void fly() il managed{}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.class value private auto ansi bird implements IFly
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .field private int32 i
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public instance void .ctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.0    &#x2F;&#x2F;this
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4    10
+&lt;&#x2F;span&gt;&lt;span&gt;        stfld int32 bird::i
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    .method virtual public instance void fly() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;fly&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.1
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(string,object)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public hidebysig static void main() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(value class bird V_0,class IFly V_1)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_0
+&lt;&#x2F;span&gt;&lt;span&gt;        call instance void bird::.ctor()
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_0
+&lt;&#x2F;span&gt;&lt;span&gt;        callvirt instance void bird::fly() &#x2F;&#x2F;运行时决定
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_0
+&lt;&#x2F;span&gt;&lt;span&gt;        box bird
+&lt;&#x2F;span&gt;&lt;span&gt;        &#x2F;&#x2F;castclass IFly
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        callvirt instance void IFly::fly()
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;zhuang-xiang-yu-chai-xiang&quot;&gt;装箱与拆箱&lt;&#x2F;h2&gt;
+&lt;p&gt;装箱：将值类型转换成引用类型进行的操作
+拆箱：将引用类型转换成值类型进行的操作&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class value auto ansi sealed point
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .field int32 x
+&lt;&#x2F;span&gt;&lt;span&gt;    .field int32 y
+&lt;&#x2F;span&gt;&lt;span&gt;    .method static void main() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(value class point V_0,object V_1,value class point V_2)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 10
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 20
+&lt;&#x2F;span&gt;&lt;span&gt;        call instance void point::.ctor(int32,int32) &#x2F;&#x2F;调用构造函数
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_0
+&lt;&#x2F;span&gt;&lt;span&gt;        call instance void point::print()
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_0
+&lt;&#x2F;span&gt;&lt;span&gt;        box point &#x2F;&#x2F;装箱成object对象,栈顶放入对象地址
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        unbox point &#x2F;&#x2F;拆箱，得到新结构体的地址
+&lt;&#x2F;span&gt;&lt;span&gt;        ldobj point &#x2F;&#x2F;根据地址装载对象
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.2
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_2
+&lt;&#x2F;span&gt;&lt;span&gt;        call instance void point::print()
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    .method instance void .ctor(int32 x,int32 y) il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.0 &#x2F;&#x2F;this
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.1
+&lt;&#x2F;span&gt;&lt;span&gt;        stfld int32 point::x
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.2
+&lt;&#x2F;span&gt;&lt;span&gt;        stfld int32 point::y
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public instance void print() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;point:x={0},y={1}&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.0 &#x2F;&#x2F;this
+&lt;&#x2F;span&gt;&lt;span&gt;        ldfld int32 point::x
+&lt;&#x2F;span&gt;&lt;span&gt;        box int32 &#x2F;&#x2F;装箱
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldfld int32 point::y
+&lt;&#x2F;span&gt;&lt;span&gt;        box int32
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(string,object,object)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;ul&gt;
+&lt;li&gt;box:装箱&lt;&#x2F;li&gt;
+&lt;li&gt;unbox:拆箱&lt;&#x2F;li&gt;
+&lt;li&gt;ldobj:从地址加载对象&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;从我的百度空间导入&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>IL学习(三)</title>
+        <published>2010-05-05T00:00:00+00:00</published>
+        <updated>2010-05-05T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/learning-il/learning-il-3/"/>
+        <id>https://blog.dotone.top/blog/it/learning-il/learning-il-3/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/learning-il/learning-il-3/">&lt;h2 id=&quot;yuan-shi-zi-fu-chuan&quot;&gt;原始字符串&lt;&#x2F;h2&gt;
+&lt;p&gt;IL中没有原始字符串，如C#中的@&amp;quot;&amp;quot;在IL中则是已经经过编译器转义的字符串&amp;quot;\&amp;quot;。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;lei-de-ji-cheng&quot;&gt;类的继承&lt;&#x2F;h2&gt;
+&lt;p&gt;IL使用extends关键字表示类的继承&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class auto ansi Animal
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;.method static void main() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;    newobj instance void Dog::.ctor()
+&lt;&#x2F;span&gt;&lt;span&gt;    callvirt instance void Animal::run()
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.method instance void .ctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.method virtual instance void run() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ldstr &amp;quot;an Animal is running&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    call void [mscorlib]System.Console::WriteLine(string)
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.class auto ansi Dog extends Animal
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;.method instance void .ctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ldarg.0
+&lt;&#x2F;span&gt;&lt;span&gt;    call instance void Animal::.ctor()
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.method virtual instance void run() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ldstr &amp;quot;an Dog is running&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    call void [mscorlib]System.Console::WriteLine(string)
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;子类的构造函数必须调用父类的构造函数，否则会报InvalidProgramException异常。
+实例方法如果没有呢new&#x2F;virtual关键字，则默认为new，virtaul则标明为虚方法，表明方法可以重写或覆盖了父类的方法（在C#中用override）。
+callvirt：在运行时决定要调用的方法。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;shi-xian-jie-kou&quot;&gt;实现接口&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class interface IRunnable
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;.method public virtual abstract void run() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;   {}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.class auto ansi Animal implements IRunnable
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;.method static void main() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;    newobj instance void Dog::.ctor()
+&lt;&#x2F;span&gt;&lt;span&gt;    callvirt instance void Animal::run()
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.method instance void .ctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.method public virtual newslot instance void run() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ldstr &amp;quot;an Animal is running&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    call void [mscorlib]System.Console::WriteLine(string)
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.class auto ansi Dog extends Animal
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;.method instance void .ctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ldarg.0
+&lt;&#x2F;span&gt;&lt;span&gt;    call instance void Animal::.ctor()
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.method public virtual instance void run() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ldstr &amp;quot;an Dog is running&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    call void [mscorlib]System.Console::WriteLine(string)
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;实现接口时如果方法签名不匹配或为实现接口中的方法，将报TypeLoadException异常。
+newslot:当第一次把方法声明为virtual方法时，最好把它标记为newslot，它表明虚方法的根。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;xi-gou-han-shu&quot;&gt;析构函数&lt;&#x2F;h2&gt;
+&lt;p&gt;C#中的析构函数编译成IL后，转化成Finalize()方法。&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class interface IRunnable
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;.method public virtual abstract void run() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;   {}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.class auto ansi Animal implements IRunnable
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;.method static void main() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;    newobj instance void Animal::.ctor()
+&lt;&#x2F;span&gt;&lt;span&gt;    callvirt instance void Animal::run()
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.method instance void .ctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.method public virtual newslot instance void run() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ldstr &amp;quot;an Animal is running&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    call void [mscorlib]System.Console::WriteLine(string)
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.method family hidebysig virtual instance void Finalize() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ldstr &amp;quot;in class Animal destructor&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    call void [mscorlib]System.Console::WriteLine(string)
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;虽然Finalize的执行是由运行时决定的，但是在这个例子中还是可以看见执行的。
+类不会继承构造函数和析构函数。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;fang-wen-xiu-shi-fu-internal&quot;&gt;访问修饰符internal&lt;&#x2F;h2&gt;
+&lt;p&gt;C#的访问修饰符internal只是C#词法的一部分，与IL没有任何关系。
+C#中父类的可访问性不能比子类小，但是在IL中不遵循这个规则。
+C#中方法的可访问性受它所在的类的可访问性的限制，但是在IL中没有这个限制。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;qiang-zhi-lei-xing-zhuan-huan&quot;&gt;强制类型转换&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class interface IRunnable
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;.method public virtual abstract void run() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;   {}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.class auto ansi Animal implements IRunnable
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;.method static void main() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;    .locals(class Animal V_0,class Dog V_1)
+&lt;&#x2F;span&gt;&lt;span&gt;    newobj instance void Dog::.ctor()
+&lt;&#x2F;span&gt;&lt;span&gt;    stloc.0    &#x2F;&#x2F;转换成Animal
+&lt;&#x2F;span&gt;&lt;span&gt;    ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;    callvirt instance void Animal::run()
+&lt;&#x2F;span&gt;&lt;span&gt;    ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;    castclass Dog &#x2F;&#x2F;转换成Dog
+&lt;&#x2F;span&gt;&lt;span&gt;    call instance void Dog::run()
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.method instance void .ctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.method public virtual newslot instance void run() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ldstr &amp;quot;an Animal is running&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    call void [mscorlib]System.Console::WriteLine(string)
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.method family hidebysig virtual instance void Finalize() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ldstr &amp;quot;in class Animal destructor&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    call void [mscorlib]System.Console::WriteLine(string)
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.class auto ansi Dog extends Animal
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;.method instance void .ctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ldarg.0
+&lt;&#x2F;span&gt;&lt;span&gt;    call instance void Animal::.ctor()
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.method public virtual instance void run() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    ldstr &amp;quot;an Dog is running&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    call void [mscorlib]System.Console::WriteLine(string)
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;如果转换失败，将抛出InvalidCastException异常。&lt;&#x2F;p&gt;
+&lt;p&gt;C#中不能继承标明Sealed的类，但在IL中可以。&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class private auto ansi sealed zzz extends System.Object
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public hidebysig static void vijay() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;.class private auto ansi yyy extends zzz
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;literal&quot;&gt;literal&lt;&#x2F;h2&gt;
+&lt;p&gt;C#编译器会在编译时计算所有常量的值。literal字段代表常量，但是不可以在IL中访问，如果访问会在运行时报错MissingFieldException。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;initonly&quot;&gt;initonly&lt;&#x2F;h2&gt;
+&lt;p&gt;C#中用readonly标记只读字段，在IL中使用initonly。&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;从我的百度空间导入&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>IL学习(一)</title>
+        <published>2010-05-01T00:00:00+00:00</published>
+        <updated>2010-05-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/learning-il/learning-il-1/"/>
+        <id>https://blog.dotone.top/blog/it/learning-il/learning-il-1/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/learning-il/learning-il-1/">&lt;h2 id=&quot;sheng-ming-ru-kou-dian&quot;&gt;声明入口点：&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.method void myfunc(){
+&lt;&#x2F;span&gt;&lt;span&gt;    .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;程序集中只能有一个入口点，可以在方法内的任何位置&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;diao-yong-fang-fa&quot;&gt;调用方法：&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.method void myfunc(){
+&lt;&#x2F;span&gt;&lt;span&gt;    .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;    ldstr &amp;quot;hello,world&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    call void [mscorlib]System.Console::WriteLine(class System.String)
+&lt;&#x2F;span&gt;&lt;span&gt;    ret
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;ret:说明方法的结束&lt;&#x2F;p&gt;
+&lt;p&gt;顺序：
+call
+返回类型
+命名空间
+方法
+参数类型&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;fang-fa-xiu-shi-shu-xing&quot;&gt;方法修饰属性&lt;&#x2F;h2&gt;
+&lt;p&gt;public&#x2F;private 可访问性&lt;&#x2F;p&gt;
+&lt;p&gt;hidebysig    在子类中通过方法名称或签名隐藏父类中的方法&lt;&#x2F;p&gt;
+&lt;p&gt;static    有入口点的方法必须是静态的&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;chuang-jian-lei&quot;&gt;创建类&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my {}
+&lt;&#x2F;span&gt;&lt;span&gt;.class private auto ansi bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public hidebysig static void fly() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;hello,world&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(class System.String)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;ldstr:加载字符串到栈&lt;&#x2F;p&gt;
+&lt;p&gt;auto:由运行时决定内存而不是当前程序&lt;&#x2F;p&gt;
+&lt;p&gt;声明构造函数&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my {}
+&lt;&#x2F;span&gt;&lt;span&gt;.class private auto ansi bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public instance void .ctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.0    &#x2F;&#x2F;this指针
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;hello,world&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(class System.String)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public hidebysig static void fly() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        newobj instance void bird::.ctor()
+&lt;&#x2F;span&gt;&lt;span&gt;        pop
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;ldarg：加载函数传入参数到栈，类的实例方法自动传入this指针，位于参数列表中位置0&lt;&#x2F;p&gt;
+&lt;p&gt;newobj:在栈顶创建新对象&lt;&#x2F;p&gt;
+&lt;p&gt;pop:弹出栈顶，这里新创建的对象没有用，所以要弹出&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;sheng-ming-jing-tai-gou-zao-han-shu&quot;&gt;声明静态构造函数&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my {}
+&lt;&#x2F;span&gt;&lt;span&gt;.class private auto ansi bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public instance void .ctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;.ctor&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(string)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    .method private static void .cctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;.cctor&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(string)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public hidebysig static void fly() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        newobj instance void bird::.ctor()&#x2F;&#x2F;创建对象
+&lt;&#x2F;span&gt;&lt;span&gt;        pop
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;sheng-ming-cheng-yuan-bian-liang&quot;&gt;声明成员变量&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my {}
+&lt;&#x2F;span&gt;&lt;span&gt;.class private auto ansi bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .field private int32 i
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public instance void .ctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.0    &#x2F;&#x2F;this
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4    10&#x2F;&#x2F;加载int32常量10到栈
+&lt;&#x2F;span&gt;&lt;span&gt;        stfld int32 bird::i&#x2F;&#x2F;栈中的值赋给成员变量i
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public hidebysig static void fly() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        newobj instance void bird::.ctor()
+&lt;&#x2F;span&gt;&lt;span&gt;        ldfld int32 bird::i
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;ldc:加载常量到栈&lt;&#x2F;p&gt;
+&lt;p&gt;ldfld:加载成员变量到栈顶&lt;&#x2F;p&gt;
+&lt;p&gt;stfld:将栈顶的值赋给成员变量&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;sheng-ming-jing-tai-cheng-yuan-bian-liang&quot;&gt;声明静态成员变量&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my {}
+&lt;&#x2F;span&gt;&lt;span&gt;.class private auto ansi bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .field private int32 i
+&lt;&#x2F;span&gt;&lt;span&gt;    .field private static int32 j
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public instance void .ctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.0    &#x2F;&#x2F;this指针
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4    20
+&lt;&#x2F;span&gt;&lt;span&gt;        stsfld int32 bird::j &#x2F;&#x2F;初始化静态成员j
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4    10&#x2F;&#x2F;加载int32常量10到栈
+&lt;&#x2F;span&gt;&lt;span&gt;        stfld int32 bird::i&#x2F;&#x2F;栈中的值赋给成员变量i
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public hidebysig static void fly() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        newobj instance void bird::.ctor()
+&lt;&#x2F;span&gt;&lt;span&gt;        &#x2F;&#x2F;输出成员变量
+&lt;&#x2F;span&gt;&lt;span&gt;        ldfld int32 bird::i
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        &#x2F;&#x2F;输出静态成员变量
+&lt;&#x2F;span&gt;&lt;span&gt;        ldsfld int32 bird::j
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;sheng-ming-ju-bu-bian-liang&quot;&gt;声明局部变量&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my {}
+&lt;&#x2F;span&gt;&lt;span&gt;.class private auto ansi bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .field private int32 i
+&lt;&#x2F;span&gt;&lt;span&gt;    .field private static int32 j
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public instance void .ctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.0    &#x2F;&#x2F;this指针
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4    20
+&lt;&#x2F;span&gt;&lt;span&gt;        stsfld int32 bird::j &#x2F;&#x2F;初始化静态成员j
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4    10&#x2F;&#x2F;加载int32常量10到栈
+&lt;&#x2F;span&gt;&lt;span&gt;        stfld int32 bird::i&#x2F;&#x2F;栈中的值赋给成员变量i
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public hidebysig static void fly() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(int32 V_0,class bird V_1)&#x2F;&#x2F;声明局部变量
+&lt;&#x2F;span&gt;&lt;span&gt;        newobj instance void bird::.ctor()&#x2F;&#x2F;创建对象
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.1    &#x2F;&#x2F;对象赋给变量V_1
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 5
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0    &#x2F;&#x2F;将5赋给变量V_0
+&lt;&#x2F;span&gt;&lt;span&gt;        &#x2F;&#x2F;重新加载对象,这样才能操作它的成员和方法
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        &#x2F;&#x2F;输出成员变量
+&lt;&#x2F;span&gt;&lt;span&gt;        ldfld int32 bird::i
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        &#x2F;&#x2F;重新加载对象,这样才能操作它的成员和方法
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0    &#x2F;&#x2F;值
+&lt;&#x2F;span&gt;&lt;span&gt;        stfld int32 bird::i&#x2F;&#x2F;赋值
+&lt;&#x2F;span&gt;&lt;span&gt;        &#x2F;&#x2F;重新加载对象,这样才能操作它的成员和方法
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        &#x2F;&#x2F;输出成员变量
+&lt;&#x2F;span&gt;&lt;span&gt;        ldfld int32 bird::i
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        &#x2F;&#x2F;输出静态成员变量
+&lt;&#x2F;span&gt;&lt;span&gt;        ldsfld int32 bird::j
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;局部变量自动命名为V_x的形式&lt;&#x2F;p&gt;
+&lt;p&gt;stloc:把栈顶的值赋给局部变量&lt;&#x2F;p&gt;
+&lt;p&gt;ldloc:把局部变量加载到栈顶&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;sheng-ming-cheng-yuan-fang-fa&quot;&gt;声明成员方法&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my {}
+&lt;&#x2F;span&gt;&lt;span&gt;.class private auto ansi bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .field private int32 i
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public instance void .ctor() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.0    &#x2F;&#x2F;this
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4    10&#x2F;&#x2F;加载int32常量10到栈
+&lt;&#x2F;span&gt;&lt;span&gt;        stfld int32 bird::i&#x2F;&#x2F;栈中的值赋给成员变量i
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public instance void fly(string over) il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;fly over {0}&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        ldarg.1
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(string,object)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    .method public hidebysig static void main() il managed
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(class bird V_0)
+&lt;&#x2F;span&gt;&lt;span&gt;        newobj instance void bird::.ctor()
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldfld int32 bird::i
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;lake&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        call instance void bird::fly(string)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;从我的百度空间导入&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>IL学习(二)</title>
+        <published>2010-05-01T00:00:00+00:00</published>
+        <updated>2010-05-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/learning-il/learning-il-2/"/>
+        <id>https://blog.dotone.top/blog/it/learning-il/learning-il-2/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/learning-il/learning-il-2/">&lt;h2 id=&quot;biao-qian&quot;&gt;标签&lt;&#x2F;h2&gt;
+&lt;p&gt;标签能用在代码中任意跳转&lt;&#x2F;p&gt;
+&lt;p&gt;虽然C#和IL中都定义了bool类型，但是他们的值却是0和1，可见这是和c、c++是一脉相承的。&lt;&#x2F;p&gt;
+&lt;p&gt;br:无条件跳转&lt;&#x2F;p&gt;
+&lt;p&gt;brtrue:当值为1时跳转&lt;&#x2F;p&gt;
+&lt;p&gt;brfalse:当值为0时跳转&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;ifyu-ju&quot;&gt;if语句&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method static void main()
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(bool V_0)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 1    &#x2F;&#x2F;常量1
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0    &#x2F;&#x2F;bool变量赋值1
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0    &#x2F;&#x2F;使用bool变量
+&lt;&#x2F;span&gt;&lt;span&gt;        brfalse IL_001    &#x2F;&#x2F;如果为假跳转到结束
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;in if statement&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(string)
+&lt;&#x2F;span&gt;&lt;span&gt;        IL_001: ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;if-elseyu-ju&quot;&gt;if else语句&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method static void main()
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(bool V_0)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 0    &#x2F;&#x2F;常量1
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0    &#x2F;&#x2F;bool变量赋值1
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0    &#x2F;&#x2F;使用bool变量
+&lt;&#x2F;span&gt;&lt;span&gt;        brfalse IL_001    &#x2F;&#x2F;如果为假跳转到结束
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;in if true statement&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(string)
+&lt;&#x2F;span&gt;&lt;span&gt;        br IL_002    &#x2F;&#x2F;true语句完成
+&lt;&#x2F;span&gt;&lt;span&gt;        IL_001:    ldstr &amp;quot;in if false statement&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(string)
+&lt;&#x2F;span&gt;&lt;span&gt;        IL_002: ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;suan-shu-yun-suan-fu&quot;&gt;算术运算符&lt;&#x2F;h2&gt;
+&lt;p&gt;add&#x2F;sub&#x2F;mul&#x2F;div&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method static void main()
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(int32 V_0,int32 V_1)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 12
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 5
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        add    &#x2F;&#x2F;加
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        sub    &#x2F;&#x2F;减
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        mul    &#x2F;&#x2F;乘
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        div    &#x2F;&#x2F;除
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;cao-zuo-fu&quot;&gt;++操作符&lt;&#x2F;h2&gt;
+&lt;p&gt;++操作符是+1操作&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method static void main()
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(int32 V_0)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 5
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 1
+&lt;&#x2F;span&gt;&lt;span&gt;        add    &#x2F;&#x2F;V_0++
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;guan-xi-yun-suan-fu&quot;&gt;关系运算符&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;cgt:大于&lt;&#x2F;li&gt;
+&lt;li&gt;clt:小于&lt;&#x2F;li&gt;
+&lt;li&gt;ceq:等于&lt;&#x2F;li&gt;
+&lt;li&gt;不等于是将ceq的结果与false再次进行ceq操作&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method static void main()
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(int32 V_0,int32 V_1,bool V_2)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 5
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 10
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        cgt
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.2
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;5 &amp;gt; 10 :{0}&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_2
+&lt;&#x2F;span&gt;&lt;span&gt;        box [mscorlib]System.Int32
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(string,object)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        clt
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.2
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;5 &amp;lt; 10 :{0}&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_2
+&lt;&#x2F;span&gt;&lt;span&gt;        box [mscorlib]System.Int32
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(string,object)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        ceq
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.2
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;5 == 10 : {0}&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_2
+&lt;&#x2F;span&gt;&lt;span&gt;        box [mscorlib]System.Int32
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(string,object)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.1
+&lt;&#x2F;span&gt;&lt;span&gt;        ceq
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 0
+&lt;&#x2F;span&gt;&lt;span&gt;        ceq
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.2
+&lt;&#x2F;span&gt;&lt;span&gt;        ldstr &amp;quot;5 != 10 :{0}&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloca V_2
+&lt;&#x2F;span&gt;&lt;span&gt;        box [mscorlib]System.Int32
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(string,object)
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;whilexun-huan&quot;&gt;while循环&lt;&#x2F;h2&gt;
+&lt;p&gt;循环的条件在后面&lt;&#x2F;p&gt;
+&lt;p&gt;ble:当小于等于时跳转&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method static void main()
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(int32 V_0)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 0
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        br IL_002
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 1
+&lt;&#x2F;span&gt;&lt;span&gt;        add
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0 &#x2F;&#x2F;V_0++
+&lt;&#x2F;span&gt;&lt;span&gt;        IL_002: ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 5
+&lt;&#x2F;span&gt;&lt;span&gt;        ble IL_001 &#x2F;&#x2F;V_0 &amp;lt;= 5
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;do-whilexun-huan&quot;&gt;do...while循环&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method static void main()
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(int32 V_0)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 0
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        IL_001: ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 1
+&lt;&#x2F;span&gt;&lt;span&gt;        add
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0 &#x2F;&#x2F;V_0++
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 5
+&lt;&#x2F;span&gt;&lt;span&gt;        ble IL_001 &#x2F;&#x2F;V_0 &amp;lt;= 5
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;forxun-huan&quot;&gt;for循环&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method static void main()
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(int32 V_0)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 0
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        br IL_002
+&lt;&#x2F;span&gt;&lt;span&gt;        IL_001: ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 1
+&lt;&#x2F;span&gt;&lt;span&gt;        add
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0 &#x2F;&#x2F;V_0++
+&lt;&#x2F;span&gt;&lt;span&gt;        IL_002: ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 5
+&lt;&#x2F;span&gt;&lt;span&gt;        ble IL_001 &#x2F;&#x2F;V_0 &amp;lt;= 5
+&lt;&#x2F;span&gt;&lt;span&gt;        ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;break-continue&quot;&gt;break&#x2F;continue&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.assembly my{}
+&lt;&#x2F;span&gt;&lt;span&gt;.class bird
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    .method static void main()
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        .entrypoint
+&lt;&#x2F;span&gt;&lt;span&gt;        .locals(int32 V_0)
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 0
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        br IL_002   
+&lt;&#x2F;span&gt;&lt;span&gt;        IL_001: ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 1
+&lt;&#x2F;span&gt;&lt;span&gt;        add
+&lt;&#x2F;span&gt;&lt;span&gt;        stloc.0 &#x2F;&#x2F;V_0++
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 2
+&lt;&#x2F;span&gt;&lt;span&gt;        div
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 1
+&lt;&#x2F;span&gt;&lt;span&gt;        ceq
+&lt;&#x2F;span&gt;&lt;span&gt;        brtrue IL_002 &#x2F;&#x2F;continue
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 3
+&lt;&#x2F;span&gt;&lt;span&gt;        ceq
+&lt;&#x2F;span&gt;&lt;span&gt;        brtrue IL_003    &#x2F;&#x2F;break
+&lt;&#x2F;span&gt;&lt;span&gt;        ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        call void [mscorlib]System.Console::WriteLine(int32)
+&lt;&#x2F;span&gt;&lt;span&gt;        IL_002: ldloc.0
+&lt;&#x2F;span&gt;&lt;span&gt;        ldc.i4 5
+&lt;&#x2F;span&gt;&lt;span&gt;        ble IL_001 &#x2F;&#x2F;V_0 &amp;lt;= 5
+&lt;&#x2F;span&gt;&lt;span&gt;        IL_003: ret
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;从我的百度空间导入&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

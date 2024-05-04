@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - [WF4.0]Windows Workflow 4.0初体验</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;wf&#x2F;try-wf4&#x2F;">[WF4.0]Windows Workflow 4.0初体验</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>3 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2009-06-03</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>最近在虚拟机中安装了Visual Studio 2010。界面是WPF的，CPU和内存占用不是很夸张,打开一个很简单的附带的Lab Project, CPU使用率一般在20%一下，内存使用不到800M。</p>
+<p>言归正传，还是来介绍Windows Workflow 4.0。</p>
+<p>与3.5相比工作流模型有了很大改变和不同。</p>
+<p>我们知道3.5中工作流都是托管在WorkflowRuntime中的，通过WorkflowRuntime来创建、执行工作流实例；在4.0中没有WorkflowRuntime类，可以方便的直接创建WorkflowInstance实例和执行工作流。Lab中代码如下：</p>
+<pre data-lang="c#" style="background-color:#2b303b;color:#c0c5ce;" class="language-c# "><code class="language-c#" data-lang="c#"><span>WorkflowInstance </span><span style="color:#bf616a;">myInstance </span><span>= new WorkflowInstance(new SayHello(),
+</span><span>    new SayHelloInArgs(</span><span style="color:#bf616a;">userName</span><span>));
+</span><span style="color:#bf616a;">myInstance</span><span>.</span><span style="color:#bf616a;">OnCompleted </span><span>= </span><span style="color:#b48ead;">delegate</span><span>(</span><span style="color:#bf616a;">WorkflowCompletedEventArgs e</span><span>)
+</span><span>{
+</span><span>    </span><span style="color:#bf616a;">Console</span><span>.</span><span style="color:#bf616a;">WriteLine</span><span>(&quot;</span><span style="color:#a3be8c;">*** OnCompleted delegate is running on thread </span><span style="color:#d08770;">{0}</span><span style="color:#a3be8c;"> ***</span><span>&quot;,
+</span><span>        </span><span style="color:#bf616a;">Thread</span><span>.</span><span style="color:#bf616a;">CurrentThread</span><span>.</span><span style="color:#bf616a;">ManagedThreadId</span><span>);
+</span><span>    SayHelloOutArgs </span><span style="color:#bf616a;">outArgs </span><span>= new SayHelloOutArgs(</span><span style="color:#bf616a;">e</span><span>.</span><span style="color:#bf616a;">Outputs</span><span>);
+</span><span>    </span><span style="color:#bf616a;">greeting </span><span>= </span><span style="color:#bf616a;">outArgs</span><span>.</span><span style="color:#bf616a;">Greeting</span><span>;
+</span><span>    </span><span style="color:#bf616a;">syncEvent</span><span>.</span><span style="color:#bf616a;">Set</span><span>();
+</span><span>};
+</span><span style="color:#bf616a;">myInstance</span><span>.</span><span style="color:#bf616a;">OnUnhandledException </span><span>= </span><span style="color:#b48ead;">delegate</span><span>(</span><span style="color:#bf616a;">WorkflowUnhandledExceptionEventArgs e</span><span>)
+</span><span>{
+</span><span>    </span><span style="color:#bf616a;">Console</span><span>.</span><span style="color:#bf616a;">WriteLine</span><span>(</span><span style="color:#bf616a;">e</span><span>.</span><span style="color:#bf616a;">UnhandledException</span><span>.</span><span style="color:#bf616a;">ToString</span><span>());
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">UnhandledExceptionAction</span><span>.</span><span style="color:#bf616a;">Terminate</span><span>;
+</span><span>};
+</span><span style="color:#bf616a;">myInstance</span><span>.</span><span style="color:#bf616a;">OnAborted </span><span>= </span><span style="color:#b48ead;">delegate</span><span>(</span><span style="color:#bf616a;">WorkflowAbortedEventArgs e</span><span>)
+</span><span>{
+</span><span>    </span><span style="color:#bf616a;">Console</span><span>.</span><span style="color:#bf616a;">WriteLine</span><span>(</span><span style="color:#bf616a;">e</span><span>.</span><span style="color:#bf616a;">Reason</span><span>);
+</span><span>    </span><span style="color:#bf616a;">syncEvent</span><span>.</span><span style="color:#bf616a;">Set</span><span>();
+</span><span>};
+</span><span style="color:#bf616a;">myInstance</span><span>.</span><span style="color:#bf616a;">Run</span><span>();
+</span><span>
+</span></code></pre>
+<p>4.0中有一个WorkflowInvoker类，这个类也可以执行工作流，只不过这个类是用来测试工作流的，这很大的改进了前一版本中工作流难以测试的问题。</p>
+<pre data-lang="c#" style="background-color:#2b303b;color:#c0c5ce;" class="language-c# "><code class="language-c#" data-lang="c#"><span>        [</span><span style="color:#bf616a;">TestMethod</span><span>]
+</span><span>        </span><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">ShouldReturnGreetingWithName</span><span>()
+</span><span>        {
+</span><span>            Dictionary&lt;</span><span style="color:#b48ead;">string</span><span>, </span><span style="color:#b48ead;">object</span><span>&gt; </span><span style="color:#bf616a;">input </span><span>= new Dictionary&lt;</span><span style="color:#b48ead;">string</span><span>, </span><span style="color:#b48ead;">object</span><span>&gt;()
+</span><span>            {
+</span><span>                {&quot;</span><span style="color:#a3be8c;">UserName</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">Test</span><span>&quot;}
+</span><span>            };
+</span><span>            IDictionary&lt;</span><span style="color:#b48ead;">string</span><span>, </span><span style="color:#b48ead;">object</span><span>&gt; </span><span style="color:#bf616a;">output</span><span>;
+</span><span>            </span><span style="color:#bf616a;">output </span><span>= </span><span style="color:#bf616a;">WorkflowInvoker</span><span>.</span><span style="color:#bf616a;">Invoke</span><span>(new SayHello(), </span><span style="color:#bf616a;">input</span><span>);
+</span><span>            </span><span style="color:#bf616a;">Assert</span><span>.</span><span style="color:#bf616a;">AreEqual</span><span>(&quot;</span><span style="color:#a3be8c;">Hello, Test from Workflow 4</span><span>&quot;, </span><span style="color:#bf616a;">output</span><span>[&quot;</span><span style="color:#a3be8c;">Greeting</span><span>&quot;]);
+</span><span>        }
+</span></code></pre>
+<p>3.5中Activity是所有活动的基类，要实现自定义活动，只需重写Activity 的Execute()方法；在4.0中所有的活动都是从抽象类WorkflowElement派生出来的，而且Visual Studio中默认自定义活动都是从CodeActivity或CodeActivity<T>继承的，相似的是也需要重写Execute()方法，从而实现自定义执行逻辑。</p>
+<pre data-lang="c#" style="background-color:#2b303b;color:#c0c5ce;" class="language-c# "><code class="language-c#" data-lang="c#"><span>    </span><span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">MyActivity1 </span><span style="color:#eff1f5;">: </span><span style="color:#a3be8c;">CodeActivity
+</span><span style="color:#eff1f5;">    {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">protected override void </span><span style="color:#8fa1b3;">Execute</span><span style="color:#eff1f5;">(CodeActivityContext </span><span style="color:#bf616a;">context</span><span style="color:#eff1f5;">)
+</span><span style="color:#eff1f5;">        {
+</span><span style="color:#eff1f5;">            </span><span style="color:#65737e;">//你的实现代码
+</span><span style="color:#eff1f5;">        }
+</span><span style="color:#eff1f5;">    }
+</span></code></pre>
+<p>当然，你还是可以从Activity派生自定义活动，不过与3.5有很大不同。</p>
+<pre data-lang="c#" style="background-color:#2b303b;color:#c0c5ce;" class="language-c# "><code class="language-c#" data-lang="c#"><span>    </span><span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">SayHelloInCode </span><span style="color:#eff1f5;">: </span><span style="color:#a3be8c;">Activity
+</span><span style="color:#eff1f5;">    {
+</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">protected override </span><span style="color:#eff1f5;">WorkflowElement </span><span style="color:#8fa1b3;">CreateBody</span><span style="color:#eff1f5;">()
+</span><span style="color:#eff1f5;">        {
+</span><span style="color:#eff1f5;">            </span><span style="color:#b48ead;">return </span><span>new </span><span style="color:#eff1f5;">Sequence()
+</span><span style="color:#eff1f5;">            {
+</span><span style="color:#eff1f5;">                </span><span style="color:#bf616a;">Activities </span><span>=
+</span><span style="color:#eff1f5;">                {
+</span><span style="color:#eff1f5;">                    </span><span>new </span><span style="color:#eff1f5;">WriteLine()
+</span><span style="color:#eff1f5;">                    {
+</span><span style="color:#eff1f5;">                        </span><span style="color:#bf616a;">Text </span><span>= &quot;</span><span style="color:#a3be8c;">Hello Workflow 4 in code</span><span>&quot;
+</span><span style="color:#eff1f5;">                    }
+</span><span style="color:#eff1f5;">                }
+</span><span style="color:#eff1f5;">            };
+</span><span style="color:#eff1f5;">        }
+</span><span style="color:#eff1f5;">    }
+</span></code></pre>
+<p>4.0中新增加的工作流服务功能，可以直接把工作流发布为WCF服务，当然工作流也必须设计为具有WCF应答功能才行。4.0提供4个与WCF相关的活动：Receive、ReceiveReply、Send、SendReply，通过这些活动可以可视化定义WCF的服务操作。
+4.0中实现了工作流设计器的基本模型，可以很容易的实现自定义设计器。</p>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/workflow/">#workflow</a>
+            
+            <a href="https://blog.dotone.top/tags/net/">#.Net</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

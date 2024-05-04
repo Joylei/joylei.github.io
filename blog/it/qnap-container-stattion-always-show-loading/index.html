@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - QNAP Container Station打开时一直loading</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;qnap-container-stattion-always-show-loading&#x2F;">QNAP Container Station打开时一直loading</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>4 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2020-03-27</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p><code>Container Station</code>打开时一直loading。
+ssh连上QTS后，也不能通过命令进行<code>docker</code>操作，报错：</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Can&#39;t connect to docker daemon.
+</span></code></pre>
+<p>参考了官方文档和论坛里的帖子，尝试了以下操作都不起任何作用：</p>
+<ul>
+<li>重启<code>container station</code></li>
+<li>重启所有服务</li>
+<li>卸载重装<code>container station</code></li>
+<li>删除虚拟交换机，安装<code>container station</code></li>
+<li>机器重启后重装<code>container station</code></li>
+<li>手动安装<code>container station</code>旧版本</li>
+<li>系统固件更新到旧版本，安装<code>container station</code></li>
+<li>系统固件从旧版本更新到新版本，安装<code>container station</code></li>
+</ul>
+<p>继续查找原因。<code>Container Stattion</code>的日志在：<code>/share/CACHEDEV1_DATA/.qpkg/container-station/var/log/container-station</code>，查看日志都挺正常，只在<code>ctstation.log</code>中发现了异常，都是打不开数据库:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[2020-03-27 22:29:14,605] ERROR in app: Exception on /api/v1/wizard/workspace/status [GET]
+</span><span>Traceback (most recent call last):
+</span><span>  File &quot;/usr/local/container-station/python/lib/python2.7/site-packages/flask/app.py&quot;, line 1982, in wsgi_app
+</span><span>    response = self.full_dispatch_request()
+</span><span>  File &quot;/usr/local/container-station/python/lib/python2.7/site-packages/flask/app.py&quot;, line 1614, in full_dispatch_request
+</span><span>    rv = self.handle_user_exception(e)
+</span><span>  File &quot;/usr/local/container-station/python/lib/python2.7/site-packages/flask/app.py&quot;, line 1517, in handle_user_exception
+</span><span>    reraise(exc_type, exc_value, tb)
+</span><span>  File &quot;/usr/local/container-station/python/lib/python2.7/site-packages/flask/app.py&quot;, line 1612, in full_dispatch_request
+</span><span>    rv = self.dispatch_request()
+</span><span>  File &quot;/usr/local/container-station/python/lib/python2.7/site-packages/flask/app.py&quot;, line 1598, in dispatch_request
+</span><span>    return self.view_functions[rule.endpoint](**req.view_args)
+</span><span>  File &quot;/home/ubuntu/src/build/amd64/container-station/target/ctstation/api/exception.py&quot;, line 37, in wrapper
+</span><span>  File &quot;/usr/local/container-station/python/lib/python2.7/site-packages/flask_login.py&quot;, line 756, in decorated_view
+</span><span>    elif not current_user.is_authenticated():
+</span><span>  File &quot;/usr/local/container-station/python/lib/python2.7/site-packages/werkzeug/local.py&quot;, line 348, in __getattr__
+</span><span>    return getattr(self._get_current_object(), name)
+</span><span>  File &quot;/usr/local/container-station/python/lib/python2.7/site-packages/werkzeug/local.py&quot;, line 307, in _get_current_object
+</span><span>    return self.__local()
+</span><span>  File &quot;/usr/local/container-station/python/lib/python2.7/site-packages/flask_login.py&quot;, line 46, in &lt;lambda&gt;
+</span><span>    current_user = LocalProxy(lambda: _get_user())
+</span><span>  File &quot;/usr/local/container-station/python/lib/python2.7/site-packages/flask_login.py&quot;, line 794, in _get_user
+</span><span>    current_app.login_manager._load_user()
+</span><span>  File &quot;/usr/local/container-station/python/lib/python2.7/site-packages/flask_login.py&quot;, line 340, in _load_user
+</span><span>    deleted = self._session_protection()
+</span><span>  File &quot;/usr/local/container-station/python/lib/python2.7/site-packages/flask_login.py&quot;, line 373, in _session_protection
+</span><span>    if &#39;_id&#39; not in sess:
+</span><span>  File &quot;/usr/local/container-station/python/lib/python2.7/_abcoll.py&quot;, line 348, in __contains__
+</span><span>    self[key]
+</span><span>  File &quot;/home/ubuntu/src/build/amd64/container-station/target/ctstation/common/session.py&quot;, line 35, in __getitem__
+</span><span>  File &quot;/home/ubuntu/src/build/amd64/container-station/target/ctstation/common/session.py&quot;, line 68, in _get_conn
+</span><span>OperationalError: unable to open database file
+</span></code></pre>
+<p>既然是数据库文件打不开，就尝试删除数据库文件。首先停止container station，然后重命名<code>ctstation.sqlite</code>为<code>ctstation.sqlite.bak</code>，让系统生成新的文件。重新启用container station。结果还是不工作。</p>
+<p>继续查找原因， 根据日志里的路径去查看<code>python</code>代码，发现有些是pyc文件，反编译pyc文件，查看session相关的代码，没有发现有什么问题，觉得是系统内部状态出了问题。</p>
+<p>最后不得不重置系统设置来解决问题。
+步骤：</p>
+<ul>
+<li>在控制台 -&gt; 备份/恢复，备份系统设置</li>
+<li>在控制台 -&gt; 备份/恢复 -&gt; 恢复出厂默认设置， 选择重置设置，然后等待系统重启</li>
+<li>重启登录后，在控制台 -&gt; 备份/恢复，浏览之前备份的系统设置文件，点击恢复，等待系统恢复设置和安装App</li>
+</ul>
+<p>这次<code>container station</code>终于正常工作了。</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/nas/">#nas</a>
+            
+            <a href="https://blog.dotone.top/tags/qnap/">#qnap</a>
+            
+            <a href="https://blog.dotone.top/tags/container/">#container</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

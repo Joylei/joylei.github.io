@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - mingw</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/mingw/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2021-01-22T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/mingw/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>Build EJDB2 on Windows</title>
+        <published>2021-01-22T00:00:00+00:00</published>
+        <updated>2021-01-22T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/build-ejdb2-on-windows/"/>
+        <id>https://blog.dotone.top/blog/it/build-ejdb2-on-windows/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/build-ejdb2-on-windows/">&lt;p&gt;最近在给&lt;a href=&quot;http:&#x2F;&#x2F;ejdb.org&quot;&gt;EJDB2&lt;&#x2F;a&gt;写&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Joylei&#x2F;ejdb2-rs&quot;&gt;&lt;code&gt;rust&lt;&#x2F;code&gt;的绑定&lt;&#x2F;a&gt;。本文记录怎么在 Windows 下编译及正常运行&lt;code&gt;EJDB2&lt;&#x2F;code&gt;。
+直接到文章末尾看结论。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;an-zhuang-huan-jing&quot;&gt;安装环境&lt;&#x2F;h2&gt;
+&lt;p&gt;参考官方文档安装&lt;code&gt;msys2&lt;&#x2F;code&gt;、&lt;code&gt;mingw64&lt;&#x2F;code&gt;。
+安装开发工具链：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;pacman -S --needed base-devel git vim \
+&lt;&#x2F;span&gt;&lt;span&gt;      mingw-w64-x86_64-toolchain \
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;bian-yi&quot;&gt;编译&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cmake&lt;&#x2F;span&gt;&lt;span&gt; ..&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DCMAKE_C_COMPILER&lt;&#x2F;span&gt;&lt;span&gt;=gcc&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DCMAKE_BUILD_TYPE&lt;&#x2F;span&gt;&lt;span&gt;=Release&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DCMAKE_INSTALL_PREFIX&lt;&#x2F;span&gt;&lt;span&gt;=.&#x2F;output&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DBUILD_SHARED_LIBS&lt;&#x2F;span&gt;&lt;span&gt;=OFF&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DENABLE_HTTP&lt;&#x2F;span&gt;&lt;span&gt;=OFF
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;make
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;make&lt;&#x2F;span&gt;&lt;span&gt; install
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;直接编译不通过。&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;mmap&lt;&#x2F;code&gt;的问题
+&lt;code&gt;iowow&lt;&#x2F;code&gt;项目中本身有&lt;code&gt;mman&lt;&#x2F;code&gt;相关代码&lt;code&gt;platform\win32\mman&lt;&#x2F;code&gt;，并且配置了一个&lt;code&gt;CMakeLists.txt&lt;&#x2F;code&gt;来导入&lt;code&gt;mman&#x2F;mman.c&lt;&#x2F;code&gt;源代码，但是这个&lt;code&gt;CMakeLists.txt&lt;&#x2F;code&gt;没有生效，导致不能编译。
+在&lt;code&gt;platform\win32\win32.c&lt;&#x2F;code&gt;中添加&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#include &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;mman&#x2F;mman.c&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;ul&gt;
+&lt;li&gt;找不到&lt;code&gt;localtime_r&lt;&#x2F;code&gt;
+将&lt;code&gt;log\iwlog.c&lt;&#x2F;code&gt;文件中的&lt;code&gt;localtime_r(&amp;amp;ts_sec, &amp;amp;timeinfo)&lt;&#x2F;code&gt;修改为&lt;code&gt;localtime_s(&amp;amp;timeinfo,&amp;amp;ts_sec)&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#ifndef&lt;&#x2F;span&gt;&lt;span&gt; _WIN32
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;localtime_r&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;ts_sec, &amp;amp;timeinfo);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#else
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;localtime_s&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;timeinfo, &amp;amp;ts_sec);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#endif
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;注意：&lt;code&gt;localtime_s&lt;&#x2F;code&gt;和&lt;code&gt;localtime_r&lt;&#x2F;code&gt;的参数的顺序是相反的。&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;strndup&lt;&#x2F;code&gt;的问题
+链接时加上&lt;code&gt;iberty&lt;&#x2F;code&gt;依赖，不需要改代码。如果不想加上&lt;code&gt;iberty&lt;&#x2F;code&gt;依赖，自己定义一个&lt;code&gt;strndup&lt;&#x2F;code&gt;:&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;char &lt;&#x2F;span&gt;&lt;span&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;strndup&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const char &lt;&#x2F;span&gt;&lt;span&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;src&lt;&#x2F;span&gt;&lt;span&gt;, size_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;char &lt;&#x2F;span&gt;&lt;span&gt;*dst = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;NULL&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(src)
+&lt;&#x2F;span&gt;&lt;span&gt;  {
+&lt;&#x2F;span&gt;&lt;span&gt;    size_t src_len = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;strlen&lt;&#x2F;span&gt;&lt;span&gt;(src);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; count = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span&gt;(src_len, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span&gt;(len, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;));
+&lt;&#x2F;span&gt;&lt;span&gt;    dst = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;malloc&lt;&#x2F;span&gt;&lt;span&gt;(count + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(dst)
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;strncpy&lt;&#x2F;span&gt;&lt;span&gt;(dst, src, count);
+&lt;&#x2F;span&gt;&lt;span&gt;      dst[count] = &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\0&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; dst;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;做完以上修改，应该可以编译通过了。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;xiu-fu-yun-xing-bao-cuo&quot;&gt;修复运行报错&lt;&#x2F;h2&gt;
+&lt;p&gt;运行编译好的可执行程序，运行报错：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;ERROR iwkv.c:3590 70007|22|0|Threading error with errno status set. (IW_ERROR_THREADING_ERRNO)|Invalid argument
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;example&lt;&#x2F;code&gt;代码一样报错。&lt;&#x2F;p&gt;
+&lt;p&gt;虽然可以知道是哪个文件报错，但是 rc 返回值可能来自很多地方，看代码不能直接定位到具体出错的地方。&lt;code&gt;70007&lt;&#x2F;code&gt;在代码中代表&lt;code&gt;pthread&lt;&#x2F;code&gt;相关错误，所以应该是&lt;code&gt;pthread&lt;&#x2F;code&gt;某个函数调用出错了。&lt;&#x2F;p&gt;
+&lt;p&gt;搜索之后发现这个错误&lt;code&gt;Invalid argument&lt;&#x2F;code&gt;是函数验证参数时抛出的错误。
+于是想用&lt;code&gt;_set_invalid_parameter_handler&lt;&#x2F;code&gt;来&lt;code&gt;hook&lt;&#x2F;code&gt;出错的位置。代码如下：&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rs&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rs &quot;&gt;&lt;code class=&quot;language-rs&quot; data-lang=&quot;rs&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;libc::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;c_void&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;type &lt;&#x2F;span&gt;&lt;span&gt;FPHandler = Option&amp;lt;
+&lt;&#x2F;span&gt;&lt;span&gt;    unsafe &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;extern &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;C&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;        expr: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;*const u16&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        func: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;*const u16&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        file: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;*const u16&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        line: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        pReserved: c_void,
+&lt;&#x2F;span&gt;&lt;span&gt;    ),
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;extern &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;system&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;_set_invalid_parameter_handler&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;fp&lt;&#x2F;span&gt;&lt;span&gt;: FPHandler);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsafe fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;u16_ptr_to_string&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ptr&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;*const u16&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; OsString {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;std::os::windows::ffi::OsStringExt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; len = (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;..).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;take_while&lt;&#x2F;span&gt;&lt;span&gt;(|&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;i&lt;&#x2F;span&gt;&lt;span&gt;| *ptr.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;offset&lt;&#x2F;span&gt;&lt;span&gt;(i) != &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;count&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; slice = std::slice::from_raw_parts(ptr, len);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    OsString::from_wide(slice)
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsafe extern &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;C&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;my_handler&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;expr&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;*const u16&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;func&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;*const u16&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;file&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;*const u16&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;line&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pReserved&lt;&#x2F;span&gt;&lt;span&gt;: c_void,
+&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;std::ffi::{OsStr, OsString};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; expr = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;u16_ptr_to_string&lt;&#x2F;span&gt;&lt;span&gt;(expr);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; func = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;u16_ptr_to_string&lt;&#x2F;span&gt;&lt;span&gt;(func);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; file = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;u16_ptr_to_string&lt;&#x2F;span&gt;&lt;span&gt;(file);
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;expr: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, expr.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;to_str&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;unwrap_or_default&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;func: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, func.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;to_str&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;unwrap_or_default&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;file: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, file.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;to_str&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;unwrap_or_default&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;line: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, line);
+&lt;&#x2F;span&gt;&lt;span&gt;    panic!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;invalid parameter&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;hook
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsafe &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;_set_invalid_parameter_handler&lt;&#x2F;span&gt;&lt;span&gt;(Some(my_handler));
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;但是没有起作用。&lt;&#x2F;p&gt;
+&lt;p&gt;试了&lt;code&gt;GDB&lt;&#x2F;code&gt; 调试，不太会用，放弃了。&lt;&#x2F;p&gt;
+&lt;p&gt;接下来使用&lt;code&gt;IDA&lt;&#x2F;code&gt;单步调试，跟踪到具体函数为&lt;code&gt;rci = pthread_condattr_setclock(&amp;amp;cattr, CLOCK_MONOTONIC)&lt;&#x2F;code&gt;。
+查看&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;msys2-contrib&#x2F;mingw-w64&#x2F;blob&#x2F;78dca70d9c2c355f0aaea3292e0d68c57ad7a5c5&#x2F;mingw-w64-libraries&#x2F;winpthreads&#x2F;src&#x2F;cond.c&quot;&gt;pthread_condattr_setclock 的实现&lt;&#x2F;a&gt;，发现第二个参数&lt;code&gt;clock_id&lt;&#x2F;code&gt;只接受&lt;code&gt;0&lt;&#x2F;code&gt;，而在&lt;code&gt;iowow&lt;&#x2F;code&gt;代码中有定义&lt;code&gt;#define CLOCK_MONOTONIC 1&lt;&#x2F;code&gt;。最简单的做法，在这里条件判断一下传入&lt;code&gt;0&lt;&#x2F;code&gt;。但是根本原因是&lt;code&gt;CMakeLists.txt&lt;&#x2F;code&gt;判断&lt;code&gt;HAVE_CLOCK_MONOTONIC&lt;&#x2F;code&gt;出问题了，判断的相关代码：&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;cmake&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-cmake &quot;&gt;&lt;code class=&quot;language-cmake&quot; data-lang=&quot;cmake&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;check_symbol_exists&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;CLOCK_MONOTONIC &lt;&#x2F;span&gt;&lt;span&gt;time.h &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;HAVE_CLOCK_MONOTONIC&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(HAVE_CLOCK_MONOTONIC)
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;add_definitions&lt;&#x2F;span&gt;&lt;span&gt;(-DIW_HAVE_CLOCK_MONOTONIC)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;endif&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;time.h&lt;&#x2F;code&gt;里面确实没有&lt;code&gt;CLOCK_MONOTONIC&lt;&#x2F;code&gt;，不明白哪里有问题。改成下面的代码：&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;cmake&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-cmake &quot;&gt;&lt;code class=&quot;language-cmake&quot; data-lang=&quot;cmake&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;check_symbol_exists&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;CLOCK_MONOTONIC &lt;&#x2F;span&gt;&lt;span&gt;time.h &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;HAVE_CLOCK_MONOTONIC&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(HAVE_CLOCK_MONOTONIC and WIN32)
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;add_definitions&lt;&#x2F;span&gt;&lt;span&gt;(-DIW_HAVE_CLOCK_MONOTONIC)
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;message&lt;&#x2F;span&gt;&lt;span&gt;(INFO &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;HAVE_CLOCK_MONOTONIC=1&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;endif&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;yi-shang-bai-zuo-liao&quot;&gt;以上白做了&lt;&#x2F;h2&gt;
+&lt;p&gt;最后发现以上白做了，只需要安装&lt;code&gt;mingw-w64-x86_64-cmake&lt;&#x2F;code&gt;：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;pacman -S --needed base-devel git vim \
+&lt;&#x2F;span&gt;&lt;span&gt;      mingw-w64-x86_64-toolchain \
+&lt;&#x2F;span&gt;&lt;span&gt;      mingw-w64-x86_64-cmake
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;然后在&lt;code&gt;mingw64&lt;&#x2F;code&gt;的 shell 执行：&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cmake&lt;&#x2F;span&gt;&lt;span&gt; ..&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -G &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;MSYS Makefiles&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DCMAKE_C_COMPILER&lt;&#x2F;span&gt;&lt;span&gt;=gcc&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DCMAKE_BUILD_TYPE&lt;&#x2F;span&gt;&lt;span&gt;=Release&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DCMAKE_INSTALL_PREFIX&lt;&#x2F;span&gt;&lt;span&gt;=.&#x2F;output&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DBUILD_SHARED_LIBS&lt;&#x2F;span&gt;&lt;span&gt;=OFF&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DENABLE_HTTP&lt;&#x2F;span&gt;&lt;span&gt;=OFF
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;make
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;make&lt;&#x2F;span&gt;&lt;span&gt; install
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;不需要改动任何代码就可以正常编译和运行。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;jing-tai-lian-jie&quot;&gt;静态链接&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cmake&lt;&#x2F;span&gt;&lt;span&gt; ..&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -G &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;MSYS Makefiles&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DCMAKE_C_COMPILER&lt;&#x2F;span&gt;&lt;span&gt;=gcc&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DCMAKE_BUILD_TYPE&lt;&#x2F;span&gt;&lt;span&gt;=Release&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DCMAKE_INSTALL_PREFIX&lt;&#x2F;span&gt;&lt;span&gt;=.&#x2F;output&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DBUILD_SHARED_LIBS&lt;&#x2F;span&gt;&lt;span&gt;=OFF&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DENABLE_HTTP&lt;&#x2F;span&gt;&lt;span&gt;=OFF
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;make
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;make&lt;&#x2F;span&gt;&lt;span&gt; install
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;自己的项目静态链接需要链接以下库文件：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;ejdb2-2
+&lt;&#x2F;span&gt;&lt;span&gt;iowow-1
+&lt;&#x2F;span&gt;&lt;span&gt;iberty
+&lt;&#x2F;span&gt;&lt;span&gt;winpthread
+&lt;&#x2F;span&gt;&lt;span&gt;mingwex
+&lt;&#x2F;span&gt;&lt;span&gt;mingw32
+&lt;&#x2F;span&gt;&lt;span&gt;gcc
+&lt;&#x2F;span&gt;&lt;span&gt;msvcrt
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;dong-tai-lian-jie&quot;&gt;动态链接&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;修改 &lt;code&gt;cmake&#x2F;modules&#x2F;AddIOWOW.cmake&lt;&#x2F;code&gt;， 把&lt;code&gt;-DBUILD_SHARED_LIBS=OFF&lt;&#x2F;code&gt; 改为&lt;code&gt;-DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS}&lt;&#x2F;code&gt;。&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;使用自定义&lt;code&gt;toolchain&lt;&#x2F;code&gt;，用&lt;code&gt;mingw64&lt;&#x2F;code&gt;里的工具导出&lt;code&gt;dll&lt;&#x2F;code&gt;和相关定义文件&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre data-lang=&quot;cmake&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-cmake &quot;&gt;&lt;code class=&quot;language-cmake&quot; data-lang=&quot;cmake&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#my-win64-tc.cmake
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(WIN32)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;add_custom_target&lt;&#x2F;span&gt;&lt;span&gt;(wintools_init)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;macro&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;add_w32_importlib &lt;&#x2F;span&gt;&lt;span&gt;tgt libname wdir)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;add_custom_command&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET &lt;&#x2F;span&gt;&lt;span&gt;${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tgt&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;POST_BUILD
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;COMMAND &lt;&#x2F;span&gt;&lt;span&gt;dlltool.exe -d ${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;libname&lt;&#x2F;span&gt;&lt;span&gt;}.def  -e ${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;libname&lt;&#x2F;span&gt;&lt;span&gt;}.exp -l ${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;libname&lt;&#x2F;span&gt;&lt;span&gt;}.lib -D ${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;libname&lt;&#x2F;span&gt;&lt;span&gt;}.dll
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;WORKING_DIRECTORY &lt;&#x2F;span&gt;&lt;span&gt;${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;wdir&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;    )
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;endmacro&lt;&#x2F;span&gt;&lt;span&gt;(add_w32_importlib)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;endif&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;ul&gt;
+&lt;li&gt;编译&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cmake&lt;&#x2F;span&gt;&lt;span&gt; ..&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -G &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;MSYS Makefiles&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DCMAKE_C_COMPILER&lt;&#x2F;span&gt;&lt;span&gt;=gcc&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DCMAKE_BUILD_TYPE&lt;&#x2F;span&gt;&lt;span&gt;=Release&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DCMAKE_INSTALL_PREFIX&lt;&#x2F;span&gt;&lt;span&gt;=.&#x2F;output&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DBUILD_SHARED_LIBS&lt;&#x2F;span&gt;&lt;span&gt;=ON&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DENABLE_HTTP&lt;&#x2F;span&gt;&lt;span&gt;=OFF&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -DCMAKE_TOOLCHAIN_FILE&lt;&#x2F;span&gt;&lt;span&gt;=my-win64-tc.cmake
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;make
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;make&lt;&#x2F;span&gt;&lt;span&gt; install
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;自己的项目动态链接需要链接以下库文件：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;libejdb2
+&lt;&#x2F;span&gt;&lt;span&gt;libwow
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;zui-hou&quot;&gt;最后&lt;&#x2F;h2&gt;
+&lt;p&gt;ejdb2 rust binding: &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Joylei&#x2F;ejdb2-rs&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;Joylei&#x2F;ejdb2-rs&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;can-kao&quot;&gt;参考&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.cnblogs.com&#x2F;oloroso&#x2F;p&#x2F;12632412.html&quot;&gt;https:&#x2F;&#x2F;www.cnblogs.com&#x2F;oloroso&#x2F;p&#x2F;12632412.html&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Softmotions&#x2F;ejdb&#x2F;blob&#x2F;master&#x2F;WINDOWS.md&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;Softmotions&#x2F;ejdb&#x2F;blob&#x2F;master&#x2F;WINDOWS.md&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

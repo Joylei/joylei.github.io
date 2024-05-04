@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - linux内核文件系统监视</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;linux-file-watch&#x2F;">linux内核文件系统监视</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>2 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-08-24</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>pyinotify是一个基于linux内核的文件系统监视的python模块。</p>
+<p>在ProcessEvent类的子类中定义对文件系统改变的事件的处理，形式为process+事件名称，如定义process_IN_CREATE方法来处理IN_CREATE事件，如果要处理所有的事件，则需要定义process_default方法。</p>
+<p>下面这个程序监视文件或文件夹的创建或删除操作。
+filewatcher.py</p>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#65737e;">#!/usr/bin/env python
+</span><span style="color:#65737e;">#encoding=utf-8
+</span><span style="color:#b48ead;">import </span><span>os
+</span><span style="color:#b48ead;">import </span><span>sys
+</span><span style="color:#b48ead;">from </span><span>pyinotify </span><span style="color:#b48ead;">import </span><span>WatchManager,Notifier,ProcessEvent
+</span><span>
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">EventHandler</span><span style="color:#eff1f5;">(</span><span style="color:#a3be8c;">ProcessEvent</span><span style="color:#eff1f5;">):
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#96b5b4;">__init__</span><span>(</span><span style="color:#bf616a;">self</span><span>,</span><span style="color:#bf616a;">path</span><span>):
+</span><span>        </span><span style="color:#bf616a;">self</span><span>.path = path
+</span><span>        </span><span style="color:#bf616a;">self</span><span>.file = file
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">process_IN_CREATE</span><span>(</span><span style="color:#bf616a;">self</span><span>,</span><span style="color:#bf616a;">event</span><span>):
+</span><span>        path = </span><span style="color:#bf616a;">self</span><span>.path
+</span><span>        </span><span style="color:#b48ead;">if </span><span>event.name:
+</span><span>            </span><span style="color:#bf616a;">self</span><span>.file = &#39;</span><span style="color:#d08770;">%s</span><span>&#39; % os.path.</span><span style="color:#bf616a;">join</span><span>(event.path,event.name)
+</span><span>        </span><span style="color:#b48ead;">else</span><span>:
+</span><span>            </span><span style="color:#bf616a;">self</span><span>.file = &#39;</span><span style="color:#d08770;">%s</span><span>&#39; % event.path
+</span><span>        </span><span style="color:#b48ead;">print </span><span>&#39;</span><span style="color:#d08770;">%s</span><span style="color:#a3be8c;"> created</span><span>&#39; % </span><span style="color:#bf616a;">self</span><span>.file
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">process_IN_DELETE</span><span>(</span><span style="color:#bf616a;">self</span><span>,</span><span style="color:#bf616a;">event</span><span>):
+</span><span>        path = </span><span style="color:#bf616a;">self</span><span>.path
+</span><span>        </span><span style="color:#b48ead;">if </span><span>event.name:
+</span><span>            </span><span style="color:#bf616a;">self</span><span>.file = &#39;</span><span style="color:#d08770;">%s</span><span>&#39; % os.path.</span><span style="color:#bf616a;">join</span><span>(event.path,event.name)
+</span><span>        </span><span style="color:#b48ead;">else</span><span>:
+</span><span>            </span><span style="color:#bf616a;">self</span><span>.file = &#39;</span><span style="color:#d08770;">%s</span><span>&#39; % event.path
+</span><span>        </span><span style="color:#b48ead;">print </span><span>&#39;</span><span style="color:#d08770;">%s</span><span style="color:#a3be8c;"> deleted</span><span>&#39; % </span><span style="color:#bf616a;">self</span><span>.file
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">monitor</span><span>(</span><span style="color:#bf616a;">path</span><span>=&#39;</span><span style="color:#a3be8c;">/home/daysky/</span><span>&#39;):
+</span><span>    handler = </span><span style="color:#bf616a;">EventHandler</span><span>(path)
+</span><span>    </span><span style="color:#b48ead;">from </span><span>pyinotify </span><span style="color:#b48ead;">import </span><span style="color:#bf616a;">IN_CREATE</span><span>,</span><span style="color:#bf616a;">IN_DELETE
+</span><span>    mask = </span><span style="color:#bf616a;">IN_CREATE </span><span>| </span><span style="color:#bf616a;">IN_DELETE
+</span><span>    wm = </span><span style="color:#bf616a;">WatchManager</span><span>()
+</span><span>    notifier = </span><span style="color:#bf616a;">Notifier</span><span>(wm,handler)
+</span><span>    wm.</span><span style="color:#bf616a;">add_watch</span><span>(path,mask)
+</span><span>    </span><span style="color:#b48ead;">print </span><span>&#39;</span><span style="color:#a3be8c;">monitor starting...</span><span>&#39;
+</span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">True</span><span>:
+</span><span>        </span><span style="color:#b48ead;">try</span><span>:
+</span><span>            notifier.</span><span style="color:#bf616a;">process_events</span><span>()
+</span><span>            </span><span style="color:#b48ead;">if </span><span>notifier.</span><span style="color:#bf616a;">check_events</span><span>():              
+</span><span>                notifier.</span><span style="color:#bf616a;">read_events</span><span>()
+</span><span>        </span><span style="color:#b48ead;">except </span><span>KeyboardInterrupt:
+</span><span>            notifier.</span><span style="color:#bf616a;">stop</span><span>()
+</span><span>            </span><span style="color:#b48ead;">print </span><span>&#39;</span><span style="color:#a3be8c;">monitor stopped.</span><span>&#39;
+</span><span>            </span><span style="color:#b48ead;">break
+</span><span>
+</span><span style="color:#b48ead;">if </span><span>__name__ == &#39;</span><span style="color:#a3be8c;">__main__</span><span>&#39;:
+</span><span>    </span><span style="color:#bf616a;">monitor</span><span>()
+</span></code></pre>
+<p>启动监视器<code>python filewatcher.py</code></p>
+<p>在命令行中执行以下操作：</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mkdir test
+</span><span>rmdir test
+</span><span>touch test.txt
+</span><span>rm test.txt
+</span></code></pre>
+<p>可以看到执行结果如下：</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>monitor starting...
+</span><span>/home/daysky/test created
+</span><span>/home/daysky/test deleted
+</span><span>/home/daysky/test.txt created
+</span><span>/home/daysky/test.txt deleted
+</span></code></pre>
+<p>参考：http://pyinotify.sourceforge.net/</p>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/linux/">#linux</a>
+            
+            <a href="https://blog.dotone.top/tags/python/">#python</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

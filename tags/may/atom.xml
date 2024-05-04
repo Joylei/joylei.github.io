@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - may</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/may/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-09-06T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/may/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>May -  rust stackful coroutine</title>
+        <published>2020-09-06T00:00:00+00:00</published>
+        <updated>2020-09-06T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/may-coroutine/"/>
+        <id>https://blog.dotone.top/blog/it/may-coroutine/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/may-coroutine/">&lt;p&gt;最近在项目中尝试了&lt;code&gt;rust&lt;&#x2F;code&gt;下的协程库&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Xudong-Huang&#x2F;may&quot;&gt;&lt;code&gt;May&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;。如果你对写&lt;code&gt;async\await&lt;&#x2F;code&gt;感到厌倦，可以试试&lt;code&gt;May&lt;&#x2F;code&gt;,换换脑子。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;jie-shao&quot;&gt;介绍&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Xudong-Huang&#x2F;may&quot;&gt;&lt;code&gt;May&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;是一个用&lt;code&gt;pure rust&lt;&#x2F;code&gt;写的基于栈的协程库。官方的介绍如下：&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;May is a high-performant library for programming stackful coroutines with which you can easily develop and maintain massive concurrent programs. It can be thought as the Rust version of the popular Goroutine.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;常见的协程库，在&lt;code&gt;python&lt;&#x2F;code&gt;下有&lt;code&gt;gevent&lt;&#x2F;code&gt;, &lt;code&gt;c\c++&lt;&#x2F;code&gt;有&lt;code&gt;libuv&lt;&#x2F;code&gt;。在&lt;code&gt;rust&lt;&#x2F;code&gt;下也有其它基于&lt;code&gt;ffi&lt;&#x2F;code&gt;封装的&lt;code&gt;libuv&lt;&#x2F;code&gt;等库。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;he-futurejian-dan-dui-bi&quot;&gt;和&lt;code&gt;Future&lt;&#x2F;code&gt;简单对比&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;May&lt;&#x2F;code&gt;和&lt;code&gt;rust&lt;&#x2F;code&gt;的&lt;code&gt;Future&lt;&#x2F;code&gt;有哪些相同和不同的地方？&lt;&#x2F;p&gt;
+&lt;p&gt;相同的地方：&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;都是基于&lt;code&gt;generator&lt;&#x2F;code&gt;实现的，也就是说都是&lt;code&gt;stackful&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;捕获的变量都需要&lt;code&gt;move&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;都需要&lt;code&gt;runtime&lt;&#x2F;code&gt;去执行&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;不同的地方：&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Future&lt;&#x2F;code&gt;需要&lt;code&gt;pin reference&lt;&#x2F;code&gt;, &lt;code&gt;May&lt;&#x2F;code&gt;不需要(可能也需要？)&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Future&lt;&#x2F;code&gt;使用&lt;code&gt;async\await&lt;&#x2F;code&gt;关键字，&lt;code&gt;May&lt;&#x2F;code&gt;不需要&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;shi-li&quot;&gt;示例&lt;&#x2F;h2&gt;
+&lt;p&gt;下面的示例简单展示了&lt;code&gt;task&lt;&#x2F;code&gt;的&lt;code&gt;spawn&lt;&#x2F;code&gt;和&lt;code&gt;cancel&lt;&#x2F;code&gt;。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;macro_use&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;extern crate&lt;&#x2F;span&gt;&lt;span&gt; may;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;may::coroutine as co;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;std::time::{Duration, Instant};
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; t = go!(|| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;main_task&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;    t.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;join&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main_task&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let mut&lt;&#x2F;span&gt;&lt;span&gt; tasks = vec![];
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt; i in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;..&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; task = go!(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;move &lt;&#x2F;span&gt;&lt;span&gt;|| { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;child_task&lt;&#x2F;span&gt;&lt;span&gt;(i) });
+&lt;&#x2F;span&gt;&lt;span&gt;        tasks.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;push&lt;&#x2F;span&gt;&lt;span&gt;(task);
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    co::sleep(Duration::from_secs(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;));
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;(i, t) in (&amp;amp;tasks[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;..&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;]).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;iter&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;enumerate&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsafe &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            t.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;coroutine&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;cancel&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;            println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;child &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;: cancelled&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, i);
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt; t in tasks {
+&lt;&#x2F;span&gt;&lt;span&gt;        t.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;join&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;all done!&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;child_task&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;index&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;usize&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; now = Instant::now();
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;loop &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt; now.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;elapsed&lt;&#x2F;span&gt;&lt;span&gt;() &amp;gt; Duration::from_secs(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;20&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;            println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;child &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;: done&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, index);
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;        println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;child &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;: running&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, index);
+&lt;&#x2F;span&gt;&lt;span&gt;        co::sleep(Duration::from_millis(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;500&lt;&#x2F;span&gt;&lt;span&gt;));
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;cancel-de-wen-ti&quot;&gt;Cancel 的问题&lt;&#x2F;h2&gt;
+&lt;p&gt;使用&lt;code&gt;cancel&lt;&#x2F;code&gt;后发现程序在&lt;code&gt;release&lt;&#x2F;code&gt;模式下莫名的崩溃。
+调试及查看源代码，发现是由于&lt;code&gt;May&lt;&#x2F;code&gt;的&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Xudong-Huang&#x2F;may&#x2F;blob&#x2F;master&#x2F;src&#x2F;cancel.rs&quot;&gt;cancel&lt;&#x2F;a&gt;机制使用&lt;code&gt;rust&lt;&#x2F;code&gt;的&lt;code&gt;panic&lt;&#x2F;code&gt;机制。所以无法在编译时优化使用自定义的&lt;code&gt;panic&lt;&#x2F;code&gt;处理机制。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span&gt;[profile.release]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;panic &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;abort&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;如果使用这个配置，&lt;code&gt;cancel()&lt;&#x2F;code&gt;时应用程序会崩溃退出。&lt;&#x2F;p&gt;
+&lt;p&gt;进一步阅读&lt;code&gt;may&lt;&#x2F;code&gt;的代码发现，&lt;code&gt;may&lt;&#x2F;code&gt;不会主动&lt;code&gt;panic&lt;&#x2F;code&gt;，&lt;code&gt;panic&lt;&#x2F;code&gt;是由于其它代码&lt;code&gt;panic&lt;&#x2F;code&gt;被它捕捉到了。可能是哪里&lt;code&gt;unwrap&lt;&#x2F;code&gt;之类的调用抛出的。&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - atom</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/atom/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2016-03-31T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/atom/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>got atom-shell 404 issue when updating atom</title>
+        <published>2016-03-31T00:00:00+00:00</published>
+        <updated>2016-03-31T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/got-atom-shell-404-issue-when-updating-atom/"/>
+        <id>https://blog.dotone.top/blog/it/got-atom-shell-404-issue-when-updating-atom/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/got-atom-shell-404-issue-when-updating-atom/">&lt;p&gt;Recent days I tried several times to update Atom packages from both Atom and apm update command, but failed finally.&lt;&#x2F;p&gt;
+&lt;p&gt;So I decided to look what happened by running command:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;apm&lt;&#x2F;span&gt;&lt;span&gt; update&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --verbose
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;It seems it failed to download atom-shell.&lt;&#x2F;p&gt;
+&lt;p&gt;Googled with &#x27;atom-shell 404&#x27; and found this link https:&#x2F;&#x2F;github.com&#x2F;atom&#x2F;atom&#x2F;issues&#x2F;11080.&lt;&#x2F;p&gt;
+&lt;p&gt;The solution mentioned did the trick.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

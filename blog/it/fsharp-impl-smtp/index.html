@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - F#实现简单的SMTP服务器</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;fsharp-impl-smtp&#x2F;">F#实现简单的SMTP服务器</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>10 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-07-12</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>服务端代码</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#65737e;">///SmtpLib.fs
+</span><span style="color:#b48ead;">namespace </span><span style="color:#8fa1b3;">SmtpLib
+</span><span>    </span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System
+</span><span>    </span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System.Net
+</span><span>    </span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System.Net.Sockets
+</span><span>    </span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System.Text.RegularExpressions
+</span><span>    </span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System.IO
+</span><span>    </span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System.Threading
+</span><span> 
+</span><span>    </span><span style="color:#b48ead;">type </span><span>BufferManager </span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">count</span><span style="color:#b48ead;">:</span><span>int</span><span style="color:#b48ead;">) =
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">bufferStore</span><span style="color:#b48ead;">:</span><span>byte</span><span style="color:#b48ead;">[] =</span><span> Array.create </span><span style="color:#b48ead;">(</span><span>BufferManager.BufferSize</span><span style="color:#b48ead;">*</span><span>count</span><span style="color:#b48ead;">) (</span><span>byte </span><span style="color:#d08770;">0</span><span style="color:#b48ead;">)
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">used </span><span style="color:#b48ead;">= new</span><span> System.Collections.Generic.Queue</span><span style="color:#d08770;">()
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">storeOffset </span><span style="color:#b48ead;">=</span><span> ref </span><span style="color:#d08770;">0
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">locker </span><span style="color:#b48ead;">= new</span><span> obj</span><span style="color:#d08770;">()
+</span><span>        </span><span style="color:#b48ead;">static member </span><span style="color:#bf616a;">BufferSize </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">2048
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.SetBuffer </span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">e</span><span style="color:#b48ead;">:</span><span>SocketAsyncEventArgs</span><span style="color:#b48ead;">) = 
+</span><span>            lock </span><span style="color:#b48ead;">(</span><span>locker</span><span style="color:#b48ead;">) (fun</span><span style="color:#bf616a;"> _</span><span style="color:#b48ead;">-&gt;
+</span><span>                </span><span style="color:#b48ead;">match</span><span> storeOffset.Value </span><span style="color:#b48ead;">with
+</span><span>                </span><span style="color:#b48ead;">|</span><span> value </span><span style="color:#b48ead;">when</span><span> value </span><span style="color:#b48ead;">&lt;</span><span> Array.length</span><span style="color:#b48ead;">(</span><span>bufferStore</span><span style="color:#b48ead;">)-</span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">-&gt; 
+</span><span>                    e.SetBuffer</span><span style="color:#b48ead;">(</span><span>bufferStore</span><span style="color:#b48ead;">,</span><span>value</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">)
+</span><span>                    storeOffset </span><span style="color:#b48ead;">:=</span><span> storeOffset.Value </span><span style="color:#b48ead;">+</span><span> BufferManager.BufferSize
+</span><span>                </span><span style="color:#b48ead;">| _ -&gt;</span><span> failwith &quot;</span><span style="color:#a3be8c;">overflow</span><span>&quot;
+</span><span>            </span><span style="color:#b48ead;">)
+</span><span>            
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.Push </span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">e</span><span style="color:#b48ead;">:</span><span>SocketAsyncEventArgs</span><span style="color:#b48ead;">) =
+</span><span>            lock </span><span style="color:#b48ead;">(</span><span>locker</span><span style="color:#b48ead;">) (fun</span><span style="color:#bf616a;"> _</span><span style="color:#b48ead;">-&gt;</span><span>used.Enqueue e</span><span style="color:#b48ead;">)|&gt;</span><span>ignore
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.Pop</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=
+</span><span>            lock </span><span style="color:#b48ead;">(</span><span>locker</span><span style="color:#b48ead;">) (fun</span><span style="color:#bf616a;"> _</span><span style="color:#b48ead;">-&gt;</span><span> used.Dequeue</span><span style="color:#b48ead;">())
+</span><span> 
+</span><span>    </span><span style="color:#b48ead;">type </span><span>SmtpCommand </span><span style="color:#b48ead;">= |</span><span>Wel</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">0 </span><span style="color:#b48ead;">|</span><span> Helo</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">|</span><span> Auth</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">2 </span><span style="color:#b48ead;">|</span><span> Login1</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">3</span><span style="color:#b48ead;">|</span><span> Login2</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">4 </span><span style="color:#b48ead;">|</span><span> Mail</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">5 </span><span style="color:#b48ead;">|</span><span> Rcpt</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">6 </span><span style="color:#b48ead;">|</span><span> Data</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">7 </span><span style="color:#b48ead;">|</span><span> Quit</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">8
+</span><span> 
+</span><span>    </span><span style="color:#b48ead;">type </span><span>SmtpUserToken</span><span style="color:#d08770;">()</span><span style="color:#b48ead;">=
+</span><span>        </span><span style="color:#b48ead;">let mutable </span><span style="color:#bf616a;">cmd </span><span style="color:#b48ead;">=</span><span> SmtpCommand.Wel
+</span><span>        </span><span style="color:#b48ead;">let mutable </span><span style="color:#bf616a;">buffer </span><span style="color:#b48ead;">:</span><span>ArraySegment option</span><span style="color:#b48ead;">=</span><span> None
+</span><span>        </span><span style="color:#b48ead;">let mutable </span><span style="color:#bf616a;">fromAddress</span><span style="color:#b48ead;">:</span><span>System.Net.Mail.MailAddress </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">null
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">toAddresses </span><span style="color:#b48ead;">= new</span><span> System.Net.Mail.MailAddressCollection</span><span style="color:#d08770;">()
+</span><span>        </span><span style="color:#b48ead;">let mutable </span><span style="color:#bf616a;">user </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">null
+</span><span>        </span><span style="color:#b48ead;">let mutable </span><span style="color:#bf616a;">pass </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">null
+</span><span>        </span><span style="color:#b48ead;">let mutable </span><span style="color:#bf616a;">domain </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">null
+</span><span>        </span><span style="color:#b48ead;">let mutable </span><span style="color:#bf616a;">isAuthed </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">false
+</span><span> 
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.LastCommand </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> cmd
+</span><span>                             </span><span style="color:#b48ead;">and</span><span> set value </span><span style="color:#b48ead;">=</span><span> cmd </span><span style="color:#b48ead;">&lt;-</span><span> value
+</span><span> 
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.Buffer </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> buffer
+</span><span>                        </span><span style="color:#b48ead;">and</span><span> set value </span><span style="color:#b48ead;">=</span><span> buffer </span><span style="color:#b48ead;">&lt;-</span><span> value
+</span><span> 
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.FromAddress </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> fromAddress
+</span><span>                             </span><span style="color:#b48ead;">and</span><span> set value </span><span style="color:#b48ead;">=</span><span> fromAddress </span><span style="color:#b48ead;">&lt;-</span><span> value
+</span><span> 
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.ToAddresses </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> toAddresses
+</span><span> 
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.UserName </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> user
+</span><span>                          </span><span style="color:#b48ead;">and</span><span> set value </span><span style="color:#b48ead;">=</span><span> user </span><span style="color:#b48ead;">&lt;-</span><span> value
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.Password </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> pass
+</span><span>                          </span><span style="color:#b48ead;">and</span><span> set value </span><span style="color:#b48ead;">=</span><span> pass </span><span style="color:#b48ead;">&lt;-</span><span> value
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.Domain </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> domain
+</span><span>                        </span><span style="color:#b48ead;">and</span><span> set value </span><span style="color:#b48ead;">=</span><span> domain </span><span style="color:#b48ead;">&lt;-</span><span> value
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.IsAuthenticated </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> isAuthed
+</span><span>                                 </span><span style="color:#b48ead;">and</span><span> set value </span><span style="color:#b48ead;">=</span><span> isAuthed </span><span style="color:#b48ead;">&lt;-</span><span> value
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.Rset</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=
+</span><span>            cmd </span><span style="color:#b48ead;">&lt;-</span><span> SmtpCommand.Auth
+</span><span>            buffer </span><span style="color:#b48ead;">&lt;-</span><span> None
+</span><span>            fromAddress </span><span style="color:#b48ead;">&lt;- </span><span style="color:#d08770;">null
+</span><span>            toAddresses.Clear</span><span style="color:#d08770;">()
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.Clear</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">= 
+</span><span>            cmd </span><span style="color:#b48ead;">&lt;-</span><span> SmtpCommand.Wel
+</span><span>            buffer </span><span style="color:#b48ead;">&lt;-</span><span> None
+</span><span>            fromAddress </span><span style="color:#b48ead;">&lt;- </span><span style="color:#d08770;">null
+</span><span>            toAddresses.Clear</span><span style="color:#d08770;">()
+</span><span>            user </span><span style="color:#b48ead;">&lt;- </span><span style="color:#d08770;">null
+</span><span>            pass </span><span style="color:#b48ead;">&lt;- </span><span style="color:#d08770;">null
+</span><span>            domain </span><span style="color:#b48ead;">&lt;- </span><span style="color:#d08770;">null
+</span><span>            isAuthed </span><span style="color:#b48ead;">&lt;- </span><span style="color:#d08770;">false
+</span><span> 
+</span><span>    </span><span style="color:#65737e;">///RFC2821
+</span><span>    </span><span style="color:#b48ead;">type </span><span>SmtpServer</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">endPoint</span><span style="color:#b48ead;">:</span><span>IPEndPoint</span><span style="color:#b48ead;">,</span><span style="color:#bf616a;">maxConnections</span><span style="color:#b48ead;">) =
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">_server </span><span style="color:#b48ead;">= new</span><span> Socket</span><span style="color:#b48ead;">(</span><span>endPoint.AddressFamily</span><span style="color:#b48ead;">,</span><span>SocketType.Stream</span><span style="color:#b48ead;">,</span><span>ProtocolType.Tcp</span><span style="color:#b48ead;">)
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">_bufferManager </span><span style="color:#b48ead;">= new</span><span> BufferManager</span><span style="color:#b48ead;">(</span><span>maxConnections</span><span style="color:#b48ead;">)
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">_maxClients </span><span style="color:#b48ead;">= new</span><span> Semaphore</span><span style="color:#b48ead;">(</span><span>maxConnections</span><span style="color:#b48ead;">,</span><span>maxConnections</span><span style="color:#b48ead;">)
+</span><span>        </span><span style="color:#b48ead;">new (</span><span>maxConnection</span><span style="color:#b48ead;">) = 
+</span><span>            </span><span style="color:#b48ead;">new</span><span> SmtpServer</span><span style="color:#b48ead;">(new</span><span> IPEndPoint</span><span style="color:#b48ead;">(</span><span>IPAddress.Loopback</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">25</span><span style="color:#b48ead;">),</span><span>maxConnection</span><span style="color:#b48ead;">)
+</span><span>        </span><span style="color:#b48ead;">new (</span><span>ipAddress</span><span style="color:#b48ead;">:</span><span>IPAddress</span><span style="color:#b48ead;">,</span><span>port</span><span style="color:#b48ead;">:</span><span>int</span><span style="color:#b48ead;">,</span><span>maxConnections</span><span style="color:#b48ead;">) =
+</span><span>            </span><span style="color:#b48ead;">new</span><span> SmtpServer</span><span style="color:#b48ead;">(new</span><span> IPEndPoint</span><span style="color:#b48ead;">(</span><span>ipAddress</span><span style="color:#b48ead;">,</span><span>port</span><span style="color:#b48ead;">),</span><span>maxConnections</span><span style="color:#b48ead;">)
+</span><span> 
+</span><span>        </span><span style="color:#65737e;">///初始化
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.Init</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=
+</span><span>            printfn &quot;</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;"> initializing...</span><span>&quot; </span><span style="color:#b48ead;">&lt;|</span><span>DateTime.Now.ToString</span><span style="color:#d08770;">()
+</span><span>            </span><span style="color:#b48ead;">for</span><span> i </span><span style="color:#b48ead;">in [</span><span style="color:#d08770;">1.</span><span>.maxConnections</span><span style="color:#b48ead;">] do
+</span><span>                </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">e </span><span style="color:#b48ead;">= new</span><span> SocketAsyncEventArgs</span><span style="color:#d08770;">()
+</span><span>                e.UserToken </span><span style="color:#b48ead;">&lt;- (new</span><span> SmtpUserToken</span><span style="color:#b48ead;">()) :&gt;</span><span>obj
+</span><span>                e.Completed.Add r.IO</span><span style="color:#b48ead;">_</span><span>Completed
+</span><span>                </span><span style="color:#b48ead;">_</span><span>bufferManager.SetBuffer e
+</span><span>                </span><span style="color:#b48ead;">_</span><span>bufferManager.Push</span><span style="color:#b48ead;">(</span><span>e</span><span style="color:#b48ead;">)
+</span><span> 
+</span><span>        </span><span style="color:#65737e;">///启动服务
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.RunForever</span><span style="color:#d08770;">()</span><span style="color:#b48ead;">=
+</span><span>            r.Init</span><span style="color:#d08770;">()
+</span><span> 
+</span><span>            </span><span style="color:#b48ead;">_</span><span>server.Bind endPoint
+</span><span>            </span><span style="color:#b48ead;">_</span><span>server.Listen </span><span style="color:#d08770;">1000
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">e </span><span style="color:#b48ead;">= new</span><span> SocketAsyncEventArgs</span><span style="color:#d08770;">()
+</span><span>            e.Completed.Add r.IO</span><span style="color:#b48ead;">_</span><span>Completed
+</span><span>            r.StartAccept e
+</span><span>            printfn &quot;</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;"> running at </span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;">...</span><span>&quot; </span><span style="color:#b48ead;">&lt;|</span><span>DateTime.Now.ToString</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">&lt;|</span><span>endPoint.ToString</span><span style="color:#d08770;">()
+</span><span> 
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.Stop</span><span style="color:#d08770;">()</span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">if _</span><span>server </span><span style="color:#b48ead;">&lt;&gt; </span><span style="color:#d08770;">null </span><span style="color:#b48ead;">then
+</span><span>                </span><span style="color:#b48ead;">_</span><span>server.Close</span><span style="color:#d08770;">()
+</span><span> 
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.StartAccept e </span><span style="color:#b48ead;">=
+</span><span>            e.AcceptSocket </span><span style="color:#b48ead;">&lt;- </span><span style="color:#d08770;">null
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">pending </span><span style="color:#b48ead;">= _</span><span>server.AcceptAsync e
+</span><span>            </span><span style="color:#b48ead;">if</span><span> not pending </span><span style="color:#b48ead;">then
+</span><span>                r.AcceptScoket e
+</span><span> 
+</span><span>        </span><span style="color:#65737e;">///IO完成
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.IO_Completed e </span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">match</span><span> e.LastOperation </span><span style="color:#b48ead;">with
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SocketAsyncOperation.Accept </span><span style="color:#b48ead;">-&gt;</span><span> r.AcceptScoket e
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SocketAsyncOperation.Send </span><span style="color:#b48ead;">-&gt;</span><span> r.AfterSend e
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SocketAsyncOperation.Receive </span><span style="color:#b48ead;">-&gt;</span><span> r.AfterReceive e
+</span><span>            </span><span style="color:#b48ead;">| _ -&gt;</span><span> failwith &quot;</span><span style="color:#a3be8c;">op not send,receive or accept</span><span>&quot;
+</span><span> 
+</span><span>        </span><span style="color:#65737e;">///accept a socket
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.AcceptScoket e </span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">if</span><span> e.SocketError </span><span style="color:#b48ead;">=</span><span> SocketError.Success </span><span style="color:#b48ead;">then
+</span><span>                </span><span style="color:#65737e;">//store local
+</span><span>                </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">client </span><span style="color:#b48ead;">=</span><span> e.AcceptSocket
+</span><span>                </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">arg </span><span style="color:#b48ead;">= _</span><span>bufferManager.Pop</span><span style="color:#d08770;">()
+</span><span>                arg.AcceptSocket </span><span style="color:#b48ead;">&lt;-</span><span> client
+</span><span>                </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">token </span><span style="color:#b48ead;">=</span><span> arg.UserToken </span><span style="color:#b48ead;">:?&gt;</span><span> SmtpUserToken
+</span><span>                printfn &quot;</span><span style="color:#b48ead;">%s %s</span><span style="color:#a3be8c;"> connected</span><span>&quot; </span><span style="color:#b48ead;">&lt;|</span><span>DateTime.Now.ToString</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">&lt;|</span><span>client.RemoteEndPoint.ToString</span><span style="color:#d08770;">()
+</span><span>                
+</span><span>                </span><span style="color:#65737e;">//reject connection 554
+</span><span>                </span><span style="color:#65737e;">//service down 421
+</span><span>                </span><span style="color:#65737e;">//welcome msg
+</span><span>                </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">msg </span><span style="color:#b48ead;">= </span><span>&quot;</span><span style="color:#a3be8c;">220 fsharpsmtp welcome</span><span style="color:#d08770;">\r\n</span><span>&quot;</span><span style="color:#b48ead;">;
+</span><span>                r.StartSend arg msg
+</span><span> 
+</span><span>                </span><span style="color:#b48ead;">_</span><span>maxClients.WaitOne</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">|&gt;</span><span> ignore
+</span><span>                </span><span style="color:#65737e;">//next accept
+</span><span>                r.StartAccept e
+</span><span> 
+</span><span>        </span><span style="color:#65737e;">///after send message
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.AfterSend e </span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">client </span><span style="color:#b48ead;">=</span><span> e.AcceptSocket
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">token </span><span style="color:#b48ead;">=</span><span> e.UserToken </span><span style="color:#b48ead;">:?&gt;</span><span> SmtpUserToken
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">buffer </span><span style="color:#b48ead;">=</span><span> token.Buffer.Value
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">left </span><span style="color:#b48ead;">=</span><span> buffer.Count </span><span style="color:#65737e;">//剩余
+</span><span>            </span><span style="color:#b48ead;">match</span><span> e.SocketError</span><span style="color:#b48ead;">,</span><span>left</span><span style="color:#b48ead;">,</span><span>token.LastCommand </span><span style="color:#b48ead;">with
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SocketError.Success</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">,</span><span>SmtpCommand.Quit </span><span style="color:#b48ead;">-&gt;
+</span><span>                r.CloseSocket e
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SocketError.Success</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">,_ -&gt;
+</span><span>                </span><span style="color:#b48ead;">match</span><span> token.LastCommand </span><span style="color:#b48ead;">with
+</span><span>                </span><span style="color:#b48ead;">|</span><span> SmtpCommand.Quit </span><span style="color:#b48ead;">-&gt;
+</span><span>                    r.CloseSocket e </span><span style="color:#65737e;">//退出
+</span><span>                </span><span style="color:#b48ead;">| _ -&gt;
+</span><span>                    </span><span style="color:#65737e;">//初始数据存放缓冲
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">bytes </span><span style="color:#b48ead;">=</span><span> Array.create BufferManager.BufferSize </span><span style="color:#b48ead;">(</span><span>byte </span><span style="color:#d08770;">0</span><span style="color:#b48ead;">)
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">buffer </span><span style="color:#b48ead;">= new</span><span> ArraySegment</span><span style="color:#b48ead;">(</span><span>bytes</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">)
+</span><span>                    token.Buffer </span><span style="color:#b48ead;">&lt;-</span><span> Some</span><span style="color:#b48ead;">(</span><span>buffer</span><span style="color:#b48ead;">)
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">pending </span><span style="color:#b48ead;">=</span><span> client.ReceiveAsync e
+</span><span>                    </span><span style="color:#b48ead;">if</span><span> not pending </span><span style="color:#b48ead;">then
+</span><span>                        r.AfterReceive e
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SocketError.Success</span><span style="color:#b48ead;">,_,_ -&gt;
+</span><span>                </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">count </span><span style="color:#b48ead;">=</span><span> Array.min </span><span style="color:#b48ead;">[|</span><span>left</span><span style="color:#b48ead;">;</span><span>BufferManager.BufferSize</span><span style="color:#b48ead;">|]</span><span style="color:#65737e;">//要发送数量
+</span><span>                </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">left </span><span style="color:#b48ead;">=</span><span> left </span><span style="color:#b48ead;">-</span><span> count
+</span><span>                </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">seg </span><span style="color:#b48ead;">= new</span><span> ArraySegment</span><span style="color:#b48ead;">(</span><span>buffer.Array</span><span style="color:#b48ead;">,</span><span>buffer.Offset </span><span style="color:#b48ead;">+</span><span> count</span><span style="color:#b48ead;">,</span><span>left</span><span style="color:#b48ead;">)
+</span><span>                token.Buffer </span><span style="color:#b48ead;">&lt;-</span><span> Some</span><span style="color:#b48ead;">(</span><span>seg</span><span style="color:#b48ead;">)
+</span><span>                Buffer.BlockCopy</span><span style="color:#b48ead;">(</span><span>buffer.Array</span><span style="color:#b48ead;">,</span><span>buffer.Offset</span><span style="color:#b48ead;">,</span><span>e.Buffer</span><span style="color:#b48ead;">,</span><span>e.Offset</span><span style="color:#b48ead;">,</span><span>count</span><span style="color:#b48ead;">)
+</span><span>                e.SetBuffer</span><span style="color:#b48ead;">(</span><span>e.Offset</span><span style="color:#b48ead;">,</span><span>count</span><span style="color:#b48ead;">)
+</span><span>                </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">pending </span><span style="color:#b48ead;">=</span><span> client.SendAsync e
+</span><span>                </span><span style="color:#b48ead;">if</span><span> not pending </span><span style="color:#b48ead;">then
+</span><span>                    r.AfterSend e
+</span><span>            </span><span style="color:#b48ead;">| _ -&gt;</span><span> r.CloseSocket e
+</span><span> 
+</span><span>        </span><span style="color:#65737e;">//after receive message
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.AfterReceive e </span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">client </span><span style="color:#b48ead;">=</span><span> e.AcceptSocket
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">token </span><span style="color:#b48ead;">=</span><span> e.UserToken </span><span style="color:#b48ead;">:?&gt;</span><span> SmtpUserToken
+</span><span> 
+</span><span>            </span><span style="color:#b48ead;">match</span><span> e.SocketError</span><span style="color:#b48ead;">,</span><span>e.BytesTransferred </span><span style="color:#b48ead;">with
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SocketError.Success</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">0 </span><span style="color:#b48ead;">-&gt;
+</span><span>                r.CloseSocket e
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SocketError.Success</span><span style="color:#b48ead;">,_ -&gt;
+</span><span>                </span><span style="color:#65737e;">//可能接收到控制字符，强制关闭连接
+</span><span>                </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">index </span><span style="color:#b48ead;">=</span><span> Array.FindIndex</span><span style="color:#b48ead;">(</span><span>e.Buffer</span><span style="color:#b48ead;">,</span><span>e.Offset</span><span style="color:#b48ead;">,</span><span>e.BytesTransferred</span><span style="color:#b48ead;">,(fun</span><span style="color:#bf616a;"> n</span><span style="color:#b48ead;">-&gt;</span><span> n</span><span style="color:#b48ead;">=</span><span>byte </span><span style="color:#d08770;">4</span><span style="color:#b48ead;">))
+</span><span>                </span><span style="color:#b48ead;">match</span><span> index </span><span style="color:#b48ead;">with
+</span><span>                </span><span style="color:#b48ead;">| -</span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">-&gt; 
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">buffer </span><span style="color:#b48ead;">=</span><span> token.Buffer.Value
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">left </span><span style="color:#b48ead;">=</span><span> buffer.Array.Length </span><span style="color:#b48ead;">-</span><span> buffer.Offset </span><span style="color:#b48ead;">- </span><span style="color:#d08770;">1 </span><span style="color:#65737e;">//缓冲剩余
+</span><span>                    </span><span style="color:#b48ead;">if</span><span> e.BytesTransferred </span><span style="color:#b48ead;">&gt;</span><span> left </span><span style="color:#b48ead;">then
+</span><span>                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">maxVal </span><span style="color:#b48ead;">=</span><span> Array.max </span><span style="color:#b48ead;">[|</span><span>e.BytesTransferred</span><span style="color:#b48ead;">;</span><span>buffer.Array.Length</span><span style="color:#b48ead;">|]
+</span><span>                        Array.Resize</span><span style="color:#b48ead;">(</span><span>ref buffer.Array</span><span style="color:#b48ead;">,</span><span>maxVal</span><span style="color:#b48ead;">*</span><span style="color:#d08770;">3</span><span style="color:#b48ead;">)
+</span><span> 
+</span><span>                    Buffer.BlockCopy</span><span style="color:#b48ead;">(</span><span>e.Buffer</span><span style="color:#b48ead;">,</span><span>e.Offset</span><span style="color:#b48ead;">,</span><span>buffer.Array</span><span style="color:#b48ead;">,</span><span>buffer.Offset</span><span style="color:#b48ead;">,</span><span>e.BytesTransferred</span><span style="color:#b48ead;">)
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">buffer </span><span style="color:#b48ead;">= new</span><span> ArraySegment</span><span style="color:#b48ead;">(</span><span>buffer.Array</span><span style="color:#b48ead;">,</span><span>buffer.Offset</span><span style="color:#b48ead;">+</span><span>e.BytesTransferred</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">)
+</span><span>                    token.Buffer </span><span style="color:#b48ead;">&lt;-</span><span> Some</span><span style="color:#b48ead;">(</span><span>buffer</span><span style="color:#b48ead;">)
+</span><span>                    </span><span style="color:#b48ead;">match</span><span> token.LastCommand</span><span style="color:#b48ead;">,</span><span>buffer.Offset</span><span style="color:#b48ead;">&gt;=</span><span style="color:#d08770;">5</span><span style="color:#b48ead;">,</span><span>buffer.Offset</span><span style="color:#b48ead;">&gt;=</span><span style="color:#d08770;">2 </span><span style="color:#b48ead;">with
+</span><span>                    </span><span style="color:#b48ead;">|</span><span> SmtpCommand.Data</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">true</span><span style="color:#b48ead;">,_ -&gt; </span><span style="color:#65737e;">//接收数据
+</span><span>                        </span><span style="color:#65737e;">//TODO:552 Too much mail data
+</span><span>                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">endOfData </span><span style="color:#b48ead;">= [|</span><span>byte </span><span style="color:#d08770;">13</span><span style="color:#b48ead;">;</span><span>byte </span><span style="color:#d08770;">10</span><span style="color:#b48ead;">;</span><span>byte </span><span style="color:#d08770;">46</span><span style="color:#b48ead;">;</span><span>byte </span><span style="color:#d08770;">13</span><span style="color:#b48ead;">;</span><span>byte </span><span style="color:#d08770;">10</span><span style="color:#b48ead;">|]
+</span><span>                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">lastData </span><span style="color:#b48ead;">=</span><span> Array.sub buffer.Array </span><span style="color:#b48ead;">(</span><span>buffer.Offset</span><span style="color:#d08770;">-5</span><span style="color:#b48ead;">) </span><span style="color:#d08770;">5
+</span><span>                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">arr </span><span style="color:#b48ead;">=</span><span> Array.zip endOfData lastData
+</span><span>                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">isEnd </span><span style="color:#b48ead;">=</span><span> Array.exists </span><span style="color:#b48ead;">(fun (</span><span style="color:#bf616a;">x</span><span style="color:#b48ead;">,</span><span style="color:#bf616a;">y</span><span style="color:#b48ead;">)-&gt;</span><span>x</span><span style="color:#b48ead;">=</span><span>y</span><span style="color:#b48ead;">|&gt;</span><span>not</span><span style="color:#b48ead;">)</span><span> arr  </span><span style="color:#b48ead;">|&gt;</span><span>not
+</span><span>                        </span><span style="color:#b48ead;">if</span><span> isEnd </span><span style="color:#b48ead;">then
+</span><span>                            </span><span style="color:#65737e;">//重置命令状态
+</span><span>                            token.Rset</span><span style="color:#d08770;">()
+</span><span>                            </span><span style="color:#65737e;">//接收数据结束,保存到文件
+</span><span>                            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">queueId </span><span style="color:#b48ead;">=</span><span> Guid.NewGuid</span><span style="color:#d08770;">()</span><span style="color:#b48ead;">;
+</span><span>                            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">cwd </span><span style="color:#b48ead;">=</span><span> Directory.GetCurrentDirectory</span><span style="color:#d08770;">()
+</span><span>                            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">fileName </span><span style="color:#b48ead;">=</span><span> sprintf &quot;</span><span style="color:#b48ead;">%s</span><span style="color:#d08770;">\\</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;">.dat</span><span>&quot; cwd </span><span style="color:#b48ead;">&lt;|</span><span>queueId.ToString</span><span style="color:#d08770;">()
+</span><span>                            </span><span style="color:#b48ead;">async {
+</span><span>                                </span><span style="color:#b48ead;">use!</span><span> fs </span><span style="color:#b48ead;">=</span><span> File.AsyncOpen</span><span style="color:#b48ead;">(</span><span>fileName</span><span style="color:#b48ead;">,</span><span>FileMode.Create</span><span style="color:#b48ead;">,</span><span>FileAccess.Write</span><span style="color:#b48ead;">,</span><span>FileShare.Write</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">4096</span><span style="color:#b48ead;">*</span><span style="color:#d08770;">1024</span><span style="color:#b48ead;">,</span><span>FileOptions.Asynchronous</span><span style="color:#b48ead;">)
+</span><span>                                </span><span style="color:#b48ead;">do!</span><span> fs.AsyncWrite</span><span style="color:#b48ead;">(</span><span>buffer.Array</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">,</span><span>buffer.Offset </span><span style="color:#b48ead;">- </span><span style="color:#d08770;">5</span><span style="color:#b48ead;">)
+</span><span>                                printfn &quot;</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;"> data saved to file:</span><span style="color:#b48ead;">%s</span><span>&quot; </span><span style="color:#b48ead;">&lt;|</span><span>DateTime.Now.ToString</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">&lt;|</span><span>fileName
+</span><span>                                </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">msg </span><span style="color:#b48ead;">= </span><span>&quot;</span><span style="color:#a3be8c;">250 Message accepted</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                                r.StartSend e msg
+</span><span>                            </span><span style="color:#b48ead;">}|&gt;</span><span> Async.Start
+</span><span>                            
+</span><span>                        </span><span style="color:#b48ead;">else
+</span><span>                            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">pending </span><span style="color:#b48ead;">=</span><span> client.ReceiveAsync e
+</span><span>                            </span><span style="color:#b48ead;">if</span><span> not pending </span><span style="color:#b48ead;">then
+</span><span>                                r.AfterReceive e
+</span><span>                    </span><span style="color:#b48ead;">|</span><span> SmtpCommand.Data</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">false</span><span style="color:#b48ead;">,_ -&gt;
+</span><span>                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">pending </span><span style="color:#b48ead;">=</span><span> client.ReceiveAsync e
+</span><span>                        </span><span style="color:#b48ead;">if</span><span> not pending </span><span style="color:#b48ead;">then
+</span><span>                            r.AfterReceive e
+</span><span>                    </span><span style="color:#b48ead;">| _,_,</span><span style="color:#d08770;">true </span><span style="color:#b48ead;">-&gt;
+</span><span>                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">endOfData </span><span style="color:#b48ead;">= [|</span><span>byte </span><span style="color:#d08770;">13</span><span style="color:#b48ead;">;</span><span>byte </span><span style="color:#d08770;">10</span><span style="color:#b48ead;">|]
+</span><span>                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">lastData </span><span style="color:#b48ead;">=</span><span> Array.sub buffer.Array </span><span style="color:#b48ead;">(</span><span>buffer.Offset</span><span style="color:#d08770;">-2</span><span style="color:#b48ead;">) </span><span style="color:#d08770;">2
+</span><span>                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">arr </span><span style="color:#b48ead;">=</span><span> Array.zip endOfData lastData
+</span><span>                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">isEnd </span><span style="color:#b48ead;">=</span><span> Array.exists </span><span style="color:#b48ead;">(fun (</span><span style="color:#bf616a;">x</span><span style="color:#b48ead;">,</span><span style="color:#bf616a;">y</span><span style="color:#b48ead;">)-&gt;</span><span>x</span><span style="color:#b48ead;">=</span><span>y</span><span style="color:#b48ead;">|&gt;</span><span>not</span><span style="color:#b48ead;">)</span><span> arr  </span><span style="color:#b48ead;">|&gt;</span><span>not
+</span><span>                        </span><span style="color:#b48ead;">if</span><span> isEnd </span><span style="color:#b48ead;">then
+</span><span>                            </span><span style="color:#65737e;">//接收数据结束
+</span><span>                            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">input </span><span style="color:#b48ead;">=</span><span> System.Text.Encoding.ASCII.GetString</span><span style="color:#b48ead;">(</span><span>buffer.Array</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">,</span><span>buffer.Offset</span><span style="color:#d08770;">-2</span><span style="color:#b48ead;">)
+</span><span>                            </span><span style="color:#65737e;">//auth login命令用户名和密码分开接收
+</span><span>                            </span><span style="color:#b48ead;">match</span><span> token.LastCommand </span><span style="color:#b48ead;">with
+</span><span>                            </span><span style="color:#b48ead;">|</span><span> SmtpCommand.Login1 </span><span style="color:#b48ead;">-&gt;
+</span><span>                                </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">msg </span><span style="color:#b48ead;">= 
+</span><span>                                    </span><span style="color:#b48ead;">try
+</span><span>                                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">bytes </span><span style="color:#b48ead;">=</span><span> Convert.FromBase64String</span><span style="color:#b48ead;">(</span><span>input</span><span style="color:#b48ead;">)
+</span><span>                                        token.UserName </span><span style="color:#b48ead;">&lt;-</span><span> System.Text.Encoding.ASCII.GetString</span><span style="color:#b48ead;">(</span><span>bytes</span><span style="color:#b48ead;">)
+</span><span>                                        token.LastCommand </span><span style="color:#b48ead;">&lt;-</span><span> SmtpCommand.Login2
+</span><span>                                        &quot;</span><span style="color:#a3be8c;">334 UGFzc3dvcmQ6</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                                    </span><span style="color:#b48ead;">with
+</span><span>                                    </span><span style="color:#b48ead;">| _ -&gt; 
+</span><span>                                        &quot;</span><span style="color:#a3be8c;">501 invalid character</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                                r.StartSend e msg
+</span><span>                            </span><span style="color:#b48ead;">|</span><span> SmtpCommand.Login2 </span><span style="color:#b48ead;">-&gt;
+</span><span>                                </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">msg </span><span style="color:#b48ead;">= 
+</span><span>                                    </span><span style="color:#b48ead;">try
+</span><span>                                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">bytes </span><span style="color:#b48ead;">=</span><span> Convert.FromBase64String</span><span style="color:#b48ead;">(</span><span>input</span><span style="color:#b48ead;">)
+</span><span>                                        token.Password </span><span style="color:#b48ead;">&lt;-</span><span> System.Text.Encoding.ASCII.GetString</span><span style="color:#b48ead;">(</span><span>bytes</span><span style="color:#b48ead;">)
+</span><span>                                        </span><span style="color:#b48ead;">if</span><span> r.CheckUser token.UserName token.Password </span><span style="color:#b48ead;">then
+</span><span>                                            token.IsAuthenticated </span><span style="color:#b48ead;">&lt;- </span><span style="color:#d08770;">true
+</span><span>                                            token.LastCommand </span><span style="color:#b48ead;">&lt;-</span><span> SmtpCommand.Auth
+</span><span>                                            &quot;</span><span style="color:#a3be8c;">235 OK Authenticated</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                                        </span><span style="color:#b48ead;">else
+</span><span>                                            &quot;</span><span style="color:#a3be8c;">535 Authenticated Failed</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                                    </span><span style="color:#b48ead;">with
+</span><span>                                    </span><span style="color:#b48ead;">| _ -&gt; 
+</span><span>                                        &quot;</span><span style="color:#a3be8c;">501 invalid character</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                                r.StartSend e msg
+</span><span>                            </span><span style="color:#b48ead;">| _ -&gt;</span><span> r.ParseCmd e </span><span style="color:#b48ead;">(</span><span>input.ToLower</span><span style="color:#b48ead;">())
+</span><span>                        </span><span style="color:#b48ead;">else
+</span><span>                            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">pending </span><span style="color:#b48ead;">=</span><span> client.ReceiveAsync e
+</span><span>                            </span><span style="color:#b48ead;">if</span><span> not pending </span><span style="color:#b48ead;">then
+</span><span>                                r.AfterReceive e
+</span><span> 
+</span><span>                    </span><span style="color:#b48ead;">| _,_,_ -&gt; </span><span style="color:#65737e;">//接收消息
+</span><span>                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">pending </span><span style="color:#b48ead;">=</span><span> client.ReceiveAsync e
+</span><span>                        </span><span style="color:#b48ead;">if</span><span> not pending </span><span style="color:#b48ead;">then
+</span><span>                            r.AfterReceive e
+</span><span>                </span><span style="color:#b48ead;">| _ -&gt;</span><span> r.CloseSocket e
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SocketError.TimedOut</span><span style="color:#b48ead;">,_ -&gt;
+</span><span>                </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">msg </span><span style="color:#b48ead;">= </span><span>&quot;</span><span style="color:#a3be8c;">421 connection timeout,closing transmission channel</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                token.LastCommand </span><span style="color:#b48ead;">&lt;-</span><span> SmtpCommand.Quit
+</span><span>                r.StartSend e msg
+</span><span>            </span><span style="color:#b48ead;">| _,_ -&gt;</span><span> r.CloseSocket e
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.CheckUser user pass </span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#65737e;">//TODO:check user &amp; pass
+</span><span>            </span><span style="color:#d08770;">true
+</span><span> 
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.ParseCmd e input</span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">client </span><span style="color:#b48ead;">=</span><span> e.AcceptSocket
+</span><span>            printfn &quot;</span><span style="color:#b48ead;">%s %s</span><span style="color:#a3be8c;">:</span><span style="color:#b48ead;">%s</span><span>&quot;  </span><span style="color:#b48ead;">&lt;|</span><span>DateTime.Now.ToString</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">&lt;|</span><span> client.RemoteEndPoint.ToString</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">&lt;|</span><span>input
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">token </span><span style="color:#b48ead;">=</span><span> e.UserToken </span><span style="color:#b48ead;">:?&gt;</span><span> SmtpUserToken
+</span><span>            </span><span style="color:#b48ead;">let  </span><span style="color:#bf616a;">msg</span><span style="color:#d08770;">()</span><span style="color:#b48ead;">:</span><span>string </span><span style="color:#b48ead;">=
+</span><span>                </span><span style="color:#65737e;">//The maximum total length of a command line including the command
+</span><span>                </span><span style="color:#65737e;">//word and the  is 512 characters
+</span><span>                </span><span style="color:#b48ead;">if</span><span> input.Length </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">0 </span><span style="color:#b48ead;">||</span><span> input.Length</span><span style="color:#b48ead;">&gt;</span><span style="color:#d08770;">510 </span><span style="color:#b48ead;">then
+</span><span>                    &quot;</span><span style="color:#a3be8c;">500 Syntax error, command unrecognized</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                </span><span style="color:#b48ead;">else
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">words </span><span style="color:#b48ead;">=</span><span> input.Split</span><span style="color:#b48ead;">([|</span><span style="color:#a3be8c;">&#39; &#39;</span><span style="color:#b48ead;">|])
+</span><span>                    </span><span style="color:#b48ead;">if</span><span> words.Length </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">0 </span><span style="color:#b48ead;">then
+</span><span>                        &quot;</span><span style="color:#a3be8c;">500 invalid args</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                    </span><span style="color:#b48ead;">else
+</span><span>                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">cmd </span><span style="color:#b48ead;">=</span><span> words.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">]
+</span><span>                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">args </span><span style="color:#b48ead;">= 
+</span><span>                            </span><span style="color:#b48ead;">if</span><span> words.Length </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">0 </span><span style="color:#b48ead;">then
+</span><span>                                </span><span style="color:#b48ead;">[||]
+</span><span>                            </span><span style="color:#b48ead;">else
+</span><span>                                Array.sub words </span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">&lt;|</span><span> words.Length </span><span style="color:#b48ead;">- </span><span style="color:#d08770;">1
+</span><span>                        </span><span style="color:#b48ead;">match</span><span> cmd </span><span style="color:#b48ead;">with
+</span><span>                        </span><span style="color:#b48ead;">| </span><span>&quot;</span><span style="color:#a3be8c;">helo</span><span>&quot; </span><span style="color:#b48ead;">-&gt;
+</span><span>                            r.ProccessHelo token args
+</span><span>                        </span><span style="color:#b48ead;">| </span><span>&quot;</span><span style="color:#a3be8c;">ehlo</span><span>&quot; </span><span style="color:#b48ead;">-&gt;
+</span><span>                            r.ProccessEhlo token args
+</span><span>                        </span><span style="color:#b48ead;">| </span><span>&quot;</span><span style="color:#a3be8c;">auth</span><span>&quot; </span><span style="color:#b48ead;">-&gt;
+</span><span>                            r.ProccessAuth token args
+</span><span>                        </span><span style="color:#b48ead;">| </span><span>&quot;</span><span style="color:#a3be8c;">mail</span><span>&quot; </span><span style="color:#b48ead;">-&gt;
+</span><span>                            r.ProccessMail token args
+</span><span>                        </span><span style="color:#b48ead;">| </span><span>&quot;</span><span style="color:#a3be8c;">rcpt</span><span>&quot; </span><span style="color:#b48ead;">-&gt;
+</span><span>                            r.ProccessRcpt token args
+</span><span>                        </span><span style="color:#b48ead;">| </span><span>&quot;</span><span style="color:#a3be8c;">data</span><span>&quot; </span><span style="color:#b48ead;">-&gt;
+</span><span>                            r.ProccessData token args
+</span><span>                        </span><span style="color:#b48ead;">| </span><span>&quot;</span><span style="color:#a3be8c;">quit</span><span>&quot; </span><span style="color:#b48ead;">-&gt;
+</span><span>                            r.ProccessQuit token args
+</span><span>                        </span><span style="color:#b48ead;">| </span><span>&quot;</span><span style="color:#a3be8c;">noop</span><span>&quot; </span><span style="color:#b48ead;">-&gt;
+</span><span>                            &quot;</span><span style="color:#a3be8c;">250 ok</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                        </span><span style="color:#b48ead;">| </span><span>&quot;</span><span style="color:#a3be8c;">rset</span><span>&quot; </span><span style="color:#b48ead;">-&gt;
+</span><span>                            r.ProccessRset token args
+</span><span>                        </span><span style="color:#b48ead;">| _ -&gt; </span><span>&quot;</span><span style="color:#a3be8c;">500 Syntax error, command unrecognized</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                        </span><span style="color:#65737e;">//502 Command not implemented
+</span><span>            msg</span><span style="color:#d08770;">()
+</span><span>            </span><span style="color:#b48ead;">|&gt;</span><span> r.StartSend e 
+</span><span>        </span><span style="color:#65737e;">///start session
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.ProccessHelo token args</span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">if</span><span> args.Length </span><span style="color:#b48ead;">=</span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">&amp;&amp;</span><span> not </span><span style="color:#b48ead;">(</span><span>args.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">]</span><span>.Length</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">) then
+</span><span>                </span><span style="color:#65737e;">//TODO:verify domain
+</span><span>                token.Clear</span><span style="color:#d08770;">() </span><span style="color:#65737e;">//clear session
+</span><span>                </span><span style="color:#65737e;">//TODO:addition operation like ip authentication
+</span><span>                token.IsAuthenticated </span><span style="color:#b48ead;">&lt;- </span><span style="color:#d08770;">true
+</span><span>                token.Domain </span><span style="color:#b48ead;">&lt;-</span><span> args.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">]
+</span><span>                token.LastCommand </span><span style="color:#b48ead;">&lt;-</span><span> SmtpCommand.Helo
+</span><span>                &quot;</span><span style="color:#a3be8c;">250 ok</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>            </span><span style="color:#b48ead;">else
+</span><span>                &quot;</span><span style="color:#a3be8c;">501 Syntax error in parameters or arguments</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>        </span><span style="color:#65737e;">///start session
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.ProccessEhlo token args</span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">if</span><span> args.Length </span><span style="color:#b48ead;">=</span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">&amp;&amp;</span><span> not </span><span style="color:#b48ead;">(</span><span>args.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">]</span><span>.Length</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">) then
+</span><span>                token.Clear</span><span style="color:#d08770;">() </span><span style="color:#65737e;">//clear session
+</span><span>                </span><span style="color:#65737e;">//TODO:addition operation like ip authentication
+</span><span>                token.IsAuthenticated </span><span style="color:#b48ead;">&lt;- </span><span style="color:#d08770;">true
+</span><span>                token.Domain </span><span style="color:#b48ead;">&lt;-</span><span> args.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">]
+</span><span>                token.LastCommand </span><span style="color:#b48ead;">&lt;-</span><span> SmtpCommand.Helo
+</span><span>                &quot;</span><span style="color:#a3be8c;">250-ok</span><span style="color:#d08770;">\r\n</span><span style="color:#a3be8c;">250 AUTH LOGIN PLAIN</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>            </span><span style="color:#b48ead;">else
+</span><span>                &quot;</span><span style="color:#a3be8c;">501 Syntax error in parameters or arguments</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span> 
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.ProccessAuth token args</span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">match</span><span> token.LastCommand </span><span style="color:#b48ead;">with
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SmtpCommand.Helo
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SmtpCommand.Auth
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SmtpCommand.Login1
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SmtpCommand.Login2  </span><span style="color:#b48ead;">-&gt;
+</span><span>                </span><span style="color:#b48ead;">if</span><span> args.Length </span><span style="color:#b48ead;">&gt; </span><span style="color:#d08770;">0 </span><span style="color:#b48ead;">then
+</span><span>                    </span><span style="color:#b48ead;">match</span><span> args.Length</span><span style="color:#b48ead;">,</span><span>args.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">] with
+</span><span>                    </span><span style="color:#b48ead;">| </span><span style="color:#d08770;">1</span><span style="color:#b48ead;">,</span><span>&quot;</span><span style="color:#a3be8c;">login</span><span>&quot; </span><span style="color:#b48ead;">-&gt;
+</span><span>                        token.LastCommand </span><span style="color:#b48ead;">&lt;-</span><span> SmtpCommand.Login1
+</span><span>                        &quot;</span><span style="color:#a3be8c;">334 VXNlcm5hbWU6</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                    </span><span style="color:#b48ead;">| </span><span style="color:#d08770;">2</span><span style="color:#b48ead;">,</span><span>&quot;</span><span style="color:#a3be8c;">login</span><span>&quot; </span><span style="color:#b48ead;">| </span><span style="color:#d08770;">3</span><span style="color:#b48ead;">,</span><span>&quot;</span><span style="color:#a3be8c;">plain</span><span>&quot; </span><span style="color:#b48ead;">-&gt;
+</span><span>                        </span><span style="color:#b48ead;">try
+</span><span>                            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">bytes </span><span style="color:#b48ead;">=</span><span> System.Convert.FromBase64String</span><span style="color:#b48ead;">(</span><span>args.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">2</span><span style="color:#b48ead;">])
+</span><span>                            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">namepass </span><span style="color:#b48ead;">=</span><span> System.Text.Encoding.ASCII.GetString</span><span style="color:#b48ead;">(</span><span>bytes</span><span style="color:#b48ead;">)
+</span><span>                            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">parts </span><span style="color:#b48ead;">=</span><span> namepass.Split</span><span style="color:#b48ead;">([|</span><span>&#39;\</span><span style="color:#d08770;">000</span><span>&#39;</span><span style="color:#b48ead;">|])
+</span><span>                            token.UserName </span><span style="color:#b48ead;">&lt;-</span><span> parts.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">]
+</span><span>                            token.Password </span><span style="color:#b48ead;">&lt;-</span><span> parts.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">]
+</span><span>                            </span><span style="color:#b48ead;">if</span><span> r.CheckUser token.UserName token.Password </span><span style="color:#b48ead;">then
+</span><span>                                token.IsAuthenticated </span><span style="color:#b48ead;">&lt;- </span><span style="color:#d08770;">true
+</span><span>                                token.LastCommand </span><span style="color:#b48ead;">&lt;-</span><span> SmtpCommand.Auth
+</span><span>                                &quot;</span><span style="color:#a3be8c;">235 OK Authenticated</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                            </span><span style="color:#b48ead;">else
+</span><span>                                &quot;</span><span style="color:#a3be8c;">535 Authentication Failed</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                        </span><span style="color:#b48ead;">with
+</span><span>                        </span><span style="color:#b48ead;">| _ -&gt; </span><span>&quot;</span><span style="color:#a3be8c;">501 Syntax error</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                    </span><span style="color:#b48ead;">| _,_ -&gt; </span><span>&quot;</span><span style="color:#a3be8c;">501 Syntax error in parameters or arguments</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                </span><span style="color:#b48ead;">else
+</span><span>                    &quot;</span><span style="color:#a3be8c;">501 Syntax error in parameters or arguments</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>            </span><span style="color:#b48ead;">| _ -&gt; </span><span>&quot;</span><span style="color:#a3be8c;">503 bad sequence of commands</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span> 
+</span><span>        </span><span style="color:#65737e;">/// MAIL FROM: [SP  ] .
+</span><span>        </span><span style="color:#65737e;">/// This command tells the SMTP-receiver that a new mail transaction is
+</span><span>        </span><span style="color:#65737e;">/// starting and to reset all its state tables and buffers.
+</span><span>        </span><span style="color:#65737e;">/// If accepted, the SMTP server returns a 250 OK reply;
+</span><span>        </span><span style="color:#65737e;">/// failures produce 550 or 553 replies;
+</span><span>        </span><span style="color:#65737e;">/// start transaction
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.ProccessMail token args</span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">msgAddr addr </span><span style="color:#b48ead;">=
+</span><span>                </span><span style="color:#b48ead;">match</span><span> token.IsAuthenticated </span><span style="color:#b48ead;">with
+</span><span>                </span><span style="color:#b48ead;">| </span><span style="color:#d08770;">false </span><span style="color:#b48ead;">-&gt;
+</span><span>                    &quot;</span><span style="color:#a3be8c;">535 Authentication Required</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                </span><span style="color:#b48ead;">| </span><span style="color:#d08770;">true </span><span style="color:#b48ead;">-&gt;
+</span><span>                    </span><span style="color:#b48ead;">try
+</span><span>                        token.Rset</span><span style="color:#d08770;">() </span><span style="color:#65737e;">//reset state
+</span><span>                        </span><span style="color:#65737e;">//TODO:user limit 64,domain limit 255
+</span><span>                        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">address </span><span style="color:#b48ead;">= new</span><span> System.Net.Mail.MailAddress</span><span style="color:#b48ead;">(</span><span>addr</span><span style="color:#b48ead;">);
+</span><span>                        token.FromAddress </span><span style="color:#b48ead;">&lt;-</span><span> address
+</span><span>                        token.LastCommand </span><span style="color:#b48ead;">&lt;-</span><span> SmtpCommand.Mail
+</span><span>                        </span><span style="color:#65737e;">//TODO:550 policy reject
+</span><span>                        </span><span style="color:#65737e;">//251 User not local; will forward to 
+</span><span>                        sprintf &quot;</span><span style="color:#a3be8c;">250 </span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;"> Accepted</span><span style="color:#d08770;">\r\n</span><span>&quot; address.Address
+</span><span>                    </span><span style="color:#b48ead;">with
+</span><span>                    </span><span style="color:#b48ead;">| _ as</span><span> ex </span><span style="color:#b48ead;">-&gt;
+</span><span>                        &quot;</span><span style="color:#a3be8c;">501 mail from should like \&quot;mail from:\&quot;</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span> 
+</span><span>            </span><span style="color:#b48ead;">match</span><span> token.LastCommand </span><span style="color:#b48ead;">with
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SmtpCommand.Helo </span><span style="color:#b48ead;">|</span><span> SmtpCommand.Auth </span><span style="color:#b48ead;">|</span><span> SmtpCommand.Login2 </span><span style="color:#b48ead;">-&gt;
+</span><span>                </span><span style="color:#b48ead;">if</span><span> args.Length </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">then
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">reg </span><span style="color:#b48ead;">= new</span><span> Regex</span><span style="color:#b48ead;">(</span><span>&quot;</span><span style="color:#a3be8c;">from:&lt;([^&gt;]+@[^&gt;]+)&gt;</span><span>&quot;</span><span style="color:#b48ead;">)
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">m </span><span style="color:#b48ead;">=</span><span> reg.Match</span><span style="color:#b48ead;">(</span><span>args.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">])
+</span><span>                    </span><span style="color:#b48ead;">if</span><span> m.Success </span><span style="color:#b48ead;">then
+</span><span>                        msgAddr m.Groups.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">]</span><span>.Value
+</span><span>                    </span><span style="color:#b48ead;">else
+</span><span>                        &quot;</span><span style="color:#a3be8c;">501 Syntax error in parameters or arguments</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                </span><span style="color:#b48ead;">else if</span><span> args.Length</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">2 </span><span style="color:#b48ead;">&amp;&amp;</span><span> args.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">] = </span><span>&quot;</span><span style="color:#a3be8c;">from:</span><span>&quot; </span><span style="color:#b48ead;">then
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">reg </span><span style="color:#b48ead;">= new</span><span> Regex</span><span style="color:#b48ead;">(</span><span>@&quot;</span><span style="color:#a3be8c;">&lt;([^&gt;]+@[^&gt;]+)&gt;</span><span>&quot;</span><span style="color:#b48ead;">)
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">m </span><span style="color:#b48ead;">=</span><span> reg.Match</span><span style="color:#b48ead;">(</span><span>args.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">])
+</span><span>                    </span><span style="color:#b48ead;">if</span><span> m.Success </span><span style="color:#b48ead;">then
+</span><span>                        msgAddr m.Groups.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">]</span><span>.Value
+</span><span>                    </span><span style="color:#b48ead;">else
+</span><span>                        &quot;</span><span style="color:#a3be8c;">501 Syntax error in parameters or arguments</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                </span><span style="color:#b48ead;">else
+</span><span>                    &quot;</span><span style="color:#a3be8c;">501 Syntax error in parameters or arguments</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>            </span><span style="color:#b48ead;">| _ -&gt; </span><span>&quot;</span><span style="color:#a3be8c;">503 bad sequence of commands</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span> 
+</span><span>        </span><span style="color:#65737e;">/// RCPT TO: [ SP  ] .
+</span><span>        </span><span style="color:#65737e;">/// If accepted, the SMTP server returns a 250 OK.
+</span><span>        </span><span style="color:#65737e;">/// If the recipient is known not to be a deliverable address,
+</span><span>        </span><span style="color:#65737e;">/// the SMTP server returns a 550 reply,
+</span><span>        </span><span style="color:#65737e;">/// typically with a string such as &quot;no such user - &quot; and the mailbox name
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.ProccessRcpt token args</span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">msgAddr addr </span><span style="color:#b48ead;">=
+</span><span>                </span><span style="color:#b48ead;">try
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">address </span><span style="color:#b48ead;">= new</span><span> System.Net.Mail.MailAddress</span><span style="color:#b48ead;">(</span><span>addr</span><span style="color:#b48ead;">);
+</span><span>                    token.ToAddresses.Add</span><span style="color:#b48ead;">(</span><span>address</span><span style="color:#b48ead;">)
+</span><span>                    token.LastCommand </span><span style="color:#b48ead;">&lt;-</span><span> SmtpCommand.Rcpt
+</span><span>                    </span><span style="color:#65737e;">//TODO:452 Too many recipients
+</span><span>                    </span><span style="color:#65737e;">//TODO:550 policy reject
+</span><span>                    sprintf &quot;</span><span style="color:#a3be8c;">250 </span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;"> Accepted</span><span style="color:#d08770;">\r\n</span><span>&quot; address.Address
+</span><span>                </span><span style="color:#b48ead;">with
+</span><span>                </span><span style="color:#b48ead;">| _ as</span><span> ex </span><span style="color:#b48ead;">-&gt;
+</span><span>                    &quot;</span><span style="color:#a3be8c;">501 rcpt to should like \&quot;rcpt to:\&quot;</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span> 
+</span><span>            </span><span style="color:#b48ead;">match</span><span> token.LastCommand </span><span style="color:#b48ead;">with
+</span><span>            </span><span style="color:#b48ead;">|</span><span> SmtpCommand.Mail </span><span style="color:#b48ead;">|</span><span> SmtpCommand.Rcpt </span><span style="color:#b48ead;">-&gt;
+</span><span>                </span><span style="color:#b48ead;">if</span><span> args.Length </span><span style="color:#b48ead;">= </span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">then
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">reg </span><span style="color:#b48ead;">= new</span><span> Regex</span><span style="color:#b48ead;">(</span><span>&quot;</span><span style="color:#a3be8c;">to:&lt;([^&gt;]+@[^&gt;]+)&gt;</span><span>&quot;</span><span style="color:#b48ead;">)
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">m </span><span style="color:#b48ead;">=</span><span> reg.Match</span><span style="color:#b48ead;">(</span><span>args.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">])
+</span><span>                    </span><span style="color:#b48ead;">if</span><span> m.Success </span><span style="color:#b48ead;">then
+</span><span>                        msgAddr m.Groups.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">]</span><span>.Value
+</span><span>                    </span><span style="color:#b48ead;">else
+</span><span>                        &quot;</span><span style="color:#a3be8c;">501 Syntax error in parameters or arguments</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                </span><span style="color:#b48ead;">else if</span><span> args.Length</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">2 </span><span style="color:#b48ead;">&amp;&amp;</span><span> args.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">]=</span><span>&quot;</span><span style="color:#a3be8c;">to:</span><span>&quot; </span><span style="color:#b48ead;">then
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">reg </span><span style="color:#b48ead;">= new</span><span> Regex</span><span style="color:#b48ead;">(</span><span>&quot;</span><span style="color:#a3be8c;">&lt;([^&gt;]+@[^&gt;]+)&gt;</span><span>&quot;</span><span style="color:#b48ead;">)
+</span><span>                    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">m </span><span style="color:#b48ead;">=</span><span> reg.Match</span><span style="color:#b48ead;">(</span><span>args.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">])
+</span><span>                    </span><span style="color:#b48ead;">if</span><span> m.Success </span><span style="color:#b48ead;">then
+</span><span>                        msgAddr m.Groups.</span><span style="color:#b48ead;">[</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">]</span><span>.Value
+</span><span>                    </span><span style="color:#b48ead;">else
+</span><span>                        &quot;</span><span style="color:#a3be8c;">501 Syntax error in parameters or arguments</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>                </span><span style="color:#b48ead;">else
+</span><span>                    &quot;</span><span style="color:#a3be8c;">501 Syntax error in parameters or arguments</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>            </span><span style="color:#b48ead;">| _ -&gt; </span><span>&quot;</span><span style="color:#a3be8c;">503 bad sequence of commands</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span> 
+</span><span>        </span><span style="color:#65737e;">/// If there was no MAIL, or no RCPT, command, or all such commands
+</span><span>        </span><span style="color:#65737e;">/// were rejected, the server MAY return a &quot;command out of sequence&quot;
+</span><span>        </span><span style="color:#65737e;">/// (503) or &quot;no valid recipients&quot; (554) reply in response to the DATA
+</span><span>        </span><span style="color:#65737e;">/// command
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.ProccessData token args </span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">match</span><span> args.Length</span><span style="color:#b48ead;">&gt;</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">,</span><span>token.LastCommand </span><span style="color:#b48ead;">with
+</span><span>            </span><span style="color:#b48ead;">| </span><span style="color:#d08770;">true</span><span style="color:#b48ead;">,_-&gt; </span><span>&quot;</span><span style="color:#a3be8c;">500 invalid syntax</span><span>&quot;
+</span><span>            </span><span style="color:#b48ead;">| _,</span><span>SmtpCommand.Rcpt </span><span style="color:#b48ead;">-&gt;
+</span><span>                token.LastCommand </span><span style="color:#b48ead;">&lt;-</span><span> SmtpCommand.Data
+</span><span>                &quot;</span><span style="color:#a3be8c;">354 Enter mail, end with \&quot;.\&quot;</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>            </span><span style="color:#b48ead;">| _,_ -&gt; </span><span>&quot;</span><span style="color:#a3be8c;">503 bad sequence of commands</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span> 
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.ProccessQuit token args </span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">match</span><span> args.Length </span><span style="color:#b48ead;">with
+</span><span>            </span><span style="color:#b48ead;">| </span><span style="color:#d08770;">0 </span><span style="color:#b48ead;">-&gt;
+</span><span>                token.LastCommand </span><span style="color:#b48ead;">&lt;-</span><span> SmtpCommand.Quit
+</span><span>                &quot;</span><span style="color:#a3be8c;">221 bye</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>            </span><span style="color:#b48ead;">| _ -&gt; </span><span>&quot;</span><span style="color:#a3be8c;">501 Syntax error in parameters or arguments</span><span>&quot;
+</span><span> 
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.ProccessRset token args </span><span style="color:#b48ead;">= 
+</span><span>            </span><span style="color:#b48ead;">match</span><span> args.Length </span><span style="color:#b48ead;">with
+</span><span>            </span><span style="color:#b48ead;">| </span><span style="color:#d08770;">0 </span><span style="color:#b48ead;">-&gt; 
+</span><span>                token.Rset</span><span style="color:#d08770;">()
+</span><span>                &quot;</span><span style="color:#a3be8c;">250 ok</span><span style="color:#d08770;">\r\n</span><span>&quot;
+</span><span>            </span><span style="color:#b48ead;">| _ -&gt; </span><span>&quot;</span><span style="color:#a3be8c;">501 Syntax error in parameters or arguments</span><span>&quot;
+</span><span> 
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.StartSend e msg</span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">client </span><span style="color:#b48ead;">=</span><span> e.AcceptSocket
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">token </span><span style="color:#b48ead;">=</span><span> e.UserToken </span><span style="color:#b48ead;">:?&gt;</span><span> SmtpUserToken
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">bytes </span><span style="color:#b48ead;">=</span><span> System.Text.Encoding.ASCII.GetBytes</span><span style="color:#b48ead;">(</span><span>msg</span><span style="color:#b48ead;">)
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">count </span><span style="color:#b48ead;">=</span><span> Array.min </span><span style="color:#b48ead;">[|</span><span>bytes.Length</span><span style="color:#b48ead;">;</span><span>BufferManager.BufferSize</span><span style="color:#b48ead;">|]
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">left </span><span style="color:#b48ead;">=</span><span> bytes.Length </span><span style="color:#b48ead;">-</span><span> count
+</span><span> 
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">buffer </span><span style="color:#b48ead;">= new</span><span> ArraySegment</span><span style="color:#b48ead;">(</span><span>bytes</span><span style="color:#b48ead;">,</span><span>count</span><span style="color:#b48ead;">,</span><span>left</span><span style="color:#b48ead;">)
+</span><span>            token.Buffer </span><span style="color:#b48ead;">&lt;-</span><span> Some</span><span style="color:#b48ead;">(</span><span>buffer</span><span style="color:#b48ead;">)
+</span><span>            e.SetBuffer</span><span style="color:#b48ead;">(</span><span>e.Offset</span><span style="color:#b48ead;">,</span><span>count</span><span style="color:#b48ead;">)
+</span><span>            Buffer.BlockCopy</span><span style="color:#b48ead;">(</span><span>buffer.Array</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">,</span><span>e.Buffer</span><span style="color:#b48ead;">,</span><span>e.Offset</span><span style="color:#b48ead;">,</span><span>count</span><span style="color:#b48ead;">)
+</span><span> 
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">pending </span><span style="color:#b48ead;">=</span><span> client.SendAsync e
+</span><span>            </span><span style="color:#b48ead;">if</span><span> not pending </span><span style="color:#b48ead;">then
+</span><span>                r.AfterSend e
+</span><span> 
+</span><span>        </span><span style="color:#65737e;">///关闭连接
+</span><span>        </span><span style="color:#b48ead;">member </span><span style="color:#bf616a;">r.CloseSocket e</span><span style="color:#b48ead;">=
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">client </span><span style="color:#b48ead;">=</span><span> e.AcceptSocket
+</span><span>            printfn &quot;</span><span style="color:#b48ead;">%s %s</span><span style="color:#a3be8c;"> disconnected</span><span>&quot; </span><span style="color:#b48ead;">&lt;|</span><span>DateTime.Now.ToString</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">&lt;|</span><span>client.RemoteEndPoint.ToString</span><span style="color:#d08770;">()
+</span><span>            client.Shutdown SocketShutdown.Both
+</span><span>            client.Close</span><span style="color:#d08770;">()
+</span><span>            </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">token </span><span style="color:#b48ead;">=</span><span> e.UserToken </span><span style="color:#b48ead;">:?&gt;</span><span> SmtpUserToken
+</span><span>            token.Clear</span><span style="color:#d08770;">()
+</span><span>            e.AcceptSocket </span><span style="color:#b48ead;">&lt;- </span><span style="color:#d08770;">null
+</span><span>         
+</span><span style="color:#65737e;">///Program.fs
+</span><span style="color:#b48ead;">module </span><span style="color:#8fa1b3;">Main</span><span style="color:#b48ead;">=
+</span><span>    </span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">SmtpLib
+</span><span>    </span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System
+</span><span>    </span><span style="color:#b48ead;">[]
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">main</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">args</span><span style="color:#b48ead;">:</span><span>string</span><span style="color:#b48ead;">[]) =
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">s </span><span style="color:#b48ead;">= new</span><span> SmtpServer</span><span style="color:#b48ead;">(</span><span style="color:#d08770;">1000</span><span style="color:#b48ead;">)
+</span><span>        s.RunForever</span><span style="color:#d08770;">()
+</span><span>        Console.ReadLine</span><span style="color:#d08770;">()</span><span style="color:#b48ead;">|&gt;</span><span>ignore
+</span><span>        </span><span style="color:#d08770;">0
+</span></code></pre>
+<p>客户端代码</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#65737e;">///Program.fs
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System.Net.Mail
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System.ComponentModel
+</span><span style="color:#b48ead;">[]
+</span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">main </span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">args</span><span style="color:#b48ead;">:</span><span>string</span><span style="color:#b48ead;">[]) =
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">client </span><span style="color:#b48ead;">= new</span><span> SmtpClient</span><span style="color:#b48ead;">(</span><span>&quot;</span><span style="color:#a3be8c;">127.0.0.1</span><span>&quot;</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">25</span><span style="color:#b48ead;">)
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">msg </span><span style="color:#b48ead;">= new</span><span> MailMessage</span><span style="color:#b48ead;">(</span><span>&quot;</span><span style="color:#a3be8c;">someone@mailfrom.com</span><span>&quot;</span><span style="color:#b48ead;">,</span><span>&quot;</span><span style="color:#a3be8c;">someone@rcptto.com</span><span>&quot;</span><span style="color:#b48ead;">)
+</span><span>    msg.Subject </span><span style="color:#b48ead;">&lt;- </span><span>&quot;</span><span style="color:#a3be8c;">subject test</span><span>&quot;
+</span><span>    msg.Body </span><span style="color:#b48ead;">&lt;- </span><span>@&quot;</span><span style="color:#a3be8c;">mail body:
+</span><span style="color:#a3be8c;">    line2
+</span><span style="color:#a3be8c;">    line3
+</span><span style="color:#a3be8c;">    line4</span><span>&quot;
+</span><span>    </span><span style="color:#b48ead;">try
+</span><span>        </span><span style="color:#65737e;">//client.Send(msg)
+</span><span>        client.SendCompleted.Add </span><span style="color:#b48ead;">(fun</span><span style="color:#bf616a;"> _</span><span style="color:#b48ead;">-&gt;</span><span>printfn &quot;</span><span style="color:#a3be8c;">success</span><span>&quot;</span><span style="color:#b48ead;">)
+</span><span>        client.SendAsync</span><span style="color:#b48ead;">(</span><span>msg</span><span style="color:#b48ead;">,</span><span style="color:#d08770;">null</span><span style="color:#b48ead;">)
+</span><span>                
+</span><span>    </span><span style="color:#b48ead;">with
+</span><span>    </span><span style="color:#b48ead;">|</span><span> ex </span><span style="color:#b48ead;">-&gt;
+</span><span>        printfn &quot;</span><span style="color:#b48ead;">%s</span><span>&quot; </span><span style="color:#b48ead;">&lt;|</span><span>ex.ToString</span><span style="color:#d08770;">()
+</span><span>    System.Console.ReadKey</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">|&gt;</span><span> ignore
+</span><span>    </span><span style="color:#d08770;">0
+</span><span>
+</span></code></pre>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/f/">#F#</a>
+            
+            <a href="https://blog.dotone.top/tags/smtp/">#SMTP</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - gui</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/gui/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2022-01-17T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/gui/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>About rust windows subsystem</title>
+        <published>2022-01-17T00:00:00+00:00</published>
+        <updated>2022-01-17T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/rust-windows-subsystem/"/>
+        <id>https://blog.dotone.top/blog/it/rust-windows-subsystem/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/rust-windows-subsystem/">&lt;p&gt;Learnt that it need to configure additional attribute for GUI application on windows platform. Otherwise it will launch a console window while launching your GUI application.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;#![&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;windows_subsystem &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;windows&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Turns on this feature, you&#x27;ll encounter a strange issue. There is no backtrace anymore when your application panics, even though you have configured the &lt;code&gt;RUST_BACKTRACE&lt;&#x2F;code&gt; environment. You will only get this information:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;error:&lt;&#x2F;span&gt;&lt;span&gt; process didn&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;t exit successfully: `target\debug\XXXXXX.exe` (exit code: 101)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;It&#x27;s difficult to trace what happened in this situation.&lt;&#x2F;p&gt;
+&lt;p&gt;No luck with newest version and nightly rust.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span&gt;&amp;gt; rustc &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;--version --verbose
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rustc&lt;&#x2F;span&gt;&lt;span&gt; 1.58.0 (02072b482 2022-01-11)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;binary:&lt;&#x2F;span&gt;&lt;span&gt; rustc
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;commit-hash:&lt;&#x2F;span&gt;&lt;span&gt; 02072b482a8b5357f7fb5e5637444ae30e423c40
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;commit-date:&lt;&#x2F;span&gt;&lt;span&gt; 2022-01-11
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;host:&lt;&#x2F;span&gt;&lt;span&gt; x86_64-pc-windows-msvc
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;release:&lt;&#x2F;span&gt;&lt;span&gt; 1.58.0
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;LLVM&lt;&#x2F;span&gt;&lt;span&gt; version: 13.0.0
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;references&quot;&gt;references&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rfcs&#x2F;1665-windows-subsystem.html&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;github.com&#x2F;rust-lang&#x2F;rust&#x2F;issues&#x2F;88576&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

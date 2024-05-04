@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - package</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/package/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2016-03-31T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/package/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>My First Nuget Package</title>
+        <published>2016-03-31T00:00:00+00:00</published>
+        <updated>2016-03-31T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/My-First-Nuget-Package/"/>
+        <id>https://blog.dotone.top/blog/it/My-First-Nuget-Package/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/My-First-Nuget-Package/">&lt;p&gt;I published my first nuget package at https:&#x2F;&#x2F;www.nuget.org&#x2F;packages&#x2F;NFly.BitsTransfer&#x2F;1.0.0-alpha1&lt;&#x2F;p&gt;
+&lt;p&gt;Although it took me some time to undnerstand how it works, it&#x27;s an interesting expirence.&lt;&#x2F;p&gt;
+&lt;p&gt;To get start publishing your own package, you can refer to these two articles:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.nuget.org&#x2F;create&#x2F;creating-and-publishing-a-package&quot;&gt;Creating and Publishing a Package&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;shazwazza.com&#x2F;post&#x2F;multi-targeting-a-single-net-project-to-build-for-different-framework-versions&#x2F;&quot;&gt;Multi targeting a single .Net project to build for different framework versions&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Hope this article can save you some time.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

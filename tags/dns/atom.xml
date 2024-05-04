@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - dns</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/dns/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2022-02-22T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/dns/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>Python cannot resolve local computer name in non-english</title>
+        <published>2022-02-22T00:00:00+00:00</published>
+        <updated>2022-02-22T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/py-host-name-zh/"/>
+        <id>https://blog.dotone.top/blog/it/py-host-name-zh/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/py-host-name-zh/">&lt;p&gt;Encountered an interesting issue: python cannot resolve dns name if it&#x27;s not english.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;gethostbyaddrname
+&lt;&#x2F;span&gt;&lt;span&gt;UnicodeDecodeError: &amp;#39;utf-8&amp;#39; codec can&amp;#39;t decode byte 0xca in position 52: invalid continuation byte
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+</feed>

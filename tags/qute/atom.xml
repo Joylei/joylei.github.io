@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - qute</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/tags/qute/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-09-07T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/tags/qute/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>qute published to Github</title>
+        <published>2020-09-07T00:00:00+00:00</published>
+        <updated>2020-09-07T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/blog/it/qute-published-to-github/"/>
+        <id>https://blog.dotone.top/blog/it/qute-published-to-github/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/blog/it/qute-published-to-github/">&lt;p&gt;今天把我为&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Joylei&#x2F;qute&quot;&gt;&lt;code&gt;qute&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;发布到了&lt;code&gt;github&lt;&#x2F;code&gt;。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;wei-shen-me&quot;&gt;为什么&lt;&#x2F;h2&gt;
+&lt;p&gt;我有一台&lt;code&gt;TS453B mini&lt;&#x2F;code&gt;，但是说实话用的并不是很顺畅，系统特别不稳定，总是容易卡死。想着换成其它系统，最后选择了&lt;code&gt;Alpine Linux&lt;&#x2F;code&gt;。
+虽然遇到了一些困难，总算是解决了，顺利运行起来。但是有个问题一直无解，那就是没法控制风扇的转速。在&lt;code&gt;BIOS&lt;&#x2F;code&gt;中可以设置风扇为&lt;code&gt;auto&lt;&#x2F;code&gt;或者&lt;code&gt;manual&lt;&#x2F;code&gt;。
+实测&lt;code&gt;auto&lt;&#x2F;code&gt;不靠谱，机器会热死机。设置&lt;code&gt;manual&lt;&#x2F;code&gt;的话，风扇在机器启动时以100%转速运转，如果可以忍耐这个噪音的话，到这一步就可以了。
+那么能不能直接控制风扇呢？没有任何头绪，直到发现了&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;guedou&#x2F;TS-453Be&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;guedou&#x2F;TS-453Be&lt;&#x2F;a&gt;，然后折腾一番，没有在&lt;code&gt;QTS&lt;&#x2F;code&gt;中运行起来，
+报了&lt;code&gt;segment fault&lt;&#x2F;code&gt;错误。作者提供了完整的步骤和思路，我就想自己写一个吧，大概是从6、7月份开始的，用&lt;code&gt;radare2&lt;&#x2F;code&gt;进行逆向分析，然后就有了&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Joylei&#x2F;qute&quot;&gt;qute&lt;&#x2F;a&gt;。期间还想了很多，例如是不是写成驱动形式，是不是写一个自动控制调整转速的逻辑，是不是支持获取其它设备的温度；所以看了怎么实现&lt;code&gt;Linux&lt;&#x2F;code&gt;驱动和&lt;code&gt;Linux&lt;&#x2F;code&gt;驱动相关实现代码，怎么用&lt;code&gt;rust&lt;&#x2F;code&gt;写&lt;code&gt;Linux&lt;&#x2F;code&gt;驱动，硬盘&lt;code&gt;SMART&lt;&#x2F;code&gt;属性读取等等。写成驱动形式好处就是可以配合其它&lt;code&gt;PWM&lt;&#x2F;code&gt;调度控制的程序，不用自己去写控制逻辑。&lt;s&gt;想了很多但最后都放弃了没有实现。&lt;&#x2F;s&gt;2021年7月实现了自动调速控制。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;shi-shen-me&quot;&gt;是什么&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;qute&lt;&#x2F;code&gt;是用&lt;code&gt;rust&lt;&#x2F;code&gt;写的通过&lt;code&gt;EC&lt;&#x2F;code&gt;协议来控制&lt;code&gt;QNAP NAS&lt;&#x2F;code&gt;的风扇转速。理论上只要是基于&lt;code&gt;ITE8528&lt;&#x2F;code&gt;的&lt;code&gt;QNAP NAS&lt;&#x2F;code&gt;都可以控制。
+除了控制风扇和获取温度，还可以设置&lt;code&gt;EuP&lt;&#x2F;code&gt;, &lt;code&gt;Power Recovery Mode&lt;&#x2F;code&gt;。&lt;&#x2F;p&gt;
+&lt;p&gt;关于&lt;code&gt;EC&lt;&#x2F;code&gt;协议，请查看我的另一片文章&lt;a href=&quot;https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;ec-protocol&#x2F;&quot;&gt;EC 协议简析&lt;&#x2F;a&gt;。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;zen-me-yong&quot;&gt;怎么用&lt;&#x2F;h2&gt;
+&lt;p&gt;注意：需要&lt;code&gt;root&lt;&#x2F;code&gt;权限运行。&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;qute v0.1
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;QNAP device control. Use AT YOUR OWN RISK!!!
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;USAGE: qute [OPTIONS] [COMMANDS]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;OPTIONS:
+&lt;&#x2F;span&gt;&lt;span&gt;  -V, --version                 Show version number
+&lt;&#x2F;span&gt;&lt;span&gt;  -h, --help                    Show help message
+&lt;&#x2F;span&gt;&lt;span&gt;  -v, --verbose [level:N]       Show verbose messages
+&lt;&#x2F;span&gt;&lt;span&gt;  -q, --quiet                   Silence all output
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;COMMANDS:
+&lt;&#x2F;span&gt;&lt;span&gt;  eup                           get or set Eup mode
+&lt;&#x2F;span&gt;&lt;span&gt;  fan                            get or set fan speed
+&lt;&#x2F;span&gt;&lt;span&gt;  power                       get or set power recovery mode
+&lt;&#x2F;span&gt;&lt;span&gt;  temp                         get temperature
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;ts-453b-mini-gui-ge-xin-xi&quot;&gt;TS-453B mini 规格信息&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;453Bmini
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Intel Celeron J3455 CPU is a 1.5GHz frequency, that can be bursted to 2.3GHz per core
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;HD Graphics 500 GPU with 12 EUs
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;DDR3L 1600 RAM
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;风扇 fan: xtreme BD121232LB  元山科技
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;(120 mm, 12 V,1700 RPM, 23 CFM, 42.5 dBA, and 80000 MTBF)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;+12V DC
+&lt;&#x2F;span&gt;&lt;span&gt;4PIN (PWM)
+&lt;&#x2F;span&gt;&lt;span&gt;120 x 120 x 32mm
+&lt;&#x2F;span&gt;&lt;span&gt;1500 min^-1 nominal
+&lt;&#x2F;span&gt;&lt;span&gt;Cable length 250 mm
+&lt;&#x2F;span&gt;&lt;span&gt;Mounting holes 105 x 105 +&#x2F;0.3 mm
+&lt;&#x2F;span&gt;&lt;span&gt;0.19A
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;内存可以加到16GB。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;geng-duo&quot;&gt;更多&lt;&#x2F;h2&gt;
+&lt;p&gt;请移步&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Joylei&#x2F;qute&quot;&gt;&lt;code&gt;github&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;了解更多。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;can-kao&quot;&gt;参考&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;https:&#x2F;&#x2F;github.com&#x2F;guedou&#x2F;TS-453Be&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

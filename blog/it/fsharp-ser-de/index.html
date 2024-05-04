@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - F#序列化与反序列化</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;it&#x2F;fsharp-ser-de&#x2F;">F#序列化与反序列化</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>2 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2010-09-10</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>借助F#熟悉一下序列化与反序列化。</p>
+<pre data-lang="f#" style="background-color:#2b303b;color:#c0c5ce;" class="language-f# "><code class="language-f#" data-lang="f#"><span style="color:#b48ead;">namespace </span><span style="color:#8fa1b3;">PersonType
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System.IO
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System.Xml.Serialization
+</span><span style="color:#b48ead;">open </span><span style="color:#8fa1b3;">System.Runtime.Serialization.Formatters.Binary
+</span><span>
+</span><span style="color:#96b5b4;">[&lt;Serializable&gt;]
+</span><span style="color:#b48ead;">type </span><span>Person</span><span style="color:#b48ead;">= val mutable 
+</span><span style="color:#bf616a;">    private name</span><span style="color:#b48ead;">:</span><span>string val mutable 
+</span><span>    </span><span style="color:#b48ead;">private</span><span> birthday</span><span style="color:#b48ead;">:</span><span>DateTime </span><span style="color:#b48ead;">val mutable 
+</span><span style="color:#bf616a;">    private gender</span><span style="color:#b48ead;">:</span><span>int 
+</span><span>    </span><span style="color:#b48ead;">new </span><span style="color:#d08770;">()</span><span style="color:#b48ead;">={</span><span>name</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">null</span><span style="color:#b48ead;">;</span><span>birthday</span><span style="color:#b48ead;">=</span><span>DateTime.Now</span><span style="color:#b48ead;">;</span><span>gender</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">} 
+</span><span>    </span><span style="color:#b48ead;">member public </span><span style="color:#bf616a;">r.Name </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">()</span><span style="color:#b48ead;">=</span><span>r.name </span><span style="color:#b48ead;">and</span><span> set v</span><span style="color:#b48ead;">=</span><span>r.name</span><span style="color:#b48ead;">&lt;-</span><span>v 
+</span><span>    </span><span style="color:#b48ead;">member public </span><span style="color:#bf616a;">r.Birthday </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">()</span><span style="color:#b48ead;">=</span><span>r.birthday </span><span style="color:#b48ead;">and</span><span> set v</span><span style="color:#b48ead;">=</span><span>r.birthday</span><span style="color:#b48ead;">&lt;-</span><span>v 
+</span><span>    </span><span style="color:#b48ead;">member public </span><span style="color:#bf616a;">r.Gender </span><span style="color:#b48ead;">with</span><span> get</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">=</span><span> r.gender </span><span style="color:#b48ead;">and</span><span> set v</span><span style="color:#b48ead;">=</span><span>r.gender</span><span style="color:#b48ead;">&lt;-</span><span>v
+</span><span style="color:#b48ead;">module </span><span style="color:#8fa1b3;">Program</span><span style="color:#b48ead;">= 
+</span><span>    </span><span style="color:#96b5b4;">[&lt;EntryPoint&gt;] 
+</span><span>    </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">main</span><span style="color:#b48ead;">(</span><span style="color:#bf616a;">args</span><span style="color:#b48ead;">)=
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">p </span><span style="color:#b48ead;">= new</span><span> Person</span><span style="color:#b48ead;">(</span><span>Name</span><span style="color:#b48ead;">=</span><span>&quot;</span><span style="color:#a3be8c;">test</span><span>&quot;</span><span style="color:#b48ead;">,</span><span>Birthday</span><span style="color:#b48ead;">=</span><span>DateTime.Now</span><span style="color:#b48ead;">,</span><span>Gender</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">)
+</span><span>        printfn &quot;</span><span style="color:#b48ead;">%A</span><span>&quot; p </span><span style="color:#65737e;">//xml序列化 let xml = new XmlSerializer(typeof&lt;Person&gt;); 
+</span><span>        </span><span style="color:#b48ead;">use</span><span> writer </span><span style="color:#b48ead;">= new</span><span> StreamWriter</span><span style="color:#b48ead;">(</span><span>@&quot;</span><span style="color:#a3be8c;">D:\fs\Person.xml</span><span>&quot;</span><span style="color:#b48ead;">)</span><span> xml.Serialize</span><span style="color:#b48ead;">(</span><span>writer</span><span style="color:#b48ead;">,</span><span>p</span><span style="color:#b48ead;">) 
+</span><span>        writer.Close</span><span style="color:#d08770;">() 
+</span><span>        </span><span style="color:#b48ead;">use</span><span> reader </span><span style="color:#b48ead;">= new</span><span> StreamReader</span><span style="color:#b48ead;">(</span><span>@&quot;</span><span style="color:#a3be8c;">D:\fs\Person.xml</span><span>&quot;</span><span style="color:#b48ead;">) let </span><span style="color:#bf616a;">p1 </span><span style="color:#b48ead;">=</span><span>xml.Deserialize</span><span style="color:#b48ead;">(</span><span>reader</span><span style="color:#b48ead;">) :?&gt;</span><span> Person 
+</span><span>        printfn &quot;</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;">,</span><span style="color:#b48ead;">%A</span><span style="color:#a3be8c;">,</span><span style="color:#b48ead;">%A</span><span>&quot; p1.Name p1.Birthday p1.Gender </span><span style="color:#65737e;">//二进制序列化 
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">formatter </span><span style="color:#b48ead;">= new</span><span> BinaryFormatter</span><span style="color:#d08770;">()</span><span style="color:#b48ead;">; 
+</span><span>        </span><span style="color:#b48ead;">use</span><span> writer </span><span style="color:#b48ead;">=</span><span> File.OpenWrite</span><span style="color:#b48ead;">(</span><span>@&quot;</span><span style="color:#a3be8c;">D:\fs\Person.dat</span><span>&quot;</span><span style="color:#b48ead;">)</span><span> formatter.Serialize</span><span style="color:#b48ead;">(</span><span>writer</span><span style="color:#b48ead;">,</span><span>p</span><span style="color:#b48ead;">); 
+</span><span>        writer.Close</span><span style="color:#d08770;">() 
+</span><span>        </span><span style="color:#b48ead;">use</span><span> reader </span><span style="color:#b48ead;">=</span><span> File.OpenRead</span><span style="color:#b48ead;">(</span><span>@&quot;</span><span style="color:#a3be8c;">D:\fs\Person.dat</span><span>&quot;</span><span style="color:#b48ead;">); 
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">p2 </span><span style="color:#b48ead;">=</span><span> formatter.Deserialize</span><span style="color:#b48ead;">(</span><span>reader</span><span style="color:#b48ead;">) :?&gt;</span><span> Person 
+</span><span>        printfn &quot;</span><span style="color:#b48ead;">%s</span><span style="color:#a3be8c;">,</span><span style="color:#b48ead;">%A</span><span style="color:#a3be8c;">,</span><span style="color:#b48ead;">%A</span><span>&quot; p2.Name p2.Birthday p2.Gender 
+</span><span>        Console.Read</span><span style="color:#d08770;">() </span><span style="color:#b48ead;">|&gt;</span><span> ignore </span><span style="color:#d08770;">0
+</span></code></pre>
+<p>对于xml序列化来说，不需要类型有Serializable属性。</p>
+<p>此外：发现在F#中模块中的类型不能进行二进制序列化操作，所以在上面的程序中我把它放在一个命名空间下。</p>
+<hr />
+<p>从我的百度空间导入</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/f/">#F#</a>
+            
+            <a href="https://blog.dotone.top/tags/serialization/">#serialization</a>
+            
+            <a href="https://blog.dotone.top/tags/xml/">#xml</a>
+            
+            <a href="https://blog.dotone.top/tags/net/">#.Net</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>

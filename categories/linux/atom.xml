@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title>Lei&#x27;s Blog - Linux</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.dotone.top/categories/linux/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.dotone.top"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-07-15T00:00:00+00:00</updated>
+    <id>https://blog.dotone.top/categories/linux/atom.xml</id>
+    <entry xml:lang="zh">
+        <title>Change default shell for Linux</title>
+        <published>2020-07-15T00:00:00+00:00</published>
+        <updated>2020-07-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/notes/change-default-shell/"/>
+        <id>https://blog.dotone.top/notes/change-default-shell/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/notes/change-default-shell/">&lt;h2 id=&quot;cha-kan-zhi-chi-de-shell&quot;&gt;查看支持的shell&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;cat &#x2F;etc&#x2F;shells
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;xiu-gai-shell&quot;&gt;修改shell&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;cat &#x2F;etc&#x2F;passwd
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;输出类似于：&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;root:x:0:0:root:&#x2F;root:&#x2F;bin&#x2F;ash
+&lt;&#x2F;span&gt;&lt;span&gt;bin:x:1:1:bin:&#x2F;bin:&#x2F;sbin&#x2F;nologin
+&lt;&#x2F;span&gt;&lt;span&gt;daemon:x:2:2:daemon:&#x2F;sbin:&#x2F;sbin&#x2F;nologin
+&lt;&#x2F;span&gt;&lt;span&gt;adm:x:3:4:adm:&#x2F;var&#x2F;adm:&#x2F;sbin&#x2F;nologin
+&lt;&#x2F;span&gt;&lt;span&gt;......
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;修改&lt;code&gt;root:x:0:0:root:&#x2F;root:&#x2F;bin&#x2F;ash&lt;&#x2F;code&gt;最后一部分的&lt;code&gt;&#x2F;bin&#x2F;ash&lt;&#x2F;code&gt;为shell的路径，然后保存就可以了。&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>linux prefer ipv4 other than ipv6</title>
+        <published>2020-07-15T00:00:00+00:00</published>
+        <updated>2020-07-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/notes/linux-ipv4-over-ipv6/"/>
+        <id>https://blog.dotone.top/notes/linux-ipv4-over-ipv6/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/notes/linux-ipv4-over-ipv6/">&lt;p&gt;双栈环境下，怎么设置IPv4优先于IPv6？
+由于中国大陆很多情况下网络访问IPv6慢于IPv4，所以最好设置IPv4优先。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;linux&quot;&gt;Linux&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;&#x2F;etc&#x2F;gai.conf&lt;&#x2F;code&gt;
+如果没有这个文件就创建这个文件，添加或修改以下内容&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;precedence ::ffff:0:0&#x2F;96 100
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;windows&quot;&gt;Windows&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;cha-kan-dang-qian-prefixpolicy&quot;&gt;查看当前&lt;code&gt;prefixpolicy&lt;&#x2F;code&gt;&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;netsh&lt;&#x2F;span&gt;&lt;span&gt; interface ipv6 show prefixpolicies 
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;可以看到&lt;code&gt;::ffff:0:0&#x2F;96&lt;&#x2F;code&gt;对应的优先级和标签。&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;xiu-gai-prefixpolicy&quot;&gt;修改&lt;code&gt;prefixpolicy&lt;&#x2F;code&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;以管理员权限运行：&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;netsh&lt;&#x2F;span&gt;&lt;span&gt; interface ipv6 set prefixpolicy ::ffff:0:0&#x2F;96 100 4
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;命令中&lt;code&gt;100&lt;&#x2F;code&gt;代表优先级， 越大优先级越低。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;http:&#x2F;&#x2F;sf-alpha.bjgang.org&#x2F;wordpress&#x2F;2012&#x2F;08&#x2F;linux-prefer-ipv4-over-ipv6-in-dual-stack-environment-and-prevent-problems-when-only-ipv4-exists&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;bbs.pcbeta.com&#x2F;viewthread-1853059-2-1.html&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>parted auto-align</title>
+        <published>2020-07-13T00:00:00+00:00</published>
+        <updated>2020-07-13T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/notes/parted-auto-align/"/>
+        <id>https://blog.dotone.top/notes/parted-auto-align/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/notes/parted-auto-align/">&lt;p&gt;parted&lt;&#x2F;p&gt;
+&lt;p&gt;自动对齐&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mkpart&lt;&#x2F;span&gt;&lt;span&gt; primary ext4 0% 100%
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="zh">
+        <title>N1救砖</title>
+        <published>2020-05-08T00:00:00+00:00</published>
+        <updated>2020-05-08T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.dotone.top/notes/N1-rescure/"/>
+        <id>https://blog.dotone.top/notes/N1-rescure/</id>
+        
+        <content type="html" xml:base="https://blog.dotone.top/notes/N1-rescure/">&lt;p&gt;https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;e27fd85866db
+https:&#x2F;&#x2F;post.smzdm.com&#x2F;p&#x2F;akmg5dv4&#x2F;
+https:&#x2F;&#x2F;powersee.github.io&#x2F;2020&#x2F;03&#x2F;n1-armbian-server&#x2F;&lt;&#x2F;p&gt;
+&lt;p&gt;N1救砖总结：
+https:&#x2F;&#x2F;blog.csdn.net&#x2F;liuyingjieyeah&#x2F;article&#x2F;details&#x2F;100064999&lt;&#x2F;p&gt;
+&lt;p&gt;T1救砖固件下载：https:&#x2F;&#x2F;www.right.com.cn&#x2F;forum&#x2F;thread-315706-1-1.html&lt;&#x2F;p&gt;
+&lt;p&gt;webpad N1 官改2.2：https:&#x2F;&#x2F;www.right.com.cn&#x2F;forum&#x2F;thread-338759-1-1.html&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

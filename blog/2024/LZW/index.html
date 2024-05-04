@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Lei&#x27;s Blog - LZW压缩算法</title>
+
+    
+    <link rel="alternate"
+        type="application/atom+xml"
+        title="RSS" href="https://blog.dotone.top/atom.xml">
+    
+
+    <script defer src="https://blog.dotone.top/vendor/instant.page-5.1.0.js" type="module"></script>
+    <script defer src="https://blog.dotone.top/vendor/medium-zoom.min.js"
+        onload="mediumZoom(document.querySelectorAll('div.post-content img'), { background: '#f8f5f5'});">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/slideout-1.0.1.min.js"></script>
+    
+
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.js">
+    </script>
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/mathtex-script-type.min.js">
+    </script>
+    
+    <script defer src="https://blog.dotone.top/vendor/katex@0.10.0/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177611810-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-177611810-1');
+</script>
+
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/site.css">
+    
+    <link rel="stylesheet" href="https://blog.dotone.top/vendor/katex@0.10.0/katex.min.css">
+    
+    
+
+    
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Lei&#x27;s Blog</a>
+            </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+            <ul class="mobile-menu-list">
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                        <span itemprop="name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                        <span itemprop="name">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                        <span itemprop="name">Tags</span>
+                    </a>
+                </li>
+                
+                <li class="mobile-menu-item">
+                    <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                        <span itemprop="name">About</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <header id="header">
+            <div class="logo"><a href="https:&#x2F;&#x2F;blog.dotone.top">Lei&#x27;s Blog</a></div>
+            <nav class="menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <ul>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top">
+                            <span itemprop="name">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;categories">
+                            <span itemprop="name">Categories</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;tags">
+                            <span itemprop="name">Tags</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a itemprop="url" href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;about">
+                            <span itemprop="name">About</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content" id="mobile-panel">
+                
+
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/2024/LZW/#lzwsuan-fa" class="toc-link">LZW算法</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/2024/LZW/#encode" class="toc-link">encode</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/2024/LZW/#decode" class="toc-link">decode</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/2024/LZW/#lzw-in-gif" class="toc-link">LZW in GIF</a>
+                    
+                    <ul>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/2024/LZW/#code-size" class="toc-link">Code Size</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/2024/LZW/#clear-code" class="toc-link">Clear Code</a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://blog.dotone.top/blog/2024/LZW/#variable-code-length" class="toc-link">Variable Code Length</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li>
+                    <a href="https://blog.dotone.top/blog/2024/LZW/#references" class="toc-link">References</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 class="post__title" itemprop="headline">
+        <a href="https:&#x2F;&#x2F;blog.dotone.top&#x2F;blog&#x2F;2024&#x2F;LZW&#x2F;">LZW压缩算法</a>
+    </h1>
+    
+<div class="post__meta">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 8 L16 16 20 20" />
+    </svg>
+    <span>4 minute read</span>
+    
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none"
+        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+    </svg>
+    <span class="post__time">Published: 2024-05-03</span>
+    
+    
+</div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>LZW(Lempel-Ziv-Welch)压缩算法是基于词典的压缩算法。</p>
+<h1 id="lzwsuan-fa">LZW算法</h1>
+<h2 id="encode">encode</h2>
+<p>编码时需要构造LZW词典。</p>
+<ol>
+<li>以所有可能的字符初始化LZW词典。</li>
+<li>模式p加上新字符a，构成待处理字符串p*a.</li>
+<li>如果p*a在字典中，则 p = p*a，继续处理2；</li>
+<li>如果p*a不在字典中，把p*a加入词典，把p的索引作为编码器输出，并把a作为新的模式p，继续处理2。</li>
+</ol>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">encode</span><span>(</span><span style="color:#bf616a;">s</span><span>:&amp;</span><span style="color:#b48ead;">str</span><span>)-&gt;Vec&lt;</span><span style="color:#b48ead;">u16</span><span>&gt;
+</span><span>{
+</span><span>	</span><span style="color:#b48ead;">let mut</span><span> table = HashMap::new();
+</span><span>	</span><span style="color:#b48ead;">for</span><span> i in </span><span style="color:#d08770;">0</span><span>..</span><span style="color:#d08770;">256 </span><span>{
+</span><span>		table.</span><span style="color:#96b5b4;">insert</span><span>(vec![i as </span><span style="color:#b48ead;">u8</span><span>], i);
+</span><span>	}
+</span><span>	</span><span style="color:#b48ead;">let mut</span><span> code = </span><span style="color:#d08770;">256</span><span>;
+</span><span>	</span><span style="color:#b48ead;">let mut</span><span> buf = vec![]; </span><span style="color:#65737e;">// pattern p
+</span><span>	</span><span style="color:#b48ead;">let mut</span><span> out = vec![];
+</span><span>    </span><span style="color:#b48ead;">let</span><span> bytes = s.</span><span style="color:#96b5b4;">as_bytes</span><span>();
+</span><span>	</span><span style="color:#b48ead;">for</span><span> c in bytes.</span><span style="color:#96b5b4;">iter</span><span>() {
+</span><span>        buf.</span><span style="color:#96b5b4;">push</span><span>(*c); </span><span style="color:#65737e;">// p*a
+</span><span>		</span><span style="color:#b48ead;">if </span><span>!table.</span><span style="color:#96b5b4;">contains_key</span><span>(&amp;buf) {
+</span><span>            table.</span><span style="color:#96b5b4;">insert</span><span>(buf.</span><span style="color:#96b5b4;">clone</span><span>(), code);
+</span><span>            </span><span style="color:#65737e;">// prev = &amp;buf[0..buf.len()-1]
+</span><span>            </span><span style="color:#65737e;">// prev code = table[&amp;buf[0..buf.len()-1]]
+</span><span>            out.</span><span style="color:#96b5b4;">push</span><span>(table[&amp;buf[</span><span style="color:#d08770;">0</span><span>..buf.</span><span style="color:#96b5b4;">len</span><span>()-</span><span style="color:#d08770;">1</span><span>]]);
+</span><span>            buf.</span><span style="color:#96b5b4;">clear</span><span>();
+</span><span>            buf.</span><span style="color:#96b5b4;">push</span><span>(*c); </span><span style="color:#65737e;">// new pattern with a
+</span><span>            code += </span><span style="color:#d08770;">1</span><span>;
+</span><span>        }
+</span><span>	}
+</span><span>    out.</span><span style="color:#96b5b4;">push</span><span>(table[&amp;buf]);
+</span><span>	out
+</span><span>}
+</span></code></pre>
+<h2 id="decode">decode</h2>
+<p>解码器初始词典与编码器相同。
+解码算法不好理解，但是可以观察到编码时词典的当前项由输出的前一项 + 后一项的首字符构成。反过来在解码时，可以由前一项 + 后一项的首字符构造词典的当前项。</p>
+<p>但是有一个问题是，解码时编码可能不在词典中，解码比编码有一步延迟；一般情况下编码时输出编码是N-1，如果编码时最后输出的编码是词典当前项N，可以注意到在这种情况下编码对应的字符串的<em>首字符</em>就是词典当前项的<em>尾字符</em>，即词典当前项首尾字符相同，所以解码时由前一项输出可构造出词典当前项。</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">decode</span><span>(</span><span style="color:#bf616a;">input</span><span>: &amp;[</span><span style="color:#b48ead;">u16</span><span>]) -&gt; String
+</span><span>{
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> table:HashMap&lt;</span><span style="color:#b48ead;">u16</span><span>,Vec&lt;</span><span style="color:#b48ead;">u8</span><span>&gt;&gt; = HashMap::new();
+</span><span>	</span><span style="color:#b48ead;">for</span><span> i in </span><span style="color:#d08770;">0</span><span>..</span><span style="color:#d08770;">256 </span><span>{
+</span><span>		table.</span><span style="color:#96b5b4;">insert</span><span>(i,vec![i as </span><span style="color:#b48ead;">u8</span><span>]);
+</span><span>	}
+</span><span>	</span><span style="color:#b48ead;">let mut</span><span> prev = vec![]; </span><span style="color:#65737e;">// pattern p
+</span><span>	</span><span style="color:#b48ead;">let mut</span><span> out = vec![];
+</span><span>	</span><span style="color:#b48ead;">let mut</span><span> code = </span><span style="color:#d08770;">256</span><span>;
+</span><span>	</span><span style="color:#b48ead;">for</span><span> c in input.</span><span style="color:#96b5b4;">iter</span><span>() {
+</span><span>		</span><span style="color:#b48ead;">if </span><span>!table.</span><span style="color:#96b5b4;">contains_key</span><span>(c) {
+</span><span>			</span><span style="color:#b48ead;">let mut</span><span> s = prev.</span><span style="color:#96b5b4;">clone</span><span>();
+</span><span>			s.</span><span style="color:#96b5b4;">push</span><span>(s[</span><span style="color:#d08770;">0</span><span>]); </span><span style="color:#65737e;">// p*a
+</span><span>			table.</span><span style="color:#96b5b4;">insert</span><span>(code, s);
+</span><span>		}
+</span><span>		out.</span><span style="color:#96b5b4;">extend</span><span>(&amp;table[c]);
+</span><span>        </span><span style="color:#b48ead;">if </span><span>!prev.</span><span style="color:#96b5b4;">is_empty</span><span>() {
+</span><span>            prev.</span><span style="color:#96b5b4;">push</span><span>(table[c][</span><span style="color:#d08770;">0</span><span>]); </span><span style="color:#65737e;">// p*a
+</span><span>            table.</span><span style="color:#96b5b4;">insert</span><span>(code, mem::take(&amp;</span><span style="color:#b48ead;">mut</span><span> prev));
+</span><span>            code += </span><span style="color:#d08770;">1</span><span>;
+</span><span>        }
+</span><span>        prev.</span><span style="color:#96b5b4;">extend</span><span>(&amp;table[c]);
+</span><span>	}
+</span><span>	String::from_utf8(out).</span><span style="color:#96b5b4;">unwrap</span><span>()
+</span><span>}
+</span></code></pre>
+<h1 id="lzw-in-gif">LZW in GIF</h1>
+<p>GIF图像数据是基于调色板(palette or color table)。
+图像数据压缩时把颜色的索引(color index)，转换为LZW编码的bit流。
+GIF中LZW基于color index构造词典。
+GIF中的LZW编码有控制码（control code）。</p>
+<ul>
+<li>CC (Clear Code)  用于重置词典</li>
+<li>EOI (End Of Information Code) 用于指示图像数据结束，<code>&lt;Clear code&gt;+1</code></li>
+</ul>
+<h2 id="code-size">Code Size</h2>
+<p>Code Size定义了表达像素值需要的最小bit数。
+通常情况下和颜色的bit数相同。但是黑白图像只需要2bit。</p>
+<h2 id="clear-code">Clear Code</h2>
+<p>Clear Code定义为 <code>2 ** &lt;Code Size&gt;</code>。</p>
+<h2 id="variable-code-length">Variable Code Length</h2>
+<p>编码输出code是动态长度的，从<code>&lt;Code Size&gt;+1</code> bits到12 bits。每当输出的code的长度要超出当前长度时，code length需要加1。动态长度编码有助于进一步压缩数据。</p>
+<h1 id="references">References</h1>
+<ul>
+<li>https://go-compression.github.io/algorithms/lz/</li>
+<li>https://marknelson.us/posts/2011/11/08/lzw-revisited</li>
+<li>https://zhuanlan.zhihu.com/p/85036591</li>
+<li>https://www.cs.cmu.edu/~cil/lzw.and.gif.txt</li>
+<li>https://burqee.com/article/12/
+-《数据压缩导论第4版》</li>
+<li>https://giflib.sourceforge.net/whatsinagif/lzw_image_data.html</li>
+</ul>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+        
+        <div class="post-tags">
+            
+            <a href="https://blog.dotone.top/tags/compression/">#compression</a>
+            
+            <a href="https://blog.dotone.top/tags/gif/">#gif</a>
+            
+            <a href="https://blog.dotone.top/tags/encode/">#encode</a>
+            
+            <a href="https://blog.dotone.top/tags/decode/">#decode</a>
+            
+        </div>
+        
+        
+
+        
+    </div>
+
+    
+    
+    <section id="utterances-comments">
+        <script src="https://utteranc.es/client.js" repo="Joylei/joylei.github.io" issue-term="pathname"
+            theme="preferred-color-scheme" crossorigin="anonymous" async>
+            </script>
+    </section>
+    
+    
+</article>
+
+
+            </div>
+        </main>
+
+        
+        
+    </div>
+
+    
+    <script type="text/javascript" src="https://blog.dotone.top/even.js"></script>
+    
+</body>
+
+</html>
